@@ -1,0 +1,16 @@
+build
+node_modules
+
+// 전체 규칙 비활성화
+/* eslint-disable */
+
+// 비활성화 블록 생성
+/* eslint-disable */
+// ...
+/* eslint-enable */
+
+// 특정 규칙 비활성화
+/* eslint-disable curly */
+
+// 특정 코드 라인에 대해 규칙 비활성환
+/* eslint-disable-next-line */
