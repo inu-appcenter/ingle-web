@@ -1,5 +1,17 @@
-build
 node_modules
+
+# 빌드 결과물
+build
+dist
+coverage
+
+# 환경 파일
+.env
+.env.*
+
+# 특정 폴더/파일
+public
+
 
 // 전체 규칙 비활성화
 /* eslint-disable */
