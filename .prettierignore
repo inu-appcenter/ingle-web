@@ -1,0 +1,33 @@
+# VCS 디렉토리
+**/.git
+**/.svn
+**/.hg
+
+# 의존성 디렉토리
+**/node_modules
+
+# 빌드 및 배포 결과물
+build
+dist
+coverage
+
+# 환경 변수 파일
+.env
+.env.*
+
+# 로그 파일
+*.log
+
+# 잠금 파일 (Prettier 포맷 불필요)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# 설정 및 무시 파일
+.prettierignore
+.eslintrc
+.eslintrc.js
+tsconfig.json
+
+# React 프로젝트의 퍼블릭 폴더
+public
