@@ -6,6 +6,10 @@ export default {
     screens: {
       sm: '390px', // 아이폰 기준
     },
+    fontFamily: {
+      manrope: ['Manrope', 'sans-serif'],
+      inter: ['Inter', 'sans-serif'],
+    },
   },
   plugins: [],
 };
