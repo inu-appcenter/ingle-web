@@ -4,7 +4,7 @@ import StudentInfoStep from './components/studentinfostep/StudentInfoStep';
 const AuthPage = () => {
   return (
     <>
-      <div>Auth 페이지입니다</div>
+      {/*<div>Auth 페이지입니다</div>*/}
       <StudentInfoStep />
       {/*Ingle 앱 소개*/}
       {/*포털로그인*/}

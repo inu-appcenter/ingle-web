@@ -11,7 +11,7 @@ function StatusCard({ status, isSelected, onClick }: StatusCardProps) {
     <>
       <button
         onClick={onClick}
-        className={`flex flex-col items-center justify-center w-32 h-40 rounded-3xl transition-colors ${
+        className={`flex flex-col items-center justify-center w-full aspect-[4/5] rounded-3xl transition-colors ${
           isSelected ? 'bg-purple-500 text-white' : 'bg-white text-gray-800'
         }`}
         style={{
@@ -20,7 +20,7 @@ function StatusCard({ status, isSelected, onClick }: StatusCardProps) {
       >
         <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 mb-2" />
         {status && (
-          <p className="text-base text-center font-medium whitespace-pre-line">
+          <p className="font-inter font-semibold text-gray-500 text-base text-center font-medium whitespace-pre-line">
             {status}
           </p>
         )}
@@ -36,26 +36,28 @@ function StatusSelect() {
   const statusOptions = [
     'Exchange\nStudent',
     'Language\nStudent',
-    'Enrolled\nStudent',
+    'Ungraduate\nStudent',
     'Graduate\nStudent',
   ];
 
   return (
     <>
-      <div className="flex flex-wrap item-center justify-center gap-4 mt-4">
+      <div className="flex flex-wrap item-center justify-center gap-6 mt-4">
         {statusOptions.map((status, index) => (
-          <StatusCard
-            key={index}
-            status={status}
-            isSelected={studentType === status}
-            onClick={() =>
-              setStudentInfo(
-                studentType === status
-                  ? { studentType: '' }
-                  : { studentType: status },
-              )
-            }
-          />
+          <div className="basis-[45%] max-w-[45%]">
+            <StatusCard
+              key={index}
+              status={status}
+              isSelected={studentType === status}
+              onClick={() =>
+                setStudentInfo(
+                  studentType === status
+                    ? { studentType: '' }
+                    : { studentType: status },
+                )
+              }
+            />
+          </div>
         ))}
       </div>
       <h1>잘 바뀌는지 확인 {studentType}</h1>
