@@ -1,10 +1,10 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import TutorialPage from '@/tutorials';
 import AuthPage from '@/auth';
-import RewardPage from '@/reward';
 import MapPage from '@/map';
-import NotFoundPage from '@/shared';
 import ProfilePage from '@/profile';
+import RewardPage from '@/reward';
+import NotFoundPage from '@/shared';
+import TutorialPage from '@/tutorials';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 function App() {
   return (
