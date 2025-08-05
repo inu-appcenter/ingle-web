@@ -7,5 +7,5 @@ export default {
       sm: '390px', // 아이폰 기준
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };
