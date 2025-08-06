@@ -47,7 +47,7 @@ function Dropdown({ label, options, selectedValue, onChange }: DropdownProps) {
         </button>
 
         {isOpen && (
-          <ul className="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
+          <ul className="absolute w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
             {options.map(option => (
               <li
                 key={option.value}
@@ -98,28 +98,24 @@ export default function DepartmentSelect() {
   const setStudentInfo = useAuthStore(state => state.setStudentInfo);
 
   return (
-    <>
-      <div>학과 선택 컴포넌트</div>
-      <div className="flex items-center justify-center">
-        <div className="flex flex-col w-80 p-4 gap-y-8">
-          <Dropdown
-            label="College"
-            options={collegeOptions}
-            selectedValue={selectedCollege}
-            onChange={value => {
-              setSelectedCollege(value);
-              setStudentInfo({ department: '' }); // 학과 초기화
-            }}
-          />
-          <Dropdown
-            label="Department"
-            options={departmentOptions[selectedCollege] || []}
-            selectedValue={department}
-            onChange={value => setStudentInfo({ department: value })}
-          />
-        </div>
+    <div className="flex items-center justify-center">
+      <div className="flex flex-col w-[100%] gap-y-8">
+        <Dropdown
+          label="College"
+          options={collegeOptions}
+          selectedValue={selectedCollege}
+          onChange={value => {
+            setSelectedCollege(value);
+            setStudentInfo({ department: '' }); // 학과 초기화
+          }}
+        />
+        <Dropdown
+          label="Department"
+          options={departmentOptions[selectedCollege] || []}
+          selectedValue={department}
+          onChange={value => setStudentInfo({ department: value })}
+        />
       </div>
-      <div>선택된 학과 : {department}</div>
-    </>
+    </div>
   );
 }

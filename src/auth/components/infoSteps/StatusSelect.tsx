@@ -1,12 +1,17 @@
 import { useAuthStore } from '@/auth/stores/authStore';
+import ExchangeIcon from '../../images/exchange.svg';
+import GraduateIcon from '../../images/graduate.svg';
+import LanguageIcon from '../../images/language.svg';
+import UngraduateIcon from '../../images/ungraduate.svg';
 
 type StatusCardProps = {
   status: string;
   isSelected?: boolean;
+  icon: string;
   onClick?: () => void;
 };
 
-function StatusCard({ status, isSelected, onClick }: StatusCardProps) {
+function StatusCard({ status, isSelected, icon, onClick }: StatusCardProps) {
   return (
     <>
       <button
@@ -18,12 +23,14 @@ function StatusCard({ status, isSelected, onClick }: StatusCardProps) {
           boxShadow: '0 4px 30px rgba(112, 112, 112, 0.2)',
         }}
       >
-        <div className="w-12 h-12 rounded-full bg-gradient-to-r from-blue-400 to-purple-400 mb-2" />
-        {status && (
-          <p className="font-inter font-semibold text-gray-500 text-base text-center font-medium whitespace-pre-line">
-            {status}
-          </p>
-        )}
+        <img src={icon} alt={`${status} icon`} className="w-20 h-20 text" />
+        <p
+          className={`font-inter font-semibold text-gray-500 text-base text-center font-medium whitespace-pre-line transition-colors ${
+            isSelected ? 'text-white' : 'text-gray-[#3C3C4399]'
+          }`}
+        >
+          {status}
+        </p>
       </button>
     </>
   );
@@ -40,14 +47,17 @@ function StatusSelect() {
     'Graduate\nStudent',
   ];
 
+  const icons = [ExchangeIcon, LanguageIcon, UngraduateIcon, GraduateIcon];
+
   return (
     <>
-      <div className="flex flex-wrap item-center justify-center gap-6 mt-4">
+      <div className="flex flex-wrap items-center justify-center gap-6 mt-4">
         {statusOptions.map((status, index) => (
           <div className="basis-[45%] max-w-[45%]">
             <StatusCard
               key={index}
               status={status}
+              icon={icons[index]}
               isSelected={studentType === status}
               onClick={() =>
                 setStudentInfo(
@@ -60,7 +70,6 @@ function StatusSelect() {
           </div>
         ))}
       </div>
-      <h1>잘 바뀌는지 확인 {studentType}</h1>
     </>
   );
 }

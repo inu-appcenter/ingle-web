@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form';
-import inuLogo from '../inuportal.svg';
+import { getLoginPortal } from '../api/auth';
+import inuLogo from '../images/inuportal.svg';
 import { useAuthStore } from '../stores/authStore';
 
 type LoginForm = {
@@ -8,26 +9,33 @@ type LoginForm = {
   rememberMe: boolean;
 };
 
-export default function Intro() {
+export default function Portal() {
   const currnetStep = useAuthStore(state => state.currentStep);
   const setStep = useAuthStore(state => state.setStep);
 
+  const setToken = useAuthStore(state => state.setToken);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginForm>();
 
-  const onSubmit = (data: LoginForm) => {
-    console.log(data); // 여기서 로그인 로직 수행
-    // 예: setStep('nextStep');
+  const onSubmit = async (data: LoginForm) => {
+    try {
+      const { token } = await getLoginPortal(data.studentId, data.password);
+      setToken(token);
+      localStorage.setItem('jwt', token);
+      console.log('로그인 성공');
+    } catch (err) {
+      console.error('로그인 실패', err);
+    }
   };
 
   return (
     <div className="flex flex-col items-center justify-center w-full min-h-screen">
-      <img src={inuLogo} alt="Inu Portal Logo" className="mb-16" />
+      <img src={inuLogo} alt="Inu Portal Logo" className="mb-6" />
 
-      {/* 로그인 폼 */}
+      {/* 로그인 폼. 파란색 박스 */}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-[85%] h-100 bg-[#094A9A] p-4 rounded-xl text-center text-white"
@@ -37,17 +45,19 @@ export default function Intro() {
 
         <div className="flex flex-col items-center justify-center mt-6 w-full">
           {/* 학번 입력 */}
-          <input
-            type="text"
-            placeholder="Student ID"
-            className="w-full h-12 mb-5 px-3 py-2 rounded-md text-black"
-            {...register('studentId', { required: 'Student ID is required' })}
-          />
-          {errors.studentId && (
-            <p className="text-red-300 text-sm mt-1">
-              {errors.studentId.message}
-            </p>
-          )}
+          <div className="w-full">
+            <input
+              type="text"
+              placeholder="Student ID"
+              className="w-full h-12 mb-5 px-3 py-2 rounded-md text-black"
+              {...register('studentId', { required: 'Student ID is required' })}
+            />
+            {errors.studentId && (
+              <p className="text-red-300 text-sm mt-1">
+                {errors.studentId.message}
+              </p>
+            )}
+          </div>
           {/* 비밀번호 입력 */}
           <div className="w-full">
             <input
