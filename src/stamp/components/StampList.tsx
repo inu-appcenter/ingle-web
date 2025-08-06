@@ -1,4 +1,4 @@
-import StampItem from '@/reward/components/StampItem';
+import StampItem from '@/stamp/components/StampItem';
 
 const stampList = [
   { name: 'Transit' },

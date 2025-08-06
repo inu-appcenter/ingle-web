@@ -3,4 +3,3 @@ function StampCard() {
 }
 
 export default StampCard;
-ㄱ;
