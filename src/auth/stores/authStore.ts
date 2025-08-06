@@ -5,7 +5,7 @@
 import { create } from 'zustand';
 
 interface AuthState {
-  currentStep: number; // 0:intro, 1:portalLogin, 2:studentInfo, 3:complete
+  currentStep: 'intro' | 'portal' | 'studentInfo' | 'finish';
   portalStudentId: string; // 2단계에서 비교를 위해 저장?
 
   studentType: string;
@@ -13,7 +13,7 @@ interface AuthState {
   studentIdInput: string; //얘는 별로 필요하지 않을 것 같은데..
   nickname: string;
 
-  setStep: (step: number) => void;
+  setStep: (step: AuthState['currentStep']) => void;
   setPortalStudentId: (id: string) => void;
   setStudentInfo: (
     info: Partial<
@@ -23,7 +23,7 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>(set => ({
-  currentStep: 0,
+  currentStep: 'intro',
   portalStudentId: '',
   studentType: '',
   department: '',
