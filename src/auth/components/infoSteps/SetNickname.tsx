@@ -1,5 +1,7 @@
 import { useAuthStore } from '@/auth/stores/authStore';
 import { useState } from 'react';
+import imgCorrect from '../../images/correct-circle.svg';
+import imgWrong from '../../images/wrong-circle.svg';
 
 function SetNickname() {
   //const nickname = useAuthStore(state => state.nickname);
@@ -43,10 +45,14 @@ function SetNickname() {
           placeholder="20xxxxxxx"
         />
         {studentIdStatus === 'valid' && (
-          <p className="text-green-600 text-sm mt-1">🟢 Correct!</p>
+          <p className="text-green-600 text-sm mt-1">
+            <img src={imgCorrect} alt="imgcorrect" /> Correct!
+          </p>
         )}
         {studentIdStatus === 'invalid' && (
-          <p className="text-red-600 text-sm mt-1">❌ Doesn't match</p>
+          <p className="text-red-600 text-sm mt-1">
+            <img src={imgWrong} alt="imgwrong" /> Doesn't match
+          </p>
         )}
       </div>
 
@@ -74,10 +80,15 @@ function SetNickname() {
           placeholder="Enter your Nickname"
         />
         {nicknameStatus === 'valid' && (
-          <p className="text-green-600 text-sm mt-1">🟢 Available!</p>
+          <p className="text-green-600 text-sm mt-1">
+            <img src={imgCorrect} alt="imgcorrect" /> Available!
+          </p>
         )}
         {nicknameStatus === 'invalid' && (
-          <p className="text-red-600 text-sm mt-1">❌ Already taken.</p>
+          <p className="text-red-600 text-sm mt-1">
+            <img src={imgWrong} alt="imgwrong" />
+            Already taken.
+          </p>
         )}
       </div>
     </div>
