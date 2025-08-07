@@ -1,28 +1,19 @@
-<<<<<<< HEAD
+import AdminPage from '@/admin';
 import AuthPage from '@/auth';
 import MapPage from '@/map';
+import NotFoundPage from '@/not-fuound';
 import ProfilePage from '@/profile';
-import RewardPage from '@/reward';
-import NotFoundPage from '@/shared';
+import { ROUTES } from '@/router/routes';
+import BottomNavigator from '@/shared/components/BottomNavigator';
+import StampPage from '@/stamp';
 import TutorialPage from '@/tutorials';
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-=======
+import TutorialDetailPage from '@/tutorials/pages/TutorialDetailPage';
 import {
+  Route,
   BrowserRouter as Router,
   Routes,
-  Route,
   useLocation,
 } from 'react-router-dom';
-import TutorialPage from '@/tutorials';
-import AuthPage from '@/auth';
-import MapPage from '@/map';
-import ProfilePage from '@/profile';
-import AdminPage from '@/admin';
-import BottomNavigator from '@/shared/components/BottomNavigator';
-import TutorialDetailPage from '@/tutorials/pages/TutorialDetailPage';
-import { ROUTES } from '@/router/routes';
-import StampPage from '@/stamp';
-import NotFoundPage from '@/not-fuound';
 
 function AppWrapper() {
   const location = useLocation();
@@ -56,7 +47,6 @@ function AppWrapper() {
     </div>
   );
 }
->>>>>>> b184ce704a16a8cacd7f02a8fa89de030659fa57
 
 function App() {
   return (
