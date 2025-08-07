@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import Image from '../images/exchange.svg';
+import Image from '../images/exchange.svg?url';
 import { useAuthStore } from '../stores/authStore';
 
-import AppLogo from '../images/Ingle.svg';
+import AppLogo from '../images/Ingle.svg?url';
 
 export default function Intro() {
   const currnetStep = useAuthStore(state => state.currentStep);
