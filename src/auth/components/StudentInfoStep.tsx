@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/auth/stores/authStore';
 import { useEffect, useState } from 'react';
-import arrowLeft from '../images/arrow-left.svg';
+import arrowLeft from '../images/arrow-left.svg?url';
 import DepartmentSelect from './infoSteps/DepartmentSelect';
 import SetNickname from './infoSteps/SetNickname'; // Assuming this component exists for nickname input
 import StatusSelect from './infoSteps/StatusSelect';

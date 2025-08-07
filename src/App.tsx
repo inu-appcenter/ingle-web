@@ -18,6 +18,7 @@ import NotFoundPage from '@/not-fuound';
 function AppWrapper() {
   const location = useLocation();
   const isAdmin = location.pathname === ROUTES.ADMIN;
+  const isAuth = location.pathname === ROUTES.AUTH;
 
   // 관리자 페이지는 기존 레이아웃 유지
   if (isAdmin) {
@@ -42,7 +43,8 @@ function AppWrapper() {
           </Routes>
         </main>
 
-        <BottomNavigator />
+        {/* AuthPage에서는 BottomNavigator 숨김 */}
+        {!isAuth && <BottomNavigator />}
       </div>
     </div>
   );
