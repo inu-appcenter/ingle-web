@@ -1,6 +1,6 @@
 import { useAuthStore } from '@/auth/stores/authStore';
 import { useEffect, useState } from 'react';
-import arrowRight from '../images/arrow-left.svg';
+import arrowLeft from '../images/arrow-left.svg';
 import DepartmentSelect from './infoSteps/DepartmentSelect';
 import SetNickname from './infoSteps/SetNickname'; // Assuming this component exists for nickname input
 import StatusSelect from './infoSteps/StatusSelect';
@@ -85,7 +85,7 @@ export default function StudentInfoStep() {
             visibility: infoStep > 0 ? 'visible' : 'hidden',
           }}
         >
-          <img src={arrowRight} alt="" className="w-6 h-6" />
+          <img src={arrowLeft} alt="" className="w-6 h-6" />
         </button>
         <h1 className="mb-8 px-2 font-manrope font-extrabold text-4xl text-pretty leading-[1.2]">
           {stepTitles[infoStep]}
