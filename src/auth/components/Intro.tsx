@@ -5,7 +5,6 @@ import { useAuthStore } from '../stores/authStore';
 import AppLogo from '../images/Ingle.svg?url';
 
 export default function Intro() {
-  const currnetStep = useAuthStore(state => state.currentStep);
   const setStep = useAuthStore(state => state.setStep);
 
   const [showAppName, setShowAppName] = useState(true);
