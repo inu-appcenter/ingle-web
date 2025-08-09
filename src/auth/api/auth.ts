@@ -1,20 +1,11 @@
 import axios from 'axios';
 
-export async function portalLogin(data: {
+export default async function SignUp(data: {
   studentId: string;
-  password: string;
+  department: string;
+  studentType: string;
+  nickname: string;
 }) {
-  try {
-    const res = await axios.post('/api/v1/auth/login', data);
-    return { status: res.status, data: res.data };
-  } catch (error: any) {
-    if (error.response) {
-      return {
-        status: error.response.status,
-        data: error.response.data,
-      };
-    } else {
-      throw new Error('network error');
-    }
-  }
+  const res = await axios.post(import.meta.env.VITE_SIGN_UP_URL, data);
+  return data;
 }

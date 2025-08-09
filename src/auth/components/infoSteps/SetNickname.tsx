@@ -1,98 +1,98 @@
+import Oicon from '@/auth/images/correct-circle.svg?url';
+import Xicon from '@/auth/images/wrong-circle.svg?url';
 import { useAuthStore } from '@/auth/stores/authStore';
+import axios from 'axios';
 import { useState } from 'react';
-import imgCorrect from '../../images/correct-circle.svg';
-import imgWrong from '../../images/wrong-circle.svg';
+import { useForm } from 'react-hook-form';
 
-function SetNickname() {
-  //const nickname = useAuthStore(state => state.nickname);
-
+export default function SetNickname() {
+  const portalId = useAuthStore(state => state.portalId);
   const setStudentInfo = useAuthStore(state => state.setStudentInfo);
+  const [checkId, setCheckID] = useState<boolean | null>(null);
+  const [isTaken, setIsTaken] = useState<boolean | null>(null);
 
-  const [studentId, setStudentId] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [studentIdStatus, setStudentIdStatus] = useState<
-    'default' | 'valid' | 'invalid'
-  >('default');
-  const [nicknameStatus, setNicknameStatus] = useState<
-    'default' | 'valid' | 'invalid'
-  >('default');
-  //onChange는 타자 하나 입력할 때마다 랜더링한다.
-  //react form hook 사용해서 사용자가 모두 입력했을 경우에만 랜더링하도록 하기.
+  type UserInput = {
+    studentId: string;
+    nickname: string;
+  };
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UserInput>();
+
+  const onSubmit = async (data: UserInput, e: any) => {
+    try {
+      if (!(e?.nativeEvent instanceof SubmitEvent)) return;
+      const submitter = e?.nativeEvent?.submitter as HTMLButtonElement;
+
+      if (submitter.name === 'id') {
+        if (portalId !== data.studentId) {
+          setCheckID(false);
+          console.log('학번 불일치');
+        } else {
+          setCheckID(true);
+          console.log('학번 일치');
+        }
+      } else {
+        const res = await axios.get(import.meta.env.VITE_NICK_CHECK_URL, {
+          params: { nickname: data.nickname },
+        });
+        if (res.data === true) {
+          //중복임
+          console.log('중복임');
+          setIsTaken(true);
+        } else {
+          //중복 아님
+          console.log('중복 아님');
+          setIsTaken(false);
+        }
+      }
+      if (checkId && !isTaken) {
+        setStudentInfo({ nickname: data.nickname });
+      }
+    } catch (err) {}
+  };
 
   return (
     <div>
-      {/* Student ID */}
-      <div className="mb-4">
-        <label
-          htmlFor="studentId"
-          className="block text-sm font-medium text-gray-700 mb-1"
-        >
-          Student ID
-        </label>
+      <form className="flex flex-col w-full" onSubmit={handleSubmit(onSubmit)}>
+        <p className="mb-2">StudentID</p>
         <input
-          id="studentId"
+          {...register('studentId')}
           type="text"
-          value={studentId}
-          onChange={e => setStudentId(e.target.value)}
-          className={`w-full px-4 py-2 border rounded-md focus:outline-none transition
-                ${
-                  studentIdStatus === 'valid'
-                    ? 'border-green-500'
-                    : studentIdStatus === 'invalid'
-                      ? 'border-red-500'
-                      : 'border-gray-300'
-                }`}
-          placeholder="20xxxxxxx"
+          placeholder="20XXXXXXX"
+          className="text-sm p-3 rounded-xl outline-none border border-[#9EA1A8]"
         />
-        {studentIdStatus === 'valid' && (
-          <p className="text-green-600 text-sm mt-1">
-            <img src={imgCorrect} alt="imgcorrect" /> Correct!
-          </p>
-        )}
-        {studentIdStatus === 'invalid' && (
-          <p className="text-red-600 text-sm mt-1">
-            <img src={imgWrong} alt="imgwrong" /> Doesn't match
-          </p>
-        )}
-      </div>
+        {checkId !== null &&
+          (checkId ? (
+            <img src={Oicon} className="w-4 h-4" />
+          ) : (
+            <img src={Xicon} className="w-4 h-4" />
+          ))}
+        <button type="submit" name="id">
+          학번확인
+        </button>
 
-      {/* Nickname */}
-      <div>
-        <label
-          htmlFor="nickname"
-          className="block text-sm font-medium text-gray-700 mb-1"
-        >
-          Nickname
-        </label>
+        <p className="mb-2">nickname</p>
         <input
-          id="nickname"
+          {...register('nickname', { minLength: 3, maxLength: 20 })}
+          // [  ] 범위 벗어났을 경우 에러 처리해줘야 함.
           type="text"
-          value={nickname}
-          onChange={e => setNickname(e.target.value)}
-          className={`w-full px-4 py-2 border rounded-md focus:outline-none transition 
-                ${
-                  nicknameStatus === 'valid'
-                    ? 'border-green-500'
-                    : nicknameStatus === 'invalid'
-                      ? 'border-red-500'
-                      : 'border-gray-300'
-                }`}
-          placeholder="Enter your Nickname"
+          placeholder="nickname"
+          className="text-sm p-3 rounded-xl outline-none border border-[#9EA1A8]"
         />
-        {nicknameStatus === 'valid' && (
-          <p className="text-green-600 text-sm mt-1">
-            <img src={imgCorrect} alt="imgcorrect" /> Available!
-          </p>
-        )}
-        {nicknameStatus === 'invalid' && (
-          <p className="text-red-600 text-sm mt-1">
-            <img src={imgWrong} alt="imgwrong" />
-            Already taken.
-          </p>
-        )}
-      </div>
+        {isTaken !== null &&
+          (!isTaken ? (
+            <img src={Oicon} className="w-4 h-4" />
+          ) : (
+            <img src={Xicon} className="w-4 h-4" />
+          ))}
+        <button type="submit" name="nick">
+          중복확인
+        </button>
+      </form>
     </div>
   );
 }
-
-export default SetNickname;

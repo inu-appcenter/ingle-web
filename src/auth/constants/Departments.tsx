@@ -1,0 +1,132 @@
+const collegeOptions = [
+  { label: 'College of Humanities', value: 'humanities' },
+  { label: 'College of Natural Sciences', value: 'natural' },
+  { label: 'College of Social Sciences', value: 'social' },
+  { label: 'College of Commerce & Public Affairs', value: 'commercePublic' },
+  { label: 'College of Engineering', value: 'engineering' },
+  { label: 'College of Information Technology', value: 'informationTech' },
+  { label: 'College of Business', value: 'business' },
+  { label: 'College of Arts and Physical Education', value: 'artPhysic' },
+  { label: 'College of Education', value: 'education' },
+  { label: 'The College of Urban Science', value: 'urban' },
+  { label: 'College of Life Sciences and Bioengineering', value: 'lifeBio' },
+  { label: 'School of Northeast Asian Studies', value: 'asian' },
+  { label: 'School of Law', value: 'law' },
+];
+
+const departmentOptions: Record<string, { label: string; value: string }[]> = {
+  humanities: [
+    { label: 'Dept. of Korean Language & Literature', value: 'korean' },
+    { label: 'Dept. of French Language & Literature', value: 'french' },
+    { label: 'Dept. of English Language & Literature', value: 'english' },
+    { label: 'Dept. of Japanese Language & Literature', value: 'japanese' },
+    { label: 'Dept. of German Language & Literature', value: 'german' },
+    { label: 'Dept. of Chinese Language & Cultural Studies', value: 'chinese' },
+  ],
+  natural: [
+    { label: 'Dept. of Physics', value: 'physics' },
+    { label: 'Dept. of Chemistry', value: 'chemistry' },
+    { label: 'Dept. of Mathematics', value: 'mathematics' },
+    { label: 'Dept. of Fashion industry', value: 'fashion' },
+    { label: 'Dept. of Marine Science', value: 'marine' },
+  ],
+  social: [
+    { label: 'Dept. of Social Welfare', value: 'welfare' },
+    { label: 'Dept. of Mass Communication', value: 'massCommu' },
+    { label: 'Dept. of Library and Information Science', value: 'libraryInfo' },
+    {
+      label: 'Dept. of Creative Human Resource Development',
+      value: 'humanResource',
+    },
+  ],
+  commercePublic: [
+    { label: 'Dept. of Public Administration', value: 'publicAdmin' },
+    {
+      label: 'Dept. of Political Science & International Studies',
+      value: 'politicalInternational',
+    },
+    { label: 'Dept. of Economics', value: 'econimics' },
+    { label: 'Dept. of International Trade', value: 'trade' },
+    { label: 'Dept. of Consumer Science', value: 'consumer' },
+  ],
+  engineering: [
+    { label: 'Energy and Chemical Engineering', value: 'energyChemical' },
+    { label: 'Electrical Engineering', value: 'electrical' },
+    { label: 'Electronics Engineering', value: 'electronics' },
+    {
+      label: 'Industrial and Management Engineering',
+      value: 'industrialManage',
+    },
+    { label: 'Materials Science and Engineering', value: 'materials' },
+    { label: 'Vehicle Engineering', value: 'vehicle' },
+    { label: 'Mechanical Engineering and Robotics', value: 'mechanicalRobot' },
+    { label: 'Biomedical & Robotics Engineering', value: 'bioRobot' },
+    { label: 'Safety Engineering', value: 'safety' },
+  ],
+  informationTech: [
+    { label: 'Dept. of Computer Science & Engineering', value: 'computer' },
+    {
+      label: 'Dept. of Information Telecommunication Engineering',
+      value: 'informationTelecommu',
+    },
+    { label: 'Dept. of Embedded-Systems Engineering', value: 'embedded' },
+  ],
+  business: [
+    { label: 'Dept. of Business Administration', value: 'businessAdmin' },
+    { label: 'Dept. of Tax & Accounting', value: 'taxAccount' },
+    { label: 'Dept. of Technology Management', value: 'techManage' },
+  ],
+  artPhysic: [
+    { label: 'Korean Painting Major', value: 'koPainting' },
+    { label: 'Western Painting Major', value: 'westPainting' },
+    { label: 'Division of Design', value: 'divDesign' },
+    { label: 'Dept. of Performing Arts', value: 'performingArts' },
+    { label: 'Dept. of Sport Science', value: 'sportScience' },
+    { label: 'Dept. of Health & Kinesiology', value: 'healthKinesiology' },
+  ],
+  education: [
+    { label: 'Korean Language Education', value: 'koEdu' },
+    { label: 'English Language Education', value: 'enEdu' },
+    { label: 'Japanese Language Education', value: 'jaEdu' },
+    { label: 'Mathematics Education', value: 'mathEdu' },
+    { label: 'Physical Education', value: 'physicEdu' },
+    { label: 'Early Childhood Education', value: 'childEdu' },
+    { label: 'History Education', value: 'historyEdu' },
+    { label: 'Ethics Education', value: 'ethicsEdu' },
+  ],
+  urban: [
+    {
+      label: 'Civil and Environmental Engineering	',
+      value: 'civilEnvironmental',
+    },
+    { label: 'Environmental Engineering	', value: 'environmental' },
+    { label: 'Urban Engineering	', value: 'urban' },
+    { label: '', value: '' },
+    { label: '', value: '' },
+    { label: '', value: '' },
+  ],
+  lifeBio: [
+    { label: 'Biological Sciences', value: 'biological' },
+    { label: 'Bioengineering', value: 'bioEngineering' },
+    { label: 'Molecular & Medical Science', value: 'molecularMedical' },
+    { label: 'Nano-Bioengineering', value: 'nanoBio' },
+  ],
+  asian: [
+    { label: '', value: '' },
+    { label: '', value: '' },
+    { label: '', value: '' },
+    { label: '', value: '' },
+    { label: '', value: '' },
+    { label: '', value: '' },
+  ],
+  law: [
+    { label: '', value: '' },
+    { label: '', value: '' },
+    { label: '', value: '' },
+    { label: '', value: '' },
+    { label: '', value: '' },
+    { label: '', value: '' },
+  ],
+};
+
+export { collegeOptions, departmentOptions };
