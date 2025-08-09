@@ -1,6 +1,10 @@
 import { useAuthStore } from '@/auth/stores/authStore';
 import { useEffect, useRef, useState } from 'react';
 // option은 박스 모양을 바꿀 수 없음 => custom select box를 만들어야 함
+import {
+  collegeOptions,
+  departmentOptions,
+} from '@/auth/constants/departments';
 
 type DropdownOption = {
   label: string;
@@ -72,24 +76,6 @@ function Dropdown({ label, options, selectedValue, onChange }: DropdownProps) {
     </>
   );
 }
-
-const collegeOptions = [
-  { label: 'College of Humanities', value: 'humanities' },
-  { label: 'College of Science', value: 'science' },
-];
-
-const departmentOptions: Record<string, { label: string; value: string }[]> = {
-  humanities: [
-    { label: 'Dept. of Korean Language & Literature', value: 'korean' },
-    { label: 'Dept. of French Language & Literature', value: 'french' },
-    { label: 'Dept. of English Language & Literature', value: 'english' },
-    { label: 'Dept. of Japanese Language & Literature', value: 'japanese' },
-  ],
-  science: [
-    { label: 'Dept. of Physics', value: 'physics' },
-    { label: 'Dept. of Chemistry', value: 'chemistry' },
-  ],
-};
 
 export default function DepartmentSelect() {
   const [selectedCollege, setSelectedCollege] = useState('');

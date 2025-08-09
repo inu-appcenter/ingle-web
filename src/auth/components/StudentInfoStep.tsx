@@ -1,9 +1,10 @@
+import SignUp from '@/auth/api/auth';
+import DepartmentSelect from '@/auth/components/infoSteps/DepartmentSelect';
+import SetNickname from '@/auth/components/infoSteps/SetNickname'; // Assuming this component exists for nickname input
+import StatusSelect from '@/auth/components/infoSteps/StatusSelect';
+import arrowLeft from '@/auth/images/arrow-left.svg?url';
 import { useAuthStore } from '@/auth/stores/authStore';
 import { useEffect, useState } from 'react';
-import arrowLeft from '../images/arrow-left.svg?url';
-import DepartmentSelect from './infoSteps/DepartmentSelect';
-import SetNickname from './infoSteps/SetNickname'; // Assuming this component exists for nickname input
-import StatusSelect from './infoSteps/StatusSelect';
 
 //단계 구분 변수 useStat
 
@@ -24,13 +25,13 @@ function StepBar({ step }: { step: number }) {
 }
 
 export default function StudentInfoStep() {
-  const [infoStep, setInfoStep] = useState(0); // 0: 신분, 1: 학과, 2: 닉네임
+  const [infoStep, setInfoStep] = useState(0); // 0: 신분, 1: 학과, 2: 닉네임,
   const [moveNext, setMoveNext] = useState(false);
   // 다음단계로 넘어갈 수 있는지 여부는 zustand에 각 단계별 속성이 채워졌는가에 따름.
   // 단계가 넘어갈때마다 리셋
-  const studentType = useAuthStore(state => state.studentType);
-  const department = useAuthStore(state => state.department);
-  const nickname = useAuthStore(state => state.nickname);
+
+  const { studentType, department, nickname, studentId, setStep } =
+    useAuthStore();
 
   const stepTitles = [
     'Select your Current Status',
@@ -44,7 +45,7 @@ export default function StudentInfoStep() {
     } else if (infoStep === 1) {
       setMoveNext(department !== '');
     } else if (infoStep === 2) {
-      setMoveNext(nickname !== '');
+      setMoveNext(nickname !== '' && studentId !== '');
     } else {
       setMoveNext(false); // 예외 방지
     }
@@ -52,7 +53,7 @@ export default function StudentInfoStep() {
 
   useEffect(() => {
     readytoNext();
-  }, [infoStep, studentType, department, nickname]);
+  }, [infoStep, studentType, department, nickname, studentId]);
 
   const renderContent = () => {
     switch (infoStep) {
@@ -105,8 +106,25 @@ export default function StudentInfoStep() {
           }`}
           onClick={() => {
             if (!moveNext) return;
-            setInfoStep(infoStep + 1);
             setMoveNext(false); //다음 버튼 누르면 단계 넘어가면서 버튼 비활성화
+            if (infoStep < 2) {
+              setInfoStep(infoStep + 1);
+            } else if (infoStep === 2) {
+              //마지막 상태
+              try {
+                SignUp({
+                  studentType: studentType,
+                  studentId: studentId,
+                  department: department,
+                  nickname: nickname,
+                });
+                setStep('finish');
+              } catch (error) {
+                console.log('로그인 완료');
+                //회원가입 완료.
+                // 회원 정보 보내기. 및 회원가입 완료 화면
+              }
+            }
           }}
         >
           NEXT

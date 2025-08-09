@@ -1,7 +1,11 @@
+import inuLogo from '@/auth/images/portalLogo.svg?url';
+import { useAuthStore } from '@/auth/stores/authStore';
 import axios from 'axios';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import inuLogo from '../images/portalLogo.svg?url';
-import { useAuthStore } from '../stores/authStore';
+
+import closeEye from '@/auth/images/eyeclose.svg?url';
+import openEye from '@/auth/images/eyeopen.svg?url';
 
 type Inputs = {
   studentId: string;
@@ -9,7 +13,7 @@ type Inputs = {
 };
 
 export default function Portal() {
-  const setStep = useAuthStore(state => state.setStep);
+  const { setStudentInfo, setStep } = useAuthStore();
 
   const {
     register,
@@ -20,28 +24,57 @@ export default function Portal() {
 
   console.log(errors);
 
-  const onSubmit = async (data: Inputs, e) => {
+  const onSubmit = async (data: Inputs, e: any) => {
     e.preventDefault(); //기본 제출 막기.
     try {
-      const res = await axios.post(
-        'https://ingle-server.inuappcenter.kr/api/v1/auth/login',
-        {
-          studentId: data.studentId,
-          password: data.password,
-        },
-      );
-      console.log('로그인 성공', res.data);
-      //토큰 저장? 서버에?
-      setStep('studentInfo');
-    } catch (err) {
-      //로그인 실패
-      console.error('post 오류:', err);
-      //id 비번 확인 또는 회원가입 안 돼있음.
+      const res = await axios.post(import.meta.env.VITE_PORTAL_URL, {
+        studentId: data.studentId,
+        password: data.password,
+      });
+      if (res.status === 200) {
+        console.log('로그인 성공'); //홈으로.
+        /*성공일 경우 처리해야 하는 것.*/
+
+        //   {
+        //   "memberId": 1,
+        //   "studentId": "202301452",
+        //   "department": "Dept. of Computer Science & Engineering",
+        //   "program": "Exchange Student",
+        //   "nickname": "IngleFan",
+        //   "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+        //   "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+        //   "accessTokenExpiresDate": "2025-05-14T15:30:00+09:00",
+        //   "refreshTokenExpiresDate": "2025-05-14T15:30:00+09:00"
+        // }
+      } else if (res.status === 202) {
+        alert(res.data.message); // 회원 가입이 필요합니다.
+        setStudentInfo({ portalId: res.data.studentId });
+        //회원가입 api 호출 필요
+        //(여기서 회원가입이란 ingle 회원가입을 의미)
+        //
+        setStep('studentInfo');
+      }
+    } catch (err: any) {
+      if (err.response && err.response.status === 401) {
+        alert('아이디 또는 비밀번호를 확인하세요.');
+      } else {
+        alert('알 수 없는 오류가 발생했습니다.');
+      }
     }
   };
 
-  const onError = () => {
+  const onError = (errors: any) => {
+    if (errors.studentId) {
+      alert('학번은 9자리 숫자입니다');
+    } else if (errors.password) {
+      alert('비밀번호를 다시 입력해주세요');
+    }
     console.log('wrong');
+  };
+
+  const [showpw, setShowPw] = useState(false);
+  const handleVisibility = () => {
+    setShowPw(!showpw);
   };
 
   return (
@@ -80,8 +113,11 @@ export default function Portal() {
             {...register('password', { required: true })}
             className="bg-transparent outline-none flex-1"
             placeholder="Password"
-            type="password"
+            type={showpw ? 'text' : 'password'}
           />
+          <span className="pr-2" onClick={handleVisibility}>
+            {showpw ? <img src={openEye} /> : <img src={closeEye} />}
+          </span>
         </div>
 
         {/* <label className="flex items-center text-sm text-gray-600">
@@ -92,12 +128,6 @@ export default function Portal() {
         <button
           className="mb-4 mx-4 h-12 bg-[#7A00E6] text-white rounded-2xl"
           type="submit"
-          // onClick={data => {
-          //   console.log(data);
-          //   //초기화
-          //   setValue('studentId', '');
-          //   setValue('password', '');
-          // }}
         >
           Log in
         </button>

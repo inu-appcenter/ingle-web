@@ -1,7 +1,7 @@
-import Intro from './components/Intro';
-import Portal from './components/Portal';
-import StudentInfoStep from './components/StudentInfoStep';
-import { useAuthStore } from './stores/authStore';
+import Intro from '@/auth/components/Intro';
+import Portal from '@/auth/components/Portal';
+import StudentInfoStep from '@/auth/components/StudentInfoStep';
+import { useAuthStore } from '@/auth/stores/authStore';
 
 //로그인 화면 구현
 const AuthPage = () => {
@@ -12,6 +12,7 @@ const AuthPage = () => {
       {currentStep === 'intro' && <Intro />}
       {currentStep === 'portal' && <Portal />}
       {currentStep === 'studentInfo' && <StudentInfoStep />}
+      {currentStep === 'finish' && <Complete />}
       {/*완료화면*/}
     </>
   );

@@ -1,8 +1,8 @@
+import ExchangeIcon from '@/auth/images/exchange.svg?url';
+import GraduateIcon from '@/auth/images/graduate.svg?url';
+import LanguageIcon from '@/auth/images/language.svg?url';
+import UngraduateIcon from '@/auth/images/ungraduate.svg?url';
 import { useAuthStore } from '@/auth/stores/authStore';
-import ExchangeIcon from '../../images/exchange.svg';
-import GraduateIcon from '../../images/graduate.svg';
-import LanguageIcon from '../../images/language.svg';
-import UngraduateIcon from '../../images/ungraduate.svg';
 
 type StatusCardProps = {
   status: string;
