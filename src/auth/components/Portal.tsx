@@ -1,8 +1,10 @@
 import inuLogo from '@/auth/images/portalLogo.svg?url';
 import { useAuthStore } from '@/auth/stores/authStore';
+import { ROUTES } from '@/router/routes';
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router';
 
 import closeEye from '@/auth/images/eyeclose.svg?url';
 import openEye from '@/auth/images/eyeopen.svg?url';
@@ -20,7 +22,6 @@ export default function Portal() {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  // const onSubmit = handleSubmit(data => console.log(data));
 
   console.log(errors);
 
@@ -32,7 +33,9 @@ export default function Portal() {
         password: data.password,
       });
       if (res.status === 200) {
-        console.log('로그인 성공'); //홈으로.
+        const { accessToken, refreshToken } = res.data;
+        useAuthStore.getState().setTokens(accessToken, refreshToken);
+        console.log('로그인 성공');
         /*성공일 경우 처리해야 하는 것.*/
 
         //   {
@@ -46,13 +49,14 @@ export default function Portal() {
         //   "accessTokenExpiresDate": "2025-05-14T15:30:00+09:00",
         //   "refreshTokenExpiresDate": "2025-05-14T15:30:00+09:00"
         // }
+
+        //홈으로.
+        const navigate = useNavigate();
+        navigate(ROUTES.TUTORIAL);
       } else if (res.status === 202) {
         alert(res.data.message); // 회원 가입이 필요합니다.
         setStudentInfo({ portalId: res.data.studentId });
-        //회원가입 api 호출 필요
-        //(여기서 회원가입이란 ingle 회원가입을 의미)
-        //
-        setStep('studentInfo');
+        setStep('studentInfo'); //회원가입 단계로 넘어감
       }
     } catch (err: any) {
       if (err.response && err.response.status === 401) {

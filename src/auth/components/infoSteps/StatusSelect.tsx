@@ -17,7 +17,7 @@ function StatusCard({ status, isSelected, icon, onClick }: StatusCardProps) {
       <button
         onClick={onClick}
         className={`flex flex-col items-center justify-center w-full aspect-[4/5] rounded-3xl transition-colors ${
-          isSelected ? 'bg-purple-500 text-white' : 'bg-white text-gray-800'
+          isSelected ? 'bg-[#7A00E6] text-white' : 'bg-white text-[#3C3C43]'
         }`}
         style={{
           boxShadow: '0 4px 30px rgba(112, 112, 112, 0.2)',
@@ -41,13 +41,11 @@ function StatusSelect() {
   const setStudentInfo = useAuthStore(state => state.setStudentInfo);
 
   const statusOptions = [
-    'Exchange\nStudent',
-    'Language\nStudent',
-    'Ungraduate\nStudent',
-    'Graduate\nStudent',
+    { option: 'Exchange\nStudent', icon: ExchangeIcon },
+    { option: 'Language\nStudent', icon: LanguageIcon },
+    { option: 'Ungraduate\nStudent', icon: UngraduateIcon },
+    { option: 'Graduate\nStudent', icon: GraduateIcon },
   ];
-
-  const icons = [ExchangeIcon, LanguageIcon, UngraduateIcon, GraduateIcon];
 
   return (
     <>
@@ -56,14 +54,14 @@ function StatusSelect() {
           <div className="basis-[45%] max-w-[45%]">
             <StatusCard
               key={index}
-              status={status}
-              icon={icons[index]}
-              isSelected={studentType === status}
+              status={status.option}
+              icon={status.icon}
+              isSelected={studentType === status.option}
               onClick={() =>
                 setStudentInfo(
-                  studentType === status
+                  studentType === status.option
                     ? { studentType: '' }
-                    : { studentType: status },
+                    : { studentType: status.option },
                 )
               }
             />
