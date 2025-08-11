@@ -1,7 +1,10 @@
+import { useCookies } from 'react-cookie';
 import { create } from 'zustand';
 
-const TOKEN_KEY = 'app_jwt';
-const REMEMBER_KEY = 'app_jwt_remember';
+const ACCESS_TOKEN_KEY = 'access_token';
+const REFRESH_TOKEN_KEY = 'refresh_token';
+const REMEMBER_KEY = 'remember';
+const [Cookies, setCookie] = useCookies(['refresh']);
 
 interface AuthState {
   currentStep: 'intro' | 'portal' | 'studentInfo' | 'finish';
@@ -20,13 +23,14 @@ interface AuthState {
     >,
   ) => void;
 
-  token: string | null;
+  accessToken: string | null;
+  refreshToken: string | null;
   remember: boolean; //true면 로컬스토리지에 저장, false면 세션스토리지에 저장
 
   isAuthenticated: boolean; // 로그인 상태 여부
 
-  setToken: (token: string | null, remember?: boolean) => void;
-  logout: () => void;
+  setTokens: (access: string, refresh: string, remember?: boolean) => void;
+  clearTokens: () => void;
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
@@ -37,48 +41,47 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   studentId: '',
   nickname: '',
 
-  token: null,
+  accessToken: null,
+  refreshToken: null,
   remember: false,
   isAuthenticated: false,
 
   setStep: step => set({ currentStep: step }),
   setStudentInfo: info => set(state => ({ ...state, ...info })),
 
-  //토큰쪽은 아직...
-  setToken: (token, remember = false) => {
-    if (token) {
-      // 저장할 장소 결정
-      try {
-        if (remember) {
-          localStorage.setItem(TOKEN_KEY, token);
-          localStorage.setItem(REMEMBER_KEY, '1');
-        } else {
-          sessionStorage.setItem(TOKEN_KEY, token);
-          localStorage.removeItem(REMEMBER_KEY);
-        }
-      } catch (e) {
-        console.warn('storage write failed', e);
-      }
-      set({ token, remember, isAuthenticated: true });
-    } else {
-      // null이면 로그아웃 동작
-      try {
-        localStorage.removeItem(TOKEN_KEY);
-        sessionStorage.removeItem(TOKEN_KEY);
+  setTokens: (access: string, refresh: string, remember = false) => {
+    // 저장할 장소 결정
+    try {
+      //remember 여부 저장
+      if (remember) {
+        localStorage.setItem(REFRESH_TOKEN_KEY, refresh);
+        localStorage.setItem(REMEMBER_KEY, '1');
+      } else {
+        sessionStorage.setItem(REFRESH_TOKEN_KEY, refresh);
         localStorage.removeItem(REMEMBER_KEY);
-      } catch (e) {}
-      set({ token: null, remember: false, isAuthenticated: false });
+      }
+
+      //accessToken은 메모리에만 저장
+      set({
+        accessToken: access,
+        remember,
+        isAuthenticated: true,
+      });
+    } catch (e) {
+      console.warn('storage write failed', e);
     }
   },
 
-  logout: () => {
+  clearTokens: () => {
     try {
-      localStorage.removeItem(TOKEN_KEY);
-      sessionStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(REMEMBER_KEY);
-    } catch (e) {}
+      localStorage.removeItem(REFRESH_TOKEN_KEY);
+      sessionStorage.removeItem(REFRESH_TOKEN_KEY);
+    } catch (e) {
+      console.warn('storage clear failed', e);
+    }
     set({
-      token: null,
+      accessToken: null,
       remember: false,
       isAuthenticated: false,
       currentStep: 'intro',

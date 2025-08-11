@@ -6,8 +6,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 export default function SetNickname() {
-  const portalId = useAuthStore(state => state.portalId);
-  const setStudentInfo = useAuthStore(state => state.setStudentInfo);
+  const { portalId, setStudentInfo } = useAuthStore();
   const [checkId, setCheckID] = useState<boolean | null>(null);
   const [isTaken, setIsTaken] = useState<boolean | null>(null);
 
@@ -55,6 +54,13 @@ export default function SetNickname() {
     } catch (err) {}
   };
 
+  const onError = (errors: any) => {
+    if (errors.nickname) {
+      alert('닉네임은 3~20자 사이의 문자열만 허용합니다.');
+    }
+    console.log('wrong');
+  };
+
   return (
     <div>
       <form className="flex flex-col w-full" onSubmit={handleSubmit(onSubmit)}>
@@ -78,7 +84,6 @@ export default function SetNickname() {
         <p className="mb-2">nickname</p>
         <input
           {...register('nickname', { minLength: 3, maxLength: 20 })}
-          // [  ] 범위 벗어났을 경우 에러 처리해줘야 함.
           type="text"
           placeholder="nickname"
           className="text-sm p-3 rounded-xl outline-none border border-[#9EA1A8]"

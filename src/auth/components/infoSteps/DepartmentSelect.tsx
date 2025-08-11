@@ -59,7 +59,7 @@ function Dropdown({ label, options, selectedValue, onChange }: DropdownProps) {
                   onChange(option.value);
                   setIsOpen(false);
                 }}
-                className={`p-2 cursor-pointer hover:bg-purple-100 ${selectedValue === option.value ? 'bg-purple-200' : ''}`}
+                className={`p-2 ${selectedValue === option.value ? 'text-[#7949FF]' : ''}`}
               >
                 <input
                   type="checkbox"

@@ -1,4 +1,4 @@
-import SignUp from '@/auth/api/auth';
+import { SignUp } from '@/auth/api/auth';
 import DepartmentSelect from '@/auth/components/infoSteps/DepartmentSelect';
 import SetNickname from '@/auth/components/infoSteps/SetNickname'; // Assuming this component exists for nickname input
 import StatusSelect from '@/auth/components/infoSteps/StatusSelect';
@@ -12,13 +12,13 @@ function StepBar({ step }: { step: number }) {
   return (
     <div className="flex gap-2 items-center justify-stretch w-full pb-2">
       <div
-        className={`flex-1 h-1 rounded-full ${step == 0 ? 'bg-[#7A00E6]' : 'bg-gray-200'}`}
+        className={`flex-1 h-1 rounded-full ${step == 0 ? 'bg-[#7A00E6]' : 'bg-[#C1C9D2]'}`}
       />
       <div
-        className={`flex-1 h-1  rounded-full ${step == 1 ? 'bg-[#7A00E6]' : 'bg-gray-200'}`}
+        className={`flex-1 h-1 rounded-full ${step == 1 ? 'bg-[#7A00E6]' : 'bg-[#C1C9D2]'}`}
       />
       <div
-        className={`flex-1 h-1 rounded-full ${step == 2 ? 'bg-[#7A00E6]' : 'bg-gray-200'}`}
+        className={`flex-1 h-1 rounded-full ${step == 2 ? 'bg-[#7A00E6]' : 'bg-[#C1C9D2]'}`}
       />
     </div>
   );
@@ -40,12 +40,12 @@ export default function StudentInfoStep() {
   ];
 
   const readytoNext = () => {
-    if (infoStep === 0) {
-      setMoveNext(studentType !== '');
-    } else if (infoStep === 1) {
-      setMoveNext(department !== '');
-    } else if (infoStep === 2) {
-      setMoveNext(nickname !== '' && studentId !== '');
+    if (
+      (infoStep === 0 && studentType) ||
+      (infoStep === 1 && department) ||
+      (infoStep === 2 && nickname && studentId)
+    ) {
+      setMoveNext(true);
     } else {
       setMoveNext(false); // 예외 방지
     }
@@ -98,10 +98,10 @@ export default function StudentInfoStep() {
       <div className="w-full flex justify-center p-7">
         <button
           disabled={!moveNext}
-          className={`w-full h-12 border border-color-gray rounded-2xl transition-colors duration-300 
+          className={`w-full h-12 border border-color-gray rounded-2xl transition-colors duration-200 
           ${
             moveNext
-              ? 'bg-purple-500 text-white border-purple-500 cursor-pointer'
+              ? 'bg-[#7A00E6] text-white border-purple-500 cursor-pointer'
               : 'bg-white text-gray cursor-not-allowed'
           }`}
           onClick={() => {
@@ -123,6 +123,9 @@ export default function StudentInfoStep() {
                 console.log('로그인 완료');
                 //회원가입 완료.
                 // 회원 정보 보내기. 및 회원가입 완료 화면
+                //회원가입 api 호출 필요
+                //(여기서 회원가입이란 ingle 회원가입을 의미)
+                //
               }
             }
           }}
