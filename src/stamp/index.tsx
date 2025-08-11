@@ -4,7 +4,7 @@ import StampList from '@/stamp/components/StampList';
 
 const StampPage = () => {
   return (
-    <div className="px-4 bg-[#F1F5FD] h-screen">
+    <div className="px-4 bg-[#F1F5FD] min-h-screen">
       <RewardHeader>My Stamps</RewardHeader>
       <AchievementStampsBar />
       <StampList />
