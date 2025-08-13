@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Stamp } from '@/stamp/types/stamp';
 import StampItem from '@/stamp/components/StampItem';
 import Modal from '@/stamp/components/Modal';
 import TransitImage from '@/shared/assets/images/stamp/transit-image.png';
@@ -16,10 +17,15 @@ import JobsImage from '@/shared/assets/images/stamp/jobs-image.png';
 import KCultureImage from '@/shared/assets/images/stamp/kculture-image.png';
 
 const stampList = [
-  { name: 'Transit', image: TransitImage, status: true },
-  { name: 'Dormitory', image: DormitoryImage, status: false },
-  { name: 'Library', image: LibraryImage, status: true },
-  { name: 'Clubs', image: ClubsImage, status: false },
+  { name: 'Transit', image: TransitImage, status: true, description: 'ABCDEF' },
+  {
+    name: 'Dormitory',
+    image: DormitoryImage,
+    status: false,
+    description: 'ABCDEF',
+  },
+  { name: 'Library', image: LibraryImage, status: true, description: 'ABCDEF' },
+  { name: 'Clubs', image: ClubsImage, status: false, description: 'ABCDEF' },
   { name: 'Festival', image: FestivalImage, status: true },
   { name: 'Tuition', image: TuitionImage, status: true },
   { name: 'Courses', image: CoursesImage, status: false },
@@ -31,7 +37,7 @@ const stampList = [
   { name: 'K-Culture', image: KCultureImage, status: false },
 ];
 
-const StampList = () => {
+const StampList = (/*{ stampList }: { stampList: Stamp[] }*/) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStamp, setSelectedStamp] = useState<
     null | (typeof stampList)[0]
