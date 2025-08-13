@@ -1,151 +1,279 @@
-import TestImage from '@/shared/assets/images/ex-detail-page.png';
-import BackIcon from '@/shared/assets/icons/back-icon.svg';
-import ClockIcon from '@/shared/assets/icons/clock-icon.svg';
-import { useNavigate } from 'react-router';
+import Header from '@/tutorials/components/Header';
+import TransitImage from '@/shared/assets/images/transit-image.png';
 
 const TransitPage = () => {
-  const navigate = useNavigate();
   return (
     <article>
-      {/* header : 이미지 + 뒤로가기 버튼 */}
-      <header className="relative mb-8">
-        <img
-          src={TestImage}
-          className="w-full max-h-80 object-cover object-center select-none pointer-events-none"
-          alt="Haksan Library"
-        />
-        <div>
-          <img
-            src={BackIcon}
-            alt="뒤로가기"
-            className="top-4 left-4 absolute cursor-pointer"
-            onClick={() => {
-              navigate(-1);
-            }}
-          />
-        </div>
-      </header>
-
-      {/* 메인 : 제목 + 내용 */}
+      <Header image={TransitImage} />
       <main className="px-4">
-        <h1 className="text-2xl font-bold mb-4">Haksan Library User Guide</h1>
+        <h1 className="text-2xl font-bold mb-4">Transit Getting Around INU</h1>
 
-        {/* 기본정보 : 운영시간 + 위치 + 태그 */}
-        <section className="mb-7 flex flex-wrap gap-4">
-          <div className="flex gap-2">
-            <img src={ClockIcon} alt="시계 아이콘" />
-            <p>Weekdays : 9:00 AM - 9:00 PM</p>
-          </div>
-          <div className="flex gap-2">
-            <img src={ClockIcon} alt="위치 아이콘" />
-            <p>Building 6</p>
-          </div>
-          <div className="flex gap-2">
-            <img src={ClockIcon} alt="태그 아이콘" />
-            <p>Library, Study Room, Media Editor Room, Print Cafe</p>
-          </div>
-        </section>
-
-        {/* 환영 메시지 */}
-        <section className="text-[#6F6F6F] mb-8">
-          <p>
-            Welcome to the Haksan Library! The library is located next to the
-            Main Building and across from the Student Union Building. It has
-            four floors above ground and one basement level.
-          </p>
-        </section>
-
-        {/* Opening Hours */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3 ">Opening Hours</h2>
-          <div>
-            <p className="font-medium mb-2">During Semester:</p>
-            <ul className="list-disc list-inside mb-4 space-y-1">
-              <li>Weekdays: 9:00 AM – 9:00 PM</li>
-              <li>Saturday: 9:00 AM – 1:00 PM</li>
-            </ul>
-
-            <p className="font-medium mb-2">During Vacation:</p>
-            <ul className="list-disc list-inside mb-4 space-y-1">
-              <li>Weekdays: 9:00 AM – 6:00 PM</li>
-              <li>Saturday: Closed</li>
-            </ul>
-
-            <p className="text-sm">
-              Please note that hours may vary during exam periods or holidays.
-              Check the official website for updates.
+        {/* 헤더 정보 */}
+        <section className="mb-7">
+          <div className="rounded-lg mb-4">
+            <h2 className="font-semibold text-lg mb-2">
+              ✏️ Transit in 3 Lines
+            </h2>
+            <p className="text-gray-700 mb-2">
+              Learn how to move between campus, the city, and the airport with
+              shuttles, buses, subway, and more.
+            </p>
+            <p className="text-gray-700 mb-2">
+              All you need is a transport card, the right app, and knowledge of
+              key routes.
+            </p>
+            <p className="text-gray-700">
+              INU's location in Songdo gives you easy access to Incheon, Seoul,
+              and Incheon Airport.
             </p>
           </div>
         </section>
 
-        {/* Book Borrowing & Reading */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3 ">
-            Book Borrowing & Reading
+        {/* What is Transit */}
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-3">
+            ❓ What is "Transit" at INU?
           </h2>
-
-          <h3 className="font-medium mb-2">How to borrow:</h3>
-          <ol className="list-decimal list-inside space-y-1 mb-4">
-            <li>Find your book on the shelf.</li>
-            <li>
-              Bring your student ID (physical or mobile) to the checkout desk.
-            </li>
-            <li>You can borrow up to 5 books for 14 days.</li>
-            <li>Renewals are possible once via the website or kiosk.</li>
-          </ol>
-
-          <h3 className="font-medium mb-2">How to return:</h3>
-          <p>
-            Use the return box on the 1st floor or return directly to the desk.
+          <p className="text-gray-700 mb-4">
+            Transit means all the transportation options you can use while
+            studying at Incheon National University. From free campus shuttles
+            to public buses, the subway, airport connections, bikes, and
+            e-scooters—knowing your routes will save time and money. This is
+            especially important for visiting the Immigration Office, community
+            centers, and cultural spots during your stay.
           </p>
         </section>
 
-        {/* Seat Reservation */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">Seat Reservation</h2>
-          <ol className="list-decimal list-inside space-y-1">
-            <li>Go to the library website or open the INGLE app.</li>
-            <li>Click on "Seat Reservation."</li>
-            <li>Select your preferred time and seat.</li>
-            <li>Check in using the kiosk upon arrival.</li>
-          </ol>
-        </section>
-
-        {/* Printing & Copying */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">Printing & Copying</h2>
-          <p className="mb-2">Available in the Copy Room on the 1st floor.</p>
-          <p className="mb-2">You'll need to purchase a printer card.</p>
-          <p>Black & white and color printing are available.</p>
-        </section>
-
-        {/* Study Support Facilities */}
-        <section className="text-[#6F6F6F] mb-8">
+        {/* How to Use Transportation */}
+        <section className="mb-8">
           <h2 className="text-xl font-semibold mb-3">
-            Study Support Facilities
+            📌 How to Use INU Transportation
           </h2>
-          <ul className="list-disc list-inside space-y-2">
+
+          {/* Campus Shuttle Bus */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3 rounded">
+              Campus Shuttle Bus
+            </h3>
+
+            <h4 className="font-medium mb-2">1. Check the Route:</h4>
+            <ul className="list-disc list-inside mb-3 space-y-1 text-gray-700">
+              <li>Songdo Campus ↔ College of Education</li>
+              <li>Incheon Nat'l Univ. Station ↔ INU Campus</li>
+              <li>Dorm Area ↔ INU Campus</li>
+            </ul>
+
+            <h4 className="font-medium mb-2">
+              2. Find the Timetable: Available on ISC website or bus stop
+              boards.
+            </h4>
+
+            <h4 className="font-medium mb-2">
+              3. Board the Shuttle: Free of charge, just wait at the marked
+              stop.
+            </h4>
+
+            <h4 className="font-medium mb-2">
+              4. Tip: Arrive 5 minutes early—buses leave on time.
+            </h4>
+          </div>
+
+          {/* City Bus */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3 rounded">City Bus</h3>
+
+            <h4 className="font-medium mb-2">
+              1. Buy a Transport Card (T-money or Cashbee) at convenience
+              stores.
+            </h4>
+
+            <h4 className="font-medium mb-2">2. Main Routes:</h4>
+            <ul className="list-disc list-inside mb-3 space-y-1 text-gray-700">
+              <li>INU Station ↔ INU: 8, 16, Circular 41, Circular 46</li>
+              <li>Dorm Area ↔ INU: 6-1, Circular 46</li>
+              <li>INU ↔ Immigration Office: 9, 16</li>
+              <li className="font-medium mb-2">
+                INU ↔ Community Centers:
+                <ul className="list-disc list-inside mb-3 space-y-1 text-gray-700">
+                  <li>Songdo 1-dong: 8, Circular 41, 6-1, 58, 16</li>
+                  <li>Songdo 2-dong: 16, 6-1, 9</li>
+                  <li>Songdo 3-dong: 16, 6, 58, 9</li>
+                  <li>Songdo 4-dong: 58, Circular 46</li>
+                </ul>
+              </li>
+            </ul>
+
+            <p className="text-gray-700 mb-3">
+              Board & Tap your card when getting on and off for transfer
+              discounts.
+            </p>
+
+            <div className="bg-green-50 p-3 rounded border-l-4 border-green-400">
+              <p className="text-sm font-medium text-green-800">
+                💡 Tip: Use Kakao Map or Naver Map for real-time arrivals.
+              </p>
+            </div>
+          </div>
+
+          {/* Subway */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3 bg-purple-100 p-2 rounded">
+              3️⃣ Subway
+            </h3>
+
+            <p className="text-gray-700 mb-3">
+              <span className="font-medium">Nearest Station:</span> Incheon
+              Nat'l Univ. Station (Line 1).
+            </p>
+
+            <h4 className="font-medium mb-2">Main Destinations:</h4>
+            <ul className="list-disc list-inside mb-3 space-y-1 text-gray-700">
+              <li>Incheon Bus Terminal, Bupyeong</li>
+              <li>Seoul Station, Hongdae (via AREX)</li>
+            </ul>
+
+            <p className="text-gray-700 mb-3">
+              Check Train Type: Express vs Local.
+            </p>
+
+            <div className="bg-green-50 p-3 rounded border-l-4 border-green-400">
+              <p className="text-sm font-medium text-green-800">
+                💡 Tip: Avoid rush hours (07:30–09:00 / 18:00–19:30).
+              </p>
+            </div>
+          </div>
+
+          {/* Airport Transportation */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3 bg-red-100 p-2 rounded">
+              4️⃣ Airport Transportation
+            </h3>
+
+            <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <li>
+                <span className="font-medium">AREX (Airport Railroad):</span>{' '}
+                Transfer at Gyeyang Station for Incheon Airport.
+              </li>
+              <li>
+                <span className="font-medium">Airport Limousine Bus:</span>{' '}
+                Check timetable on ISC notices.
+              </li>
+              <li>
+                <span className="font-medium">Taxi:</span> Use Kakao T Blue
+                (~35,000–40,000 KRW to the airport).
+              </li>
+            </ul>
+          </div>
+
+          {/* Bikes & E-scooters */}
+          <div className="mb-6">
+            <h3 className="text-lg font-medium mb-3 bg-green-100 p-2 rounded">
+              5️⃣ Bikes & E-scooters
+            </h3>
+
+            <p className="text-gray-700 mb-3">
+              <span className="font-medium">Services:</span> Kakao T Bike,
+              Gcooter, Swing.
+            </p>
+
+            <h4 className="font-medium mb-2">How to Ride:</h4>
+            <p className="text-gray-700 mb-3">
+              Download app → Register payment → Scan QR code → Ride.
+            </p>
+
+            <div className="bg-yellow-50 p-3 rounded border-l-4 border-yellow-400">
+              <p className="text-sm font-medium text-yellow-800">
+                ⚠️ Safety Tip: Wear a helmet, follow traffic rules, avoid
+                sidewalks.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* How You Can Use This */}
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-3">
+            💡 How You Can Use This
+          </h2>
+          <ul className="list-disc list-inside space-y-2 text-gray-700">
             <li>
-              Study Rooms: For small group discussions. Reservation required.
+              <span className="font-medium">Daily commute:</span> Save money by
+              combining shuttle + bus.
             </li>
             <li>
-              Multimedia Room: For video viewing and digital resource access.
+              <span className="font-medium">Quick trips:</span> E-scooter or
+              bike for nearby cafes and shops.
             </li>
             <li>
-              Accessible Study Area: Special seating available for students with
-              disabilities.
+              <span className="font-medium">Weekend trips:</span> Subway to
+              Seoul for sightseeing.
+            </li>
+            <li>
+              <span className="font-medium">Airport runs:</span> Choose between
+              AREX and airport limousine bus based on luggage size.
             </li>
           </ul>
         </section>
 
-        {/* Help & Inquiries */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">Help & Inquiries</h2>
-          <p className="mb-2">
-            Visit the information desk on the 1st floor or use the Q&A board on
-            the website.
-          </p>
-          <p>Phone: +82 32-835-9570</p>
+        {/* Recommended Apps */}
+        <section className="mb-8">
+          <h2 className="text-xl font-semibold mb-3">📱 Recommended Apps</h2>
+
+          <div className="overflow-x-auto">
+            <table className="w-full border-collapse border border-gray-300">
+              <thead>
+                <tr className="bg-gray-50">
+                  <th className="border border-gray-300 px-4 py-2 text-left font-medium">
+                    App
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2 text-left font-medium">
+                    What it does
+                  </th>
+                  <th className="border border-gray-300 px-4 py-2 text-left font-medium">
+                    Languages
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td className="border border-gray-300 px-4 py-2 font-medium">
+                    Kakao Map
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    Real-time bus/subway info, navigation
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">KR, EN</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-4 py-2 font-medium">
+                    Naver Map
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    Navigation, public transport info
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">KR, EN</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-4 py-2 font-medium">
+                    Kakao T
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    Taxi, bike, driver service
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">KR, EN</td>
+                </tr>
+                <tr>
+                  <td className="border border-gray-300 px-4 py-2 font-medium">
+                    Subway Korea
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    Subway maps & timetables
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">KR, EN</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
       </main>
     </article>
