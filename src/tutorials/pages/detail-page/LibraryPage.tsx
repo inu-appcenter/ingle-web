@@ -1,5 +1,7 @@
 import libraryImage from '@/shared/assets/images/library-image.png';
 import ClockIcon from '@/shared/assets/icons/clock-icon.svg?react';
+import PlaceIcon from '@/shared/assets/icons/place-icon.svg?react';
+import TagIcon from '@/shared/assets/icons/tag-icon.svg?react';
 import Header from '@/tutorials/components/Header';
 
 const LibraryPage = () => {
@@ -19,17 +21,17 @@ const LibraryPage = () => {
             <p>Weekdays : 9:00 AM - 9:00 PM</p>
           </div>
           <div className="flex gap-2 items-center">
-            <ClockIcon />
+            <PlaceIcon />
             <p>Building 6</p>
           </div>
           <div className="flex gap-2 items-center">
-            <ClockIcon />
+            <TagIcon />
             <p>Library, Study Room, Media Editor Room, Print Cafe</p>
           </div>
         </section>
 
         {/* 환영 메시지 */}
-        <section className="text-[#6F6F6F] mb-8">
+        <section className="text-[#695c5c] mb-8">
           <p>
             Welcome to the Haksan Library! The library is located next to the
             Main Building and across from the Student Union Building. It has
