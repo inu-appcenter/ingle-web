@@ -1,13 +1,14 @@
-import ExchangeIcon from '@/auth/images/exchange.svg?url';
-import GraduateIcon from '@/auth/images/graduate.svg?url';
-import LanguageIcon from '@/auth/images/language.svg?url';
-import UngraduateIcon from '@/auth/images/ungraduate.svg?url';
+import GraduateIcon from '@/auth/images/status-select/briefcase.svg?react';
+import LanguageIcon from '@/auth/images/status-select/bubble.svg?react';
+import ExchangeIcon from '@/auth/images/status-select/earth.svg?react';
+import UngraduateIcon from '@/auth/images/status-select/pencil.svg?react';
 import { useAuthStore } from '@/auth/stores/authStore';
+import { ReactNode } from 'react';
 
 type StatusCardProps = {
   status: string;
   isSelected?: boolean;
-  icon: string;
+  icon: ReactNode;
   onClick?: () => void;
 };
 
@@ -23,9 +24,9 @@ function StatusCard({ status, isSelected, icon, onClick }: StatusCardProps) {
           boxShadow: '0 4px 30px rgba(112, 112, 112, 0.2)',
         }}
       >
-        <img src={icon} alt={`${status} icon`} className="w-20 h-20 text" />
+        {icon}
         <p
-          className={`font-inter font-semibold text-gray-500 text-base text-center font-medium whitespace-pre-line transition-colors ${
+          className={`mt-4 font-inter font-semibold text-gray-500 text-base text-center font-medium whitespace-pre-line transition-colors ${
             isSelected ? 'text-white' : 'text-gray-[#3C3C4399]'
           }`}
         >
@@ -37,14 +38,25 @@ function StatusCard({ status, isSelected, icon, onClick }: StatusCardProps) {
 }
 
 function StatusSelect() {
-  const studentType = useAuthStore(state => state.studentType);
-  const setStudentInfo = useAuthStore(state => state.setStudentInfo);
+  const { studentType, setStudentInfo } = useAuthStore();
 
   const statusOptions = [
-    { option: 'Exchange\nStudent', icon: ExchangeIcon },
-    { option: 'Language\nStudent', icon: LanguageIcon },
-    { option: 'Ungraduate\nStudent', icon: UngraduateIcon },
-    { option: 'Graduate\nStudent', icon: GraduateIcon },
+    {
+      option: 'Exchange\nStudent',
+      icon: <ExchangeIcon />,
+    },
+    {
+      option: 'Language\nStudent',
+      icon: <LanguageIcon />,
+    },
+    {
+      option: 'Ungraduate\nStudent',
+      icon: <UngraduateIcon />,
+    },
+    {
+      option: 'Graduate\nStudent',
+      icon: <GraduateIcon />,
+    },
   ];
 
   return (

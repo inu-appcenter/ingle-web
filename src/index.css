@@ -9,3 +9,13 @@
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+.scroll::-webkit-scrollbar {
+  width: 15px; /* 스크롤바의 너비 */
+}
+.scroll::-webkit-scrollbar-thumb {
+  height: 30%; /* 스크롤바의 길이 */
+  background: #c1c1c1; /* 스크롤바의 색상 */
+  border: 4px solid #ffffff;
+  border-radius: 14px;
+}
