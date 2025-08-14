@@ -1,10 +1,9 @@
-import { useCookies } from 'react-cookie';
 import { create } from 'zustand';
 
 const ACCESS_TOKEN_KEY = 'access_token';
 const REFRESH_TOKEN_KEY = 'refresh_token';
 const REMEMBER_KEY = 'remember';
-const [Cookies, setCookie] = useCookies(['refresh']);
+// const [Cookies, setCookie] = useCookies(['refresh']);
 
 interface AuthState {
   currentStep: 'intro' | 'portal' | 'studentInfo' | 'finish';

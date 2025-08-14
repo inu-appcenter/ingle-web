@@ -1,3 +1,4 @@
+import Complete from '@/auth/components/Complete';
 import Intro from '@/auth/components/Intro';
 import Portal from '@/auth/components/Portal';
 import StudentInfoStep from '@/auth/components/StudentInfoStep';

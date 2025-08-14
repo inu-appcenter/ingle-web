@@ -1,10 +1,12 @@
+import LolosArrow from '@/auth/images/depart-select/arrow-lolos.svg?react';
+import Checked from '@/auth/images/depart-select/checked.svg?react';
+import Empty from '@/auth/images/depart-select/empty.svg?react';
+
 import { useAuthStore } from '@/auth/stores/authStore';
 import { useEffect, useRef, useState } from 'react';
+
 // option은 박스 모양을 바꿀 수 없음 => custom select box를 만들어야 함
-import {
-  collegeOptions,
-  departmentOptions,
-} from '@/auth/constants/departments';
+import { collegeOptions, departmentOptions } from '@/auth/constants/Departments';
 
 type DropdownOption = {
   label: string;
@@ -16,72 +18,27 @@ type DropdownProps = {
   options: DropdownOption[];
   selectedValue: string;
   onChange: (value: string) => void;
+  isOpen: boolean;
+  onToggle: () => void;
 };
-
-function Dropdown({ label, options, selectedValue, onChange }: DropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null); //
-
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(e.target as Node)
-      ) {
-        setIsOpen(false); // 드롭다운 외부 클릭 시 닫기
-      }
-    };
-  });
-
-  const selectedLabel = options.find(opt => opt.value === selectedValue)?.label;
-
-  return (
-    <>
-      <div className="relative mb-2" ref={dropdownRef}>
-        <label className="block mb-1 text-sm font-medium text-gray-700">
-          {label}
-        </label>
-
-        <button
-          onClick={() => setIsOpen(prev => !prev)}
-          className="flex justify-between items-center w-full p-2 border border-gray-300 rounded-lg text-left focus:outline-none focus:ring-1 focus:ring-purple-500"
-        >
-          <span>{selectedLabel || `Select ${label}`}</span>
-          <span className="ml-2 text-gray-500">{isOpen ? '▲' : '▼'}</span>
-        </button>
-
-        {isOpen && (
-          <ul className="absolute w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg z-10">
-            {options.map(option => (
-              <li
-                key={option.value}
-                onClick={() => {
-                  onChange(option.value);
-                  setIsOpen(false);
-                }}
-                className={`p-2 ${selectedValue === option.value ? 'text-[#7949FF]' : ''}`}
-              >
-                <input
-                  type="checkbox"
-                  checked={selectedValue === option.value}
-                  readOnly
-                  className="mr-2 accent-purple-500"
-                />
-                {option.label}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-    </>
-  );
-}
 
 export default function DepartmentSelect() {
   const [selectedCollege, setSelectedCollege] = useState('');
-  //const [selectedDepartment, setSelectedDepartment] = useState('');
   const department = useAuthStore(state => state.department);
   const setStudentInfo = useAuthStore(state => state.setStudentInfo);
+  const [openDropdown, setOpenDropdown] = useState<null | 'college' | 'department'>(null);
+
+  useEffect(() => {
+    if (department) {
+      // department에 맞는 college 찾아서 세팅
+      const foundCollege = Object.keys(departmentOptions).find(college =>
+        departmentOptions[college].some(opt => opt.value === department),
+      );
+      if (foundCollege) {
+        setSelectedCollege(foundCollege);
+      }
+    }
+  }, [department]);
 
   return (
     <div className="flex items-center justify-center">
@@ -94,14 +51,87 @@ export default function DepartmentSelect() {
             setSelectedCollege(value);
             setStudentInfo({ department: '' }); // 학과 초기화
           }}
+          isOpen={openDropdown === 'college'}
+          onToggle={() =>
+            setOpenDropdown(prev => (prev === 'college' ? null : 'college'))
+          }
         />
         <Dropdown
           label="Department"
           options={departmentOptions[selectedCollege] || []}
           selectedValue={department}
           onChange={value => setStudentInfo({ department: value })}
+          isOpen={openDropdown === 'department'}
+          onToggle={() =>
+            setOpenDropdown(prev => (prev === 'department' ? null : 'department'))
+          }
         />
       </div>
     </div>
+  );
+}
+
+function Dropdown({
+  label,
+  options,
+  selectedValue,
+  onChange,
+  isOpen,
+  onToggle,
+}: DropdownProps) {
+  const dropdownRef = useRef<HTMLDivElement>(null); //
+  const selectedLabel = options.find(opt => opt.value === selectedValue)?.label;
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        onToggle(); // 외부 클릭 시 닫기
+      }
+    };
+  }, [onToggle]);
+
+  return (
+    <>
+      <div className="relative mb-2" ref={dropdownRef}>
+        <label className="block mb-1 text-sm font-medium text-gray-700">{label}</label>
+
+        <button
+          onClick={onToggle}
+          className="flex justify-between items-center w-full p-3 border border-[#9EA1A8] rounded-xl text-left focus:outline-none focus:ring-1 focus:ring-purple-500"
+        >
+          <span className={selectedLabel ? 'text-[#6C757D]  ' : 'text-[#C1C9D2]'}>
+            {selectedLabel || `Select ${label}`}
+          </span>
+          <span className="ml-2 text-gray-500">
+            {isOpen ? <LolosArrow className="rotate-180" /> : <LolosArrow />}
+          </span>
+        </button>
+
+        {isOpen && (
+          <ul
+            className="scroll absolute w-full mt-1 py-2 bg-white border border-[#DEE2E6] rounded-xl shadow-lg z-10
+          max-h-56 overflow-y-auto"
+          >
+            {options.map(option => (
+              <li
+                key={option.value}
+                onClick={() => {
+                  onChange(option.value);
+                  onToggle();
+                }}
+                className={`flex items-center py-[14px] h-12 text-base/4 pl-6 ${selectedValue === option.value ? 'text-[#7949FF]' : 'text-[#6C757D]'}`}
+              >
+                {selectedValue === option.value ? (
+                  <Checked className="w-5 h-5 mr-2" />
+                ) : (
+                  <Empty className="w-5 h-5 mr-2" />
+                )}
+                {option.label}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 }

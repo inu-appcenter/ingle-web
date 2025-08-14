@@ -1,4 +1,4 @@
-import Image from '@/auth/images/introgroup.svg?url';
+import Image from '@/auth/images/intro.svg?react';
 import { useAuthStore } from '@/auth/stores/authStore';
 
 export default function Intro() {
@@ -7,7 +7,7 @@ export default function Intro() {
   return (
     <div className="flex flex-col p-4 w-full h-screen">
       <div className="flex flex-col flex-grow justify-center">
-        <img src={Image} alt="image" className="w-full" />
+        <Image className="w-full" />
         <div className="text-4xl font-extrabold mt-3">
           <h1>Your Global</h1>
           <h1 className="text-[#7A00E6]">Guide Book</h1>
