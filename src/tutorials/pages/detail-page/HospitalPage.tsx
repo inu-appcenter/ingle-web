@@ -6,7 +6,7 @@ import HomeCare from '@/tutorials/home_health.svg?react';
 import MainImage from '@/tutorials/hospital-bg.svg?react';
 import Stethoscope from '@/tutorials/stethoscope.svg?react';
 
-const InsurancePage = () => {
+export default function HospitalPage() {
   const tips =
     '"When visiting a hospital, be sure to bring your health insurance card (alien registration card) and passport. After your consultation, you will receive a prescription from the doctor, which you can take to a nearby pharmacy. You can find the list of government-designated medical institutions for official health check-ups in the attached file."';
   const facilities = [
@@ -157,6 +157,4 @@ const InsurancePage = () => {
       </div>
     </div>
   );
-};
-
-export default InsurancePage;
+}
