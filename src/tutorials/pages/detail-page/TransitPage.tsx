@@ -1,282 +1,251 @@
 import Header from '@/tutorials/components/Header';
-import TransitImage from '@/shared/assets/images/transit-image.png';
+import TransitImage from '@/shared/assets/images/transit-image.jpg';
+import Tag from '@/tutorials/components/Tag';
+import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
+import NervousIcon from '@/shared/assets/icons/nervous-icon.png';
+import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
+import Button from '@/tutorials/components/Button';
 
 const TransitPage = () => {
   return (
-    <article>
+    <>
       <Header image={TransitImage} />
       <main className="px-4">
-        <h1 className="text-2xl font-bold mb-4">Transit Getting Around INU</h1>
+        <Tag>Campus Life</Tag>
+        <h1 className="text-[32px] font-bold mb-4">Transit</h1>
 
-        {/* 헤더 정보 */}
-        <section className="mb-7">
-          <div className="rounded-lg mb-4">
-            <h2 className="font-semibold text-lg mb-2">
-              ✏️ Transit in 3 Lines
-            </h2>
-            <p className="text-gray-700 mb-2">
-              Learn how to move between campus, the city, and the airport with
-              shuttles, buses, subway, and more.
-            </p>
-            <p className="text-gray-700 mb-2">
-              All you need is a transport card, the right app, and knowledge of
-              key routes.
-            </p>
-            <p className="text-gray-700">
-              INU's location in Songdo gives you easy access to Incheon, Seoul,
-              and Incheon Airport.
-            </p>
-          </div>
-        </section>
+        <hr className="border-t border-[#E8E5EF] my-5" />
 
-        {/* What is Transit */}
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">
-            ❓ What is "Transit" at INU?
+        {/* 소제목 : Bus, Subway */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">
+            Bus, Subway, Taxi... All ways in Incheon!
           </h2>
-          <p className="text-gray-700 mb-4">
-            Transit means all the transportation options you can use while
-            studying at Incheon National University. From free campus shuttles
-            to public buses, the subway, airport connections, bikes, and
-            e-scooters—knowing your routes will save time and money. This is
-            especially important for visiting the Immigration Office, community
-            centers, and cultural spots during your stay.
+          <p className="text-base font-light">
+            INGLE will guide you through how to use public transportation around
+            Incheon National University. Our campus is at the center of the
+            city, making it easy to go anywhere — Incheon Airport, Seoul, and
+            major cities across Korea.
           </p>
         </section>
 
-        {/* How to Use Transportation */}
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">
-            📌 How to Use INU Transportation
+        <hr className="border-t border-[#E8E5EF] my-5" />
+
+        {/* 소제목 : Recommended Apps */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">Recommended Apps</h2>
+          <p className="text-base font-light">
+            Public transportation in Korea is famous for being on time and
+            convenient.Try installing these apps!
+          </p>
+          <table className="border border-[#B9B9B9] rounded-md w-full text-left text-xs">
+            <thead>
+              <tr className="bg-[#9681EB] text-white">
+                <th className="px-4 py-2">App</th>
+                <th className="px-4 py-2">What it does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-t">
+                <td className="px-4 py-2 border-r">
+                  <p>Kakao Map</p>
+                  <p>Naver Map</p>
+                </td>
+                <td className="px-4 py-2">
+                  Real-time bus & subway info, navigation
+                </td>
+              </tr>
+              <tr className="border-t">
+                <td className="px-4 py-2 border-r">Kakao T</td>
+                <td className="px-4 py-2">Taxi booking, bike rental</td>
+              </tr>
+              <tr className="border-t">
+                <td className="px-4 py-2 border-r">Subway Korea</td>
+                <td className="px-4 py-2">
+                  Subway maps and timetables nationwide
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <hr className="border-t border-[#E8E5EF] my-5" />
+
+        {/* 소제목 : OOO */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">
+            <p>T-Money Card</p>
+            <p>(Transportation Card)</p>
           </h2>
-
-          {/* Campus Shuttle Bus */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3 rounded">
-              Campus Shuttle Bus
-            </h3>
-
-            <h4 className="font-medium mb-2">1. Check the Route:</h4>
-            <ul className="list-disc list-inside mb-3 space-y-1 text-gray-700">
-              <li>Songdo Campus ↔ College of Education</li>
-              <li>Incheon Nat'l Univ. Station ↔ INU Campus</li>
-              <li>Dorm Area ↔ INU Campus</li>
+          <p className="text-base font-light">
+            <ul className="list-disc list-inside">
+              <li>
+                Buy: Available at convenience stores (CU, GS25, 7-Eleven) or
+                subway stations.
+              </li>
+              <li>
+                Top-up: Same convenience stores, station staff, or recharge
+                machines (cash/card).
+              </li>
+              <li>
+                Use: Tap the card when boarding and getting off buses/subways.
+              </li>
+              <li>
+                Pro tip: Can also be used to pay in taxis and convenience
+                stores.
+              </li>
             </ul>
+          </p>
+        </section>
 
-            <h4 className="font-medium mb-2">
-              2. Find the Timetable: Available on ISC website or bus stop
-              boards.
-            </h4>
+        <hr className="border-t border-[#E8E5EF] my-5" />
 
-            <h4 className="font-medium mb-2">
-              3. Board the Shuttle: Free of charge, just wait at the marked
-              stop.
-            </h4>
-
-            <h4 className="font-medium mb-2">
-              4. Tip: Arrive 5 minutes early—buses leave on time.
-            </h4>
+        {/* 소제목 : How to Use Different Transport Modes */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">
+            How to Use Different Transport Modes
+          </h2>
+          <div className="flex gap-2">
+            <CheckIcon className="w-10" />
+            <div className="flex flex-col gap-4">
+              <p className="text-base">Bus</p>
+              <ul className="text-base font-light list-disc list-inside flex flex-col gap-4">
+                <li>
+                  Find your stop: Use Kakao Map or Naver Map to check bus number
+                  and stop location.
+                </li>
+                <li>
+                  Board: Enter through the front door and tap your T-Money card.
+                </li>
+                <li>
+                  Get off: Press the stop button 1–2 stops in advance, then tap
+                  your card when exiting through the back door.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="bg-[#F4F2F6] w-full h-12 flex justify-between items-center px-4">
+            <p>Why tap when getting off?</p>
+            <img src={NervousIcon} className="w-10 h-10" />
+          </div>
+          <div className="bg-[#F4F2F6] w-full h-32 flex justify-between items-center px-4">
+            <p>
+              Because Korea calculates fares based on distance. If you don’t tap
+              off, you’ll be charged to the final stop or pay extra next time.
+              Plus, transfer discounts won’t apply without it.
+            </p>
           </div>
 
-          {/* City Bus */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3 rounded">City Bus</h3>
+          <div className="flex gap-2">
+            <CheckIcon className="w-10" />
+            <div className="flex flex-col gap-4">
+              <p className="text-base">Subway</p>
+              <ul className="text-base font-light list-disc list-inside flex flex-col gap-4">
+                <li>
+                  Check route: Use Subway Korea or Kakao Map to see the route
+                  and transfer stations.
+                </li>
+                <li>Enter: Tap T-Money at the gate.</li>
+                <li>
+                  Transfer: Within 30 minutes, transfers between bus subway are
+                  discounted or free.
+                </li>
+                <li>Exit: Tap your card at the gate when leaving.</li>
+              </ul>
+            </div>
+          </div>
 
-            <h4 className="font-medium mb-2">
-              1. Buy a Transport Card (T-money or Cashbee) at convenience
-              stores.
-            </h4>
+          <div className="flex gap-2">
+            <CheckIcon className="w-10" />
+            <div className="flex flex-col gap-4">
+              <p className="text-base">Taxi</p>
+              <ul className="text-base font-light list-disc list-inside flex flex-col gap-4">
+                <li>Book: Use Kakao T for real-time taxi booking.</li>
+                <li>Pay: Cash, credit card, T-Money, or in-app payment.</li>
+                <li>Note: Late-night surcharge (22:00–04:00) is 20–40%.</li>
+                <li>Exit: Tap your card at the gate when leaving.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
-            <h4 className="font-medium mb-2">2. Main Routes:</h4>
-            <ul className="list-disc list-inside mb-3 space-y-1 text-gray-700">
-              <li>INU Station ↔ INU: 8, 16, Circular 41, Circular 46</li>
-              <li>Dorm Area ↔ INU: 6-1, Circular 46</li>
-              <li>INU ↔ Immigration Office: 9, 16</li>
-              <li className="font-medium mb-2">
-                INU ↔ Community Centers:
-                <ul className="list-disc list-inside mb-3 space-y-1 text-gray-700">
-                  <li>Songdo 1-dong: 8, Circular 41, 6-1, 58, 16</li>
-                  <li>Songdo 2-dong: 16, 6-1, 9</li>
-                  <li>Songdo 3-dong: 16, 6, 58, 9</li>
-                  <li>Songdo 4-dong: 58, Circular 46</li>
+        <hr className="border-t border-[#E8E5EF] my-5" />
+
+        {/* 소제목 : Bicycle Use */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">Bicycle Use</h2>
+          <p className="text-base font-light">
+            There are both bike-sharing services and public bike rentals near
+            the university.
+          </p>
+          <div className="pl-4">
+            <ul className="text-base font-light list-disc list-inside flex flex-col gap-4">
+              <li>
+                Bike-sharing apps
+                <ul className="list-disc pl-10">
+                  <li>sogar elecle</li>
+                  <li>Kakao T</li>
+                </ul>
+              </li>
+              <li>
+                Public bike rental (G-Tower)
+                <ul className="list-disc pl-10">
+                  <li>
+                    Hours: Weekdays 09:00–17:00 (closed weekends & public
+                    holidays)
+                  </li>
+                  <li>
+                    Requirierens: ID & proof of residence (1 bike per foreigner)
+                  </li>
+                  <li>
+                    Contact: IFEZ Public Bike Info Desk(G-Tower 1F) ☎
+                    032-453-7887
+                  </li>
                 </ul>
               </li>
             </ul>
-
-            <p className="text-gray-700 mb-3">
-              Board & Tap your card when getting on and off for transfer
-              discounts.
+          </div>
+          <div className="bg-[#F4F2F6] p-4 flex gap-4 flex-col">
+            <div className="flex items-center gap-4">
+              <SmileIcon />
+              <h4>INGLE’s guide</h4>
+            </div>
+            <p className="text-[#6C757D] font-medium">
+              "Most Koreans only speak Korean. Although some are good at English
+              or other foreign languages, it's a country where Korean is
+              predominantly used. This can sometimes lead to misunderstandings
+              in communication. If you ask a question and someone doesn't answer
+              or gives a strange answer, it's highly likely they didn't
+              understand you. When this happens, try asking again with some
+              gestures. We’re actually quite nice, you’ll see!"
             </p>
-
-            <div className="bg-green-50 p-3 rounded border-l-4 border-green-400">
-              <p className="text-sm font-medium text-green-800">
-                💡 Tip: Use Kakao Map or Naver Map for real-time arrivals.
+          </div>
+          <div className="bg-[#C3E4FF] flex justify-between px-4 py-5 rounded-[20px]">
+            <p className="text-base">For more travel Tips</p>
+            <div className="bg-[#71EBFF] px-3 rounded-[20px] text-[#ffffff]">
+              <p>
+                <a href="https://english.visitkorea.or.kr/svc/main/index.do?utm_source=ko_visitkorea&utm_medium=landing_url&utm_campaign=vk_main_enu">
+                  view
+                </a>
               </p>
             </div>
           </div>
-
-          {/* Subway */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3 bg-purple-100 p-2 rounded">
-              3️⃣ Subway
-            </h3>
-
-            <p className="text-gray-700 mb-3">
-              <span className="font-medium">Nearest Station:</span> Incheon
-              Nat'l Univ. Station (Line 1).
-            </p>
-
-            <h4 className="font-medium mb-2">Main Destinations:</h4>
-            <ul className="list-disc list-inside mb-3 space-y-1 text-gray-700">
-              <li>Incheon Bus Terminal, Bupyeong</li>
-              <li>Seoul Station, Hongdae (via AREX)</li>
-            </ul>
-
-            <p className="text-gray-700 mb-3">
-              Check Train Type: Express vs Local.
-            </p>
-
-            <div className="bg-green-50 p-3 rounded border-l-4 border-green-400">
-              <p className="text-sm font-medium text-green-800">
-                💡 Tip: Avoid rush hours (07:30–09:00 / 18:00–19:30).
+          <div className="bg-[#F9F871] flex justify-between px-4 py-5 rounded-[20px]">
+            <p className="text-base">Incheon Cycling Course</p>
+            <div className="bg-[#70A9F0] px-3 rounded-[20px] text-[#ffffff]">
+              <p>
+                <a href="https://eng-itour.incheon.go.kr/cmn/board/BBSMSTR_000000000080/2874bbsDetail.do">
+                  view
+                </a>
               </p>
             </div>
-          </div>
-
-          {/* Airport Transportation */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3 bg-red-100 p-2 rounded">
-              4️⃣ Airport Transportation
-            </h3>
-
-            <ul className="list-disc list-inside space-y-2 text-gray-700">
-              <li>
-                <span className="font-medium">AREX (Airport Railroad):</span>{' '}
-                Transfer at Gyeyang Station for Incheon Airport.
-              </li>
-              <li>
-                <span className="font-medium">Airport Limousine Bus:</span>{' '}
-                Check timetable on ISC notices.
-              </li>
-              <li>
-                <span className="font-medium">Taxi:</span> Use Kakao T Blue
-                (~35,000–40,000 KRW to the airport).
-              </li>
-            </ul>
-          </div>
-
-          {/* Bikes & E-scooters */}
-          <div className="mb-6">
-            <h3 className="text-lg font-medium mb-3 bg-green-100 p-2 rounded">
-              5️⃣ Bikes & E-scooters
-            </h3>
-
-            <p className="text-gray-700 mb-3">
-              <span className="font-medium">Services:</span> Kakao T Bike,
-              Gcooter, Swing.
-            </p>
-
-            <h4 className="font-medium mb-2">How to Ride:</h4>
-            <p className="text-gray-700 mb-3">
-              Download app → Register payment → Scan QR code → Ride.
-            </p>
-
-            <div className="bg-yellow-50 p-3 rounded border-l-4 border-yellow-400">
-              <p className="text-sm font-medium text-yellow-800">
-                ⚠️ Safety Tip: Wear a helmet, follow traffic rules, avoid
-                sidewalks.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* How You Can Use This */}
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">
-            💡 How You Can Use This
-          </h2>
-          <ul className="list-disc list-inside space-y-2 text-gray-700">
-            <li>
-              <span className="font-medium">Daily commute:</span> Save money by
-              combining shuttle + bus.
-            </li>
-            <li>
-              <span className="font-medium">Quick trips:</span> E-scooter or
-              bike for nearby cafes and shops.
-            </li>
-            <li>
-              <span className="font-medium">Weekend trips:</span> Subway to
-              Seoul for sightseeing.
-            </li>
-            <li>
-              <span className="font-medium">Airport runs:</span> Choose between
-              AREX and airport limousine bus based on luggage size.
-            </li>
-          </ul>
-        </section>
-
-        {/* Recommended Apps */}
-        <section className="mb-8">
-          <h2 className="text-xl font-semibold mb-3">📱 Recommended Apps</h2>
-
-          <div className="overflow-x-auto">
-            <table className="w-full border-collapse border border-gray-300">
-              <thead>
-                <tr className="bg-gray-50">
-                  <th className="border border-gray-300 px-4 py-2 text-left font-medium">
-                    App
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2 text-left font-medium">
-                    What it does
-                  </th>
-                  <th className="border border-gray-300 px-4 py-2 text-left font-medium">
-                    Languages
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-medium">
-                    Kakao Map
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Real-time bus/subway info, navigation
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">KR, EN</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-medium">
-                    Naver Map
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Navigation, public transport info
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">KR, EN</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-medium">
-                    Kakao T
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Taxi, bike, driver service
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">KR, EN</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 px-4 py-2 font-medium">
-                    Subway Korea
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">
-                    Subway maps & timetables
-                  </td>
-                  <td className="border border-gray-300 px-4 py-2">KR, EN</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
         </section>
       </main>
-    </article>
+      <div className="px-4 mb-8">
+        <Button>Done Reading</Button>
+      </div>
+    </>
   );
 };
 
