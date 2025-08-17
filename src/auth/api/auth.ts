@@ -1,41 +1,33 @@
 import { useAuthStore } from '@/auth/stores/authStore';
 import axios from 'axios';
 
-//인스턴스
-const instance = axios.create({
-  baseURL: import.meta.env.BASE_URL,
-  timeout: 3000,
-  headers: {
-    'Content-Type': 'application/json',
-    //Authorization: `Bearer ${accessToken}`, //access 토큰을 zustand에 저장해둘꺼니까?
-  },
-  responseType: 'json',
-});
+axios.defaults.withCredentials = true; //쿠키 사용 위함
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 //요청 인터셉터
-instance.interceptors.request.use(
+axios.interceptors.request.use(
   config => {
-    //요청이 전단되기 전 작업
+    const accessToken = useAuthStore();
+    if (accessToken) {
+      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    }
+
+    // [ ] 로그인되어 있고, access 토큰 만료됐으면 재발급 ㄱㄱ
 
     return config;
   },
   error => {
-    //요청 오류가 있는 작업
     console.log(error);
     return Promise.reject(error);
   },
 );
 
 //응답 인터셉터
-instance.interceptors.response.use(
+axios.interceptors.response.use(
   response => {
-    // 2xx 범위에 있는 상태 코드가 이 함수 실행
-    // 응답 데이터가 있는 작업 수행
     return response;
   },
   error => {
-    // 2xx 외의 범위에 있는 상태 코드는 이 함수를 트리거 합니다.
-    // 응답 오류가 있는 작업 수행
     return Promise.reject(error);
   },
 );

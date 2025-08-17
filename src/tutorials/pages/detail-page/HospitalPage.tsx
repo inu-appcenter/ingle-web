@@ -1,5 +1,12 @@
+import BubbleGuide from '@/tutorials/components/BubbleGuide';
+
 const HospitalPage = () => {
-  return <div></div>;
+  const des = 'this is description for hospital';
+  return (
+    <div>
+      <BubbleGuide description={des} />
+    </div>
+  );
 };
 
 export default HospitalPage;
