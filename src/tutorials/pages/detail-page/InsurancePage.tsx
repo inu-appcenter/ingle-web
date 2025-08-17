@@ -1,9 +1,9 @@
 import BubbleGuide from '@/tutorials/components/BubbleGuide';
-import CategoryTag from '@/tutorials/components/categoryTag';
+import CategoryTag from '@/tutorials/components/CategoryTag';
 import CountOne from '@/tutorials/counter_1.svg?react';
 import CountTwo from '@/tutorials/counter_2.svg?react';
 import CountThree from '@/tutorials/counter_3.svg?react';
-import MainImage from '@/tutorials/Whisk_c3e1efd605 1.svg?react';
+import MainImage from '@/tutorials/insurance-bg.svg?react';
 
 const InsurancePage = () => {
   const tips =
@@ -61,8 +61,8 @@ const InsurancePage = () => {
   ];
 
   return (
-    <div className="flex flex-col">
-      <MainImage className="w-full" />
+    <div className="flex flex-col w-full">
+      <MainImage className="w-full h-auto" />
       <div className="flex flex-col gap-5 mx-4 my-5 text-[#383737] leading-[140%]">
         <CategoryTag />
         <h1 className="text-[#383737] text-[32px] font-bold leading-none">Insurance</h1>
