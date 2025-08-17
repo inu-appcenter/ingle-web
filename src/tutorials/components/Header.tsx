@@ -17,8 +17,8 @@ const Header = ({ image }: HeaderProps) => {
     <header className="relative mb-8">
       <img
         src={image}
-        className="w-full aspect-[5/4] object-cover object-center select-none pointer-events-none"
-        alt="Haksan Library"
+        className="w-full aspect-[4/5] object-cover object-center select-none pointer-events-none"
+        alt="detailPageImage"
       />
       <div
         onClick={handleBackClick}
