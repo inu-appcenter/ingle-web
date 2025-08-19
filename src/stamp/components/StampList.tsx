@@ -39,12 +39,10 @@ const stampList = [
 
 const StampList = (/*{ stampList }: { stampList: Stamp[] }*/) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedStamp, setSelectedStamp] = useState<
-    null | (typeof stampList)[0]
-  >(null);
+  const [selectedStamp, setSelectedStamp] = useState<null | (typeof stampList)[0]>(null);
 
   console.log(isModalOpen, selectedStamp);
-  const handleStampClick = stamp => {
+  const handleStampClick = (stamp: any) => {
     setSelectedStamp(stamp);
     setIsModalOpen(true);
   };

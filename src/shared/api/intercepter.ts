@@ -1,17 +1,16 @@
 import { useAuthStore } from '@/auth/stores/authStore';
 import { ROUTES } from '@/router/routes';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
 
-const instance = axios.create({
-  //baseURL:import.meta.env.VITE_BASE_URL,
+export const instance = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
   withCredentials: true,
 });
 
 //요청 인터셉터
 instance.interceptors.request.use(
   config => {
-    const accessToken = useAuthStore();
+    const { accessToken } = useAuthStore.getState();
     if (accessToken) {
       config.headers['Authorization'] = `Bearer ${accessToken}`;
     }
@@ -35,19 +34,17 @@ instance.interceptors.response.use(
       error.config._retry = true;
 
       try {
-        const res = await axios.post('/auth/refresh'); //인스턴스 사용 권장
+        const res = await axios.post('/auth/refresh');
         const newAccessToken = res.data.accessToken;
         const newExpireDate = res.data.accessTokenExpiresDate;
-        const { setTokens } = useAuthStore();
 
-        setTokens(newAccessToken, newExpireDate);
+        useAuthStore.getState().setTokens(newAccessToken, newExpireDate);
 
         // 실패했던 요청 헤더 갱신 후 재시도
         error.config.headers.Authorization = `Bearer ${newAccessToken}`;
         return axios(error.config);
       } catch (err: any) {
-        const { clearTokens } = useAuthStore();
-        const navigate = useNavigate();
+        const { clearTokens } = useAuthStore.getState();
 
         if (err.response.status === 400) {
           alert(err.response.data.message); //리프레시 토큰 불일치
@@ -56,7 +53,7 @@ instance.interceptors.response.use(
         } else if (err.response.status === 420) {
           alert(err.response.data.message); // 만료된 리프레시 토큰
           clearTokens();
-          navigate(ROUTES.AUTH);
+          window.location.href = ROUTES.AUTH;
         }
         return Promise.reject(err);
       }
