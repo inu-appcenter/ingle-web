@@ -1,15 +1,8 @@
 import { create } from 'zustand';
 
-const ACCESS_TOKEN_KEY = 'access_token';
-const REFRESH_TOKEN_KEY = 'refresh_token';
 const REMEMBER_KEY = 'remember';
 
-type ServerResponse = {
-  memberId: number;
-  studentId: string;
-  department: string;
-  studentType: string;
-  nickname: string;
+type TokenInfo = {
   accessToken: string;
   accessTokenExpiresDate: Date;
 };
@@ -25,15 +18,15 @@ interface AuthState {
   nickname: string;
 
   accessToken: string | null;
-  expiryTime: Date | null;
-  remember: boolean; // ? : 아직 잘 모르겠다.
+  expiryTime: string | null;
+  remember: boolean; // [ ] 아직...
   isAuthenticated: boolean; // 로그인 상태 여부
 
   setStep: (step: AuthState['currentStep']) => void;
   setStudentInfo: (
     info: Partial<Omit<AuthState, 'setStep' | 'setPortalStudentId' | 'setStudentInfo'>>,
   ) => void;
-  setTokens: (res: ServerResponse) => void;
+  setTokens: (access: string, expire: string) => void;
   clearTokens: () => void;
 }
 
@@ -54,18 +47,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   setStudentInfo: info => set(state => ({ ...state, ...info })),
 
   // access token, expireDate 저장
-  setTokens: (res: ServerResponse) => {
+  setTokens: (access, expire) => {
     try {
       // 메모리에 저장
       set({
         isAuthenticated: true,
-        accessToken: res.accessToken,
-        expiryTime: res.accessTokenExpiresDate,
-
-        studentId: res.studentId,
-        department: res.department,
-        studentType: res.studentType,
-        nickname: res.nickname,
+        accessToken: access,
+        expiryTime: expire,
       });
     } catch (e) {
       console.warn('storage write failed', e);
@@ -80,9 +68,15 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
     set({
       accessToken: null,
+      expiryTime: null,
       remember: false,
       isAuthenticated: false,
       currentStep: 'intro',
     });
   },
 }));
+
+// 👇 디버깅용 (브라우저 콘솔에서 접근 가능)
+if (typeof window !== 'undefined') {
+  (window as any).authStore = useAuthStore;
+}

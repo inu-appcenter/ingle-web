@@ -1,9 +1,9 @@
-import { SignUp } from '@/auth/api/auth';
 import DepartmentSelect from '@/auth/components/infoSteps/DepartmentSelect';
 import SetNickname from '@/auth/components/infoSteps/SetNickname'; // Assuming this component exists for nickname input
 import StatusSelect from '@/auth/components/infoSteps/StatusSelect';
 import ArrowLeft from '@/auth/images/arrow-left.svg?react';
 import { useAuthStore } from '@/auth/stores/authStore';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 //단계 구분 변수 useStat
@@ -30,8 +30,15 @@ export default function StudentInfoStep() {
   // 다음단계로 넘어갈 수 있는지 여부는 zustand에 각 단계별 속성이 채워졌는가에 따름.
   // 단계가 넘어갈때마다 리셋
 
-  const { studentType, department, nickname, studentId, setStep, setStudentInfo } =
-    useAuthStore();
+  const {
+    studentType,
+    department,
+    nickname,
+    studentId,
+    setStep,
+    setStudentInfo,
+    setTokens,
+  } = useAuthStore();
 
   const stepTitles = [
     'Select your Current Status',
@@ -68,6 +75,48 @@ export default function StudentInfoStep() {
     }
   };
 
+  async function SignUp(data: {
+    studentId: string;
+    department: string;
+    studentType: string;
+    nickname: string;
+  }) {
+    const res = await axios.post(import.meta.env.VITE_SIGN_UP_URL, data);
+    try {
+      if (res.status === 201) {
+        //회원가입 성공 시
+        //토큰 저장.
+        setStudentInfo({
+          studentId: res.data.studentId,
+          department: res.data.department,
+          studentType: res.data.studentType,
+          nickname: res.data.nickname,
+        });
+        setTokens(res.data.accessToken, res.data.accessTokenExpiresDate);
+
+        alert('회원가입 성공');
+      }
+    } catch {
+      alert('회원가입에 실패하였습니다. 다시 시도해주세요');
+    }
+  }
+
+  const settingStep = () => {
+    if (!actNext) return;
+    setActNext(false);
+    if (infoStep < 2) {
+      setInfoStep(infoStep + 1);
+    } else if (infoStep === 2) {
+      SignUp({
+        studentType: studentType,
+        department: department,
+        nickname: nickname,
+        studentId: studentId,
+      });
+      setStep('finish');
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-between w-full min-h-screen">
       {/* 상단 : 상태바 */}
@@ -96,11 +145,7 @@ export default function StudentInfoStep() {
         </h1>
         {renderContent()}
       </div>
-      <div>
-        포털id : {studentId}
-        <br />
-        닉네임 : {nickname}
-      </div>
+
       {/* 다음 버튼 */}
       <div className="w-full flex justify-center p-7">
         <button
@@ -111,30 +156,7 @@ export default function StudentInfoStep() {
               ? 'bg-[#7A00E6] text-white border-purple-500 cursor-pointer'
               : 'bg-white text-gray cursor-not-allowed'
           }`}
-          onClick={() => {
-            if (!actNext) return;
-            setActNext(false);
-            if (infoStep < 2) {
-              setInfoStep(infoStep + 1);
-            } else if (infoStep === 2) {
-              //마지막 상태에서
-
-              SignUp({
-                //회원가입 api
-                studentType: studentType,
-                studentId: studentId,
-                department: department,
-                nickname: nickname,
-              });
-              setStep('finish');
-
-              //회원가입 완료.
-              // 회원 정보 보내기. 및 회원가입 완료 화면
-              //회원가입 api 호출 필요
-              //(여기서 회원가입이란 ingle 회원가입을 의미)
-              //
-            }
-          }}
+          onClick={settingStep}
         >
           NEXT
         </button>

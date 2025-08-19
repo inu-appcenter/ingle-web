@@ -55,7 +55,9 @@ export default function SetNickname() {
 
   const onError = () => {
     if (errors.nickname) {
-      console.log('닉네임은 3~20자 사이입니다');
+      alert('닉네임은 3~20자 사이입니다');
+      setIsTaken(undefined);
+      setStudentInfo({ nickname: '' });
     }
   };
 

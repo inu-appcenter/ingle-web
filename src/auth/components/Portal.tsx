@@ -20,7 +20,9 @@ type Inputs = {
 };
 
 export default function Portal() {
-  const { setStudentInfo, setStep } = useAuthStore();
+  const { setStudentInfo, setStep, setTokens } = useAuthStore();
+  const { studentId, studentType, department, nickname, accessToken, expiryTime } =
+    useAuthStore();
   const [showpw, setShowPw] = useState(false);
   const [ischecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
@@ -35,43 +37,50 @@ export default function Portal() {
 
   const onSubmit = async (data: Inputs, e: any) => {
     e.preventDefault(); //기본 제출 막기.
+
     try {
       const res = await axios.post(import.meta.env.VITE_PORTAL_URL, {
         studentId: data.studentId,
         password: data.password,
       });
-      if (res.status === 200) {
-        const { accessToken, refreshToken } = res.data;
-        useAuthStore.getState().setTokens(accessToken, refreshToken);
-        console.log('로그인 성공');
-        // [ ] 성공했을 때 처리
 
-        //홈으로.
-        navigate(ROUTES.TUTORIAL);
+      if (res.status === 200) {
+        setStudentInfo({
+          studentId: res.data.studentId,
+          department: res.data.department,
+          studentType: res.data.studentType,
+          nickname: res.data.nickname,
+        });
+        setTokens(res.data.accessToken, res.data.accessTokenExpiresDate);
+        //-[ ] 정보가 잘 저장되었는지 확인. 확인 후 정보는 다 지우기.
+        //-[ ] 쿠키도 확인
+        console.log(
+          '로그인 성공',
+          studentId,
+          studentType,
+          department,
+          nickname,
+          accessToken,
+          expiryTime,
+        );
+        navigate(ROUTES.TUTORIAL); // 튜토리얼로 넘어감
       } else if (res.status === 202) {
-        alert(res.data.message); // 회원 가입이 필요합니다.
+        alert(res.data.message); //회원가입이 필요합니다
         setStudentInfo({ portalId: res.data.studentId });
-        setStep('studentInfo'); //회원가입 단계로 넘어감
+        setStep('studentInfo');
       }
     } catch (err: any) {
-      // [ ] 요 조건문의 의미 = 응답이 왔는데 상태가 401
-      if (err.response && err.response.status === 401) {
-        alert(err.data.message); //로그인이 실패하였습니다.
+      if (err.response.status === 401) {
+        alert(err.response.data.message); // 로그인이 실패하였습니다
       } else {
         alert('알 수 없는 오류가 발생했습니다.');
       }
     }
   };
 
-  const onError = (errors: any) => {
-    if (errors.studentId.type === 'required') {
-      alert('학번을 입력해주세요');
-    } else if (errors.studentId.type === 'minLength') {
-      alert('학번을 다시 입력해주세요');
-    } else if (errors.password.type === 'required') {
-      alert('비밀번호를 입력해주세요');
-    }
-    console.log('wrong');
+  const onError = (err: any) => {
+    alert('학번과 비밀번호를 확인해주세요');
+    console.error('로그인 에러:', err);
   };
 
   const handleVisibility = () => {
@@ -95,7 +104,6 @@ export default function Portal() {
         onSubmit={handleSubmit(onSubmit, onError)}
         className="flex flex-col flex-1 w-full justify-center gap-[20px] mt-[26px]"
       >
-        {/*[ ] 에러 처리 필요.. */}
         {/*학번*/}
         <div className="flex items-center bg-[#F0EDFF]/80 rounded-2xl px-5 py-4">
           <Id className="mr-4" />

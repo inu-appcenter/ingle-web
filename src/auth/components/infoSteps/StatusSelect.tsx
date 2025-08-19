@@ -44,18 +44,22 @@ function StatusSelect() {
     {
       option: 'Exchange\nStudent',
       icon: <ExchangeIcon />,
+      value: 'EXCHANGE',
     },
     {
       option: 'Language\nStudent',
       icon: <LanguageIcon />,
+      value: 'LANGUAGE',
     },
     {
       option: 'Ungraduate\nStudent',
       icon: <UngraduateIcon />,
+      value: 'UNDERGRADUATE',
     },
     {
       option: 'Graduate\nStudent',
       icon: <GraduateIcon />,
+      value: 'GRADUATE',
     },
   ];
 
@@ -68,12 +72,12 @@ function StatusSelect() {
               key={index}
               status={status.option}
               icon={status.icon}
-              isSelected={studentType === status.option}
+              isSelected={studentType === status.value}
               onClick={() =>
                 setStudentInfo(
-                  studentType === status.option
+                  studentType === status.value
                     ? { studentType: '' }
-                    : { studentType: status.option },
+                    : { studentType: status.value },
                 )
               }
             />
