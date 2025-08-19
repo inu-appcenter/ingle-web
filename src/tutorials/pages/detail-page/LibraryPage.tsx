@@ -1,136 +1,205 @@
-import libraryImage from '@/shared/assets/images/place/library-image.png';
+import libraryImage1 from '@/shared/assets/images/place/library-image1.jpeg';
+import libraryImage2 from '@/shared/assets/images/place/library-image2.jpg';
+import libraryImage3 from '@/shared/assets/images/place/library-image3.png';
+import libraryImage4 from '@/shared/assets/images/place/library-image4.png';
 import ClockIcon from '@/shared/assets/icons/clock-icon.svg?react';
 import PlaceIcon from '@/shared/assets/icons/place-icon.svg?react';
 import TagIcon from '@/shared/assets/icons/tag-icon.svg?react';
 import Header from '@/tutorials/components/Header';
+import Tag from '@/tutorials/components/Tag';
 
 const LibraryPage = () => {
   return (
     <article>
       {/* header : 이미지 + 뒤로가기 버튼 */}
-      <Header images={[libraryImage]} />
+      <Header images={[libraryImage1, libraryImage2]} />
 
       {/* 메인 : 제목 + 내용 */}
       <main className="px-4">
-        <h1 className="text-2xl font-bold mb-4">Haksan Library User Guide</h1>
+        <Tag>Campus Life</Tag>
+        <h1 className="text-2xl font-bold mb-4">Haksan Library</h1>
 
-        {/* 기본정보 : 운영시간 + 위치 + 태그 */}
-        <section className="mb-7 flex flex-wrap gap-4">
-          <div className="flex gap-2 items-center">
-            <ClockIcon />
-            <p>Weekdays : 9:00 AM - 9:00 PM</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <PlaceIcon />
-            <p>Building 6</p>
-          </div>
-          <div className="flex gap-2 items-center">
-            <TagIcon />
-            <p>Library, Study Room, Media Editor Room, Print Cafe</p>
-          </div>
-        </section>
+        <hr className="border-t border-[#E8E5EF] my-5" />
 
-        {/* 환영 메시지 */}
-        <section className="text-[#695c5c] mb-8">
-          <p>
-            Welcome to the Haksan Library! The library is located next to the
-            Main Building and across from the Student Union Building. It has
-            four floors above ground and one basement level.
+        {/* 소제목 : OOOO */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">Using INU Library Services</h2>
+          <p className="text-base font-light">
+            Haksan Library always strives to provide the best learning
+            environment for students. Our library opens its reading rooms 24
+            hours a day, 365 days a year, so you can study whenever you want.
+            There are also IRUM Hall where you can hold discussions and study
+            together. INGLE will tell you more about the key facilities of
+            Haksan Library!
           </p>
+          <img src={libraryImage4} />
         </section>
 
-        {/* Opening Hours */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3 ">Opening Hours</h2>
-          <div>
-            <p className="font-medium mb-2">During Semester:</p>
-            <ul className="list-disc list-inside mb-4 space-y-1">
-              <li>Weekdays: 9:00 AM – 9:00 PM</li>
-              <li>Saturday: 9:00 AM – 1:00 PM</li>
-            </ul>
+        <hr className="border-t border-[#E8E5EF] my-5" />
 
-            <p className="font-medium mb-2">During Vacation:</p>
-            <ul className="list-disc list-inside mb-4 space-y-1">
-              <li>Weekdays: 9:00 AM – 6:00 PM</li>
-              <li>Saturday: Closed</li>
-            </ul>
+        {/* 소제목 : Centeral Hall Floor Guide */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">Centeral Hall Floor Guide</h2>
 
-            <p className="text-sm">
-              Please note that hours may vary during exam periods or holidays.
-              Check the official website for updates.
-            </p>
-          </div>
+          <table className="w-full bg-white rounded-lg font-normal text-[14px] border">
+            <tbody>
+              <tr className="border-b border-gray-200">
+                <td className="bg-[#9681EB] text-white text-center py-6 px-6 w-20">
+                  <span>4F</span>
+                </td>
+                <td className="p-4">
+                  <div className="text-gray-800 mb-2">
+                    Resource Room 500-900
+                  </div>
+                  <div className="text-gray-600">
+                    : Applied Science, Arts, Language, Literature,
+                    History&Geography
+                  </div>
+                </td>
+              </tr>
+
+              <tr className="border-b border-gray-200">
+                <td className="bg-[#9681EB] text-white text-center py-6 px-6">
+                  <span>3F</span>
+                </td>
+                <td className="p-4">
+                  <div className="text-gray-800 mb-2">
+                    Resource Room 000-400
+                  </div>
+                  <div className="text-gray-600 mb-2">
+                    : Generalities, Philosophy & Psychology, Religion, Social
+                    Science, Natural Science
+                  </div>
+                  <div className="text-gray-800">Study Room</div>
+                </td>
+              </tr>
+
+              <tr className="border-b border-gray-200">
+                <td className="bg-[#9681EB] text-white text-center py-6 px-6">
+                  <span>2F</span>
+                </td>
+                <td className="p-4">
+                  <div className="text-gray-800">
+                    Periodicals Room, Job Library, Study Room, Study Garden
+                  </div>
+                </td>
+              </tr>
+
+              <tr className="border-b border-gray-200">
+                <td className="bg-[#9681EB] text-white text-center py-6 px-6">
+                  <span>1F</span>
+                </td>
+                <td className="p-4">
+                  <div className="text-gray-800">
+                    Media Lounge, Multimedia LAB, Academic Information Team
+                    Office
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td className="bg-[#9681EB] text-white text-center py-6 px-6">
+                  <span>B1</span>
+                </td>
+                <td className="p-4">
+                  <div className="text-gray-800">
+                    Reading Room, Laptop Room, Seminar Room, Healing Zone,
+                    Repository, Book Catalog Department, Copy&Bookbinding,
+                    Convenience Store
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h2 className="text-xl font-bold">IRUM Hall Floor Guide</h2>
+          <table className="w-full bg-white rounded-lg border font-normal text-[12px]">
+            <tbody>
+              <tr className="border-b border-gray-200">
+                <td className="bg-[#9681EB] text-white text-center py-6 px-6 w-20">
+                  <span>4F</span>
+                </td>
+                <td className="p-4">
+                  Curation Zone, Personal Research Carrel, INU Honors Hall,
+                  Video Conference Room, Meeting Room, Library Director’s Room
+                </td>
+              </tr>
+
+              <tr className="border-b border-gray-200">
+                <td className="bg-[#9681EB] text-white text-center py-6 px-6">
+                  <span>3F</span>
+                </td>
+                <td className="p-4">
+                  Open Lounge, INU Great Books Center, Seminar Room, Study Room,
+                  Academic Information Team Office
+                </td>
+              </tr>
+
+              <tr className="border-b border-gray-200">
+                <td className="bg-[#9681EB] text-white text-center py-6 px-6">
+                  <span>2F</span>
+                </td>
+                <td className="p-4">
+                  Open Lounge•Focus Lounge, Study Garden, Private Study Carrel,
+                  Sky Rest Area, Sea Rest Area, Irum Madang
+                </td>
+              </tr>
+
+              <tr className="border-b border-gray-200">
+                <td className="bg-[#9681EB] text-white text-center py-6 px-6">
+                  <span>1F</span>
+                </td>
+                <td className="p-4">
+                  Triversity Convergence Hall, Live Studio, Video Production
+                  Room, Media Room, Startup Zone, Startup Nest, Co-working
+                  Studio, Multiplex Zone
+                </td>
+              </tr>
+
+              <tr>
+                <td className="bg-[#9681EB] text-white text-center py-6 px-6">
+                  <span>B1</span>
+                </td>
+                <td className="p-4">
+                  INU Play Zone, ICT Lounge, Maker Space, Irum Job Center
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </section>
 
-        {/* Book Borrowing & Reading */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3 ">
-            Book Borrowing & Reading
-          </h2>
+        <hr className="border-t border-[#E8E5EF] my-5" />
 
-          <h3 className="font-medium mb-2">How to borrow:</h3>
-          <ol className="list-decimal list-inside space-y-1 mb-4">
-            <li>Find your book on the shelf.</li>
-            <li>
-              Bring your student ID (physical or mobile) to the checkout desk.
-            </li>
-            <li>You can borrow up to 5 books for 14 days.</li>
-            <li>Renewals are possible once via the website or kiosk.</li>
-          </ol>
-
-          <h3 className="font-medium mb-2">How to return:</h3>
-          <p>
-            Use the return box on the 1st floor or return directly to the desk.
-          </p>
+        {/* 소제목 : OOOO */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">Opening Hours</h2>
         </section>
 
-        {/* Seat Reservation */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">Seat Reservation</h2>
-          <ol className="list-decimal list-inside space-y-1">
-            <li>Go to the library website or open the INGLE app.</li>
-            <li>Click on "Seat Reservation."</li>
-            <li>Select your preferred time and seat.</li>
-            <li>Check in using the kiosk upon arrival.</li>
-          </ol>
+        <hr className="border-t border-[#E8E5EF] my-5" />
+
+        {/* 소제목 : OOOO */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold"></h2>
+          <p className="text-base font-light"></p>
         </section>
 
-        {/* Printing & Copying */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">Printing & Copying</h2>
-          <p className="mb-2">Available in the Copy Room on the 1st floor.</p>
-          <p className="mb-2">You'll need to purchase a printer card.</p>
-          <p>Black & white and color printing are available.</p>
+        <hr className="border-t border-[#E8E5EF] my-5" />
+
+        {/* 소제목 : OOOO */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold"></h2>
+          <p className="text-base font-light"></p>
         </section>
 
-        {/* Study Support Facilities */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">
-            Study Support Facilities
-          </h2>
-          <ul className="list-disc list-inside space-y-2">
-            <li>
-              Study Rooms: For small group discussions. Reservation required.
-            </li>
-            <li>
-              Multimedia Room: For video viewing and digital resource access.
-            </li>
-            <li>
-              Accessible Study Area: Special seating available for students with
-              disabilities.
-            </li>
-          </ul>
+        <hr className="border-t border-[#E8E5EF] my-5" />
+
+        {/* 소제목 : OOOO */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold"></h2>
+          <p className="text-base font-light"></p>
         </section>
 
-        {/* Help & Inquiries */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">Help & Inquiries</h2>
-          <p className="mb-2">
-            Visit the information desk on the 1st floor or use the Q&A board on
-            the website.
-          </p>
-          <p>Phone: +82 32-835-9570</p>
-        </section>
+        <hr className="border-t border-[#E8E5EF] my-5" />
       </main>
     </article>
   );
