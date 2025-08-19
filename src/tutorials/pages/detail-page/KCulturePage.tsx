@@ -101,7 +101,7 @@ export default function KCulturePage() {
           to go eat with them!
         </p>
 
-        <BubbleGuide description={tips} />
+        <BubbleGuide>{tips}</BubbleGuide>
 
         <hr className="border-[#E8E5EF]" />
 
