@@ -1,154 +1,251 @@
-import TestImage from '@/shared/assets/images/ex-detail-page.png';
-import BackIcon from '@/shared/assets/icons/back-icon.svg';
-import ClockIcon from '@/shared/assets/icons/clock-icon.svg';
-import { useNavigate } from 'react-router';
+import Header from '@/tutorials/components/Header';
+import TransitImage from '@/shared/assets/images/place/transit-image.jpg';
+import Tag from '@/tutorials/components/Tag';
+import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
+import NervousIcon from '@/shared/assets/icons/nervous-icon.png';
+import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
+import Button from '@/tutorials/components/Button';
 
 const TransitPage = () => {
-  const navigate = useNavigate();
   return (
-    <article>
-      {/* header : 이미지 + 뒤로가기 버튼 */}
-      <header className="relative mb-8">
-        <img
-          src={TestImage}
-          className="w-full max-h-80 object-cover object-center select-none pointer-events-none"
-          alt="Haksan Library"
-        />
-        <div>
-          <img
-            src={BackIcon}
-            alt="뒤로가기"
-            className="top-4 left-4 absolute cursor-pointer"
-            onClick={() => {
-              navigate(-1);
-            }}
-          />
-        </div>
-      </header>
-
-      {/* 메인 : 제목 + 내용 */}
+    <>
+      <Header images={[TransitImage]} />
       <main className="px-4">
-        <h1 className="text-2xl font-bold mb-4">Haksan Library User Guide</h1>
+        <Tag>Campus Life</Tag>
+        <h1 className="text-[32px] font-bold mb-4">Transit</h1>
 
-        {/* 기본정보 : 운영시간 + 위치 + 태그 */}
-        <section className="mb-7 flex flex-wrap gap-4">
-          <div className="flex gap-2">
-            <img src={ClockIcon} alt="시계 아이콘" />
-            <p>Weekdays : 9:00 AM - 9:00 PM</p>
-          </div>
-          <div className="flex gap-2">
-            <img src={ClockIcon} alt="위치 아이콘" />
-            <p>Building 6</p>
-          </div>
-          <div className="flex gap-2">
-            <img src={ClockIcon} alt="태그 아이콘" />
-            <p>Library, Study Room, Media Editor Room, Print Cafe</p>
-          </div>
-        </section>
+        <hr className="border-t border-[#E8E5EF] my-5" />
 
-        {/* 환영 메시지 */}
-        <section className="text-[#6F6F6F] mb-8">
-          <p>
-            Welcome to the Haksan Library! The library is located next to the
-            Main Building and across from the Student Union Building. It has
-            four floors above ground and one basement level.
+        {/* 소제목 : Bus, Subway */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">
+            Bus, Subway, Taxi... All ways in Incheon!
+          </h2>
+          <p className="text-base font-light">
+            INGLE will guide you through how to use public transportation around
+            Incheon National University. Our campus is at the center of the
+            city, making it easy to go anywhere — Incheon Airport, Seoul, and
+            major cities across Korea.
           </p>
         </section>
 
-        {/* Opening Hours */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3 ">Opening Hours</h2>
-          <div>
-            <p className="font-medium mb-2">During Semester:</p>
-            <ul className="list-disc list-inside mb-4 space-y-1">
-              <li>Weekdays: 9:00 AM – 9:00 PM</li>
-              <li>Saturday: 9:00 AM – 1:00 PM</li>
-            </ul>
+        <hr className="border-t border-[#E8E5EF] my-5" />
 
-            <p className="font-medium mb-2">During Vacation:</p>
-            <ul className="list-disc list-inside mb-4 space-y-1">
-              <li>Weekdays: 9:00 AM – 6:00 PM</li>
-              <li>Saturday: Closed</li>
-            </ul>
+        {/* 소제목 : Recommended Apps */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">Recommended Apps</h2>
+          <p className="text-base font-light">
+            Public transportation in Korea is famous for being on time and
+            convenient.Try installing these apps!
+          </p>
+          <table className="border border-[#B9B9B9] rounded-md w-full text-left text-xs">
+            <thead>
+              <tr className="bg-[#9681EB] text-white">
+                <th className="px-4 py-2">App</th>
+                <th className="px-4 py-2">What it does</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr className="border-t">
+                <td className="px-4 py-2 border-r">
+                  <p>Kakao Map</p>
+                  <p>Naver Map</p>
+                </td>
+                <td className="px-4 py-2">
+                  Real-time bus & subway info, navigation
+                </td>
+              </tr>
+              <tr className="border-t">
+                <td className="px-4 py-2 border-r">Kakao T</td>
+                <td className="px-4 py-2">Taxi booking, bike rental</td>
+              </tr>
+              <tr className="border-t">
+                <td className="px-4 py-2 border-r">Subway Korea</td>
+                <td className="px-4 py-2">
+                  Subway maps and timetables nationwide
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
 
-            <p className="text-sm">
-              Please note that hours may vary during exam periods or holidays.
-              Check the official website for updates.
+        <hr className="border-t border-[#E8E5EF] my-5" />
+
+        {/* 소제목 : OOO */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">
+            <p>T-Money Card</p>
+            <p>(Transportation Card)</p>
+          </h2>
+          <p className="text-base font-light">
+            <ul className="list-disc list-inside">
+              <li>
+                Buy: Available at convenience stores (CU, GS25, 7-Eleven) or
+                subway stations.
+              </li>
+              <li>
+                Top-up: Same convenience stores, station staff, or recharge
+                machines (cash/card).
+              </li>
+              <li>
+                Use: Tap the card when boarding and getting off buses/subways.
+              </li>
+              <li>
+                Pro tip: Can also be used to pay in taxis and convenience
+                stores.
+              </li>
+            </ul>
+          </p>
+        </section>
+
+        <hr className="border-t border-[#E8E5EF] my-5" />
+
+        {/* 소제목 : How to Use Different Transport Modes */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">
+            How to Use Different Transport Modes
+          </h2>
+          <div className="flex gap-2">
+            <CheckIcon className="w-10" />
+            <div className="flex flex-col gap-4">
+              <p className="text-base">Bus</p>
+              <ul className="text-base font-light list-disc list-inside flex flex-col gap-4">
+                <li>
+                  Find your stop: Use Kakao Map or Naver Map to check bus number
+                  and stop location.
+                </li>
+                <li>
+                  Board: Enter through the front door and tap your T-Money card.
+                </li>
+                <li>
+                  Get off: Press the stop button 1–2 stops in advance, then tap
+                  your card when exiting through the back door.
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="bg-[#F4F2F6] w-full h-12 flex justify-between items-center px-4">
+            <p>Why tap when getting off?</p>
+            <img src={NervousIcon} className="w-10 h-10" />
+          </div>
+          <div className="bg-[#F4F2F6] w-full h-32 flex justify-between items-center px-4">
+            <p>
+              Because Korea calculates fares based on distance. If you don’t tap
+              off, you’ll be charged to the final stop or pay extra next time.
+              Plus, transfer discounts won’t apply without it.
             </p>
           </div>
+
+          <div className="flex gap-2">
+            <CheckIcon className="w-10" />
+            <div className="flex flex-col gap-4">
+              <p className="text-base">Subway</p>
+              <ul className="text-base font-light list-disc list-inside flex flex-col gap-4">
+                <li>
+                  Check route: Use Subway Korea or Kakao Map to see the route
+                  and transfer stations.
+                </li>
+                <li>Enter: Tap T-Money at the gate.</li>
+                <li>
+                  Transfer: Within 30 minutes, transfers between bus subway are
+                  discounted or free.
+                </li>
+                <li>Exit: Tap your card at the gate when leaving.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="flex gap-2">
+            <CheckIcon className="w-10" />
+            <div className="flex flex-col gap-4">
+              <p className="text-base">Taxi</p>
+              <ul className="text-base font-light list-disc list-inside flex flex-col gap-4">
+                <li>Book: Use Kakao T for real-time taxi booking.</li>
+                <li>Pay: Cash, credit card, T-Money, or in-app payment.</li>
+                <li>Note: Late-night surcharge (22:00–04:00) is 20–40%.</li>
+                <li>Exit: Tap your card at the gate when leaving.</li>
+              </ul>
+            </div>
+          </div>
         </section>
 
-        {/* Book Borrowing & Reading */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3 ">
-            Book Borrowing & Reading
-          </h2>
+        <hr className="border-t border-[#E8E5EF] my-5" />
 
-          <h3 className="font-medium mb-2">How to borrow:</h3>
-          <ol className="list-decimal list-inside space-y-1 mb-4">
-            <li>Find your book on the shelf.</li>
-            <li>
-              Bring your student ID (physical or mobile) to the checkout desk.
-            </li>
-            <li>You can borrow up to 5 books for 14 days.</li>
-            <li>Renewals are possible once via the website or kiosk.</li>
-          </ol>
-
-          <h3 className="font-medium mb-2">How to return:</h3>
-          <p>
-            Use the return box on the 1st floor or return directly to the desk.
+        {/* 소제목 : Bicycle Use */}
+        <section className="mb-8 flex flex-col gap-5">
+          <h2 className="text-xl font-bold">Bicycle Use</h2>
+          <p className="text-base font-light">
+            There are both bike-sharing services and public bike rentals near
+            the university.
           </p>
-        </section>
-
-        {/* Seat Reservation */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">Seat Reservation</h2>
-          <ol className="list-decimal list-inside space-y-1">
-            <li>Go to the library website or open the INGLE app.</li>
-            <li>Click on "Seat Reservation."</li>
-            <li>Select your preferred time and seat.</li>
-            <li>Check in using the kiosk upon arrival.</li>
-          </ol>
-        </section>
-
-        {/* Printing & Copying */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">Printing & Copying</h2>
-          <p className="mb-2">Available in the Copy Room on the 1st floor.</p>
-          <p className="mb-2">You'll need to purchase a printer card.</p>
-          <p>Black & white and color printing are available.</p>
-        </section>
-
-        {/* Study Support Facilities */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">
-            Study Support Facilities
-          </h2>
-          <ul className="list-disc list-inside space-y-2">
-            <li>
-              Study Rooms: For small group discussions. Reservation required.
-            </li>
-            <li>
-              Multimedia Room: For video viewing and digital resource access.
-            </li>
-            <li>
-              Accessible Study Area: Special seating available for students with
-              disabilities.
-            </li>
-          </ul>
-        </section>
-
-        {/* Help & Inquiries */}
-        <section className="text-[#6F6F6F] mb-8">
-          <h2 className="text-xl font-semibold mb-3">Help & Inquiries</h2>
-          <p className="mb-2">
-            Visit the information desk on the 1st floor or use the Q&A board on
-            the website.
-          </p>
-          <p>Phone: +82 32-835-9570</p>
+          <div className="pl-4">
+            <ul className="text-base font-light list-disc list-inside flex flex-col gap-4">
+              <li>
+                Bike-sharing apps
+                <ul className="list-disc pl-10">
+                  <li>sogar elecle</li>
+                  <li>Kakao T</li>
+                </ul>
+              </li>
+              <li>
+                Public bike rental (G-Tower)
+                <ul className="list-disc pl-10">
+                  <li>
+                    Hours: Weekdays 09:00–17:00 (closed weekends & public
+                    holidays)
+                  </li>
+                  <li>
+                    Requirierens: ID & proof of residence (1 bike per foreigner)
+                  </li>
+                  <li>
+                    Contact: IFEZ Public Bike Info Desk(G-Tower 1F) ☎
+                    032-453-7887
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div className="bg-[#F4F2F6] p-4 flex gap-4 flex-col">
+            <div className="flex items-center gap-4">
+              <SmileIcon />
+              <h4>INGLE’s guide</h4>
+            </div>
+            <p className="text-[#6C757D] font-medium">
+              "Most Koreans only speak Korean. Although some are good at English
+              or other foreign languages, it's a country where Korean is
+              predominantly used. This can sometimes lead to misunderstandings
+              in communication. If you ask a question and someone doesn't answer
+              or gives a strange answer, it's highly likely they didn't
+              understand you. When this happens, try asking again with some
+              gestures. We’re actually quite nice, you’ll see!"
+            </p>
+          </div>
+          <div className="bg-[#C3E4FF] flex justify-between px-4 py-5 rounded-[20px]">
+            <p className="text-base">For more travel Tips</p>
+            <div className="bg-[#71EBFF] px-3 rounded-[20px] text-[#ffffff]">
+              <p>
+                <a href="https://english.visitkorea.or.kr/svc/main/index.do?utm_source=ko_visitkorea&utm_medium=landing_url&utm_campaign=vk_main_enu">
+                  view
+                </a>
+              </p>
+            </div>
+          </div>
+          <div className="bg-[#F9F871] flex justify-between px-4 py-5 rounded-[20px]">
+            <p className="text-base">Incheon Cycling Course</p>
+            <div className="bg-[#70A9F0] px-3 rounded-[20px] text-[#ffffff]">
+              <p>
+                <a href="https://eng-itour.incheon.go.kr/cmn/board/BBSMSTR_000000000080/2874bbsDetail.do">
+                  view
+                </a>
+              </p>
+            </div>
+          </div>
         </section>
       </main>
-    </article>
+      <div className="px-4 mb-8">
+        <Button>Done Reading</Button>
+      </div>
+    </>
   );
 };
 
