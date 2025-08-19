@@ -1,12 +1,12 @@
 import Header from '@/tutorials/components/Header';
-import TutitionImage from '@/shared/assets/images/tuition-image.png';
-import TutitionImage2 from '@/shared/assets/images/tuition-image2.png';
+import TutitionImage from '@/shared/assets/images/place/tuition-image.png';
+import TutitionImage2 from '@/shared/assets/images/place/tuition-image2.png';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
 
 const TuitionPage = () => {
   return (
     <article>
-      <Header image={TutitionImage} />
+      <Header images={[TutitionImage]} />
       <main className="w-full flex flex-col px-4 gap-4">
         <h1 className="text-2xl font-bold">Tuition Fees</h1>
         <section className="flex flex-col text-xs gap-4">

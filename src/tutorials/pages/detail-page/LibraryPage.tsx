@@ -1,4 +1,4 @@
-import libraryImage from '@/shared/assets/images/library-image.png';
+import libraryImage from '@/shared/assets/images/place/library-image.png';
 import ClockIcon from '@/shared/assets/icons/clock-icon.svg?react';
 import PlaceIcon from '@/shared/assets/icons/place-icon.svg?react';
 import TagIcon from '@/shared/assets/icons/tag-icon.svg?react';
@@ -8,7 +8,7 @@ const LibraryPage = () => {
   return (
     <article>
       {/* header : 이미지 + 뒤로가기 버튼 */}
-      <Header image={libraryImage} />
+      <Header images={[libraryImage]} />
 
       {/* 메인 : 제목 + 내용 */}
       <main className="px-4">
