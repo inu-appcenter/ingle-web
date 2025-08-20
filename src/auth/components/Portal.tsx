@@ -21,8 +21,6 @@ type Inputs = {
 
 export default function Portal() {
   const { setStudentInfo, setStep, setTokens } = useAuthStore();
-  const { studentId, studentType, department, nickname, accessToken, expiryTime } =
-    useAuthStore();
   const [showpw, setShowPw] = useState(false);
   const [ischecked, setIsChecked] = useState(false);
   const navigate = useNavigate();
@@ -52,18 +50,8 @@ export default function Portal() {
           nickname: res.data.nickname,
         });
         setTokens(res.data.accessToken, res.data.accessTokenExpiresDate);
-        //-[ ] 정보가 잘 저장되었는지 확인. 확인 후 정보는 다 지우기.
-        //-[ ] 쿠키도 확인
-        console.log(
-          '로그인 성공',
-          studentId,
-          studentType,
-          department,
-          nickname,
-          accessToken,
-          expiryTime,
-        );
-        navigate(ROUTES.TUTORIAL); // 튜토리얼로 넘어감
+        console.log('로그인 성공');
+        navigate(ROUTES.TUTORIAL);
       } else if (res.status === 202) {
         alert(res.data.message); //회원가입이 필요합니다
         setStudentInfo({ portalId: res.data.studentId });
@@ -73,6 +61,7 @@ export default function Portal() {
       if (err.response.status === 401) {
         alert(err.response.data.message); // 로그인이 실패하였습니다
       } else {
+        console.log(err);
         alert('알 수 없는 오류가 발생했습니다.');
       }
     }
@@ -115,9 +104,6 @@ export default function Portal() {
             className="bg-transparent outline-none flex-1 placeholder:text-[#C1C9D2]"
             aria-invalid={errors.studentId ? 'true' : 'false'}
           />
-          {errors.studentId?.type === 'required' && (
-            <p role="alert">First name is required</p>
-          )}
         </div>
 
         {/*비번*/}
@@ -141,7 +127,7 @@ export default function Portal() {
           {ischecked ? <Check className="mr-2" /> : <Empty className="mr-2" />}
           Remember Me
         </label>
-        {/*[ ] 버튼은... form 안에*/}
+
         <button
           className="mt-auto flex-none mb-4 mx-4 h-12 bg-[#7A00E6] text-white rounded-2xl"
           type="submit"

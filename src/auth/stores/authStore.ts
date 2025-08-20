@@ -2,11 +2,6 @@ import { create } from 'zustand';
 
 const REMEMBER_KEY = 'remember';
 
-type TokenInfo = {
-  accessToken: string;
-  accessTokenExpiresDate: Date;
-};
-
 interface AuthState {
   currentStep: 'intro' | 'portal' | 'studentInfo' | 'finish';
   portalId: string;
@@ -76,7 +71,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
 }));
 
-// 👇 디버깅용 (브라우저 콘솔에서 접근 가능)
-if (typeof window !== 'undefined') {
-  (window as any).authStore = useAuthStore;
-}
+// // 👇 디버깅용 (브라우저 콘솔에서 접근 가능)
+// if (typeof window !== 'undefined') {
+//   (window as any).authStore = useAuthStore;
+// }

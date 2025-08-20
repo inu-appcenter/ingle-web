@@ -5,7 +5,6 @@ import Empty from '@/auth/images/depart-select/empty.svg?react';
 import { useAuthStore } from '@/auth/stores/authStore';
 import { useEffect, useRef, useState } from 'react';
 
-// option은 박스 모양을 바꿀 수 없음 => custom select box를 만들어야 함
 import { collegeOptions, departmentOptions } from '@/auth/constants/Departments';
 
 type DropdownOption = {
