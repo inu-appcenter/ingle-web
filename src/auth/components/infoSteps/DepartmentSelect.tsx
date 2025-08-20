@@ -5,7 +5,12 @@ import Empty from '@/auth/images/depart-select/empty.svg?react';
 import { useAuthStore } from '@/shared/stores/authStore';
 import { useEffect, useRef, useState } from 'react';
 
-import { collegeOptions, departmentOptions } from '@/auth/constants/Departments';
+import {
+  GraduateCollage,
+  GraduateDepartment,
+  UndergraduateCollege,
+  UndergraduateDepartment,
+} from '@/auth/constants/Departments';
 
 type DropdownOption = {
   label: string;
@@ -23,15 +28,14 @@ type DropdownProps = {
 
 export default function DepartmentSelect() {
   const [selectedCollege, setSelectedCollege] = useState('');
-  const department = useAuthStore(state => state.department);
-  const setStudentInfo = useAuthStore(state => state.setStudentInfo);
+  const { department, setStudentInfo, studentType } = useAuthStore();
   const [openDropdown, setOpenDropdown] = useState<null | 'college' | 'department'>(null);
 
   useEffect(() => {
-    if (department) {
+    if (department && department === 'GRADUATE') {
       // department에 맞는 college 찾아서 세팅
-      const foundCollege = Object.keys(departmentOptions).find(college =>
-        departmentOptions[college].some(opt => opt.value === department),
+      const foundCollege = Object.keys(GraduateDepartment).find(college =>
+        GraduateDepartment[college].some(opt => opt.value === department),
       );
       if (foundCollege) {
         setSelectedCollege(foundCollege);
@@ -44,7 +48,7 @@ export default function DepartmentSelect() {
       <div className="flex flex-col w-[100%] gap-y-8">
         <Dropdown
           label="College"
-          options={collegeOptions}
+          options={studentType === 'GRADUATE' ? GraduateCollage : UndergraduateCollege}
           selectedValue={selectedCollege}
           onChange={value => {
             setSelectedCollege(value);
@@ -57,7 +61,11 @@ export default function DepartmentSelect() {
         />
         <Dropdown
           label="Department"
-          options={departmentOptions[selectedCollege] || []}
+          options={
+            studentType === 'GRADUATE'
+              ? GraduateDepartment[selectedCollege] || []
+              : UndergraduateDepartment[selectedCollege] || []
+          }
           selectedValue={department}
           onChange={value => setStudentInfo({ department: value })}
           isOpen={openDropdown === 'department'}
