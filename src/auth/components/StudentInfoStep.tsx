@@ -2,7 +2,7 @@ import DepartmentSelect from '@/auth/components/infoSteps/DepartmentSelect';
 import SetNickname from '@/auth/components/infoSteps/SetNickname'; // Assuming this component exists for nickname input
 import StatusSelect from '@/auth/components/infoSteps/StatusSelect';
 import ArrowLeft from '@/auth/images/arrow-left.svg?react';
-import { useAuthStore } from '@/auth/stores/authStore';
+import { useAuthStore } from '@/shared/stores/authStore';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -27,8 +27,6 @@ function StepBar({ step }: { step: number }) {
 export default function StudentInfoStep() {
   const [infoStep, setInfoStep] = useState(0); // 0: 신분, 1: 학과, 2: 닉네임,
   const [actNext, setActNext] = useState(false);
-  // 다음단계로 넘어갈 수 있는지 여부는 zustand에 각 단계별 속성이 채워졌는가에 따름.
-  // 단계가 넘어갈때마다 리셋
 
   const {
     studentType,
@@ -62,6 +60,7 @@ export default function StudentInfoStep() {
     readytoNext();
   }, [infoStep, studentType, department, nickname, studentId]);
 
+  // [ ] infoStep === 0 && 컴포넌트 이런 식으로 바꿔도 될듯?
   const renderContent = () => {
     switch (infoStep) {
       case 0:
@@ -84,8 +83,7 @@ export default function StudentInfoStep() {
     const res = await axios.post(import.meta.env.VITE_SIGN_UP_URL, data);
     try {
       if (res.status === 201) {
-        //회원가입 성공 시
-        //토큰 저장.
+        //회원가입 성공
         setStudentInfo({
           studentId: res.data.studentId,
           department: res.data.department,
@@ -103,7 +101,9 @@ export default function StudentInfoStep() {
 
   const settingStep = () => {
     if (!actNext) return;
+
     setActNext(false);
+
     if (infoStep < 2) {
       setInfoStep(infoStep + 1);
     } else if (infoStep === 2) {

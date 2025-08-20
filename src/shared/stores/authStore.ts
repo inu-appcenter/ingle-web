@@ -1,12 +1,5 @@
 import { create } from 'zustand';
 
-const REMEMBER_KEY = 'remember';
-
-type TokenInfo = {
-  accessToken: string;
-  accessTokenExpiresDate: Date;
-};
-
 interface AuthState {
   currentStep: 'intro' | 'portal' | 'studentInfo' | 'finish';
   portalId: string;
@@ -62,7 +55,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   clearTokens: () => {
     try {
-      localStorage.removeItem(REMEMBER_KEY);
     } catch (e) {
       console.warn('storage clear failed', e);
     }
@@ -71,7 +63,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       expiryTime: null,
       remember: false,
       isAuthenticated: false,
-      currentStep: 'intro',
     });
   },
 }));
