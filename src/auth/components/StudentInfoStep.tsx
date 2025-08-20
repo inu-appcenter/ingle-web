@@ -2,8 +2,8 @@ import DepartmentSelect from '@/auth/components/infoSteps/DepartmentSelect';
 import SetNickname from '@/auth/components/infoSteps/SetNickname'; // Assuming this component exists for nickname input
 import StatusSelect from '@/auth/components/infoSteps/StatusSelect';
 import ArrowLeft from '@/auth/images/arrow-left.svg?react';
-import { useAuthStore } from '@/auth/stores/authStore';
-import api from '@/shared/api/intercepter';
+import { useAuthStore } from '@/shared/stores/authStore';
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 //단계 구분 변수 useStat
@@ -80,7 +80,7 @@ export default function StudentInfoStep() {
     studentType: string;
     nickname: string;
   }) {
-    const res = await api.post(import.meta.env.VITE_SIGN_UP_URL, data);
+    const res = await axios.post(import.meta.env.VITE_SIGN_UP_URL, data);
     try {
       if (res.status === 201) {
         //회원가입 성공

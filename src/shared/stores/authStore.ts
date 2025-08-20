@@ -1,7 +1,5 @@
 import { create } from 'zustand';
 
-const REMEMBER_KEY = 'remember';
-
 interface AuthState {
   currentStep: 'intro' | 'portal' | 'studentInfo' | 'finish';
   portalId: string;
@@ -57,7 +55,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   clearTokens: () => {
     try {
-      localStorage.removeItem(REMEMBER_KEY);
     } catch (e) {
       console.warn('storage clear failed', e);
     }
@@ -66,12 +63,11 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       expiryTime: null,
       remember: false,
       isAuthenticated: false,
-      currentStep: 'intro',
     });
   },
 }));
 
-// // 👇 디버깅용 (브라우저 콘솔에서 접근 가능)
-// if (typeof window !== 'undefined') {
-//   (window as any).authStore = useAuthStore;
-// }
+// 👇 디버깅용 (브라우저 콘솔에서 접근 가능)
+if (typeof window !== 'undefined') {
+  (window as any).authStore = useAuthStore;
+}

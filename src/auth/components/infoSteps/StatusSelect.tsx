@@ -2,7 +2,7 @@ import GraduateIcon from '@/auth/images/status-select/briefcase.svg?react';
 import LanguageIcon from '@/auth/images/status-select/bubble.svg?react';
 import ExchangeIcon from '@/auth/images/status-select/earth.svg?react';
 import UngraduateIcon from '@/auth/images/status-select/pencil.svg?react';
-import { useAuthStore } from '@/auth/stores/authStore';
+import { useAuthStore } from '@/shared/stores/authStore';
 import { ReactNode } from 'react';
 
 type StatusCardProps = {

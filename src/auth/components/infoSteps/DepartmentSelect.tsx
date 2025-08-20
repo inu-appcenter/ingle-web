@@ -2,7 +2,7 @@ import LolosArrow from '@/auth/images/depart-select/arrow-lolos.svg?react';
 import Checked from '@/auth/images/depart-select/checked.svg?react';
 import Empty from '@/auth/images/depart-select/empty.svg?react';
 
-import { useAuthStore } from '@/auth/stores/authStore';
+import { useAuthStore } from '@/shared/stores/authStore';
 import { useEffect, useRef, useState } from 'react';
 
 import { collegeOptions, departmentOptions } from '@/auth/constants/Departments';

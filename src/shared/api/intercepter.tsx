@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/auth/stores/authStore';
+import { useAuthStore } from '@/shared/stores/authStore';
 import axios from 'axios';
 
 //주의 : hook은 컴포넌트나 커스텀 훅 안에서만 사용 가능
@@ -7,7 +7,9 @@ import axios from 'axios';
 // => useNavigate는 컴포넌트에서만 사용.
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
+//로그인 되어 있을 때만 refresh 토큰 포함해서 보냄
 const api = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
   withCredentials: true,
 });
 

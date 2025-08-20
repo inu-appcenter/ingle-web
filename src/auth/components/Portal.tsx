@@ -1,5 +1,5 @@
-import { useAuthStore } from '@/auth/stores/authStore';
 import { ROUTES } from '@/router/routes';
+import { useAuthStore } from '@/shared/stores/authStore';
 import axios from 'axios';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -20,10 +20,12 @@ type Inputs = {
 };
 
 export default function Portal() {
-  const { setStudentInfo, setStep, setTokens } = useAuthStore();
+  const { setStudentInfo, setStep, setTokens, studentId } = useAuthStore();
   const [showpw, setShowPw] = useState(false);
-  const [ischecked, setIsChecked] = useState(false);
+  const [remember, setRemember] = useState(false);
   const navigate = useNavigate();
+  const storedId = localStorage.getItem('portalId');
+  console.log('저장된 아이디', storedId);
 
   const {
     register,
@@ -51,11 +53,18 @@ export default function Portal() {
         });
         setTokens(res.data.accessToken, res.data.accessTokenExpiresDate);
         console.log('로그인 성공');
+
         navigate(ROUTES.TUTORIAL);
       } else if (res.status === 202) {
         alert(res.data.message); //회원가입이 필요합니다
         setStudentInfo({ portalId: res.data.studentId });
         setStep('studentInfo');
+      }
+
+      if (remember === true) {
+        localStorage.setItem('portalId', res.data.studentId);
+      } else if (remember === false) {
+        localStorage.removeItem('portalId');
       }
     } catch (err: any) {
       if (err.response.status === 401) {
@@ -80,7 +89,7 @@ export default function Portal() {
     /* [ ] 기능연결 : 버튼 누르면 마지막으로 저장된 remember 상태도 저장해야 됨*/
   }
   const handleRemember = () => {
-    setIsChecked(!ischecked);
+    setRemember(!remember);
   };
 
   return (
@@ -100,6 +109,7 @@ export default function Portal() {
             {...register('studentId', {
               required: true,
             })}
+            defaultValue={storedId || ''}
             placeholder="20XXXXXXX"
             className="bg-transparent outline-none flex-1 placeholder:text-[#C1C9D2]"
             aria-invalid={errors.studentId ? 'true' : 'false'}
@@ -124,7 +134,7 @@ export default function Portal() {
           onClick={handleRemember}
           className="flex items-center text-sm text-gray-600"
         >
-          {ischecked ? <Check className="mr-2" /> : <Empty className="mr-2" />}
+          {remember ? <Check className="mr-2" /> : <Empty className="mr-2" />}
           Remember Me
         </label>
 
