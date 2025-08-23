@@ -47,7 +47,7 @@ export default function DepartmentSelect() {
     <div className="flex items-center justify-center">
       <div className="flex flex-col w-[100%] gap-y-8">
         <Dropdown
-          label="College"
+          label={studentType === 'GRADUATE' ? 'Graduate School of College' : 'College'}
           options={studentType === 'GRADUATE' ? GraduateCollage : UndergraduateCollege}
           selectedValue={selectedCollege}
           onChange={value => {

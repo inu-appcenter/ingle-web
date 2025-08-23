@@ -134,7 +134,7 @@ export default function Portal() {
           onClick={handleRemember}
           className="flex items-center text-sm text-gray-600"
         >
-          {remember ? <Check className="mr-2" /> : <Empty className="mr-2" />}
+          {remember || storedId ? <Check className="mr-2" /> : <Empty className="mr-2" />}
           Remember Me
         </label>
 
