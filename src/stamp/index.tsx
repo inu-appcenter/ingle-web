@@ -11,7 +11,7 @@ const StampPage = () => {
   useEffect(() => {
     const getStampList = async () => {
       try {
-        const res = await instance.get('/api/v1/tutorials');
+        const res = await instance.get('/api/v1/stamps');
         setStampList(res.data);
         console.log('getStampList:', res.data);
       } catch (err) {
