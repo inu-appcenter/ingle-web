@@ -1,4 +1,8 @@
+
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import TutorialPage from '@/tutorials';
 import AdminPage from '@/admin';
+
 import AuthPage from '@/auth';
 import MapPage from '@/map';
 import NotFoundPage from '@/not-fuound';
