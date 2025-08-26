@@ -9,6 +9,7 @@ interface AuthState {
   studentType: string;
   department: string;
   nickname: string;
+  country: string;
 
   accessToken: string | null;
   expiryTime: string | null;
@@ -30,6 +31,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   department: '',
   studentId: '',
   nickname: '',
+  country: '',
 
   accessToken: null,
   expiryTime: null,
