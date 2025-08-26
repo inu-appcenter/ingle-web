@@ -8,7 +8,7 @@ import { ReactNode } from 'react';
 type StatusCardProps = {
   status: string;
   isSelected?: boolean;
-  icon: ReactNode;
+  icon?: ReactNode;
   onClick?: () => void;
 };
 
@@ -17,7 +17,7 @@ function StatusCard({ status, isSelected, icon, onClick }: StatusCardProps) {
     <>
       <button
         onClick={onClick}
-        className={`flex flex-col items-center justify-center w-full aspect-[4/5] rounded-3xl transition-colors ${
+        className={`flex flex-col gap-1 items-center justify-center w-full  ${icon ? 'aspect-[4/5] py-4' : 'py-3'} rounded-3xl transition-colors ${
           isSelected ? 'bg-[#7A00E6] text-white' : 'bg-white text-[#3C3C43]'
         }`}
         style={{
@@ -26,7 +26,7 @@ function StatusCard({ status, isSelected, icon, onClick }: StatusCardProps) {
       >
         {icon}
         <p
-          className={`mt-4 font-inter font-semibold text-gray-500 text-base text-center font-medium whitespace-pre-line transition-colors ${
+          className={`font-inter font-semibold text-gray-500 text-base text-center font-medium whitespace-pre-line transition-colors ${
             isSelected ? 'text-white' : 'text-gray-[#3C3C4399]'
           }`}
         >
@@ -43,31 +43,31 @@ function StatusSelect() {
   const statusOptions = [
     {
       option: 'Exchange\nStudent',
-      icon: <ExchangeIcon />,
+      icon: <ExchangeIcon className="w-[50%]" />,
       value: 'EXCHANGE',
     },
     {
       option: 'Language\nStudent',
-      icon: <LanguageIcon />,
+      icon: <LanguageIcon className="w-[50%]" />,
       value: 'LANGUAGE',
     },
     {
       option: 'Ungraduate\nStudent',
-      icon: <UngraduateIcon />,
+      icon: <UngraduateIcon className="h-[50%] my-2" />,
       value: 'UNDERGRADUATE',
     },
     {
       option: 'Graduate\nStudent',
-      icon: <GraduateIcon />,
+      icon: <GraduateIcon className="w-[50%]" />,
       value: 'GRADUATE',
     },
   ];
 
   return (
     <>
-      <div className="flex flex-wrap items-center justify-center gap-6 mt-4">
+      <div className="flex flex-wrap items-center justify-center gap-4 mt-4">
         {statusOptions.map((status, index) => (
-          <div className="basis-[45%] max-w-[45%]">
+          <div className="basis-[43%] max-w-[45%]">
             <StatusCard
               key={index}
               status={status.option}
@@ -83,6 +83,19 @@ function StatusSelect() {
             />
           </div>
         ))}
+        <div className="w-36 h-12">
+          <StatusCard
+            status="Others"
+            isSelected={studentType === 'OTHERS'}
+            onClick={() =>
+              setStudentInfo(
+                studentType === 'OTHERS'
+                  ? { studentType: '' }
+                  : { studentType: 'OTHERS' },
+              )
+            }
+          />
+        </div>
       </div>
     </>
   );

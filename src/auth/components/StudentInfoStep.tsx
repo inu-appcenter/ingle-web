@@ -1,6 +1,8 @@
+import CountrySelect from '@/auth/components/infoSteps/CountrySelect';
 import DepartmentSelect from '@/auth/components/infoSteps/DepartmentSelect';
 import SetNickname from '@/auth/components/infoSteps/SetNickname'; // Assuming this component exists for nickname input
 import StatusSelect from '@/auth/components/infoSteps/StatusSelect';
+
 import ArrowLeft from '@/auth/images/arrow-left.svg?react';
 import { useAuthStore } from '@/shared/stores/authStore';
 import axios from 'axios';
@@ -20,12 +22,15 @@ function StepBar({ step }: { step: number }) {
       <div
         className={`flex-1 h-1 rounded-full ${step == 2 ? 'bg-[#7A00E6]' : 'bg-[#C1C9D2]'}`}
       />
+      <div
+        className={`flex-1 h-1 rounded-full ${step == 3 ? 'bg-[#7A00E6]' : 'bg-[#C1C9D2]'}`}
+      />
     </div>
   );
 }
 
 export default function StudentInfoStep() {
-  const [infoStep, setInfoStep] = useState(0); // 0: 신분, 1: 학과, 2: 닉네임,
+  const [infoStep, setInfoStep] = useState(0); // 0: 신분, 1: 국가 2: 학과, 3: 닉네임,
   const [actNext, setActNext] = useState(false);
 
   const {
@@ -33,6 +38,7 @@ export default function StudentInfoStep() {
     department,
     nickname,
     studentId,
+    country,
     setStep,
     setStudentInfo,
     setTokens,
@@ -40,15 +46,17 @@ export default function StudentInfoStep() {
 
   const stepTitles = [
     'Select your Current Status',
-    'Select Your Department',
-    'Enter Your ID & Nickname',
+    'Select your Country',
+    'Select your Department',
+    'Enter your ID & Nickname',
   ];
 
   const readytoNext = () => {
     if (
       (infoStep === 0 && studentType) ||
-      (infoStep === 1 && department) ||
-      (infoStep === 2 && nickname && studentId)
+      (infoStep === 1 && country) ||
+      (infoStep === 2 && department) ||
+      (infoStep === 3 && nickname && studentId)
     ) {
       setActNext(true);
     } else {
@@ -58,19 +66,19 @@ export default function StudentInfoStep() {
 
   useEffect(() => {
     readytoNext();
-  }, [infoStep, studentType, department, nickname, studentId]);
+  }, [infoStep, studentType, department, nickname, studentId, country]);
 
-  // [ ] infoStep === 0 && 컴포넌트 이런 식으로 바꿔도 될듯?
   const renderContent = () => {
-    switch (infoStep) {
-      case 0:
-        return <StatusSelect />;
-      case 1:
-        return <DepartmentSelect />;
-      case 2:
-        return <SetNickname />;
-      default:
-        return null;
+    if (infoStep === 0) {
+      return <StatusSelect />;
+    } else if (infoStep === 1) {
+      return <CountrySelect />;
+    } else if (infoStep === 2) {
+      return <DepartmentSelect />;
+    } else if (infoStep === 3) {
+      return <SetNickname />;
+    } else {
+      return null; // Return null if none of the conditions are met
     }
   };
 
@@ -79,6 +87,7 @@ export default function StudentInfoStep() {
     department: string;
     studentType: string;
     nickname: string;
+    country: string;
   }) {
     const res = await axios.post(import.meta.env.VITE_SIGN_UP_URL, data);
     try {
@@ -89,6 +98,7 @@ export default function StudentInfoStep() {
           department: res.data.department,
           studentType: res.data.studentType,
           nickname: res.data.nickname,
+          country: res.data.country,
         });
         setTokens(res.data.accessToken, res.data.accessTokenExpiresDate);
 
@@ -104,21 +114,22 @@ export default function StudentInfoStep() {
 
     setActNext(false);
 
-    if (infoStep < 2) {
+    if (infoStep < 3) {
       setInfoStep(infoStep + 1);
-    } else if (infoStep === 2) {
+    } else if (infoStep === 3) {
       SignUp({
         studentType: studentType,
         department: department,
         nickname: nickname,
         studentId: studentId,
+        country: country,
       });
       setStep('finish');
     }
   };
 
   return (
-    <div className="flex flex-col items-center justify-between w-full min-h-screen">
+    <div className="flex flex-col items-center justify-between w-full h-screen">
       {/* 상단 : 상태바 */}
       <div className="flex flex-col w-full max-w-2xl px-7 pt-7">
         <StepBar step={infoStep} />
@@ -140,7 +151,7 @@ export default function StudentInfoStep() {
         >
           <ArrowLeft className="w-6 h-6" />
         </button>
-        <h1 className="mb-8 px-2 font-extrabold text-4xl text-pretty leading-[1.2]">
+        <h1 className="mb-6 px-2 font-extrabold text-4xl text-pretty leading-[1.2]">
           {stepTitles[infoStep]}
         </h1>
         {renderContent()}
