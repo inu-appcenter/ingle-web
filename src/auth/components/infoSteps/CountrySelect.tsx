@@ -23,7 +23,7 @@ type DropdownProps = {
 
 export default function DepartmentSelect() {
   const [selectedCountry, setSelectedCountry] = useState('');
-  const { country, setStudentInfo } = useAuthStore();
+  const { country, studentType, setStudentInfo } = useAuthStore();
   const [openDropdown, setOpenDropdown] = useState<null | 'country'>(null);
 
   useEffect(() => {

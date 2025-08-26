@@ -129,7 +129,7 @@ export default function StudentInfoStep() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-between w-full min-h-screen">
+    <div className="flex flex-col items-center justify-between w-full h-screen">
       {/* 상단 : 상태바 */}
       <div className="flex flex-col w-full max-w-2xl px-7 pt-7">
         <StepBar step={infoStep} />
@@ -151,7 +151,7 @@ export default function StudentInfoStep() {
         >
           <ArrowLeft className="w-6 h-6" />
         </button>
-        <h1 className="mb-8 px-2 font-extrabold text-4xl text-pretty leading-[1.2]">
+        <h1 className="mb-6 px-2 font-extrabold text-4xl text-pretty leading-[1.2]">
           {stepTitles[infoStep]}
         </h1>
         {renderContent()}
