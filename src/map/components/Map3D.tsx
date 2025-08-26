@@ -11,9 +11,11 @@ export function Map3D(props: any) {
         castShadow
         receiveShadow
         geometry={nodes.Areasbuilding004.geometry}
-        material={materials['Material.002']}
+        //material={materials['Material.002']}
         position={[246815.047, 10.793, -77462.125]}
-      />
+      >
+        <meshStandardMaterial color="#ff0000" /> {/* 빨간색 */}
+      </mesh>
       <mesh
         castShadow
         receiveShadow

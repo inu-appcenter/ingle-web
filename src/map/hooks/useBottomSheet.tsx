@@ -38,7 +38,7 @@ export default function useBottomSheet() {
     // 컨텐츠 영역 터치시 바텀시트가 올라가지 않도록
     const canUserMoveBottomSheet = () => {
       const { touchMove, isContentAreaTouched } = metrics.current;
-      const scrollTop = content.current!.scrollTop; // 스크롤 최상단 = 0 <<< 스크롤 = 값증가
+      const scrollTop = content.current!.scrollTop; //content의 스크롤 정도
       if (isContentAreaTouched && scrollTop > 0) {
         return false;
       }

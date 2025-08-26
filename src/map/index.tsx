@@ -20,8 +20,11 @@ const MapPage = () => {
         <directionalLight position={[20, 10, 5]} />
         <ambientLight intensity={0.3} />
       </Canvas>
-      <BottomSheet />
-      <div>지도페이지</div>
+
+      {/* 배경 클릭하면 바텀 시트가 닫히도록 */}
+      <div className="absolute bottom-[63px] w-full z-50">
+        <BottomSheet />
+      </div>
     </div>
   );
 };
