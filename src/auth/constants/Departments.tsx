@@ -7,7 +7,7 @@ const UndergraduateCollege = [
   { label: 'Commerce & Public Affairs', value: 'COMMERCE_PUBLIC_AFFAIRS' },
   { label: 'Engineering', value: 'ENGINEERING' },
   { label: 'Information Technology', value: 'INFORMATION_TECHNOLOGY' },
-  { label: 'Business Administration', value: 'BUSINESS_ADMINISTRATION' },
+  { label: 'Business Administration', value: 'BUSINESS' },
   { label: 'Arts and Physical Education', value: 'ARTS_PHYSICAL_EDUCATION' },
   { label: 'Urban Science', value: 'URBAN_SCIENCE' },
   { label: 'Life Sciences and Bioengineering', value: 'LIFE_SCIENCES_BIOENGINEERING' },
@@ -19,9 +19,9 @@ const UndergraduateDepartment: Record<string, { label: string; value: string }[]
   HUMANITIES: [
     { label: 'Korean Language & Literature', value: 'KOREAN_LITERATURE' },
     { label: 'English Language & Literature', value: 'ENGLISH_LITERATURE' },
-    { label: 'German Language & Literature', value: 'GERMAN_LITERATURE' },
-    { label: 'French Language & Literature', value: 'FRENCH_LITERATURE' },
-    { label: 'Japanese Regional Culture', value: 'JAPANESE_REGIONAL' },
+    { label: 'German Language & Literature', value: 'GERMAN_STUDIES' },
+    { label: 'French Language & Literature', value: 'FRENCH_STUDIES' },
+    { label: 'Japanese Regional Culture', value: 'JAPANESE_LITERATURE' },
     { label: 'Chinese Language & Cultural Studies', value: 'CHINESE_STUDIES' },
   ],
   NATURAL_SCIENCES: [
@@ -71,14 +71,14 @@ const UndergraduateDepartment: Record<string, { label: string; value: string }[]
     },
     { label: 'Embedded-Systems Engineering', value: 'EMBEDDED_SYSTEM' },
   ],
-  BUSINESS_ADMINISTRATION: [
+  BUSINESS: [
     { label: 'Business Administration', value: 'BUSINESS_ADMINISTRATION' },
     { label: 'Data Science', value: 'DATA_SCIENCE' },
     { label: 'Tax & Accounting', value: 'TAX_ACCOUNTING' },
   ],
   ARTS_PHYSICAL_EDUCATION: [
-    { label: 'Rine Arts - Korean Painting', value: 'FINE_ARTS_KOREAN_PAINTING' },
-    { label: 'Rine Arts - Western Painting', value: 'FINE_ARTS_WESTERN_PAINTING' },
+    { label: 'Rine Arts - Korean Painting', value: 'FINE_ARTS' },
+    { label: 'Rine Arts - Western Painting', value: 'FINE_ARTS' },
     { label: 'Division of Design', value: 'DESIGN' },
     { label: 'Performing Arts', value: 'PERFORMING_ART' },
     { label: 'Sport Science', value: 'SPORTS_SCIENCE' },
@@ -88,21 +88,22 @@ const UndergraduateDepartment: Record<string, { label: string; value: string }[]
     { label: 'Urban Policy and Administration', value: 'URBAN_ADMINISTRATION' },
     {
       label: 'Construction Environmental Engineering',
-      value: 'CONSTRUCTION_ENVIRONMENT_ENGINEERING',
+      value: 'CIVIL_ENVIRONMENT_ENGINEERING',
     },
     {
       label: 'Environmental Engineering	',
-      value: 'ENVIRONMENTAL_ENGINEERING',
+      value: 'CIVIL_ENVIRONMENT_ENGINEERING',
     },
     { label: 'Urban Engineering	', value: 'URBAN_ENGINEERING' },
     { label: 'Architecture and Urban Design', value: 'URBAN_ARCHITECTURE' },
+    { label: 'Architectural Engineering', value: 'URBAN_ARCHITECTURE' },
   ],
-  // [ ] 여기 뭔가 이상.. 확인 후 다시
+
   LIFE_SCIENCES_BIOENGINEERING: [
-    { label: 'Biological Sciences', value: 'BIOLOGICAL_SCIENCE' },
-    { label: 'Molecular and Medical Science', value: 'MOLECULAR_MEDICAL_SCIENCE' },
+    { label: 'Biological Sciences', value: 'LIFE_SCIENCE' },
+    { label: 'Molecular and Medical Science', value: 'LIFE_SCIENCE' },
     { label: 'Bioengineering', value: 'BIOENGINEERING' },
-    { label: 'Nano-Bioengineering', value: 'NANO_BIOENGINNEERING' },
+    { label: 'Nano-Bioengineering', value: 'BIOENGINEERING' },
   ],
   NORTHEAST_ASIAN_STUDIES: [
     { label: 'Northeast Asian Trade', value: 'NORTHEAST_ASIAN_TRADE' },
