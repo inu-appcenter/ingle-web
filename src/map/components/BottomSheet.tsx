@@ -39,7 +39,7 @@ export default function BottomSheet() {
   const onSubmit = async (keyword: any) => {
     try {
       const res = await api.get(import.meta.env.VITE_MAP_SEARCHING_URL, {
-        params: { keyword: { keyword } },
+        params: keyword,
       });
       console.log(res);
     } catch (err) {
@@ -72,6 +72,7 @@ export default function BottomSheet() {
             <input type="submit" />
           </form>
 
+          {/* 카테고리 버튼 */}
           <div className="w-full flex flex-row justify-between text-xs text-center">
             <div
               className="flex flex-col gap-1"
