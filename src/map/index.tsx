@@ -1,7 +1,7 @@
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import BottomSheet from './components/BottomSheet';
-import { Map3D } from './components/Map3D';
+import Model from './components/MapTest';
 
 const MapPage = () => {
   return (
@@ -13,8 +13,7 @@ const MapPage = () => {
           minDistance={300} // 카메라와 대상(lookAt)의 최소 거리
           maxDistance={700}
         />
-
-        <Map3D />
+        <Model url="/images/INGLE_campus_map.glb" />
 
         {/* 빛 */}
         <directionalLight position={[20, 10, 5]} />
@@ -22,7 +21,7 @@ const MapPage = () => {
       </Canvas>
 
       {/* 배경 클릭하면 바텀 시트가 닫히도록 */}
-      <div className="absolute bottom-[63px] w-full z-50">
+      <div className="absolute bottom-[63px] overflow-hidden w-full z-50">
         <BottomSheet />
       </div>
     </div>

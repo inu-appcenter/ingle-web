@@ -1,4 +1,5 @@
 // import {useState} from 'react'
+import Buildings from '@/map/components/Buildings';
 import useBottomSheet from '@/map/hooks/useBottomSheet';
 import api from '@/shared/api/intercepter';
 import { useState } from 'react';
@@ -16,12 +17,14 @@ import Search from '@/map/icnSearch.svg?react';
 import SmokeP from '@/map/smoke-purple.svg?react';
 import SmokeW from '@/map/smoke-white.svg?react';
 
+import { SearchResult } from '@/map/types/Types';
+
 // import Content from '@/map/components/Content';
 
 export default function BottomSheet() {
   const { sheet, content, handleUp, handleDown } = useBottomSheet();
   const { register, handleSubmit } = useForm();
-  const [searchData, setSearchData] = useState('');
+  const [buildingList, setBuildingList] = useState<SearchResult[]>([]);
   const [category, setCategory] = useState<
     null | 'busStop' | 'cafeteria' | 'convenience' | 'cafe' | 'smokingBooth'
   >(null);
@@ -41,9 +44,11 @@ export default function BottomSheet() {
       const res = await api.get(import.meta.env.VITE_MAP_SEARCHING_URL, {
         params: keyword,
       });
-      console.log(res);
+      console.log(res.data);
+      setBuildingList(res.data);
     } catch (err) {
       console.log(err);
+      alert('No related search terms found');
     }
   };
 
@@ -52,72 +57,82 @@ export default function BottomSheet() {
       {/* ▼ 시트 전체 */}
       <div
         ref={sheet}
-        className="px-4 pb-4 pt-2 w-full h-100vh bg-[#F7F7F6] rounded-t-xl flex flex-col items-center"
+        className="px-4 pb-4 pt-2 w-ful bg-[#F7F7F6] rounded-t-xl flex flex-col items-center"
+        style={{
+          transform: 'translateY(20%)',
+          transition: 'transform 0.2s',
+          maxHeight: '80vh',
+        }}
       >
+        {/* 바텀 핸들러 */}
         <div className="my-4 h-[5px] w-9 rounded-sm bg-[#BEBFC0]" />
 
-        <div ref={content} className="w-full">
-          {/* <Content /> */}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mb-4 flex flex-row gap-[6px] items-center w-full bg-[#EDEDED] h-9 p-[6px] rounded-[10px]"
+        >
+          <Search />
+          <input
+            {...register('keyword')}
+            placeholder="Search Maps"
+            className="focus:outline-none text-[#6C6C6C] text-[17px] bg-[#EDEDED]"
+          />
+          <input type="submit" />
+        </form>
 
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="mb-4 flex flex-row gap-[6px] items-center w-full bg-[#EDEDED] h-9 p-[6px] rounded-[10px]"
+        {/* 카테고리 버튼 */}
+        <div className="w-full flex flex-row justify-between text-xs text-center">
+          <div
+            className="flex flex-col gap-1"
+            onClick={() => handleCategoryClick('cafeteria')}
           >
-            <Search />
-            <input
-              {...register('keyword')}
-              placeholder="Search Maps"
-              className="text-[#6C6C6C] text-[17px] bg-[#EDEDED]"
-            />
-            <input type="submit" />
-          </form>
-
-          {/* 카테고리 버튼 */}
-          <div className="w-full flex flex-row justify-between text-xs text-center">
-            <div
-              className="flex flex-col gap-1"
-              onClick={() => handleCategoryClick('cafeteria')}
-            >
-              {category === 'cafeteria' ? <CafeteriaP /> : <CafeteriaW />}
-              <div>Cafeteria</div>
-            </div>
-            <div
-              className="flex flex-col gap-1"
-              onClick={() => handleCategoryClick('cafe')}
-            >
-              {category === 'cafe' ? <CafeP /> : <CafeW />}
-              <div>Cafe</div>
-            </div>
-            <div
-              className="flex flex-col gap-1"
-              onClick={() => handleCategoryClick('convenience')}
-            >
-              {category === 'convenience' ? <StoreP /> : <StoreW />}
-              <div>24/7</div>
-            </div>
-            <div
-              className="flex flex-col gap-1"
-              onClick={() => handleCategoryClick('smokingBooth')}
-            >
-              {category === 'smokingBooth' ? <SmokeP /> : <SmokeW />}
-              <div>
-                Smoking
-                <br />
-                Area
-              </div>
-            </div>
-            <div
-              className="flex flex-col gap-1"
-              onClick={() => handleCategoryClick('busStop')}
-            >
-              {category === 'busStop' ? <BusP /> : <BusW />}
-              <div>
-                Bus
-                <br />
-                Station
-              </div>
+            {category === 'cafeteria' ? <CafeteriaP /> : <CafeteriaW />}
+            <div>Cafeteria</div>
+          </div>
+          <div
+            className="flex flex-col gap-1"
+            onClick={() => handleCategoryClick('cafe')}
+          >
+            {category === 'cafe' ? <CafeP /> : <CafeW />}
+            <div>Cafe</div>
+          </div>
+          <div
+            className="flex flex-col gap-1"
+            onClick={() => handleCategoryClick('convenience')}
+          >
+            {category === 'convenience' ? <StoreP /> : <StoreW />}
+            <div>24/7</div>
+          </div>
+          <div
+            className="flex flex-col gap-1"
+            onClick={() => handleCategoryClick('smokingBooth')}
+          >
+            {category === 'smokingBooth' ? <SmokeP /> : <SmokeW />}
+            <div>
+              Smoking
+              <br />
+              Area
             </div>
           </div>
+          <div
+            className="flex flex-col gap-1"
+            onClick={() => handleCategoryClick('busStop')}
+          >
+            {category === 'busStop' ? <BusP /> : <BusW />}
+            <div>
+              Bus
+              <br />
+              Station
+            </div>
+          </div>
+        </div>
+
+        {/* 스크롤되는 바텀시트 내용 */}
+        <div ref={content} className="w-full overflow-y-auto">
+          {/* <Content /> */}
+
+          {/* 검색 결과 */}
+          <Buildings buildingList={buildingList} />
         </div>
       </div>
     </div>
