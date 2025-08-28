@@ -3,8 +3,12 @@ import NextIcon from '@/shared/assets/icons/next-icon.svg?react';
 import DeleteIcon from '@/shared/assets/icons/delete-icon.svg?react';
 import InformationIcon from '@/shared/assets/icons/information-icon.svg?react';
 import LogoutIcon from '@/shared/assets/icons/logout-icon.svg?react';
+import { useNavigate } from 'react-router';
+import { ROUTES } from '@/router/routes';
 
 const ProfilePage = () => {
+  const navigate = useNavigate();
+
   return (
     <main className="flex flex-col px-4 items-center">
       {/* 프로필 사진 */}
@@ -18,21 +22,36 @@ const ProfilePage = () => {
       </div>
 
       {/* 프로필 수정 버튼 */}
-      <button className="bg-[#313131] px-2 text-[#ffffff] rounded-[30px] py-1">
+      <button
+        onClick={() => {
+          navigate(`${ROUTES.PROFILE}/edit`);
+        }}
+        className="bg-[#313131] px-2 text-[#ffffff] rounded-[30px] py-1"
+      >
         Edit Profile
       </button>
 
       {/* 세팅 리스트 & 세팅 아이템 */}
       <section className="w-full gap-2.5 flex flex-col mb-20">
         <h4 className="text-sm">settings</h4>
-        <button className="rounded-lg flex items-center bg-[#F4F2F6] h-10 px-4 justify-between">
+        <button
+          onClick={() => {
+            navigate(`${ROUTES.PROFILE}/support`);
+          }}
+          className="rounded-lg flex items-center bg-[#F4F2F6] h-10 px-4 justify-between"
+        >
           <div className="flex flex-row gap-4 items-center">
             <QuestionIcon />
             <p>Support</p>
           </div>
           <NextIcon />
         </button>
-        <button className="flex items-center rounded-lg bg-[#F4F2F6] h-10 px-4 justify-between">
+        <button
+          onClick={() => {
+            navigate(`${ROUTES.PROFILE}/delete`);
+          }}
+          className="flex items-center rounded-lg bg-[#F4F2F6] h-10 px-4 justify-between"
+        >
           <div className="flex flex-row gap-4 items-center">
             <DeleteIcon />
             <p>Delete Account</p>
@@ -55,7 +74,12 @@ const ProfilePage = () => {
 
       {/* 로그아웃 버튼 */}
       <section className="w-full flex flex-col gap-2.5 ">
-        <button className="flex rounded-lg items-center bg-[#F4F2F6] h-10 px-4 justify-between">
+        <button
+          onClick={() => {
+            navigate('/');
+          }}
+          className="flex rounded-lg items-center bg-[#F4F2F6] h-10 px-4 justify-between"
+        >
           <div className="flex flex-row gap-4 items-center">
             <LogoutIcon />
             <p className="text-[#D51D20]">Log out</p>
