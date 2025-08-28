@@ -18,6 +18,7 @@ interface BottomCheetMetrics {
 export default function useBottomSheet() {
   let MIN_Y = BOTTOM_SHEET_MIN_Y;
   let MAX_Y = BOTTOM_SHEET_MAX_Y;
+  let MID_Y = 400;
 
   const sheet = useRef<HTMLDivElement>(null);
   const content = useRef<HTMLDivElement>(null);
@@ -43,7 +44,7 @@ export default function useBottomSheet() {
         return false;
       }
 
-      if (sheet.current!.getBoundingClientRect().y !== MIN_Y) {
+      if (sheet.current!.getBoundingClientRect().top !== MIN_Y) {
         return true;
       }
 
@@ -55,7 +56,7 @@ export default function useBottomSheet() {
 
     const handleTouchStart = (e: TouchEvent) => {
       const { touchStart } = metrics.current;
-      touchStart.sheetY = sheet.current!.getBoundingClientRect().y;
+      touchStart.sheetY = sheet.current!.getBoundingClientRect().top;
       touchStart.touchY = e.touches[0].clientY;
     };
 
@@ -63,7 +64,9 @@ export default function useBottomSheet() {
       //   console.log('handleTouchMove', e.touches[0]);
       const { touchStart, touchMove } = metrics.current;
       const currentTouch = e.touches[0];
+
       console.log(touchStart.touchY, currentTouch.clientY);
+      ``;
       if (touchMove.prevTouchY === undefined) {
         touchMove.prevTouchY = touchStart.touchY;
       }
@@ -109,7 +112,7 @@ export default function useBottomSheet() {
       const { touchMove } = metrics.current;
 
       // Snap Animation
-      const currentSheetY = sheet.current!.getBoundingClientRect().y;
+      const currentSheetY = sheet.current!.getBoundingClientRect().top;
 
       if (currentSheetY !== MIN_Y) {
         if (touchMove.movingDirection === 'down' && content.current!.scrollTop <= 0) {

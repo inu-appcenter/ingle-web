@@ -5,17 +5,17 @@ import api from '@/shared/api/intercepter';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import BusP from '@/map/bus-purple.svg?react';
-import BusW from '@/map/bus-white.svg?react';
-import CafeP from '@/map/cafe-purple.svg?react';
-import CafeW from '@/map/cafe-white.svg?react';
-import CafeteriaP from '@/map/cafeteria-purple.svg?react';
-import CafeteriaW from '@/map/cafeteria-white.svg?react';
-import StoreP from '@/map/conven-purple.svg?react';
-import StoreW from '@/map/conven-white.svg?react';
-import Search from '@/map/icnSearch.svg?react';
-import SmokeP from '@/map/smoke-purple.svg?react';
-import SmokeW from '@/map/smoke-white.svg?react';
+import BusP from '@/map/icons/bus-purple.svg?react';
+import BusW from '@/map/icons/bus-white.svg?react';
+import CafeP from '@/map/icons/cafe-purple.svg?react';
+import CafeW from '@/map/icons/cafe-white.svg?react';
+import CafeteriaP from '@/map/icons/cafeteria-purple.svg?react';
+import CafeteriaW from '@/map/icons/cafeteria-white.svg?react';
+import StoreP from '@/map/icons/conven-purple.svg?react';
+import StoreW from '@/map/icons/conven-white.svg?react';
+import Search from '@/map/icons/icnSearch.svg?react';
+import SmokeP from '@/map/icons/smoke-purple.svg?react';
+import SmokeW from '@/map/icons/smoke-white.svg?react';
 
 import { SearchResult } from '@/map/types/Types';
 
@@ -57,14 +57,9 @@ export default function BottomSheet() {
       {/* ▼ 시트 전체 */}
       <div
         ref={sheet}
-        className="px-4 pb-4 pt-2 w-ful bg-[#F7F7F6] rounded-t-xl flex flex-col items-center"
-        style={{
-          transform: 'translateY(20%)',
-          transition: 'transform 0.2s',
-          maxHeight: '80vh',
-        }}
+        className="px-4 pb-4 pt-2 w-full  bg-[#F7F7F6] rounded-t-xl flex flex-col items-center"
       >
-        {/* 바텀 핸들러 */}
+        {/* 핸들러 */}
         <div className="my-4 h-[5px] w-9 rounded-sm bg-[#BEBFC0]" />
 
         <form
@@ -81,7 +76,10 @@ export default function BottomSheet() {
         </form>
 
         {/* 카테고리 버튼 */}
-        <div className="w-full flex flex-row justify-between text-xs text-center">
+        <div
+          ref={content}
+          className="w-full flex flex-row justify-between text-xs text-center"
+        >
           <div
             className="flex flex-col gap-1"
             onClick={() => handleCategoryClick('cafeteria')}
@@ -128,7 +126,7 @@ export default function BottomSheet() {
         </div>
 
         {/* 스크롤되는 바텀시트 내용 */}
-        <div ref={content} className="w-full overflow-y-auto">
+        <div className="w-full overflow-y-auto max-h-[70vh]">
           {/* <Content /> */}
 
           {/* 검색 결과 */}
