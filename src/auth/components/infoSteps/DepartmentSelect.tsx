@@ -32,10 +32,10 @@ export default function DepartmentSelect() {
   const [openDropdown, setOpenDropdown] = useState<null | 'college' | 'department'>(null);
 
   useEffect(() => {
+    let foundCollege;
     if (department) {
-      let foundCollege;
+      // department에 맞는 college 찾아서 세팅
       if (department === 'GRADUATE') {
-        // department에 맞는 college 찾아서 세팅
         foundCollege = Object.keys(GraduateDepartment).find(college =>
           GraduateDepartment[college].some(opt => opt.value === department),
         );

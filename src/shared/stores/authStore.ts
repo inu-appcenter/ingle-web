@@ -44,12 +44,10 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   // access token, expireDate 저장
   setTokens: (access, expire) => {
     try {
-      // 메모리에 저장
-      set({
-        isAuthenticated: true,
-        accessToken: access,
-        expiryTime: expire,
-      });
+      // 로컬 스토리지에에 저장
+      localStorage.setItem('AccessToken', access);
+      localStorage.setItem('AccessTokenExpireTime', expire);
+      localStorage.setItem('isAuthenticated', 'true');
     } catch (e) {
       console.warn('storage write failed', e);
     }
@@ -57,19 +55,11 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
   clearTokens: () => {
     try {
+      localStorage.removeItem('AccessToken');
+      localStorage.removeItem('AccessTokenExpireTime');
+      localStorage.removeItem('isAuthenticated');
     } catch (e) {
       console.warn('storage clear failed', e);
     }
-    set({
-      accessToken: null,
-      expiryTime: null,
-      remember: false,
-      isAuthenticated: false,
-    });
   },
 }));
-
-// 👇 디버깅용 (브라우저 콘솔에서 접근 가능)
-if (typeof window !== 'undefined') {
-  (window as any).authStore = useAuthStore;
-}

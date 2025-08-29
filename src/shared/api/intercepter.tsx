@@ -1,13 +1,9 @@
 import { useAuthStore } from '@/shared/stores/authStore';
 import axios from 'axios';
 
-//주의 : hook은 컴포넌트나 커스텀 훅 안에서만 사용 가능
-//       일반 함수, 이벤트 핸들러 등에서는 사용 불가.
-// => getState 사용
-// => useNavigate는 컴포넌트에서만 사용.
 axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
-//로그인 되어 있을 때만 refresh 토큰 포함해서 보냄
+//로그인 되어 있을 때 사용하는 api
 const api = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   withCredentials: true,
@@ -16,11 +12,10 @@ const api = axios.create({
 //요청 인터셉터
 api.interceptors.request.use(
   config => {
-    const access = localStorage.getItem('AccessToken');
+    const access = window.localStorage.getItem('AccessToken');
     if (access) {
       config.headers['Authorization'] = `Bearer ${access}`;
     }
-
     return config;
   },
   error => {
