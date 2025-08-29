@@ -1,4 +1,7 @@
-import { BOTTOM_SHEET_MAX_Y, BOTTOM_SHEET_MIN_Y } from '@/map/constants/constants';
+import {
+  BOTTOM_SHEET_MAX_Y,
+  BOTTOM_SHEET_MIN_Y,
+} from '@/map/constants/BottomSheetOption';
 import { useEffect, useRef } from 'react';
 
 //[ ] 지금 시트의 상단이 기준이 되어야 하는데 bottom이 기준이 되고 있다.

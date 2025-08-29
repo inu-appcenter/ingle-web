@@ -1,138 +1,35 @@
 // import {useState} from 'react'
-import Buildings from '@/map/components/Buildings';
+import Header from '@/map/components/Header';
+import { BOTTOM_SHEET_HEIGHT } from '@/map/constants/BottomSheetOption';
 import useBottomSheet from '@/map/hooks/useBottomSheet';
-import api from '@/shared/api/intercepter';
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-
-import BusP from '@/map/icons/bus-purple.svg?react';
-import BusW from '@/map/icons/bus-white.svg?react';
-import CafeP from '@/map/icons/cafe-purple.svg?react';
-import CafeW from '@/map/icons/cafe-white.svg?react';
-import CafeteriaP from '@/map/icons/cafeteria-purple.svg?react';
-import CafeteriaW from '@/map/icons/cafeteria-white.svg?react';
-import StoreP from '@/map/icons/conven-purple.svg?react';
-import StoreW from '@/map/icons/conven-white.svg?react';
-import Search from '@/map/icons/icnSearch.svg?react';
-import SmokeP from '@/map/icons/smoke-purple.svg?react';
-import SmokeW from '@/map/icons/smoke-white.svg?react';
-
 import { SearchResult } from '@/map/types/Types';
-
-// import Content from '@/map/components/Content';
+import { useState } from 'react';
+import Buildings from './Buildings';
 
 export default function BottomSheet() {
   const { sheet, content, handleUp, handleDown } = useBottomSheet();
-  const { register, handleSubmit } = useForm();
   const [buildingList, setBuildingList] = useState<SearchResult[]>([]);
-  const [category, setCategory] = useState<
-    null | 'busStop' | 'cafeteria' | 'convenience' | 'cafe' | 'smokingBooth'
-  >(null);
-
-  const handleCategoryClick = (
-    categoryName: 'busStop' | 'cafeteria' | 'convenience' | 'cafe' | 'smokingBooth',
-  ) => {
-    // 현재 선택된 카테고리와 클릭한 카테고리가 같으면 null로, 아니면 해당 카테고리로 설정합니다.
-    setCategory(prevCategory => (prevCategory === categoryName ? null : categoryName));
-  };
 
   // handleSubmit(searchData =>
   //               setSearchData(JSON.stringify(searchData)),
   //             )
-  const onSubmit = async (keyword: any) => {
-    try {
-      const res = await api.get(import.meta.env.VITE_MAP_SEARCHING_URL, {
-        params: keyword,
-      });
-      console.log(res.data);
-      setBuildingList(res.data);
-    } catch (err) {
-      console.log(err);
-      alert('No related search terms found');
-    }
-  };
 
   return (
-    <div className="w-full ">
-      {/* ▼ 시트 전체 */}
-      <div
-        ref={sheet}
-        className="px-4 pb-4 pt-2 w-full  bg-[#F7F7F6] rounded-t-xl flex flex-col items-center"
-      >
-        {/* 핸들러 */}
-        <div className="my-4 h-[5px] w-9 rounded-sm bg-[#BEBFC0]" />
-
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mb-4 flex flex-row gap-[6px] items-center w-full bg-[#EDEDED] h-9 p-[6px] rounded-[10px]"
-        >
-          <Search />
-          <input
-            {...register('keyword')}
-            placeholder="Search Maps"
-            className="focus:outline-none text-[#6C6C6C] text-[17px] bg-[#EDEDED]"
-          />
-          <input type="submit" />
-        </form>
-
-        {/* 카테고리 버튼 */}
-        <div
-          ref={content}
-          className="w-full flex flex-row justify-between text-xs text-center"
-        >
-          <div
-            className="flex flex-col gap-1"
-            onClick={() => handleCategoryClick('cafeteria')}
-          >
-            {category === 'cafeteria' ? <CafeteriaP /> : <CafeteriaW />}
-            <div>Cafeteria</div>
-          </div>
-          <div
-            className="flex flex-col gap-1"
-            onClick={() => handleCategoryClick('cafe')}
-          >
-            {category === 'cafe' ? <CafeP /> : <CafeW />}
-            <div>Cafe</div>
-          </div>
-          <div
-            className="flex flex-col gap-1"
-            onClick={() => handleCategoryClick('convenience')}
-          >
-            {category === 'convenience' ? <StoreP /> : <StoreW />}
-            <div>24/7</div>
-          </div>
-          <div
-            className="flex flex-col gap-1"
-            onClick={() => handleCategoryClick('smokingBooth')}
-          >
-            {category === 'smokingBooth' ? <SmokeP /> : <SmokeW />}
-            <div>
-              Smoking
-              <br />
-              Area
-            </div>
-          </div>
-          <div
-            className="flex flex-col gap-1"
-            onClick={() => handleCategoryClick('busStop')}
-          >
-            {category === 'busStop' ? <BusP /> : <BusW />}
-            <div>
-              Bus
-              <br />
-              Station
-            </div>
-          </div>
-        </div>
-
-        {/* 스크롤되는 바텀시트 내용 */}
-        <div className="w-full overflow-y-auto max-h-[70vh]">
-          {/* <Content /> */}
-
-          {/* 검색 결과 */}
-          <Buildings buildingList={buildingList} />
-        </div>
+    <div
+      ref={sheet}
+      className={`flex flex-col items-center absolute z-1 top-[calc(100%-205px)] h-[${BOTTOM_SHEET_HEIGHT}px]
+            px-4 pb-4 pt-2 w-full  bg-[#F7F7F6] rounded-t-xl transition:transform duration-200 ease-out`}
+    >
+      <Header setBuildingList={setBuildingList} />
+      <div ref={content} className="overflow-auto">
+        <Buildings buildingList={buildingList} />
       </div>
+
+      {/* 스크롤되는 바텀시트 내용 */}
+      {/* <div className="w-full overflow-y-auto max-h-[70vh]">
+
+        
+      </div> */}
     </div>
   );
 }
