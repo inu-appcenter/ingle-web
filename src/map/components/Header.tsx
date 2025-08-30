@@ -37,7 +37,7 @@ export default function Header({
       const res = await api.get(import.meta.env.VITE_MAP_SEARCHING_URL, {
         params: keyword,
       });
-      console.log(res.data);
+      console.log('response', res.data);
       setBuildingList(res.data);
     } catch (err) {
       console.log(err);
