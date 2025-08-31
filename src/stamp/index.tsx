@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import api from '@/shared/api/intercepter';
 import AchievementStampsBar from '@/stamp/components/AchievementStampsBar';
 import StampHeader from '@/stamp/components/StampHeader';
 import StampList from '@/stamp/components/StampList';
 import { Stamp } from '@/stamp/types/stamp';
-import { instance } from '@/shared/api/intercepter';
+import { useEffect, useState } from 'react';
 
 const StampPage = () => {
   const [stampList, setStampList] = useState<Stamp[]>([]);
@@ -11,7 +11,7 @@ const StampPage = () => {
   useEffect(() => {
     const getStampList = async () => {
       try {
-        const res = await instance.get('/api/v1/stamps');
+        const res = await api.get('/api/v1/stamps');
         setStampList(res.data);
         console.log('getStampList:', res.data);
       } catch (err) {
