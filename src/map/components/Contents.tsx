@@ -16,7 +16,7 @@ export default function Buildings({ buildingList }: { buildingList: SearchResult
   if (!buildingList || buildingList.length === 0) return null;
   //console.log('컴포넌트 안', buildingList);
 
-  const checkOpen = () => {};
+  const checkTime = () => {};
 
   const getDetails = async (buildingId: number | null) => {
     console.log('건물ID', buildingId);
@@ -34,22 +34,21 @@ export default function Buildings({ buildingList }: { buildingList: SearchResult
   return (
     <div className="relative">
       {/* 빌딩 리스트 */}
-      {!buildingId &&
-        buildingList.map(building => (
-          <div
-            key={building.buildingId}
-            className="p-2 border-b "
-            onClick={() => {
-              getDetails(building.buildingId);
-            }}
-          >
-            <div className="font-bold">{building.buildingName}</div>
-            <div className="text-sm text-gray-500">
-              {building.latitude}, {building.longitude}
-            </div>
-            <div className="text-sm">{building.buildingCategory}</div>
+      {buildingList.map(building => (
+        <div
+          key={building.buildingId}
+          className="p-2 border-b "
+          onClick={() => {
+            getDetails(building.buildingId);
+          }}
+        >
+          <div className="font-bold">{building.buildingName}</div>
+          <div className="text-sm text-gray-500">
+            {building.latitude}, {building.longitude}
           </div>
-        ))}
+          <div className="text-sm">{building.buildingCategory}</div>
+        </div>
+      ))}
 
       {/* 빌딩 상세 정보 */}
       {buildingId && (

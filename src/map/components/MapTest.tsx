@@ -1,38 +1,59 @@
 import { useGLTF } from '@react-three/drei';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as THREE from 'three';
 
 export default function Model({ url }: { url: string }) {
-  const gltf = useGLTF(url);
-  const [selectedMesh, setSelectedMesh] = useState<THREE.Mesh | null>(null);
+  const { scene, nodes, materials } = useGLTF(url);
+  const [selectedGroup, setSelectedGroup] = useState<THREE.Group | null>(null);
 
-  //   const handleClick = (e: any) => {
-  //     e.stopPropagation(); // 이벤트 버블링 방지
-  //     const clickedMesh = e.object as THREE.Mesh;
+  const buildingGroup = new THREE.Group();
+  buildingGroup.name = 'BuildingsGroup';
 
-  //     // 이전에 선택된 메쉬가 있다면 원래 색으로 되돌리기
-  //     if (selectedMesh && selectedMesh !== clickedMesh) {
-  //       (selectedMesh.material as THREE.MeshStandardMaterial).color.set('white');
+  // const handleClick = (e: any) => {
+  //   e.stopPropagation(); // 이벤트 버블링 방지
+
+  //   // 이전에 선택된 메쉬가 있다면 원래 색으로 되돌리기
+  //   if (selectedGroup && selectedGroup !== buildingGroup) {
+  //     selectedGroup.traverse(child => {
+  //       if ((child as THREE.Mesh).isMesh) {
+  //         ((child as THREE.Mesh).material as THREE.MeshStandardMaterial).color.set(
+  //           'white',
+  //         );
+  //       }
+  //     });
+  //   }
+
+  //   // 새로운 그룹 색상 변경
+  //   buildingGroup.traverse(child => {
+  //     if ((child as THREE.Mesh).isMesh) {
+  //       ((child as THREE.Mesh).material as THREE.MeshStandardMaterial).color.set(
+  //         'orange',
+  //       );
   //     }
+  //   });
 
-  //     // 클릭한 메쉬 색 변경
-  //     const material = clickedMesh.material as THREE.MeshStandardMaterial;
-  //     material.color.set('orange');
+  //   setSelectedGroup(buildingGroup);
+  // };
 
-  //     setSelectedMesh(clickedMesh);
-  //   };
+  // useEffect(() => {
+  //   if (!scene) return;
 
-  useEffect(() => {
-    gltf.scene.traverse(child => {
-      console.log(child);
-      if ((child as THREE.Mesh).isMesh) {
-        const mesh = child as THREE.Mesh;
-        console.log('Mesh 이름:', mesh.name);
-        console.log('재질:', mesh.material);
-        console.log('geometry:', mesh.geometry);
-      }
-    });
-  }, [gltf]);
+  //   scene.traverse(node => {
+  //     if ((node as THREE.Mesh).isMesh && node.name.includes('building')) {
+  //       buildingGroup.add(node);
+  //     }
+  //   });
+  //   scene.add(buildingGroup);
 
-  return <primitive object={gltf.scene} />;
+  //   //디버깅
+  //   scene.traverse(child => {
+  //     console.log(child);
+  //     if ((child as THREE.Mesh).isMesh) {
+  //       const mesh = child as THREE.Mesh;
+  //       console.log('Mesh 이름:', mesh.name);
+  //     }
+  //   });
+  // }, [scene]);
+
+  return <primitive object={scene} />;
 }
