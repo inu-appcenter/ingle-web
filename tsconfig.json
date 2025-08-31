@@ -11,8 +11,9 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite-plugin-svgr/client"]
-    
+
+    "types": ["vite-plugin-svgr/client"],
+
   },
   "include": ["src","svg.d.ts"],
   "exclude": ["node_modules"]
