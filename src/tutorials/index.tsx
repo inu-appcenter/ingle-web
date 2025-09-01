@@ -173,7 +173,7 @@ const TutorialPage = () => {
       </div>
 
       {/* 카테고리 */}
-      <div className="h-[55vh]  flex flex-col gap-[14px] bg-[#F4F2F6] w-full px-4 pt-6 pb-4 rounded-t-[30px]">
+      <div className="h-[55vh]  flex flex-col gap-[14px] bg-[#F4F2F6] w-full px-4 pt-6 rounded-t-[30px]">
         {/* 버튼 리스트 :  */}
         {tabs === 1 && (
           <div>
@@ -200,7 +200,7 @@ const TutorialPage = () => {
           </div>
         )}
 
-        <div className="w-full grid grid-cols-2 gap-4 mx-auto overflow-y-auto ">
+        <div className="w-full grid grid-cols-2 gap-4 mx-auto overflow-y-auto scrollbar-hide">
           {tabs === 1 &&
             campusLifeList.map((data, index) => {
               return (
