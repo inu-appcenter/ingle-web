@@ -1,7 +1,9 @@
+import { ROUTES } from '@/router/routes';
 import InformationButton from '@/tutorials/components/InformationButton';
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { ROUTES } from '@/router/routes';
+
+import TutorialImage from '@/shared/assets/images/place/tutorial-image1.png';
 
 const campusLifeList = [
   {
@@ -82,98 +84,131 @@ const TutorialPage = () => {
   const [tabs, setTabs] = useState(1);
 
   return (
-    <div className="px-4 pt-2">
-      {/* 헤더 : 마진 정확하게 조정해야함 */}
-      <header className="w-full mb-8">
-        <p className="text-2xl">INGLE</p>
-        <p className="text-base text-[#838A8F]">Your INU Guide Book</p>
-      </header>
+    <div
+      className="flex flex-col pt-4 h-full bg-contain bg-top bg-no-repeat"
+      style={{ backgroundImage: `url(${TutorialImage})` }}
+    >
+      <div className="flex-1 flex flex-col px-4 w-full">
+        {/* 탭바 : 간격 정확하게 설정, */}
+        <div className="flex-none flex flex-row justify-between mb-8">
+          <div
+            onClick={() => {
+              setTabs(1);
+            }}
+          >
+            <p
+              className={`${tabs === 1 ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
+            >
+              Campus Life
+            </p>
+            {tabs === 1 && <hr className="border-t-2 border-[#7A00E6] w-full"></hr>}
+          </div>
+          <div
+            onClick={() => {
+              setTabs(2);
+            }}
+          >
+            <p
+              className={`${tabs === 2 ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
+            >
+              Academics
+            </p>
+            {tabs === 2 && <hr className="border-t-2 border-[#7A00E6] w-full"></hr>}
+          </div>
+          <div
+            onClick={() => {
+              setTabs(3);
+            }}
+          >
+            <p
+              className={`${tabs === 3 ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
+            >
+              Lifestyle
+            </p>
+            {tabs === 3 && <hr className="border-t-2 border-[#7A00E6] w-full"></hr>}
+          </div>
+        </div>
 
-      {/* 완료 게이지 바 : 마진 조정 예정, 글꼴 미세 조정, 폰트 설정 */}
-      <div className="mb-8 bg-[#F5F5F5] rounded-[20px] px-[21px] h-[65px] flex items-center justify-between">
-        <div>
-          <p className="text-2xl">Welcome back</p>
-          <p className="text-base text-[#838A8F]">
-            Incheon National University
+        {/* 헤더 : 마진 정확하게 조정해야함 */}
+        <header className="w-full mb-8 flex-1 flex flex-col justify-center ">
+          <p
+            className="text-4xl font-extrabold text-white "
+            style={{ textShadow: '0 4px 4px rgba(0,0,0,0.25)' }}
+          >
+            INGLE
           </p>
-        </div>
-        <div>
-          <p className="text-2xl text-[#7A00E6] font-bold">13/13</p>
-        </div>
+          <p
+            className="text-2xl font-extrabold text-white"
+            style={{ textShadow: '0 4px 4px rgba(0,0,0,0.25)' }}
+          >
+            Your INU Guide Book
+          </p>
+        </header>
       </div>
 
-      {/* 탭바 : 간격 정확하게 설정, */}
-      <div className="flex justify-between mb-8">
-        <div
-          onClick={() => {
-            setTabs(1);
-          }}
-        >
-          <p
-            className={`${tabs === 1 ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
-          >
-            Campus Life
-          </p>
-        </div>
-        <div
-          onClick={() => {
-            setTabs(2);
-          }}
-        >
-          <p
-            className={`${tabs === 2 ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
-          >
-            Accademic Affairs
-          </p>
-        </div>
-        <div
-          onClick={() => {
-            setTabs(3);
-          }}
-        >
-          <p
-            className={`${tabs === 3 ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
-          >
-            Life Style
-          </p>
-        </div>
-      </div>
+      {/* 카테고리 */}
+      <div className="h-[55vh]  flex flex-col gap-[14px] bg-[#F4F2F6] w-full px-4 pt-6 pb-4 rounded-t-[30px]">
+        {/* 버튼 리스트 :  */}
+        {tabs === 1 && (
+          <div>
+            <h1 className="font-extrabold text-xl">All about Campus</h1>
+            <p className="text-[#9681EB] font-medium text-sm">
+              Kick off your campus life with ease.
+            </p>
+          </div>
+        )}
+        {tabs === 2 && (
+          <div>
+            <h1 className="font-extrabold text-xl">Smarter Academics</h1>
+            <p className="text-[#9681EB] font-medium text-sm">
+              All the academic stuff, minus the headache.
+            </p>
+          </div>
+        )}
+        {tabs === 3 && (
+          <div>
+            <h1 className="font-extrabold text-xl">Life in Korea INU</h1>
+            <p className="text-[#9681EB] font-medium text-sm">
+              Daily hacks for living in Korea..
+            </p>
+          </div>
+        )}
 
-      {/* 버튼 리스트 :  */}
-      <div className="grid grid-cols-2 gap-4 mx-auto">
-        {tabs === 1 &&
-          campusLifeList.map((data, index) => {
-            return (
-              <InformationButton
-                name={data.name}
-                description={data.description}
-                route={data.route}
-                key={index}
-              ></InformationButton>
-            );
-          })}
-        {tabs === 2 &&
-          academicAffairsList.map((data, index) => {
-            return (
-              <InformationButton
-                name={data.name}
-                description={data.description}
-                route={data.route}
-                key={index}
-              ></InformationButton>
-            );
-          })}
-        {tabs === 3 &&
-          lifeStyleList.map((data, index) => {
-            return (
-              <InformationButton
-                name={data.name}
-                description={data.description}
-                route={data.route}
-                key={index}
-              ></InformationButton>
-            );
-          })}
+        <div className="grid grid-cols-2 gap-4 mx-auto overflow-y-auto ">
+          {tabs === 1 &&
+            campusLifeList.map((data, index) => {
+              return (
+                <InformationButton
+                  name={data.name}
+                  description={data.description}
+                  route={data.route}
+                  key={index}
+                ></InformationButton>
+              );
+            })}
+          {tabs === 2 &&
+            academicAffairsList.map((data, index) => {
+              return (
+                <InformationButton
+                  name={data.name}
+                  description={data.description}
+                  route={data.route}
+                  key={index}
+                ></InformationButton>
+              );
+            })}
+          {tabs === 3 &&
+            lifeStyleList.map((data, index) => {
+              return (
+                <InformationButton
+                  name={data.name}
+                  description={data.description}
+                  route={data.route}
+                  key={index}
+                ></InformationButton>
+              );
+            })}
+        </div>
       </div>
     </div>
   );
