@@ -1,59 +1,41 @@
 import { useGLTF } from '@react-three/drei';
-import { useState } from 'react';
+import { useThree } from '@react-three/fiber';
+import { useEffect, useState } from 'react';
 import * as THREE from 'three';
 
 export default function Model({ url }: { url: string }) {
-  const { scene, nodes, materials } = useGLTF(url);
-  const [selectedGroup, setSelectedGroup] = useState<THREE.Group | null>(null);
+  const gltf = useGLTF(url);
+  const { camera, scene } = useThree();
 
-  const buildingGroup = new THREE.Group();
-  buildingGroup.name = 'BuildingsGroup';
+  const [originalColors] = useState(new Map<string, THREE.Color>());
 
-  // const handleClick = (e: any) => {
-  //   e.stopPropagation(); // 이벤트 버블링 방지
+  useEffect(() => {
+    if (!gltf?.scene) return;
 
-  //   // 이전에 선택된 메쉬가 있다면 원래 색으로 되돌리기
-  //   if (selectedGroup && selectedGroup !== buildingGroup) {
-  //     selectedGroup.traverse(child => {
-  //       if ((child as THREE.Mesh).isMesh) {
-  //         ((child as THREE.Mesh).material as THREE.MeshStandardMaterial).color.set(
-  //           'white',
-  //         );
-  //       }
-  //     });
-  //   }
+    // gltf.scene.traverse(child => {
+    //   //building 이름만 들어간 오브젝트 찾아서 출력
+    //   if (child.name.toLowerCase().includes('building')) {
+    //     console.log('건물:', child.name);
+    //   }
+    // });
 
-  //   // 새로운 그룹 색상 변경
-  //   buildingGroup.traverse(child => {
-  //     if ((child as THREE.Mesh).isMesh) {
-  //       ((child as THREE.Mesh).material as THREE.MeshStandardMaterial).color.set(
-  //         'orange',
-  //       );
-  //     }
-  //   });
+    //카메라 시야 프로스텀 생성
+    const frustum = new THREE.Frustum();
+    const projScreenMatrix = new THREE.Matrix4();
 
-  //   setSelectedGroup(buildingGroup);
-  // };
+    projScreenMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+    frustum.setFromProjectionMatrix(projScreenMatrix);
 
-  // useEffect(() => {
-  //   if (!scene) return;
+    gltf.scene.traverse(child => {
+      if (child instanceof THREE.Mesh) {
+        const visible = frustum.intersectsObject(child);
+        const mat = child.material as THREE.MeshStandardMaterial;
+        if (visible) {
+          console.log('보이는 건물:', child.name);
+        }
+      }
+    });
+  }, [gltf]);
 
-  //   scene.traverse(node => {
-  //     if ((node as THREE.Mesh).isMesh && node.name.includes('building')) {
-  //       buildingGroup.add(node);
-  //     }
-  //   });
-  //   scene.add(buildingGroup);
-
-  //   //디버깅
-  //   scene.traverse(child => {
-  //     console.log(child);
-  //     if ((child as THREE.Mesh).isMesh) {
-  //       const mesh = child as THREE.Mesh;
-  //       console.log('Mesh 이름:', mesh.name);
-  //     }
-  //   });
-  // }, [scene]);
-
-  return <primitive object={scene} />;
+  return <primitive object={gltf.scene} />;
 }

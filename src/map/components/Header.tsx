@@ -47,9 +47,6 @@ export default function Header({
 
   return (
     <>
-      {/* 핸들러 */}
-      <div className="my-4 h-[5px] w-9 rounded-sm bg-[#BEBFC0]" />
-
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mb-4 flex flex-row gap-[6px] items-center w-full bg-[#EDEDED] h-9 p-[6px] rounded-[10px]"
@@ -64,7 +61,7 @@ export default function Header({
       </form>
 
       {/* 카테고리 버튼 */}
-      <div className="w-full flex flex-row justify-between text-xs text-center">
+      <div className="mb-2 w-full flex flex-row justify-between text-xs text-center">
         <div
           className="flex flex-col gap-1"
           onClick={() => handleCategoryClick('cafeteria')}

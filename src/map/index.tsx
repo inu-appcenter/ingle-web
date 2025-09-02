@@ -1,13 +1,13 @@
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 
+import Model from '@/map/components/MapTest';
 import BottomSheet from './components/BottomSheet';
-import Model from './components/MapTest';
 
 const MapPage = () => {
   return (
     <div className="w-full h-full bg-black relative">
-      <Canvas className=" w-full h-full">
+      <Canvas className=" w-full h-full absolute z-1">
         <PerspectiveCamera makeDefault position={[100, 280, -250]} fov={100} />
         <Environment preset="apartment" />
         <OrbitControls

@@ -11,7 +11,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite-plugin-svgr/client","react", "react-dom", "@react-three/fiber"]
+    "types": ["vite-plugin-svgr/client","react", "react-dom", "@react-three/fiber","@react-three/drei"]
   },
   "include": ["src","svg.d.ts"],
   "exclude": ["node_modules"]
