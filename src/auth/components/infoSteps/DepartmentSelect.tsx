@@ -8,12 +8,12 @@ import { useEffect, useRef, useState } from 'react';
 // option은 박스 모양을 바꿀 수 없음 => custom select box를 만들어야 함
 import { collegeOptions, departmentOptions } from '@/auth/constants/Departments';
 
-type DropdownOption = {
+export type DropdownOption = {
   label: string;
   value: string;
 };
 
-type DropdownProps = {
+export type DropdownProps = {
   label: string;
   options: DropdownOption[];
   selectedValue: string;
@@ -71,7 +71,7 @@ export default function DepartmentSelect() {
   );
 }
 
-function Dropdown({
+export function Dropdown({
   label,
   options,
   selectedValue,

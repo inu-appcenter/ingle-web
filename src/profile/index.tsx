@@ -5,9 +5,18 @@ import InformationIcon from '@/shared/assets/icons/information-icon.svg?react';
 import LogoutIcon from '@/shared/assets/icons/logout-icon.svg?react';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '@/router/routes';
+import { logout } from '@/profile/api/profile';
+import { useAuthStore } from '@/auth/stores/authStore';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
+  const { clearTokens } = useAuthStore();
+
+  const handleLogoutButton = () => {
+    logout();
+    clearTokens();
+    navigate('/');
+  };
 
   return (
     <main className="flex flex-col px-4 items-center">
@@ -75,9 +84,7 @@ const ProfilePage = () => {
       {/* 로그아웃 버튼 */}
       <section className="w-full flex flex-col gap-2.5 ">
         <button
-          onClick={() => {
-            navigate('/');
-          }}
+          onClick={handleLogoutButton}
           className="flex rounded-lg items-center bg-[#F4F2F6] h-10 px-4 justify-between"
         >
           <div className="flex flex-row gap-4 items-center">
