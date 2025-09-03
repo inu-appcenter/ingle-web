@@ -1,21 +1,21 @@
-import { useAuthStore } from '@/auth/stores/authStore';
-import { ROUTES } from '@/router/routes';
+import { useAuthStore } from '@/shared/stores/authStore';
 import axios from 'axios';
-import { useNavigate } from 'react-router';
 
-const instance = axios.create({
-  //baseURL:import.meta.env.VITE_BASE_URL,
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
+
+//로그인 되어 있을 때 사용하는 api
+const api = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
   withCredentials: true,
 });
 
 //요청 인터셉터
-instance.interceptors.request.use(
+api.interceptors.request.use(
   config => {
-    const accessToken = useAuthStore();
-    if (accessToken) {
-      config.headers['Authorization'] = `Bearer ${accessToken}`;
+    const access = window.localStorage.getItem('AccessToken');
+    if (access) {
+      config.headers['Authorization'] = `Bearer ${access}`;
     }
-
     return config;
   },
   error => {
@@ -25,29 +25,31 @@ instance.interceptors.request.use(
 );
 
 //응답 인터셉터
-instance.interceptors.response.use(
+api.interceptors.response.use(
   response => {
     return response;
   },
   async error => {
     // accessToken 만료
-    if (error.response?.status === 401 && !error.config._retry) {
-      error.config._retry = true;
+    const originalRequest = error.config;
 
+    if (originalRequest.url.includes('/auth/refresh')) {
+      return Promise.reject(error);
+    }
+
+    if (error.response?.status === 401) {
       try {
-        const res = await axios.post('/auth/refresh'); //인스턴스 사용 권장
+        const res = await api.post('/auth/refresh');
         const newAccessToken = res.data.accessToken;
         const newExpireDate = res.data.accessTokenExpiresDate;
-        const { setTokens } = useAuthStore();
 
-        setTokens(newAccessToken, newExpireDate);
+        useAuthStore.getState().setTokens(newAccessToken, newExpireDate);
 
         // 실패했던 요청 헤더 갱신 후 재시도
         error.config.headers.Authorization = `Bearer ${newAccessToken}`;
-        return axios(error.config);
+        return api(error.config);
       } catch (err: any) {
-        const { clearTokens } = useAuthStore();
-        const navigate = useNavigate();
+        const { clearTokens } = useAuthStore.getState();
 
         if (err.response.status === 400) {
           alert(err.response.data.message); //리프레시 토큰 불일치
@@ -56,7 +58,6 @@ instance.interceptors.response.use(
         } else if (err.response.status === 420) {
           alert(err.response.data.message); // 만료된 리프레시 토큰
           clearTokens();
-          navigate(ROUTES.AUTH);
         }
         return Promise.reject(err);
       }
@@ -65,3 +66,5 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+export default api;

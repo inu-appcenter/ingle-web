@@ -5,12 +5,7 @@ import Empty from '@/auth/images/depart-select/empty.svg?react';
 import { useAuthStore } from '@/shared/stores/authStore';
 import { useEffect, useRef, useState } from 'react';
 
-import {
-  GraduateCollage,
-  GraduateDepartment,
-  UndergraduateCollege,
-  UndergraduateDepartment,
-} from '@/auth/constants/Departments';
+import { Countries } from '@/auth/constants/Countries';
 
 type DropdownOption = {
   label: string;
@@ -27,57 +22,31 @@ type DropdownProps = {
 };
 
 export default function DepartmentSelect() {
-  const [selectedCollege, setSelectedCollege] = useState('');
-  const { department, setStudentInfo, studentType } = useAuthStore();
-  const [openDropdown, setOpenDropdown] = useState<null | 'college' | 'department'>(null);
+  const [selectedCountry, setSelectedCountry] = useState('');
+  const { country, studentType, setStudentInfo } = useAuthStore();
+  const [openDropdown, setOpenDropdown] = useState<null | 'country'>(null);
 
   useEffect(() => {
-    let foundCollege;
-    if (department) {
-      // department에 맞는 college 찾아서 세팅
-      if (department === 'GRADUATE') {
-        foundCollege = Object.keys(GraduateDepartment).find(college =>
-          GraduateDepartment[college].some(opt => opt.value === department),
-        );
-      } else {
-        foundCollege = Object.keys(UndergraduateDepartment).find(college =>
-          UndergraduateDepartment[college].some(opt => opt.value === department),
-        );
-      }
-      if (foundCollege) {
-        setSelectedCollege(foundCollege);
+    if (country) {
+      // 선택된 country 세팅
+      const foundCountry = Countries.find(obt => obt.value === country);
+      if (foundCountry) {
+        setSelectedCountry(foundCountry.label);
       }
     }
-  }, [department]);
+  }, [country]);
 
   return (
     <div className="flex items-center justify-center">
       <div className="flex flex-col w-[100%] gap-y-8">
         <Dropdown
-          label={studentType === 'GRADUATE' ? 'Graduate School of College' : 'College'}
-          options={studentType === 'GRADUATE' ? GraduateCollage : UndergraduateCollege}
-          selectedValue={selectedCollege}
-          onChange={value => {
-            setSelectedCollege(value);
-            setStudentInfo({ department: '' }); // 학과 초기화
-          }}
-          isOpen={openDropdown === 'college'}
+          label="Country"
+          options={Countries}
+          selectedValue={country}
+          onChange={value => setStudentInfo({ country: value })}
+          isOpen={openDropdown === 'country'}
           onToggle={() =>
-            setOpenDropdown(prev => (prev === 'college' ? null : 'college'))
-          }
-        />
-        <Dropdown
-          label="Department"
-          options={
-            studentType === 'GRADUATE'
-              ? GraduateDepartment[selectedCollege] || []
-              : UndergraduateDepartment[selectedCollege] || []
-          }
-          selectedValue={department}
-          onChange={value => setStudentInfo({ department: value })}
-          isOpen={openDropdown === 'department'}
-          onToggle={() =>
-            setOpenDropdown(prev => (prev === 'department' ? null : 'department'))
+            setOpenDropdown(prev => (prev === 'country' ? null : 'country'))
           }
         />
       </div>
