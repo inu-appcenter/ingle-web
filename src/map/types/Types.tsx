@@ -20,6 +20,7 @@ interface BuildingDetails {
   closeTime: string; // "24:00" 형식 (시간)
   phoneNumber: string;
   closedDays: string;
+  buildingUrl: string;
 }
 
 export { BuildingDetails, SearchResult };

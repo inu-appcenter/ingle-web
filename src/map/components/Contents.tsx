@@ -25,6 +25,12 @@ export default function Contents({
   const checkTime = () => {
     // 현재 시간 가져와서 비교 => 오픈, 닫음
   };
+
+  const moveToUrl = () => {
+    if (!details?.buildingUrl) return;
+    window.location.href = details.buildingUrl;
+  };
+
   const showImages = () => {};
 
   const getDetails = async (Id: number | null) => {
@@ -104,7 +110,11 @@ export default function Contents({
         </main>
 
         <footer className="flex flex-row gap-2 justify-stretch w-full">
-          <button className="flex-grow self-stretch flex flex-row items-center justify-center gap-1 h-12 text-[17px] text-[#F7F7F6] font-semibold bg-[#7A00E6] rounded-[10px]">
+          <button
+            disabled={!details?.buildingUrl}
+            onClick={() => moveToUrl()}
+            className={`flex-grow self-stretch flex flex-row items-center justify-center gap-1 h-12 text-[17px] text-[#F7F7F6] font-semibold ${details?.buildingUrl ? 'bg-[#7A00E6]' : 'bg-gray-300'} rounded-[10px] `}
+          >
             <p>More Details</p>
             <Cursor />
           </button>
