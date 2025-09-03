@@ -1,28 +1,26 @@
-import CylceIcon from '@/shared/assets/icons/cycle-icon.svg?react';
 import { useNavigate } from 'react-router';
 
 interface Props {
   name: string;
   description: string;
   route: string;
+  children?: React.ReactNode;
 }
 
-const InformationButton = ({ name, description, route }: Props) => {
+const InformationButton = ({ name, description, route, children }: Props) => {
   const navigate = useNavigate();
   return (
     <button
       onClick={() => {
         navigate(route);
       }}
-      className="group flex flex-col text-left hover:bg-[#7A00E6] bg-[#EDEDED] rounded-[20px] h-48 pl-2.5 pt-3 hover:text-[#ffffff] transition-transform duration-300 ease-in-out transform hover:-translate-y-1"
+      className="group flex flex-col justify-between text-left hover:bg-[#7A00E6] bg-[#FFFFFF] rounded-[20px] h-44 px-3 py-3 hover:text-[#ffffff] transition-transform duration-300 ease-in-out transform hover:-translate-y-1"
     >
-      <div className="flex w-9 h-9 rounded-full group-hover:bg-[#7949FF] bg-[#DADADA] justify-center items-center mb-10">
-        <CylceIcon />
+      <div className="">
+        <p className="text-xl font-bold">{name}</p>
+        {/* <p className="text-[#848484] group-hover:text-white">{description}</p> */}
       </div>
-      <div className="pr-2.5">
-        <p className="text-xl font-bold mb-1">{name}</p>
-        <p className="text-[#848484] group-hover:text-white">{description}</p>
-      </div>
+      <div className="place-self-center">{children}</div>
     </button>
   );
 };
