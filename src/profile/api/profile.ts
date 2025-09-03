@@ -14,7 +14,6 @@ export const editMembers = async (
   studentId: string,
   department: string,
   studentType: string,
-  country: string,
   nickname: string,
 ) => {
   try {
