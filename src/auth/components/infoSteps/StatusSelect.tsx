@@ -85,13 +85,13 @@ function StatusSelect() {
         ))}
         <div className="w-36 h-12">
           <StatusCard
-            status="Others"
-            isSelected={studentType === 'OTHERS'}
+
+            status="Other"
+            isSelected={studentType === 'OTHER'}
             onClick={() =>
               setStudentInfo(
-                studentType === 'OTHERS'
-                  ? { studentType: '' }
-                  : { studentType: 'OTHERS' },
+                studentType === 'OTHER' ? { studentType: '' } : { studentType: 'OTHER' },
+
               )
             }
           />
