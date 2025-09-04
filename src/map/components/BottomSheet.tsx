@@ -29,6 +29,7 @@ export default function BottomSheet() {
       {/* 핸들러 */}
       <div className="flex-none my-4 h-[5px] w-9 rounded-sm bg-[#BEBFC0]" />
 
+      {/* 건물 상세 정보 */}
       {showDetail && (
         <div className="overflow-y-auto scrollbar-hide w-full">
           <Contents buildingList={buildingList} Id={showDetail}>
@@ -37,6 +38,7 @@ export default function BottomSheet() {
         </div>
       )}
 
+      {/* 바텀시트 기본 구성 */}
       {!showDetail && (
         <>
           <Header setBuildingList={setBuildingList} />

@@ -24,6 +24,9 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
   if (gltf?.scene && originalColors.current.size === 0) {
     gltf.scene.traverse(child => {
       if (child instanceof THREE.Mesh && child.name.toLowerCase().includes('building')) {
+        // 머티리얼을 개별 인스턴스로 복제
+        child.material = (child.material as THREE.MeshStandardMaterial).clone();
+        // 원래 색상 저장
         originalColors.current.set(
           child,
           (child.material as THREE.MeshStandardMaterial).color.clone(),
@@ -38,15 +41,20 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
     //보이는 건물 저장
     const visibleBuildings = new Set<THREE.Mesh>();
 
-    //화면 전체를 10*20 grid로 샘플림
-    const rows = 20;
-    const cols = 10;
+    //화면 전체를 10*20 grid로 샘플링
+    const xMin = -0.7;
+    const xMax = 0.7;
+    const yMin = -0.15;
+    const yMax = 0.8;
+
+    const rows = 40;
+    const cols = 20;
 
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
         // 화면 좌표 NDC (-1 ~ 1)
-        const x = (i / (cols - 1)) * 2 - 1;
-        const y = (j / (rows - 1)) * 2 - 1;
+        const x = xMin + (i / (cols - 1)) * (xMax - xMin);
+        const y = yMin + (j / (rows - 1)) * (yMax - yMin);
         //raycaster 설정
         const mouse = new THREE.Vector2(x, y);
         raycaster.setFromCamera(mouse, camera);
@@ -77,40 +85,7 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       '화면에 보이는 건물:',
       Array.from(visibleBuildings).map(b => b.name),
     );
-
-    // if (visibleBuildings.size > 0) {
-    //   console.log('뷰포트에서 보이는 건물 ID 목록:', [...new Set(visibleBuildings)]);
-    //   setPrinted(true); // 처음 한 번만 출력
-    // }
   };
-
-  // useEffect(() => {
-  //   if (!gltf?.scene) return;
-
-  //   // gltf.scene.traverse(child => {
-  //   //   //building 이름만 들어간 오브젝트 찾아서 출력
-  //   //   if (child.name.toLowerCase().includes('building')) {
-  //   //     console.log('건물:', child.name);
-  //   //   }
-  //   // });
-
-  //   //카메라 시야 프로스텀 생성
-  //   const frustum = new THREE.Frustum();
-  //   const projScreenMatrix = new THREE.Matrix4();
-
-  //   projScreenMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
-  //   frustum.setFromProjectionMatrix(projScreenMatrix);
-
-  //   gltf.scene.traverse(child => {
-  //     if (child instanceof THREE.Mesh) {
-  //       const visible = frustum.intersectsObject(child);
-  //       const mat = child.material as THREE.MeshStandardMaterial;
-  //       if (visible) {
-  //         //console.log('보이는 건물:', child.name);
-  //       }
-  //     }
-  //   });
-  // }, [gltf]);
 
   // 외부 ref에서 castRays 호출 가능
   useImperativeHandle(ref, () => ({

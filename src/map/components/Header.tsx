@@ -1,6 +1,6 @@
 import { SearchResult } from '@/map/types/Types';
 import api from '@/shared/api/intercepter';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import BusP from '@/map/icons/bus-purple.svg?react';
@@ -15,20 +15,47 @@ import Search from '@/map/icons/icnSearch.svg?react';
 import SmokeP from '@/map/icons/smoke-purple.svg?react';
 import SmokeW from '@/map/icons/smoke-white.svg?react';
 
+enum Category {
+  BusStop = 'BUS_STOP',
+  Cafeteria = 'RESTAURANT',
+  Convenience = 'CONVENIENCE_STORE',
+  Cafe = 'CAFE',
+  SmokingBooth = 'SMOKING_BOOTH',
+  SchoolBuilding = 'SCHOOL_BUILDING',
+}
+
 export default function Header({
   setBuildingList,
 }: {
   setBuildingList: React.Dispatch<React.SetStateAction<SearchResult[]>>;
 }) {
   const { register, handleSubmit } = useForm();
-  const [category, setCategory] = useState<
-    null | 'busStop' | 'cafeteria' | 'convenience' | 'cafe' | 'smokingBooth'
-  >(null);
+  const [category, setCategory] = useState<Category | null>(null);
 
-  const handleCategoryClick = (
-    categoryName: 'busStop' | 'cafeteria' | 'convenience' | 'cafe' | 'smokingBooth',
-  ) => {
+  useEffect(() => {
+    console.log('바텀시트 헤더');
+    const fetchBuildings = async () => {
+      try {
+        const res = await api.get(import.meta.env.VITE_MAP_BUILDIINGS, {
+          params: {
+            maxLat: 38.003481,
+            maxLng: 127,
+            minLat: 36,
+            minLng: 126,
+            category: null,
+          },
+        });
+        console.log('all buildings', res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchBuildings();
+  }, []);
+
+  const handleCategoryClick = (categoryName: Category) => {
     // 현재 선택된 카테고리와 클릭한 카테고리가 같으면 null로, 아니면 해당 카테고리로 설정합니다.
+    console.log('버튼 클릭');
     setCategory(prevCategory => (prevCategory === categoryName ? null : categoryName));
   };
 
@@ -64,27 +91,32 @@ export default function Header({
       <div className="mb-2 w-full flex flex-row justify-between text-xs text-center">
         <div
           className="flex flex-col gap-1"
-          onClick={() => handleCategoryClick('cafeteria')}
+          onClick={() => {
+            handleCategoryClick(Category.Cafeteria);
+          }}
         >
-          {category === 'cafeteria' ? <CafeteriaP /> : <CafeteriaW />}
+          {category === Category.Cafeteria ? <CafeteriaP /> : <CafeteriaW />}
           <div>Cafeteria</div>
         </div>
-        <div className="flex flex-col gap-1" onClick={() => handleCategoryClick('cafe')}>
-          {category === 'cafe' ? <CafeP /> : <CafeW />}
+        <div
+          className="flex flex-col gap-1"
+          onClick={() => handleCategoryClick(Category.Cafe)}
+        >
+          {category === Category.Cafe ? <CafeP /> : <CafeW />}
           <div>Cafe</div>
         </div>
         <div
           className="flex flex-col gap-1"
-          onClick={() => handleCategoryClick('convenience')}
+          onClick={() => handleCategoryClick(Category.Convenience)}
         >
-          {category === 'convenience' ? <StoreP /> : <StoreW />}
+          {category === Category.Convenience ? <StoreP /> : <StoreW />}
           <div>24/7</div>
         </div>
         <div
           className="flex flex-col gap-1"
-          onClick={() => handleCategoryClick('smokingBooth')}
+          onClick={() => handleCategoryClick(Category.SmokingBooth)}
         >
-          {category === 'smokingBooth' ? <SmokeP /> : <SmokeW />}
+          {category === Category.SmokingBooth ? <SmokeP /> : <SmokeW />}
           <div>
             Smoking
             <br />
@@ -93,9 +125,9 @@ export default function Header({
         </div>
         <div
           className="flex flex-col gap-1"
-          onClick={() => handleCategoryClick('busStop')}
+          onClick={() => handleCategoryClick(Category.BusStop)}
         >
-          {category === 'busStop' ? <BusP /> : <BusW />}
+          {category === Category.BusStop ? <BusP /> : <BusW />}
           <div>
             Bus
             <br />
