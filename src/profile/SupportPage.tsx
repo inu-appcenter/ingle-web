@@ -1,9 +1,27 @@
 import Header from '@/profile/components/Header';
 import Button from '@/tutorials/components/Button';
 import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import { instance } from '@/shared/api/intercepter';
 
 const SupportPage = () => {
   const navigate = useNavigate();
+  const [feedback, setFeedback] = useState('');
+
+  const handleSend = async () => {
+    try {
+      const res = await instance.post('/api/v1/members/feedback', {
+        content: feedback,
+      });
+      console.log('피드백 전송 결과:', res.data);
+      alert('피드백이 성공적으로 전송되었습니다!');
+      navigate(-1); // 전송 후 뒤로가기
+    } catch (error) {
+      console.error('피드백 전송 오류:', error);
+      alert('피드백 전송 중 오류가 발생했습니다.');
+    }
+  };
+
   return (
     <div className="bg-[#F9F9F9] h-full flex flex-col">
       <Header>Support</Header>
@@ -16,14 +34,11 @@ const SupportPage = () => {
         <textarea
           className="border border-[#9EA1A8] rounded-xl h-40 px-4 py-5 outline-none"
           placeholder="e.g., Add more 00000 information"
+          value={feedback}
+          onChange={e => setFeedback(e.target.value)} // ✅ 상태 관리
         />
       </main>
-      <div
-        onClick={() => {
-          navigate(-1);
-        }}
-        className="px-4 py-4"
-      >
+      <div onClick={handleSend} className="px-4 py-4">
         <Button>Send</Button>
       </div>
     </div>
