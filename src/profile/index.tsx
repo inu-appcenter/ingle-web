@@ -12,10 +12,15 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const { clearTokens } = useAuthStore();
 
-  const handleLogoutButton = () => {
-    logout();
-    clearTokens();
-    navigate('/');
+  const handleLogoutButton = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error(error);
+    } finally {
+      clearTokens();
+      navigate('/');
+    }
   };
 
   return (

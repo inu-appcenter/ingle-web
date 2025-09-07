@@ -2,7 +2,7 @@ import { instance } from '@/shared/api/intercepter';
 
 export const logout = async () => {
   try {
-    const res = instance.delete('/api/v1/auth/logout');
+    const res = await instance.delete('/api/v1/auth/logout');
     console.log('로그아웃 결과 :', res);
   } catch (error) {
     console.error('로그아웃 에러 발생', error);
