@@ -99,6 +99,7 @@ const ProfilePage = () => {
         </button>
       </section>
     </main>
+
   );
 };
 

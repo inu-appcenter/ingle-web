@@ -2,7 +2,7 @@ import Complete from '@/auth/components/Complete';
 import Intro from '@/auth/components/Intro';
 import Portal from '@/auth/components/Portal';
 import StudentInfoStep from '@/auth/components/StudentInfoStep';
-import { useAuthStore } from '@/auth/stores/authStore';
+import { useAuthStore } from '@/shared/stores/authStore';
 
 //로그인 화면 구현
 const AuthPage = () => {

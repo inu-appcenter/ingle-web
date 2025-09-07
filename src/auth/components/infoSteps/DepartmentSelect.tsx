@@ -2,11 +2,15 @@ import LolosArrow from '@/auth/images/depart-select/arrow-lolos.svg?react';
 import Checked from '@/auth/images/depart-select/checked.svg?react';
 import Empty from '@/auth/images/depart-select/empty.svg?react';
 
-import { useAuthStore } from '@/auth/stores/authStore';
+import { useAuthStore } from '@/shared/stores/authStore';
 import { useEffect, useRef, useState } from 'react';
 
-// option은 박스 모양을 바꿀 수 없음 => custom select box를 만들어야 함
-import { collegeOptions, departmentOptions } from '@/auth/constants/Departments';
+import {
+  GraduateCollage,
+  GraduateDepartment,
+  UndergraduateCollege,
+  UndergraduateDepartment,
+} from '@/auth/constants/Departments';
 
 export type DropdownOption = {
   label: string;
@@ -24,16 +28,22 @@ export type DropdownProps = {
 
 export default function DepartmentSelect() {
   const [selectedCollege, setSelectedCollege] = useState('');
-  const department = useAuthStore(state => state.department);
-  const setStudentInfo = useAuthStore(state => state.setStudentInfo);
+  const { department, setStudentInfo, studentType } = useAuthStore();
   const [openDropdown, setOpenDropdown] = useState<null | 'college' | 'department'>(null);
 
   useEffect(() => {
+    let foundCollege;
     if (department) {
       // department에 맞는 college 찾아서 세팅
-      const foundCollege = Object.keys(departmentOptions).find(college =>
-        departmentOptions[college].some(opt => opt.value === department),
-      );
+      if (department === 'GRADUATE') {
+        foundCollege = Object.keys(GraduateDepartment).find(college =>
+          GraduateDepartment[college].some(opt => opt.value === department),
+        );
+      } else {
+        foundCollege = Object.keys(UndergraduateDepartment).find(college =>
+          UndergraduateDepartment[college].some(opt => opt.value === department),
+        );
+      }
       if (foundCollege) {
         setSelectedCollege(foundCollege);
       }
@@ -44,8 +54,8 @@ export default function DepartmentSelect() {
     <div className="flex items-center justify-center">
       <div className="flex flex-col w-[100%] gap-y-8">
         <Dropdown
-          label="College"
-          options={collegeOptions}
+          label={studentType === 'GRADUATE' ? 'Graduate School of College' : 'College'}
+          options={studentType === 'GRADUATE' ? GraduateCollage : UndergraduateCollege}
           selectedValue={selectedCollege}
           onChange={value => {
             setSelectedCollege(value);
@@ -58,7 +68,11 @@ export default function DepartmentSelect() {
         />
         <Dropdown
           label="Department"
-          options={departmentOptions[selectedCollege] || []}
+          options={
+            studentType === 'GRADUATE'
+              ? GraduateDepartment[selectedCollege] || []
+              : UndergraduateDepartment[selectedCollege] || []
+          }
           selectedValue={department}
           onChange={value => setStudentInfo({ department: value })}
           isOpen={openDropdown === 'department'}

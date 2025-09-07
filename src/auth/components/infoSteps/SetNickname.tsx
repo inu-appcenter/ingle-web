@@ -1,7 +1,7 @@
 import { isTakenNickname } from '@/auth/api/auth';
 import Oicon from '@/auth/images/nick-setting/correct-circle.svg?react';
 import Xicon from '@/auth/images/nick-setting/wrong-circle.svg?react';
-import { useAuthStore } from '@/auth/stores/authStore';
+import { useAuthStore } from '@/shared/stores/authStore';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 

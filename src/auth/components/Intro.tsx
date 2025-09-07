@@ -1,5 +1,5 @@
 import Image from '@/auth/images/intro.svg?react';
-import { useAuthStore } from '@/auth/stores/authStore';
+import { useAuthStore } from '@/shared/stores/authStore';
 
 export default function Intro() {
   const setStep = useAuthStore(state => state.setStep);
