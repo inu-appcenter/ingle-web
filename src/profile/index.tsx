@@ -82,7 +82,7 @@ const ProfilePage = () => {
             <InformationIcon />
             <p>App version</p>
           </div>
-          <NextIcon />
+          <p className="mr-2">v 1.0.0</p>
         </button>
       </section>
 
