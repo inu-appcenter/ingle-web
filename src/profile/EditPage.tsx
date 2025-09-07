@@ -3,17 +3,23 @@ import testImage from '@/shared/assets/images/stamp/clubs-image.png';
 import EditIcon from '@/shared/assets/icons/edit-icon.svg?react';
 import { useState } from 'react';
 import ProfileButton from '@/profile/components/ProfileButton';
-import DepartmentSelect, { Dropdown } from '@/auth/components/infoSteps/DepartmentSelect';
+import { Dropdown } from '@/auth/components/infoSteps/DepartmentSelect';
 import { departmentOptions } from '@/auth/constants/Departments';
 import { useAuthStore } from '@/auth/stores/authStore';
 import { editMembers } from '@/profile/api/profile';
 
 const EditPage = () => {
-  const [image, setImage] = useState('');
-  const [selectedCollege, setSelectedCollege] = useState('');
-  const { studentId, nickname, studentType, department, setStudentInfo } = useAuthStore();
+  const { studentId, nickname, studentType, department } = useAuthStore();
+
+  // 기존 store 값으로 초기화
+  const [editedNickname, setEditedNickname] = useState(nickname);
+  const [editedStudentId, setEditedStudentId] = useState(studentId);
+  const [editedDepartment, setEditedDepartment] = useState(department);
+  const [status, setStatus] = useState(studentType);
+  const [country, setCountry] = useState('SOUTH_KOREA'); // 기본값 추가
 
   const [openDropdown, setOpenDropdown] = useState<null | 'department' | 'status'>(null);
+
   const departmentList = [
     'HUMANITIES',
     'NATURAL_SCIENCES',
@@ -29,18 +35,28 @@ const EditPage = () => {
     'NORTHEAST_ASIAN_STUDIES',
     'LAW',
   ].flatMap(key => departmentOptions[key]);
-  const [status, setStatus] = useState<string>('');
+
   const statusList = [
-    { label: 'Exchange Student', value: 'EXCHANGE' }, // 교환학생
-    { label: 'Language Student', value: 'LANGUAGE' }, // 어학연수생
-    { label: 'Undergraduate Student', value: 'UNDERGRADUATE' }, // 학부생
-    { label: 'Graduate Student', value: 'GRADUATE' }, // 대학원생
-    { label: 'Other', value: 'OTHER' }, // 기타
+    { label: 'Exchange Student', value: 'EXCHANGE' },
+    { label: 'Language Student', value: 'LANGUAGE' },
+    { label: 'Undergraduate Student', value: 'UNDERGRADUATE' },
+    { label: 'Graduate Student', value: 'GRADUATE' },
+    { label: 'Other', value: 'OTHER' },
   ];
 
-  const handleButton = () => {
-    console.log(studentId, department, studentType, nickname);
-    editMembers(studentId, department, studentType, nickname);
+  const handleButton = async () => {
+    try {
+      await editMembers(
+        editedStudentId,
+        editedDepartment,
+        status,
+        editedNickname,
+        country, // ✅ country 전달
+      );
+      alert('프로필이 수정되었습니다.');
+    } catch (error) {
+      alert('수정 중 오류가 발생했습니다.');
+    }
   };
 
   return (
@@ -51,7 +67,7 @@ const EditPage = () => {
       {/* 상단 헤더 */}
       <Header>Edit Profile</Header>
 
-      {/* 메인 영역 (프로필 + 입력창) */}
+      {/* 메인 영역 */}
       <main className="flex flex-col flex-1">
         {/* 프로필 */}
         <section className="flex flex-col justify-center items-center my-4">
@@ -59,47 +75,52 @@ const EditPage = () => {
             <img src={testImage} alt="profile-image" className="w-40 h-40" />
             <EditIcon className="absolute bottom-2 right-2" />
           </div>
-          <p className="text-xl font-bold">{nickname}</p>
+          <p className="text-xl font-bold">{editedNickname}</p>
         </section>
 
-        {/* 입력창 (아래쪽에 붙음) */}
+        {/* 입력창 */}
         <section className="mt-auto px-4 rounded-t-[30px] bg-[#ffffff] pt-6 pb-8">
           <div className="flex flex-col gap-2 mb-4">
             <p className="text-base font-bold">Nickname</p>
             <input
               type="text"
+              value={editedNickname}
+              onChange={e => setEditedNickname(e.target.value)}
               className="border border-[rgba(84,76,76,0.14)] w-full h-11 rounded-md outline-none px-4 text-sm"
             />
           </div>
+
           <div className="flex flex-col gap-2 mb-4">
             <p className="text-base font-bold">Student ID</p>
             <input
               type="text"
+              value={editedStudentId}
+              onChange={e => setEditedStudentId(e.target.value)}
               className="border border-[rgba(84,76,76,0.14)] w-full h-11 rounded-md outline-none px-4 text-sm"
             />
           </div>
+
           <div className="flex flex-col gap-2 mb-4">
             <p className="text-base font-bold">Department</p>
             <Dropdown
               label=""
               options={departmentList}
-              selectedValue={department}
-              onChange={value => setStudentInfo({ department: value })}
+              selectedValue={editedDepartment}
+              onChange={value => setEditedDepartment(value)}
               isOpen={openDropdown === 'department'}
               onToggle={() =>
                 setOpenDropdown(prev => (prev === 'department' ? null : 'department'))
               }
             />
           </div>
+
           <div className="flex flex-col gap-2 mb-6">
             <p className="text-base font-bold">Current Status</p>
             <Dropdown
               label=""
               options={statusList}
               selectedValue={status}
-              onChange={value => {
-                setStatus(value);
-              }}
+              onChange={value => setStatus(value)}
               isOpen={openDropdown === 'status'}
               onToggle={() =>
                 setOpenDropdown(prev => (prev === 'status' ? null : 'status'))

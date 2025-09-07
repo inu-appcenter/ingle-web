@@ -15,16 +15,16 @@ export const editMembers = async (
   department: string,
   studentType: string,
   nickname: string,
+  country: string,
 ) => {
   try {
     const res = await instance.put('/api/v1/members', {
       studentId,
       department,
       studentType,
-      country: 'SOUTH_KOREA',
       nickname,
+      country,
     });
-
     console.log('프로필 수정 결과:', res.data);
     return res.data;
   } catch (error) {
