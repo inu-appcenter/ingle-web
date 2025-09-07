@@ -1,6 +1,6 @@
 export interface Stamp {
   name: string;
-  image: string;
-  status: boolean;
+  imageUrl: string;
+  completed: boolean;
   description?: string;
 }
