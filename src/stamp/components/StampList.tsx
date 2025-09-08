@@ -16,32 +16,31 @@ import InsuranceImage from '@/shared/assets/images/stamp/insurance-image.png';
 import JobsImage from '@/shared/assets/images/stamp/jobs-image.png';
 import KCultureImage from '@/shared/assets/images/stamp/kculture-image.png';
 
-const stampList = [
-  { name: 'Transit', image: TransitImage, status: true, description: 'ABCDEF' },
-  {
-    name: 'Dormitory',
-    image: DormitoryImage,
-    status: false,
-    description: 'ABCDEF',
-  },
-  { name: 'Library', image: LibraryImage, status: true, description: 'ABCDEF' },
-  { name: 'Clubs', image: ClubsImage, status: false, description: 'ABCDEF' },
-  { name: 'Festival', image: FestivalImage, status: true },
-  { name: 'Tuition', image: TuitionImage, status: true },
-  { name: 'Courses', image: CoursesImage, status: false },
-  { name: 'Curriculum', image: CurriculumImage, status: true },
-  { name: 'Grades', image: GradesImage, status: false },
-  { name: 'Hospital', image: HostpitalImage, status: true },
-  { name: 'Insurance', image: InsuranceImage, status: false },
-  { name: 'Jobs', image: JobsImage, status: true },
-  { name: 'K-Culture', image: KCultureImage, status: false },
-];
+// const stampList = [
+//   { name: 'Transit', image: TransitImage, status: true, description: 'ABCDEF' },
+//   {
+//     name: 'Dormitory',
+//     image: DormitoryImage,
+//     status: false,
+//     description: 'ABCDEF',
+//   },
+//   { name: 'Library', image: LibraryImage, status: true, description: 'ABCDEF' },
+//   { name: 'Clubs', image: ClubsImage, status: false, description: 'ABCDEF' },
+//   { name: 'Festival', image: FestivalImage, status: true },
+//   { name: 'Tuition', image: TuitionImage, status: true },
+//   { name: 'Courses', image: CoursesImage, status: false },
+//   { name: 'Curriculum', image: CurriculumImage, status: true },
+//   { name: 'Grades', image: GradesImage, status: false },
+//   { name: 'Hospital', image: HostpitalImage, status: true },
+//   { name: 'Insurance', image: InsuranceImage, status: false },
+//   { name: 'Jobs', image: JobsImage, status: true },
+//   { name: 'K-Culture', image: KCultureImage, status: false },
+// ];
 
-const StampList = (/*{ stampList }: { stampList: Stamp[] }*/) => {
+const StampList = ({ stampList }: { stampList: Stamp[] }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedStamp, setSelectedStamp] = useState<null | (typeof stampList)[0]>(null);
 
-  console.log(isModalOpen, selectedStamp);
   const handleStampClick = (stamp: any) => {
     setSelectedStamp(stamp);
     setIsModalOpen(true);
@@ -53,8 +52,8 @@ const StampList = (/*{ stampList }: { stampList: Stamp[] }*/) => {
         <StampItem
           key={index}
           name={item.name}
-          image={item.image}
-          status={item.status}
+          image={item.imageUrl}
+          completed={item.completed}
           onClick={() => handleStampClick(item)} // 여기서 클릭 이벤트
         />
       ))}

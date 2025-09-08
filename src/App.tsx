@@ -1,9 +1,11 @@
 import AdminPage from '@/admin';
-
 import AuthPage from '@/auth';
 import MapPage from '@/map';
 import NotFoundPage from '@/not-fuound';
 import ProfilePage from '@/profile';
+import DeletePage from '@/profile/DeletePage';
+import EditPage from '@/profile/EditPage';
+import SupportPage from '@/profile/SupportPage';
 import { ROUTES } from '@/router/routes';
 import BottomNavigator from '@/shared/components/BottomNavigator';
 import StampPage from '@/stamp';
@@ -32,6 +34,9 @@ function AppWrapper() {
             <Route path={ROUTES.STAMP} element={<StampPage />} />
             <Route path={ROUTES.MAP} element={<MapPage />} />
             <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+            <Route path={`${ROUTES.PROFILE}/edit`} element={<EditPage />} />
+            <Route path={`${ROUTES.PROFILE}/delete`} element={<DeletePage />} />
+            <Route path={`${ROUTES.PROFILE}/support`} element={<SupportPage />} />
             <Route path={ROUTES.NOTFOUND} element={<NotFoundPage />} />
           </Routes>
         </main>
