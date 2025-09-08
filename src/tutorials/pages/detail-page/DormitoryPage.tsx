@@ -1,15 +1,15 @@
-import Header from '@/tutorials/components/Header';
+import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
+import NervousIcon from '@/shared/assets/icons/nervous-icon.png';
+import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
 import dormitoryImage1 from '@/shared/assets/images/place/dormitory-image1.jpg';
 import dormitoryImage2 from '@/shared/assets/images/place/dormitory-image2.png';
 import dormitoryImage3 from '@/shared/assets/images/place/dormitory-image3.jpg';
 import dormitoryImage4 from '@/shared/assets/images/place/dormitory-image4.png';
 import dormitoryImage5 from '@/shared/assets/images/place/dormitory-image5.png';
-import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
-import NervousIcon from '@/shared/assets/icons/nervous-icon.png';
-import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
+import Header from '@/tutorials/components/Header';
 
-import Tag from '@/tutorials/components/Tag';
 import Button from '@/tutorials/components/Button';
+import Tag from '@/tutorials/components/Tag';
 
 const DormitoryPage = () => {
   return (
@@ -24,12 +24,11 @@ const DormitoryPage = () => {
         <section className="mb-8 flex flex-col gap-5">
           <h2 className="text-xl font-bold">Dorm - Living on Campus</h2>
           <p className="text-base font-light">
-            Dorm life isn’t as comfortable as living at home. In Korean
-            universities, dormitories have curfews, strict gender separation,
-            and no kitchens for safety reasons. However, even within these
-            rules, you can share late-night conversations with friends, spend
-            time together, and create unforgettable memories that will last a
-            lifetime.
+            Dorm life isn’t as comfortable as living at home. In Korean universities,
+            dormitories have curfews, strict gender separation, and no kitchens for safety
+            reasons. However, even within these rules, you can share late-night
+            conversations with friends, spend time together, and create unforgettable
+            memories that will last a lifetime.
           </p>
         </section>
 
@@ -67,21 +66,15 @@ const DormitoryPage = () => {
               <li>Contact the relevant department or dormitory office.</li>
               <li>Fill out the online or paper application form.</li>
               <li>
-                Submit required documents (passport, admission letter, ARC if
-                available).
+                Submit required documents (passport, admission letter, ARC if available).
               </li>
             </ul>
           </div>
 
           <div className="w-full h-40 bg-[#F4F2F6] flex flex-col px-4 py-2.5">
-            <h4 className="font-semibold text-sm mb-10">
-              Roommate Application
-            </h4>
+            <h4 className="font-semibold text-sm mb-10">Roommate Application</h4>
             <ul className="text-sm font-light px-4 list-disc">
-              <li>
-                Apply for a roommate at the same time as the dormitory
-                application.
-              </li>
+              <li>Apply for a roommate at the same time as the dormitory application.</li>
               <li>You can request to be assigned the same room.</li>
             </ul>
           </div>
@@ -96,13 +89,9 @@ const DormitoryPage = () => {
           <div className="flex gap-2">
             <CheckIcon className="w-10" />
             <div className="flex flex-col gap-4">
-              <p className="text-base">
-                Tuberculosis (TB) Test / X-ray Certificate
-              </p>
+              <p className="text-base">Tuberculosis (TB) Test / X-ray Certificate</p>
               <ul className="text-base font-light list-disc list-inside flex flex-col gap-4">
-                <li>
-                  Must be taken at an approved medical center before moving in.
-                </li>
+                <li>Must be taken at an approved medical center before moving in.</li>
                 <li>
                   <a href="https://www.google.com/maps/place/%EC%86%A1%EB%8F%84%EB%B3%B4%EA%B1%B4%EC%A7%80%EC%86%8C/@37.3770972,126.6358193,16z/data=!4m6!3m5!1s0x357b765342af4101:0x4509863bec0df8b4!8m2!3d37.3797317!4d126.6464617!16s%2Fg%2F11bytsmjm1?entry=tts&g_ep=EgoyMDI1MDgxMS4wIPu8ASoASAFQAw%3D%3D&skid=ef162002-d9c3-4b76-a6eb-3e1774728b6d">
                     Nearby Option: Songdo Public Health Center
@@ -116,9 +105,7 @@ const DormitoryPage = () => {
             <div className="flex flex-col gap-4">
               <p className="text-base">Check-in Day</p>
               <ul className="text-base font-light list-disc list-inside flex flex-col gap-4">
-                <li>
-                  Bring ID, TB test result, and printed acceptance confirmation.
-                </li>
+                <li>Bring ID, TB test result, and printed acceptance confirmation.</li>
                 <li>
                   <a href="https://www.google.com/maps/place/%EC%86%A1%EB%8F%84%EB%B3%B4%EA%B1%B4%EC%A7%80%EC%86%8C/@37.3770972,126.6358193,16z/data=!4m6!3m5!1s0x357b765342af4101:0x4509863bec0df8b4!8m2!3d37.3797317!4d126.6464617!16s%2Fg%2F11bytsmjm1?entry=tts&g_ep=EgoyMDI1MDgxMS4wIPu8ASoASAFQAw%3D%3D&skid=ef162002-d9c3-4b76-a6eb-3e1774728b6d">
                     Staff will give you a room key/card.
@@ -133,9 +120,9 @@ const DormitoryPage = () => {
           </div>
           <div className="bg-[#F4F2F6] px-4 h-32 flex justify-center items-center ">
             <p>
-              Because Korea calculates fares based on distance. If you don’t tap
-              off, you’ll be charged to the final stop or pay extra next time.
-              Plus, transfer discounts won’t apply without it.
+              Because Korea calculates fares based on distance. If you don’t tap off,
+              you’ll be charged to the final stop or pay extra next time. Plus, transfer
+              discounts won’t apply without it.
             </p>
           </div>
         </section>
@@ -187,8 +174,8 @@ const DormitoryPage = () => {
               <p>INGLE’s guide</p>
             </div>
             <p className="text-[#6C757D]">
-              Dorm residents often order delivery food, so be sure to try some
-              of Korea’s delicious delivery options!
+              Dorm residents often order delivery food, so be sure to try some of Korea’s
+              delicious delivery options!
             </p>
           </div>
 
@@ -196,9 +183,7 @@ const DormitoryPage = () => {
             <p>For more travel Tips</p>
             <div className="bg-[#BE5845] px-3 rounded-3xl text-[#ffffff]">
               <p>
-                <a href="https://www.inu.ac.kr/dorm_eng/index.do?epTicket=LOG">
-                  view
-                </a>
+                <a href="https://www.inu.ac.kr/dorm_eng/index.do?epTicket=LOG">view</a>
               </p>
             </div>
           </div>
@@ -216,7 +201,7 @@ const DormitoryPage = () => {
         </section>
 
         <div className="mb-8">
-          <Button>Done Reading</Button>
+          <Button tutorialNum={2}>Done Reading</Button>
         </div>
       </main>
     </>

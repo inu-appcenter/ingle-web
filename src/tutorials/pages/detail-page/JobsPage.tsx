@@ -148,7 +148,7 @@ const JobsPage = () => {
         <div className="h-12" />
         <BubbleGuide>{tips}</BubbleGuide>
         <div className="my-8 h-11">
-          <Button>Done Reading</Button>
+          <Button tutorialNum={12}>Done Reading</Button>
         </div>
       </main>
     </div>

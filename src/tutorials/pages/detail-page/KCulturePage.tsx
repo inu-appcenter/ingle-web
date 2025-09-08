@@ -175,7 +175,7 @@ export default function KCulturePage() {
         </div>
 
         <div className="my-8 h-11">
-          <Button>Done Reading</Button>
+          <Button tutorialNum={13}>Done Reading</Button>
         </div>
       </div>
     </div>
