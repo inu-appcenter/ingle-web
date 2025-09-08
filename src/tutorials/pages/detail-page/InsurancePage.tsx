@@ -1,9 +1,11 @@
+import MainImage from '@/shared/assets/images/place/insurance-image.png';
 import BubbleGuide from '@/tutorials/components/BubbleGuide';
+import Button from '@/tutorials/components/Button';
 import CategoryTag from '@/tutorials/components/CategoryTag';
+import Header from '@/tutorials/components/Header';
 import CountOne from '@/tutorials/counter_1.svg?react';
 import CountTwo from '@/tutorials/counter_2.svg?react';
 import CountThree from '@/tutorials/counter_3.svg?react';
-import MainImage from '@/tutorials/insurance-bg.svg?react';
 
 const InsurancePage = () => {
   const tips =
@@ -62,11 +64,9 @@ const InsurancePage = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <header>
-        <MainImage className="w-full h-auto" />
-      </header>
+      <Header images={[MainImage]} />
 
-      <main className="flex flex-col gap-5 mx-4 my-5 text-[#383737] leading-[140%]">
+      <main className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />
         <h1 className="text-[#383737] text-[32px] font-bold leading-none">Insurance</h1>
         <section className="flex flex-col gap-5">
@@ -143,6 +143,9 @@ const InsurancePage = () => {
 
         <div className="h-12" />
         <BubbleGuide>{tips}</BubbleGuide>
+        <div className="my-8 h-11">
+          <Button>Done Reading</Button>
+        </div>
       </main>
     </div>
   );

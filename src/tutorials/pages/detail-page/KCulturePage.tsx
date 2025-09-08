@@ -1,8 +1,10 @@
+import Button from '@/tutorials/components/Button';
+import Header from '@/tutorials/components/Header';
 import { useState } from 'react';
 
+import KCultrueImage from '@/shared/assets/images/place/kculture-image.png';
 import BubbleGuide from '@/tutorials/components/BubbleGuide';
 import CategoryTag from '@/tutorials/components/CategoryTag';
-import MainImage from '@/tutorials/kculture-bg.svg?react';
 
 import CheckBox from '@/tutorials/check_box.svg?react';
 import Down from '@/tutorials/chevron-left.svg?react';
@@ -28,8 +30,8 @@ export default function KCulturePage() {
 
   return (
     <div className="flex flex-col w-full">
-      <MainImage className="w-full h-auto" />
-      <div className="flex flex-col gap-5 mx-4 my-5 text-[#383737] leading-[140%]">
+      <Header images={[KCultrueImage]} />
+      <div className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />
         <h1 className="text-[#383737] text-[32px] font-bold leading-none">K-Culture</h1>
 
@@ -172,7 +174,9 @@ export default function KCulturePage() {
           </div>
         </div>
 
-        <div className="h-12" />
+        <div className="my-8 h-11">
+          <Button>Done Reading</Button>
+        </div>
       </div>
     </div>
   );
