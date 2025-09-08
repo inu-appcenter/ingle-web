@@ -1,12 +1,12 @@
-import Header from '@/profile/components/Header';
-import testImage from '@/shared/assets/images/stamp/clubs-image.png';
-import EditIcon from '@/shared/assets/icons/edit-icon.svg?react';
-import { useState } from 'react';
-import ProfileButton from '@/profile/components/ProfileButton';
 import { Dropdown } from '@/auth/components/infoSteps/DepartmentSelect';
-import { departmentOptions } from '@/auth/constants/Departments';
-import { useAuthStore } from '@/auth/stores/authStore';
+import { UndergraduateDepartment } from '@/auth/constants/Departments';
 import { editMembers } from '@/profile/api/profile';
+import Header from '@/profile/components/Header';
+import ProfileButton from '@/profile/components/ProfileButton';
+import EditIcon from '@/shared/assets/icons/edit-icon.svg?react';
+import testImage from '@/shared/assets/images/stamp/clubs-image.png';
+import { useAuthStore } from '@/shared/stores/authStore';
+import { useState } from 'react';
 
 const EditPage = () => {
   const { studentId, nickname, studentType, department } = useAuthStore();
@@ -20,6 +20,7 @@ const EditPage = () => {
 
   const [openDropdown, setOpenDropdown] = useState<null | 'department' | 'status'>(null);
 
+  // [ ] 현재 undergraduate 대학만 나타내고 있다.
   const departmentList = [
     'HUMANITIES',
     'NATURAL_SCIENCES',
@@ -34,7 +35,7 @@ const EditPage = () => {
     'LIFE_SCIENCES_BIOENGINEERING',
     'NORTHEAST_ASIAN_STUDIES',
     'LAW',
-  ].flatMap(key => departmentOptions[key]);
+  ].flatMap(key => UndergraduateDepartment[key]);
 
   const statusList = [
     { label: 'Exchange Student', value: 'EXCHANGE' },

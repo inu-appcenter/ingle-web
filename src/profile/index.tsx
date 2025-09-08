@@ -1,12 +1,12 @@
-import QuestionIcon from '@/shared/assets/icons/question-icon.svg?react';
-import NextIcon from '@/shared/assets/icons/next-icon.svg?react';
+import { logout } from '@/profile/api/profile';
+import { ROUTES } from '@/router/routes';
 import DeleteIcon from '@/shared/assets/icons/delete-icon.svg?react';
 import InformationIcon from '@/shared/assets/icons/information-icon.svg?react';
 import LogoutIcon from '@/shared/assets/icons/logout-icon.svg?react';
+import NextIcon from '@/shared/assets/icons/next-icon.svg?react';
+import QuestionIcon from '@/shared/assets/icons/question-icon.svg?react';
+import { useAuthStore } from '@/shared/stores/authStore';
 import { useNavigate } from 'react-router';
-import { ROUTES } from '@/router/routes';
-import { logout } from '@/profile/api/profile';
-import { useAuthStore } from '@/auth/stores/authStore';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -99,7 +99,6 @@ const ProfilePage = () => {
         </button>
       </section>
     </main>
-
   );
 };
 

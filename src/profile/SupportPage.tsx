@@ -1,8 +1,8 @@
 import Header from '@/profile/components/Header';
+import instance from '@/shared/api/intercepter';
 import Button from '@/tutorials/components/Button';
-import { useNavigate } from 'react-router';
 import { useState } from 'react';
-import { instance } from '@/shared/api/intercepter';
+import { useNavigate } from 'react-router';
 
 const SupportPage = () => {
   const navigate = useNavigate();
