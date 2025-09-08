@@ -11,7 +11,6 @@ const MapPage = () => {
 
   return (
     <div className="w-full h-full relative">
-      <button onClick={() => modelRef.current?.castRays()}>건물 검사</button>
       <Canvas
         className=" w-full h-full absolute z-1"
         onContextMenu={e => e.preventDefault()}
@@ -33,7 +32,7 @@ const MapPage = () => {
         <ambientLight intensity={0.3} />
       </Canvas>
 
-      <BottomSheet />
+      <BottomSheet modelRef={modelRef} />
     </div>
   );
 };

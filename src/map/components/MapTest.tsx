@@ -1,3 +1,4 @@
+import { useRayStore } from '@/map/stores/rayStore';
 import { useGLTF } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
 import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
@@ -8,6 +9,7 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
   const { camera, scene } = useThree();
   const raycaster = useRef(new THREE.Raycaster()).current;
   const originalColors = useRef(new Map<THREE.Mesh, THREE.Color>());
+  const { visibleBuildings, setVisibleBuildings } = useRayStore();
 
   const mouse = new THREE.Vector2();
 
@@ -36,6 +38,8 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
   }
 
   const castRays = () => {
+    console.log('castRays 호출');
+
     if (!gltf?.scene || printed) return;
 
     //보이는 건물 저장
@@ -81,10 +85,9 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       }
     });
 
-    console.log(
-      '화면에 보이는 건물:',
-      Array.from(visibleBuildings).map(b => b.name),
-    );
+    const visibleNames = Array.from(visibleBuildings).map(b => b.name);
+    //setVisibleBuildings(visibleNames);
+    //저장하면 뭔가 다른가?
   };
 
   // 외부 ref에서 castRays 호출 가능

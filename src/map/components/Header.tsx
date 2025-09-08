@@ -2,6 +2,7 @@ import { SearchResult } from '@/map/types/Types';
 import api from '@/shared/api/intercepter';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRayStore } from '../stores/rayStore';
 
 import BusP from '@/map/icons/bus-purple.svg?react';
 import BusW from '@/map/icons/bus-white.svg?react';
@@ -26,38 +27,53 @@ enum Category {
 
 export default function Header({
   setBuildingList,
+  modelRef,
 }: {
   setBuildingList: React.Dispatch<React.SetStateAction<SearchResult[]>>;
+  modelRef: React.RefObject<any>;
 }) {
   const { register, handleSubmit } = useForm();
   const [category, setCategory] = useState<Category | null>(null);
+  const visibleBuildings = useRayStore();
+
+  const handleCategoryClick = (categoryName: Category) => {
+    // 현재 선택된 카테고리와 클릭한 카테고리가 같으면 null로, 아니면 해당 카테고리로 설정합니다.
+    setCategory(prevCategory =>
+      prevCategory === categoryName ? Category.SchoolBuilding : categoryName,
+    );
+  };
 
   useEffect(() => {
-    console.log('바텀시트 헤더');
+    console.log('Selected Category:', category);
     const fetchBuildings = async () => {
       try {
         const res = await api.get(import.meta.env.VITE_MAP_BUILDIINGS, {
           params: {
-            maxLat: 38.003481,
+            maxLat: 38,
             maxLng: 127,
             minLat: 36,
             minLng: 126,
-            category: null,
+            buildingCategory: category,
           },
         });
-        console.log('all buildings', res.data);
+        console.log('최종 full URL:', res.request?.responseURL);
+        console.log(category + ' buildings', res.data);
+
+        //화면에 보이는 건물 레이캐스트
+        modelRef.current?.castRays();
+        //테스트
+        console.log('화면에 보이는 건물:', visibleBuildings);
+
+        //setBuildingList();
       } catch (err) {
         console.log(err);
       }
     };
-    fetchBuildings();
-  }, []);
 
-  const handleCategoryClick = (categoryName: Category) => {
-    // 현재 선택된 카테고리와 클릭한 카테고리가 같으면 null로, 아니면 해당 카테고리로 설정합니다.
-    console.log('버튼 클릭');
-    setCategory(prevCategory => (prevCategory === categoryName ? null : categoryName));
-  };
+    if (category) {
+      fetchBuildings();
+    }
+  }, [category]);
 
   const onSubmit = async (keyword: any) => {
     try {
@@ -82,7 +98,7 @@ export default function Header({
         <input
           {...register('keyword')}
           placeholder="Search Maps"
-          className="focus:outline-none text-[#6C6C6C] text-[17px] bg-[#EDEDED]"
+          className="focus:outline-none text-[#6C6C6C] text-[17px] bg-[#EDEDED] flex-1"
         />
         <input type="submit" />
       </form>

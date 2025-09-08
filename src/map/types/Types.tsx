@@ -5,13 +5,14 @@ interface SearchResult {
   longitude: number;
   buildingCategory: string;
 }
+
 interface BuildingDetails {
   buildingId: number;
   buildingName: string;
   buildingImages: string[];
   latitude: number;
   longitude: number;
-  buildingCategory: string; // "SCHOOL_BUILDING" 같은 enum으로 바꿀 수도 있음
+  buildingCategory: string;
   buildingNumber: number;
   buildingCode: string;
   location: string;
