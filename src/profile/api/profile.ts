@@ -1,4 +1,4 @@
-import { instance } from '@/shared/api/intercepter';
+import instance from '@/shared/api/intercepter';
 
 export const logout = async () => {
   try {

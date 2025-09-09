@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import BackIcon from '@/shared/assets/icons/back-icon.svg?react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface HeaderProps {
   images: string[];

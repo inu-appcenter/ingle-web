@@ -1,9 +1,11 @@
+import MainImage from '@/shared/assets/images/place/hospital-image.png';
 import CheckBox from '@/tutorials/check_box.svg?react';
 import Down from '@/tutorials/chevron-left.svg?react';
 import BubbleGuide from '@/tutorials/components/BubbleGuide';
+import Button from '@/tutorials/components/Button';
 import CategoryTag from '@/tutorials/components/CategoryTag';
+import Header from '@/tutorials/components/Header';
 import HomeCare from '@/tutorials/home_health.svg?react';
-import MainImage from '@/tutorials/hospital-bg.svg?react';
 import Stethoscope from '@/tutorials/stethoscope.svg?react';
 
 import { useState } from 'react';
@@ -38,7 +40,7 @@ export default function HospitalPage() {
       type: 'Internal Medicine',
       name: [
         'Songdo First Internal Medicine',
-        'Synergy Internal Medicine \n & Neurology Clinic',
+        'Synergy Internal Medicine & Neurology Clinic',
         'Songdo Best Internal Medicine Clinic',
       ],
     },
@@ -77,11 +79,9 @@ export default function HospitalPage() {
 
   return (
     <div className="flex flex-col w-full">
-      <header>
-        <MainImage className="w-full h-auto" />
-      </header>
+      <Header images={[MainImage]} />
 
-      <main className="flex flex-col gap-5 mx-4 my-5 text-[#383737] leading-[140%]">
+      <main className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />
         <h1 className="text-[#383737] text-[32px] font-bold leading-none">Hospital</h1>
 
@@ -153,9 +153,12 @@ export default function HospitalPage() {
               <div className={`${visibleList[index] ? 'block' : 'hidden'}`}>
                 <ul>
                   {item.name.map((hospital, idx) => (
-                    <li key={idx} className={`flex flex-row items-center mt-5 pl-4`}>
+                    <li
+                      key={idx}
+                      className={`flex flex-row items-center mt-5 pl-4 text-pretty`}
+                    >
                       {hospital}
-                      <HomeCare className="ml-2" />
+                      <HomeCare className="ml-2 flex-shrink-0" />
                     </li>
                   ))}
                 </ul>
@@ -176,6 +179,9 @@ export default function HospitalPage() {
         </section>
         <div className="h-12" />
         <BubbleGuide>{tips}</BubbleGuide>
+        <div className="my-8 h-11">
+          <Button tutorialNum={10}>Done Reading</Button>
+        </div>
       </main>
     </div>
   );

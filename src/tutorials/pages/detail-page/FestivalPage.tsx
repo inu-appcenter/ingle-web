@@ -1,14 +1,10 @@
+import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
+import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
 import festivalImage1 from '@/shared/assets/images/place/festival-image1.png';
 import festivalImage2 from '@/shared/assets/images/place/festival-image2.png';
-import ClockIcon from '@/shared/assets/icons/clock-icon.svg?react';
-import PlaceIcon from '@/shared/assets/icons/place-icon.svg?react';
-import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
-import TagIcon from '@/shared/assets/icons/tag-icon.svg?react';
-import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
-import SunGlassesIcon from '@/shared/assets/icons/sunGlasses-icon.png';
+import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
 import Tag from '@/tutorials/components/Tag';
-import Button from '@/tutorials/components/Button';
 
 const FestivalPage = () => {
   return (
@@ -128,7 +124,7 @@ const FestivalPage = () => {
           </div>
         </section>
         <div className="mb-8">
-          <Button>Done Reading</Button>
+          <Button tutorialNum={5}>Done Reading</Button>
         </div>
       </main>
     </>
