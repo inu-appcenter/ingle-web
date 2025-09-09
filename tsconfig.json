@@ -3,7 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["DOM", "ESNext"],
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "strict": true,
     "jsx": "react-jsx", // React가 아니라면 이건 제거
@@ -11,7 +11,7 @@
     "paths": {
       "@/*": ["src/*"]
     },
-
+    "outDir": "./dist", // 혹시 이게 "./src"인가요?
     "types": ["vite-plugin-svgr/client"],
 
   },
