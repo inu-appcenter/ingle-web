@@ -8,8 +8,10 @@ import EditPage from '@/profile/EditPage';
 import SupportPage from '@/profile/SupportPage';
 import { ROUTES } from '@/router/routes';
 import BottomNavigator from '@/shared/components/BottomNavigator';
+import { useTutorialModal } from '@/shared/stores/modalStore';
 import StampPage from '@/stamp';
 import TutorialPage from '@/tutorials';
+import TutorialModal from '@/tutorials/components/Modal';
 import TutorialDetailPage from '@/tutorials/pages/TutorialDetailPage';
 import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
 
@@ -17,6 +19,7 @@ function AppWrapper() {
   const location = useLocation();
   const isAdmin = location.pathname === ROUTES.ADMIN;
   const isAuth = location.pathname === ROUTES.AUTH;
+  const { isOpen, openModal, closeModal } = useTutorialModal();
 
   // 관리자 페이지는 기존 레이아웃 유지
   if (isAdmin) {
@@ -40,9 +43,10 @@ function AppWrapper() {
             <Route path={ROUTES.NOTFOUND} element={<NotFoundPage />} />
           </Routes>
         </main>
-
         {/* AuthPage에서는 BottomNavigator 숨김 */}
         {!isAuth && <BottomNavigator />}
+
+        {isOpen && <TutorialModal isOpen={isOpen} onClose={closeModal} />}
       </div>
     </div>
   );
