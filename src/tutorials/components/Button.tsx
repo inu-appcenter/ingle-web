@@ -1,6 +1,9 @@
 import instance from '@/shared/api/intercepter';
+import { useTutorialModal } from '@/shared/stores/modalStore';
 import { ReactNode } from 'react';
 
+// tutorialNum 이 있으면 post요청을 보내고
+// 없으면 그냥 버튼 역할만 함
 const Button = ({
   children,
   tutorialNum,
@@ -8,11 +11,13 @@ const Button = ({
   children: ReactNode;
   tutorialNum?: number;
 }) => {
+  const { isOpen, openModal, closeModal } = useTutorialModal();
+
   const handleSend = async () => {
     try {
       const res = await instance.post(`/api/v1/stamps/tutorials/${tutorialNum}/complete`);
       console.log('튜토리얼 완료 처리 결과:', res.data);
-      alert(`튜토리얼 ${tutorialNum}이(가) 성공적으로 완료 처리되었습니다!`);
+      openModal();
     } catch (error: any) {
       console.error('피드백 전송 오류:', error);
       alert(error.response?.data?.message);
