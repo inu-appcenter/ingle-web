@@ -1,10 +1,10 @@
 import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
 import SunGlassesIcon from '@/shared/assets/icons/sunGlasses-icon.png';
-import libraryImage1 from '@/shared/assets/images/place/library-image1.jpeg';
-import libraryImage2 from '@/shared/assets/images/place/library-image2.jpg';
-import libraryImage3 from '@/shared/assets/images/place/library-image3.png';
-import libraryImage4 from '@/shared/assets/images/place/library-image4.png';
+// import libraryImage1 from '@/shared/assets/images/place/library-image1.jpeg';
+// import libraryImage2 from '@/shared/assets/images/place/library-image2.jpg';
+// import libraryImage3 from '@/shared/assets/images/place/library-image3.png';
+// import libraryImage4 from '@/shared/assets/images/place/library-image4.png';
 import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
 import Tag from '@/tutorials/components/Tag';
@@ -13,7 +13,9 @@ const LibraryPage = () => {
   return (
     <article>
       {/* header : 이미지 + 뒤로가기 버튼 */}
-      <Header images={[libraryImage1, libraryImage2]} />
+      <Header
+        images={['/images/place/library-image1.jpeg', '/images/place/library-image2.jpg']}
+      />
 
       {/* 메인 : 제목 + 내용 */}
       <main className="px-4">
@@ -32,7 +34,7 @@ const LibraryPage = () => {
             hold discussions and study together. INGLE will tell you more about the key
             facilities of Haksan Library!
           </p>
-          <img src={libraryImage4} />
+          <img src="/images/place/library-image4.png" />
         </section>
 
         <hr className="border-t border-[#E8E5EF] my-5" />
@@ -308,7 +310,7 @@ const LibraryPage = () => {
             <li>PW: same as INU Portal site password</li>
             <li>Phone number: use it entered in INU Portal</li>
           </ul>
-          <img src={libraryImage3} />
+          <img src="/images/place/library-image3.png" />
           <div className="flex justify-between items-center h-12 bg-[#F4F2F6] px-4">
             <p>How to use an E-Book</p>
             <img src={SunGlassesIcon} className="w-10" />

@@ -1,7 +1,7 @@
 import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
 import NervousIcon from '@/shared/assets/icons/nervous-icon.png';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
-import TransitImage from '@/shared/assets/images/place/transit-image.jpg';
+// import TransitImage from '@/shared/assets/images/place/transit-image.jpg';
 import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
 import Tag from '@/tutorials/components/Tag';
@@ -9,7 +9,7 @@ import Tag from '@/tutorials/components/Tag';
 const TransitPage = () => {
   return (
     <>
-      <Header images={[TransitImage]} />
+      <Header images={['/images/place/transit-image.jpg']} />
       <main className="px-4">
         <Tag>Campus Life</Tag>
         <h1 className="text-[32px] font-bold mb-4">Transit</h1>

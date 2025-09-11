@@ -1,4 +1,4 @@
-import MainImage from '@/shared/assets/images/place/jops-image.png';
+// import MainImage from '@/shared/assets/images/place/jops-image.png';
 import BubbleGuide from '@/tutorials/components/BubbleGuide';
 import Button from '@/tutorials/components/Button';
 import CategoryTag from '@/tutorials/components/CategoryTag';
@@ -44,7 +44,7 @@ const JobsPage = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <Header images={[MainImage]} />
+      <Header images={['/images/place/jops-image.png']} />
       <main className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />
         <h1 className="text-[#383737] text-[32px] font-bold leading-none">Job</h1>

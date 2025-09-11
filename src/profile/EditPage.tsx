@@ -3,8 +3,8 @@ import { UndergraduateDepartment } from '@/auth/constants/Departments';
 import { editMembers } from '@/profile/api/profile';
 import Header from '@/profile/components/Header';
 import ProfileButton from '@/profile/components/ProfileButton';
-import EditIcon from '@/shared/assets/icons/edit-icon.svg?react';
-import testImage from '@/shared/assets/images/stamp/clubs-image.png';
+// import EditIcon from '@/shared/assets/icons/edit-icon.svg?react';
+// import testImage from '@/shared/assets/images/stamp/clubs-image.png';
 import { useAuthStore } from '@/shared/stores/authStore';
 import { useState } from 'react';
 
@@ -73,8 +73,16 @@ const EditPage = () => {
         {/* 프로필 */}
         <section className="flex flex-col justify-center items-center my-4">
           <div className="relative">
-            <img src={testImage} alt="profile-image" className="w-40 h-40" />
-            <EditIcon className="absolute bottom-2 right-2" />
+            <img
+              src="/images/place/club-image1.jpg"
+              alt="profile-image"
+              className="w-40 h-40"
+            />
+            <img
+              src="/icons/edit-icon.svg"
+              alt="Edit"
+              className="absolute bottom-2 right-2 w-6 h-6"
+            />
           </div>
           <p className="text-xl font-bold">{editedNickname}</p>
         </section>

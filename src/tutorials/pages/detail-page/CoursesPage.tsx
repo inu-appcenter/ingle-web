@@ -1,5 +1,5 @@
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
-import courseImage1 from '@/shared/assets/images/place/course-image1.jpg';
+// import courseImage1 from '@/shared/assets/images/place/course-image1.jpg';
 import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
 import Tag from '@/tutorials/components/Tag';
@@ -7,7 +7,7 @@ import Tag from '@/tutorials/components/Tag';
 const CoursesPage = () => {
   return (
     <>
-      <Header images={[courseImage1]} />
+      <Header images={['/images/place/course-image1.jpg']} />
       <main className="px-4 flex flex-col gap-5">
         <Tag>Academics</Tag>
         <h1 className="text-[32px] font-bold">Course Registration</h1>

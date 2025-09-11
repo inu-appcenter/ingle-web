@@ -1,7 +1,7 @@
-import HomeIcon from '@/shared/assets/icons/home-icon.svg?react';
-import MapIcon from '@/shared/assets/icons/map-icon.svg?react';
-import StampIcon from '@/shared/assets/icons/stamp-icon.svg?react';
-import UserIcon from '@/shared/assets/icons/user-icon.svg?react';
+// import HomeIcon from '@/shared/assets/icons/home-icon.svg?react';
+// import MapIcon from '@/shared/assets/icons/map-icon.svg?react';
+// import StampIcon from '@/shared/assets/icons/stamp-icon.svg?react';
+// import UserIcon from '@/shared/assets/icons/user-icon.svg?react';
 import { Link } from 'react-router';
 import { ROUTES } from '@/router/routes';
 
@@ -12,7 +12,7 @@ const BottomNavigator = () => {
         {/* Home으로 이동 */}
         <li className="justify-center items-center">
           <Link to={ROUTES.TUTORIAL}>
-            <HomeIcon />
+            <img src="/icons/home-icon.svg" alt="Home" className="w-6 h-6 mx-auto" />
             <p>Home</p>
           </Link>
         </li>
@@ -20,8 +20,7 @@ const BottomNavigator = () => {
         {/* Map으로 이동 */}
         <li>
           <Link to={ROUTES.MAP}>
-            {/* <img src={MapIcon} className="mx-auto" /> */}
-            <MapIcon />
+            <img src="/icons/map-icon.svg" alt="Map" className="w-6 h-6 mx-auto" />
             <p>Map</p>
           </Link>
         </li>
@@ -29,8 +28,7 @@ const BottomNavigator = () => {
         {/* My Stamps로 이동 */}
         <li className="">
           <Link to={ROUTES.STAMP}>
-            {/* <img src={StampIcon} className="mx-auto" /> */}
-            <StampIcon />
+            <img src="/icons/stamp-icon.svg" alt="Stamp" className="w-6 h-6 mx-auto" />
             <p>Stamp</p>
           </Link>
         </li>
@@ -38,8 +36,7 @@ const BottomNavigator = () => {
         {/* Profile로 이동 */}
         <li>
           <Link to={ROUTES.PROFILE}>
-            {/* <img src={UserIcon} className="mx-auto" /> */}
-            <UserIcon />
+            <img src="/icons/user-icon.svg" alt="Profile" className="w-6 h-6 mx-auto" />
             <p>Profile</p>
           </Link>
         </li>

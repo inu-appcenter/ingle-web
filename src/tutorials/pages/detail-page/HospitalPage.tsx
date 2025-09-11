@@ -1,4 +1,4 @@
-import MainImage from '@/shared/assets/images/place/hospital-image.png';
+// import MainImage from '@/shared/assets/images/place/hospital-image.png';
 import CheckBox from '@/tutorials/check_box.svg?react';
 import Down from '@/tutorials/chevron-left.svg?react';
 import BubbleGuide from '@/tutorials/components/BubbleGuide';
@@ -79,7 +79,7 @@ export default function HospitalPage() {
 
   return (
     <div className="flex flex-col w-full">
-      <Header images={[MainImage]} />
+      <Header images={['/images/place/hospital-image.png']} />
 
       <main className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />

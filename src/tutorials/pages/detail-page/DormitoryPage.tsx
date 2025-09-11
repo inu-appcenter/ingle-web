@@ -1,11 +1,11 @@
 import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
 import NervousIcon from '@/shared/assets/icons/nervous-icon.png';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
-import dormitoryImage1 from '@/shared/assets/images/place/dormitory-image1.jpg';
-import dormitoryImage2 from '@/shared/assets/images/place/dormitory-image2.png';
-import dormitoryImage3 from '@/shared/assets/images/place/dormitory-image3.jpg';
-import dormitoryImage4 from '@/shared/assets/images/place/dormitory-image4.png';
-import dormitoryImage5 from '@/shared/assets/images/place/dormitory-image5.png';
+// import dormitoryImage1 from '@/shared/assets/images/place/dormitory-image1.jpg';
+// import dormitoryImage2 from '@/shared/assets/images/place/dormitory-image2.png';
+// import dormitoryImage3 from '@/shared/assets/images/place/dormitory-image3.jpg';
+// import dormitoryImage4 from '@/shared/assets/images/place/dormitory-image4.png';
+// import dormitoryImage5 from '@/shared/assets/images/place/dormitory-image5.png';
 import Header from '@/tutorials/components/Header';
 
 import Button from '@/tutorials/components/Button';
@@ -14,7 +14,13 @@ import Tag from '@/tutorials/components/Tag';
 const DormitoryPage = () => {
   return (
     <>
-      <Header images={[dormitoryImage1, dormitoryImage2, dormitoryImage3]} />
+      <Header
+        images={[
+          '/images/place/dormitory-image1.jpg',
+          '/images/place/dormitory-image2.png',
+          '/images/place/dormitory-image3.jpg',
+        ]}
+      />
       <main className="px-4">
         <Tag>Campus Life</Tag>
         <h1 className="text-[32px] font-bold mb-4">Dormitory</h1>
@@ -37,8 +43,8 @@ const DormitoryPage = () => {
         {/* 소제목 : Dormitory Location */}
         <section className="mb-8 flex flex-col gap-5">
           <h2 className="text-xl font-bold">Dormitory Location</h2>
-          <img src={dormitoryImage1} />
-          <img src={dormitoryImage4} />
+          <img src="/images/place/dormitory-image1.jpg" />
+          <img src="/images/place/dormitory-image4.png" />
           <p className="text-base font-light"></p>
           <ul className="list-disc px-4">
             <li>Dormitory 1 & 2 & 3: Building no. 18</li>
@@ -132,7 +138,7 @@ const DormitoryPage = () => {
         {/* 소제목 : OOOO */}
         <section className="mb-8 flex flex-col gap-5">
           <h2 className="text-xl font-bold">What to Bring</h2>
-          <img src={dormitoryImage5} />
+          <img src="/images/place/dormitory-image5.png" />
           <ul className="text-sm font-light px-4 list-disc">
             <li>Pillow and blanket (not provided)</li>
             <li>Personal toiletries</li>

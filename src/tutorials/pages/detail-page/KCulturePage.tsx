@@ -2,7 +2,7 @@ import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
 import { useState } from 'react';
 
-import KCultrueImage from '@/shared/assets/images/place/kculture-image.png';
+// import KCultrueImage from '@/shared/assets/images/place/kculture-image.png';
 import BubbleGuide from '@/tutorials/components/BubbleGuide';
 import CategoryTag from '@/tutorials/components/CategoryTag';
 
@@ -30,7 +30,7 @@ export default function KCulturePage() {
 
   return (
     <div className="flex flex-col w-full">
-      <Header images={[KCultrueImage]} />
+      <Header images={['/images/place/kculture-image.png']} />
       <div className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />
         <h1 className="text-[#383737] text-[32px] font-bold leading-none">K-Culture</h1>
