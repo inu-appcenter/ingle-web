@@ -1,7 +1,7 @@
 import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
 import GiftIcon from '@/shared/assets/icons/gift-icon.png';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
-import curriculumImage1 from '@/shared/assets/images/place/curriculum-image1.jpg';
+// import curriculumImage1 from '@/shared/assets/images/place/curriculum-image1.jpg';
 import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
 import Tag from '@/tutorials/components/Tag';
@@ -9,7 +9,7 @@ import Tag from '@/tutorials/components/Tag';
 const CurriculumPage = () => {
   return (
     <>
-      <Header images={[curriculumImage1]} />
+      <Header images={['/images/place/curriculum-image1.jpg']} />
       <main className="px-4 flex flex-col gap-5">
         <Tag>Academics</Tag>
         <h1 className="text-[32px] font-bold">Curriculum</h1>

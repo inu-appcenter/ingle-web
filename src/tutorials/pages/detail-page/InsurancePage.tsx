@@ -1,4 +1,4 @@
-import MainImage from '@/shared/assets/images/place/insurance-image.png';
+// import MainImage from '@/shared/assets/images/place/insurance-image.png';
 import BubbleGuide from '@/tutorials/components/BubbleGuide';
 import Button from '@/tutorials/components/Button';
 import CategoryTag from '@/tutorials/components/CategoryTag';
@@ -64,7 +64,7 @@ const InsurancePage = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <Header images={[MainImage]} />
+      <Header images={['/images/place/insurance-image.png']} />
 
       <main className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />

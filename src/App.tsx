@@ -33,7 +33,19 @@ function AppWrapper() {
           <Routes>
             <Route path={ROUTES.AUTH} element={<AuthPage />} />
             <Route path={ROUTES.TUTORIAL} element={<TutorialPage />} />
-            <Route path={`${ROUTES.TUTORIAL}/:params`} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.TRANSIT} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.DORMITORY} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.LIBRARY} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.CLUBS} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.FESTIVAL} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.TUITION} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.COURSES} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.CURRICULUM} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.GRADES} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.HOSPITAL} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.INSURANCE} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.JOBS} element={<TutorialDetailPage />} />
+            <Route path={ROUTES.K_CULTURE} element={<TutorialDetailPage />} />
             <Route path={ROUTES.STAMP} element={<StampPage />} />
             <Route path={ROUTES.MAP} element={<MapPage />} />
             <Route path={ROUTES.PROFILE} element={<ProfilePage />} />

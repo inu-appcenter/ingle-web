@@ -2,19 +2,19 @@ import { useState } from 'react';
 import { Stamp } from '@/stamp/types/stamp';
 import StampItem from '@/stamp/components/StampItem';
 import Modal from '@/stamp/components/Modal';
-import TransitImage from '@/shared/assets/images/stamp/transit-image.png';
-import DormitoryImage from '@/shared/assets/images/stamp/dormitory-image.png';
-import LibraryImage from '@/shared/assets/images/stamp/library-image.png';
-import ClubsImage from '@/shared/assets/images/stamp/clubs-image.png';
-import FestivalImage from '@/shared/assets/images/stamp/festival-image.png';
-import TuitionImage from '@/shared/assets/images/stamp/tuition-image.png';
-import CoursesImage from '@/shared/assets/images/stamp/course-image.png';
-import CurriculumImage from '@/shared/assets/images/stamp/curriculum-image.png';
-import GradesImage from '@/shared/assets/images/stamp/grades-image.png';
-import HostpitalImage from '@/shared/assets/images/stamp/hospital-image.png';
-import InsuranceImage from '@/shared/assets/images/stamp/insurance-image.png';
-import JobsImage from '@/shared/assets/images/stamp/jobs-image.png';
-import KCultureImage from '@/shared/assets/images/stamp/kculture-image.png';
+// import TransitImage from '@/shared/assets/images/stamp/transit-image.png';
+// import DormitoryImage from '@/shared/assets/images/stamp/dormitory-image.png';
+// import LibraryImage from '@/shared/assets/images/stamp/library-image.png';
+// import ClubsImage from '@/shared/assets/images/stamp/clubs-image.png';
+// import FestivalImage from '@/shared/assets/images/stamp/festival-image.png';
+// import TuitionImage from '@/shared/assets/images/stamp/tuition-image.png';
+// import CoursesImage from '@/shared/assets/images/stamp/course-image.png';
+// import CurriculumImage from '@/shared/assets/images/stamp/curriculum-image.png';
+// import GradesImage from '@/shared/assets/images/stamp/grades-image.png';
+// import HostpitalImage from '@/shared/assets/images/stamp/hospital-image.png';
+// import InsuranceImage from '@/shared/assets/images/stamp/insurance-image.png';
+// import JobsImage from '@/shared/assets/images/stamp/jobs-image.png';
+// import KCultureImage from '@/shared/assets/images/stamp/kculture-image.png';
 
 // const stampList = [
 //   { name: 'Transit', image: TransitImage, status: true, description: 'ABCDEF' },
