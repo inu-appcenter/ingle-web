@@ -9,9 +9,7 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
   const { camera, scene } = useThree();
   const raycaster = useRef(new THREE.Raycaster()).current;
   const originalColors = useRef(new Map<THREE.Mesh, THREE.Color>());
-  const { visibleBuildings, setVisibleBuildings } = useRayStore();
-
-  const mouse = new THREE.Vector2();
+  const { setVisibleBuildings, resetVisibleBuildings } = useRayStore();
 
   //ray 선 그룹
   const guideGroup = useRef<THREE.Group>(new THREE.Group());
@@ -86,7 +84,9 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
     });
 
     const visibleNames = Array.from(visibleBuildings).map(b => b.name);
-    //setVisibleBuildings(visibleNames);
+    console.log('maptest 보이는 건물:', visibleNames);
+    resetVisibleBuildings();
+    setVisibleBuildings(visibleNames);
     //저장하면 뭔가 다른가?
   };
 

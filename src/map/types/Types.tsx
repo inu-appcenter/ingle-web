@@ -17,11 +17,18 @@ interface BuildingDetails {
   buildingCode: string;
   location: string;
   floor: number;
+  address: string;
   openTime: string; // "00:00" 형식 (시간)
   closeTime: string; // "24:00" 형식 (시간)
   phoneNumber: string;
-  closedDays: string;
+  inglePick: string;
+  closedDays: string[];
   buildingUrl: string;
 }
 
-export { BuildingDetails, SearchResult };
+interface Times {
+  hour: number;
+  minute: number;
+}
+
+export { BuildingDetails, SearchResult, Times };

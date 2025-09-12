@@ -45,6 +45,7 @@ export default function Header({
 
   useEffect(() => {
     console.log('Selected Category:', category);
+
     const fetchBuildings = async () => {
       try {
         const res = await api.get(import.meta.env.VITE_MAP_BUILDIINGS, {
@@ -56,13 +57,13 @@ export default function Header({
             buildingCategory: category,
           },
         });
-        console.log('최종 full URL:', res.request?.responseURL);
-        console.log(category + ' buildings', res.data);
+        console.log('api 결과', category, res.data);
+        setBuildingList(res.data); //검색 결과 빌딩 데이터 리스트
 
         //화면에 보이는 건물 레이캐스트
         modelRef.current?.castRays();
         //테스트
-        console.log('화면에 보이는 건물:', visibleBuildings);
+        console.log('저장된 건물:', visibleBuildings);
 
         //setBuildingList();
       } catch (err) {
@@ -80,7 +81,7 @@ export default function Header({
       const res = await api.get(import.meta.env.VITE_MAP_SEARCHING_URL, {
         params: keyword,
       });
-      console.log('response', res.data);
+      //console.log('response', res.data);
       setBuildingList(res.data);
     } catch (err) {
       console.log(err);

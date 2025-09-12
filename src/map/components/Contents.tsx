@@ -1,4 +1,4 @@
-import { BuildingDetails, SearchResult } from '@/map/types/Types';
+import { BuildingDetails, SearchResult, Times } from '@/map/types/Types';
 import api from '@/shared/api/intercepter';
 import { useEffect, useState } from 'react';
 
@@ -10,7 +10,7 @@ import Report from '@/map/icons/reportIssue.svg?react';
 export default function Contents({
   buildingList,
   Id,
-  children,
+  children, //close 버튼 위한...
 }: {
   buildingList: SearchResult[];
   Id: number | null;
@@ -18,14 +18,67 @@ export default function Contents({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState<BuildingDetails | null>(null);
+  const Day = [
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+  ];
 
   if (!buildingList || buildingList.length === 0) return null;
-  //console.log('컴포넌트 안', buildingList);
 
   const checkTime = () => {
     // 현재 시간 가져와서 비교 => 오픈, 닫음
+    const getTime = new Date();
+    const Today: Times = {
+      hour: getTime.getHours(),
+      minute: getTime.getMinutes(),
+    };
+    const openTime: Times = {
+      hour: Number(details?.openTime.split(':')[0]),
+      minute: Number(details?.openTime.split(':')[1]),
+    };
+    const closedTime: Times = {
+      hour: Number(details?.closeTime.split(':')[0]),
+      minute: Number(details?.closeTime.split(':')[1]),
+    };
+
+    //closedDay = string (Monday, Tuesday ...)
+    //day = 0~6 (일~토)
+    {
+      details?.closedDays.map(closedDay => {
+        if (closedDay === Day[getTime.getDay()]) {
+          setIsOpen(false);
+        } else if (Today.hour >= openTime.hour && Today.hour <= closedTime.hour) {
+          if (
+            (Today.hour === openTime.hour && Today.minute < openTime.minute) ||
+            (Today.hour === closedTime.hour && Today.minute > closedTime.minute)
+          ) {
+            setIsOpen(false);
+          } else {
+            setIsOpen(true);
+          }
+        }
+      });
+    }
   };
 
+  const operation = () => {
+    const OpenDays = Day.filter(x => !details?.closedDays.includes(x));
+    console.log(OpenDays);
+    return (
+      <div>
+        {OpenDays.map(index => (
+          <div>
+            {index.slice(0, 3)} {details?.openTime} - {details?.closeTime}
+          </div>
+        ))}
+      </div>
+    );
+  };
   const moveToUrl = () => {
     if (!details?.buildingUrl) return;
     window.location.href = details.buildingUrl;
@@ -47,6 +100,14 @@ export default function Contents({
     getDetails(Id);
   }, [Id]);
 
+  useEffect(() => {
+    checkTime();
+    const timer = setInterval(() => {
+      checkTime();
+    }, 60 * 1000);
+    return () => clearInterval(timer);
+  }, [details]);
+
   return (
     <div className="pb-4">
       {/* 빌딩 상세 정보 */}
@@ -54,10 +115,11 @@ export default function Contents({
       <div className="flex flex-col gap-5 w-full bg-[#F7F7F6]">
         <header className="flex flex-col gap-2">
           <div className="flex flex-row justify-between">
-            <h1 className=" text-pretty font-extrabold text-[28px] ">
+            <h1 className="text-pretty font-extrabold text-[28px] ">
               {details?.buildingName}
             </h1>
             <div className="w-[30px] h-[30px]">{children}</div>
+            {/* children은 닫기 버튼 */}
           </div>
           <h3 className="text-[15px] ">한줄 부가 설명</h3>
         </header>
@@ -83,8 +145,10 @@ export default function Contents({
               <p className="font-semibold text-[#DF563F] text-[17px]">
                 {isOpen ? 'Open' : 'Closed'}
               </p>
+              {/* 드롭다운 기능 추가 */}
+              {operation()}
             </div>
-            {/* 드롭다운 기능 추가 */}
+
             <Drop />
           </section>
 
@@ -93,12 +157,16 @@ export default function Contents({
             <div className="bg-[#FFFFFF] rounded-[10px]">
               <div className="flex flex-col gap-1 px-4 py-3">
                 <div className="text-[15px] text-[#868782] font-normal">INGLE's pick</div>
-                <div className="text-[#7A00E6] text-sm font-medium">내용</div>
+                <div className="text-[#7A00E6] text-sm font-medium">
+                  {details?.inglePick}
+                </div>
 
                 <hr className="my-2 border-[#E8E5EF]" />
 
                 <div className="text-[15px] text-[#868782] font-normal">Address</div>
-                <div className="text-[#000000] text-sm font-normal">내용</div>
+                <div className="text-[#000000] text-sm font-normal">
+                  {details?.address}
+                </div>
               </div>
             </div>
           </section>
