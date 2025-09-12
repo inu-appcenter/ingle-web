@@ -1,10 +1,10 @@
+// import BackIcon from '@/shared/assets/icons/back-icon.svg?react';
 import { useState } from 'react';
-import BackIcon from '@/shared/assets/icons/back-icon.svg?react';
 import { useNavigate } from 'react-router';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
+import { Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 interface HeaderProps {
   images: string[];
@@ -46,7 +46,7 @@ const Header = ({ images }: HeaderProps) => {
         className="absolute top-2 left-2 cursor-pointer z-10"
         role="button"
       >
-        <BackIcon />
+        <img src="/icons/back-icon.svg" alt="Back" className="w-6 h-6" />
       </div>
 
       {/* 확대 모달 */}

@@ -1,18 +1,13 @@
-import courseImage1 from '@/shared/assets/images/place/course-image1.jpg';
-import ClockIcon from '@/shared/assets/icons/clock-icon.svg?react';
-import PlaceIcon from '@/shared/assets/icons/place-icon.svg?react';
-import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
-import TagIcon from '@/shared/assets/icons/tag-icon.svg?react';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
-import SunGlassesIcon from '@/shared/assets/icons/sunGlasses-icon.png';
+// import courseImage1 from '@/shared/assets/images/place/course-image1.jpg';
+import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
 import Tag from '@/tutorials/components/Tag';
-import Button from '@/tutorials/components/Button';
 
 const CoursesPage = () => {
   return (
     <>
-      <Header images={[courseImage1]} />
+      <Header images={['/images/place/course-image1.jpg']} />
       <main className="px-4 flex flex-col gap-5">
         <Tag>Academics</Tag>
         <h1 className="text-[32px] font-bold">Course Registration</h1>
@@ -121,7 +116,7 @@ const CoursesPage = () => {
         </div>
 
         <div className="my-8">
-          <Button>Done Reading</Button>
+          <Button tutorialNum={7}>Done Reading</Button>
         </div>
       </main>
     </>

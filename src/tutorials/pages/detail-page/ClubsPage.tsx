@@ -1,21 +1,24 @@
-import clubImage1 from '@/shared/assets/images/place/club-image1.jpg';
-import clubImage2 from '@/shared/assets/images/place/club-image2.png';
-import clubImage3 from '@/shared/assets/images/place/club-image3.png';
-import clubImage4 from '@/shared/assets/images/place/club-image4.png';
-import ClockIcon from '@/shared/assets/icons/clock-icon.svg?react';
-import PlaceIcon from '@/shared/assets/icons/place-icon.svg?react';
 import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
-import TagIcon from '@/shared/assets/icons/tag-icon.svg?react';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
-import SunGlassesIcon from '@/shared/assets/icons/sunGlasses-icon.png';
+// import clubImage1 from '@/shared/assets/images/place/club-image1.jpg';
+// import clubImage2 from '@/shared/assets/images/place/club-image2.png';
+// import clubImage3 from '@/shared/assets/images/place/club-image3.png';
+// import clubImage4 from '@/shared/assets/images/place/club-image4.png';
+import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
 import Tag from '@/tutorials/components/Tag';
-import Button from '@/tutorials/components/Button';
 
 const ClubsPage = () => {
   return (
     <>
-      <Header images={[clubImage1, clubImage2, clubImage3, clubImage4]} />
+      <Header
+        images={[
+          '/images/place/club-image1.jpg',
+          '/images/place/club-image2.png',
+          '/images/place/club-image3.png',
+          '/images/place/club-image4.png',
+        ]}
+      />
       <main className="px-4 flex flex-col gap-5">
         <Tag>Campus Life</Tag>
         <h1 className="text-[32px] font-bold">Student Club</h1>
@@ -127,7 +130,7 @@ const ClubsPage = () => {
               </tr>
             </tbody>
           </table>
-          <img src={clubImage4} />
+          <img src="/images/place/club-image4.png" />
         </section>
         <hr className="border-t border-[#E8E5EF] my-5" />
 
@@ -161,7 +164,7 @@ const ClubsPage = () => {
           </div>
         </section>
         <div className="mb-8">
-          <Button>Done Reading</Button>
+          <Button tutorialNum={4}>Done Reading</Button>
         </div>
       </main>
     </>

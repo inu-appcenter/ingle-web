@@ -3,7 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["DOM", "ESNext"],
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "strict": true,
     "jsx": "react-jsx",
@@ -11,7 +11,8 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "types": ["vite-plugin-svgr/client","react", "react-dom", "@react-three/fiber","@react-three/drei"]
+    "types": ["vite-plugin-svgr/client","react", "react-dom", "@react-three/fiber","@react-three/drei"],
+    "outDir": "./dist"
   },
   "include": ["src","svg.d.ts"],
   "exclude": ["node_modules"]

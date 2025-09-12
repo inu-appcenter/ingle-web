@@ -12,13 +12,32 @@ import KCulturePage from '@/tutorials/pages/detail-page/KCulturePage';
 import LibraryPage from '@/tutorials/pages/detail-page/LibraryPage';
 import TransitPage from '@/tutorials/pages/detail-page/TransitPage';
 import TuitionPage from '@/tutorials/pages/detail-page/TuitionPage';
-import { ReactNode } from 'react';
-import { useParams } from 'react-router';
+import { useLocation } from 'react-router';
 
 const TutorialDetailPage = () => {
-  const { params } = useParams<{ params: string }>();
+  const location = useLocation();
 
-  const tutorialMap: Record<string, ReactNode> = {
+  // URL 경로에서 페이지 타입 결정
+  const getPageType = (pathname: string) => {
+    if (pathname.includes('/transit')) return 'transit';
+    if (pathname.includes('/dormitory')) return 'dormitory';
+    if (pathname.includes('/library')) return 'library';
+    if (pathname.includes('/festival')) return 'festival';
+    if (pathname.includes('/clubs')) return 'clubs';
+    if (pathname.includes('/tuition')) return 'tuition';
+    if (pathname.includes('/courses')) return 'courses';
+    if (pathname.includes('/curriculum')) return 'curriculum';
+    if (pathname.includes('/grades')) return 'grades';
+    if (pathname.includes('/hospital')) return 'hospital';
+    if (pathname.includes('/insurance')) return 'insurance';
+    if (pathname.includes('/jobs')) return 'jobs';
+    if (pathname.includes('/k-culture')) return 'k-culture';
+    return null;
+  };
+
+  const pageType = getPageType(location.pathname);
+
+  const tutorialMap: Record<string, JSX.Element> = {
     transit: <TransitPage />,
     dormitory: <DormitoryPage />,
     library: <LibraryPage />,
@@ -35,10 +54,14 @@ const TutorialDetailPage = () => {
   };
 
   // 디버깅을 위해 추가
-  console.log('Current params:', params);
-  console.log('Available keys:', Object.keys(tutorialMap));
+  console.log('Current pathname:', location.pathname);
+  console.log('Page type:', pageType);
 
-  return <div>{tutorialMap[params ?? ''] ?? <NotFoundPage />}</div>;
+  if (!pageType || !tutorialMap[pageType]) {
+    return <NotFoundPage />;
+  }
+
+  return <div>{tutorialMap[pageType]}</div>;
 };
 
 export default TutorialDetailPage;
