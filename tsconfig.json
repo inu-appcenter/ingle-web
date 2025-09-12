@@ -6,14 +6,13 @@
     "moduleResolution": "bundler",
     "esModuleInterop": true,
     "strict": true,
-    "jsx": "react-jsx", // React가 아니라면 이건 제거
+    "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
-    "outDir": "./dist", // 혹시 이게 "./src"인가요?
-    "types": ["vite-plugin-svgr/client"],
-
+    "types": ["vite-plugin-svgr/client","react", "react-dom", "@react-three/fiber","@react-three/drei"],
+    "outDir": "./dist"
   },
   "include": ["src","svg.d.ts"],
   "exclude": ["node_modules"]
