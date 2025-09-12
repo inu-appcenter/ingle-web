@@ -1,19 +1,13 @@
-import Header from '@/tutorials/components/Header';
-import TutitionImage1 from '@/shared/assets/images/place/tuition-image1.jpg';
-import TutitionImage2 from '@/shared/assets/images/place/tuition-image2.png';
-import Tag from '@/tutorials/components/Tag';
-import ClockIcon from '@/shared/assets/icons/clock-icon.svg?react';
-import PlaceIcon from '@/shared/assets/icons/place-icon.svg?react';
 import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
-import TagIcon from '@/shared/assets/icons/tag-icon.svg?react';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
-import SunGlassesIcon from '@/shared/assets/icons/sunGlasses-icon.png';
 import Button from '@/tutorials/components/Button';
+import Header from '@/tutorials/components/Header';
+import Tag from '@/tutorials/components/Tag';
 
 const TuitionPage = () => {
   return (
     <>
-      <Header images={[TutitionImage1]} />
+      <Header images={['/images/place/tuition-image1.jpg']} />
       <main className="px-4 flex flex-col gap-5">
         <Tag>Academics</Tag>
         <h1 className="text-[32px] font-bold">Tuition</h1>
@@ -152,7 +146,7 @@ const TuitionPage = () => {
               <li>Certificate of Language Skills</li>
             </ul>
           </div>
-          <img src={TutitionImage2} />
+          <img src="/images/place/tuition-image2.png" />
           <div className="bg-[#C3FCF2] flex justify-between px-4 h-16 items-center text-base rounded-[20px]">
             <p className="text-base font-bold">2025 Syllabus</p>
             <div className="bg-[#007663] px-2 rounded-[20px] h-6">
@@ -176,7 +170,7 @@ const TuitionPage = () => {
         </section>
 
         <div className="my-8 h-11">
-          <Button>Done Reading</Button>
+          <Button tutorialNum={6}>Done Reading</Button>
         </div>
       </main>
     </>

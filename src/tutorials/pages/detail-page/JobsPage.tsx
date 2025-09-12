@@ -1,6 +1,8 @@
+// import MainImage from '@/shared/assets/images/place/jops-image.png';
 import BubbleGuide from '@/tutorials/components/BubbleGuide';
+import Button from '@/tutorials/components/Button';
 import CategoryTag from '@/tutorials/components/CategoryTag';
-import MainImage from '@/tutorials/job-bg.svg?react';
+import Header from '@/tutorials/components/Header';
 
 const JobsPage = () => {
   const overview = [
@@ -42,8 +44,8 @@ const JobsPage = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <MainImage className="w-full h-auto" />
-      <main className="flex flex-col gap-5 mx-4 my-5 text-[#383737] leading-[140%]">
+      <Header images={['/images/place/jops-image.png']} />
+      <main className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />
         <h1 className="text-[#383737] text-[32px] font-bold leading-none">Job</h1>
 
@@ -145,6 +147,9 @@ const JobsPage = () => {
 
         <div className="h-12" />
         <BubbleGuide>{tips}</BubbleGuide>
+        <div className="my-8 h-11">
+          <Button tutorialNum={12}>Done Reading</Button>
+        </div>
       </main>
     </div>
   );

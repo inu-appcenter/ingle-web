@@ -21,16 +21,16 @@ const StampPage = () => {
     getStampList();
   }, []);
 
-  // const currentCount = stampList.filter(stamp => stamp.status).length;
-  // const totalCount = stampList.length;
-  const currentCount = 2;
-  const totalCount = 5;
+  const currentCount = stampList.filter(stamp => stamp.completed).length;
+  const totalCount = stampList.length;
+  // const currentCount = 2;
+  // const totalCount = 5;
 
   return (
-    <div className="px-4 bg-[#F1F5FD] min-h-screen">
+    <div className="px-4 bg-[#F9F9F9] min-h-screen">
       <StampHeader>My Stamps</StampHeader>
       <AchievementStampsBar currentCount={currentCount} totalCount={totalCount} />
-      <StampList /*stampList={stampList} */ />
+      <StampList stampList={stampList} />
     </div>
   );
 };
