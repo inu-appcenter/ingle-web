@@ -32,3 +32,13 @@ export const editMembers = async (
     throw error;
   }
 };
+
+export const getProfile = async () => {
+  try {
+    const res = await instance.get('/api/v1/members');
+    return res.data;
+  } catch (error) {
+    console.error('프로필 조회 에러 발생:', error);
+    throw error;
+  }
+};
