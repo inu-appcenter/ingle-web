@@ -16,7 +16,6 @@ const StampPage = () => {
         setIsLoading(true);
         const res = await api.get('/api/v1/stamps');
         setStampList(res.data);
-        console.log('getStampList:', res.data);
       } catch (err) {
         console.error('에러:', err);
       } finally {
@@ -28,8 +27,6 @@ const StampPage = () => {
 
   const currentCount = stampList.filter(stamp => stamp.completed).length;
   const totalCount = stampList.length;
-  // const currentCount = 2;
-  // const totalCount = 5;
 
   return (
     <div className="px-4 bg-[#F9F9F9] min-h-screen">

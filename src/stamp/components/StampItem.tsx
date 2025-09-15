@@ -5,6 +5,7 @@ interface StampItemProps {
   name: string;
   image: string;
   completed: boolean;
+  keyword?: string;
   onClick?: () => void;
 }
 
@@ -22,8 +23,10 @@ const StampItem = ({ name, image, completed, onClick }: StampItemProps) => {
 
   return (
     <div
-      className="w-1/3 h-32 flex flex-col items-center justify-center mb-8 cursor-pointer group"
-      onClick={onClick}
+      className={`w-1/3 h-32 flex flex-col items-center justify-center mb-8 group ${
+        completed ? 'cursor-pointer' : 'cursor-not-allowed'
+      }`}
+      onClick={completed ? onClick : undefined}
     >
       <div className="bg-[#ffffff] w-[104px] h-[104px] flex justify-center items-center rounded-full overflow-hidden relative">
         {imageLoading && (
@@ -58,7 +61,7 @@ const StampItem = ({ name, image, completed, onClick }: StampItemProps) => {
       </div>
       <p
         className={`text-center transition duration-300 ${
-          completed ? 'group-hover:text-[#7A00E6]' : 'text-gray-400'
+          completed ? 'group-hover:text-[#7A00E6] text-gray-700' : 'text-gray-400'
         }`}
       >
         {name}

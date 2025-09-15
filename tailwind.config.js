@@ -10,6 +10,11 @@ export default {
         manrope: ['Manrope', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
       },
+      colors: {
+        // 커스텀 색상 추가
+        'black-custom': '#000000',
+        'white-custom': '#ffffff',
+      },
       keyframes: {
         shimmer: {
           '0%': { backgroundPosition: '-200% 0' },

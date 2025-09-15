@@ -12,7 +12,7 @@ const StampButton = ({
   return (
     <button
       onClick={onClick}
-      className={`flex w-full bg-[#7949FF] h-11 text-[#ffffff] justify-center items-center rounded-2xl ${className}`}
+      className={`flex ${className} w-full bg-[#7949FF] h-11 justify-center items-center rounded-2xl `}
     >
       <p>{children}</p>
     </button>
