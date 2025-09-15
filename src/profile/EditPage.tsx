@@ -8,9 +8,11 @@ import { LazyImage } from '@/shared/components/LazyImage';
 // import testImage from '@/shared/assets/images/stamp/clubs-image.png';
 import { useAuthStore } from '@/shared/stores/authStore';
 import { useState } from 'react';
+import { useProfileStore } from '@/profile/stores/profile-store';
 
 const EditPage = () => {
   const { studentId, nickname, studentType, department } = useAuthStore();
+  const { imageUrl } = useProfileStore();
 
   // 기존 store 값으로 초기화
   const [editedNickname, setEditedNickname] = useState(nickname);
@@ -74,11 +76,15 @@ const EditPage = () => {
         {/* 프로필 */}
         <section className="flex flex-col justify-center items-center my-4">
           <div className="relative">
-            <LazyImage
-              src="/images/place/club-image1.jpg"
-              alt="profile-image"
-              className="w-40 h-40 rounded-full object-cover"
-            />
+            {imageUrl ? (
+              <LazyImage
+                src={imageUrl}
+                alt="profile-image"
+                className="w-40 h-40 rounded-full object-cover"
+              />
+            ) : (
+              <div className="w-40 h-40 rounded-full bg-[#d9d9d9]" />
+            )}
             <img
               src="/icons/edit-icon.svg"
               alt="Edit"

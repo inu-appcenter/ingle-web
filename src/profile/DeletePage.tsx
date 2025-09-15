@@ -2,6 +2,7 @@ import Header from '@/profile/components/Header';
 import Button from '@/tutorials/components/Button';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
+import { deleteAccount } from './api/profile';
 
 const DeletePage = () => {
   const navigate = useNavigate();
@@ -14,7 +15,8 @@ const DeletePage = () => {
     }
 
     // API 연동은 추후 추가 예정
-    console.log('선택한 탈퇴 사유:', reason);
+    // console.log('선택한 탈퇴 사유:', reason);
+    deleteAccount();
     navigate('/'); // 원하는 경로로 수정 가능
   };
 
