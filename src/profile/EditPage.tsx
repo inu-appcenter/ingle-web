@@ -3,6 +3,7 @@ import { UndergraduateDepartment } from '@/auth/constants/Departments';
 import { editMembers } from '@/profile/api/profile';
 import Header from '@/profile/components/Header';
 import ProfileButton from '@/profile/components/ProfileButton';
+import { LazyImage } from '@/shared/components/LazyImage';
 // import EditIcon from '@/shared/assets/icons/edit-icon.svg?react';
 // import testImage from '@/shared/assets/images/stamp/clubs-image.png';
 import { useAuthStore } from '@/shared/stores/authStore';
@@ -73,10 +74,10 @@ const EditPage = () => {
         {/* 프로필 */}
         <section className="flex flex-col justify-center items-center my-4">
           <div className="relative">
-            <img
+            <LazyImage
               src="/images/place/club-image1.jpg"
               alt="profile-image"
-              className="w-40 h-40"
+              className="w-40 h-40 rounded-full object-cover"
             />
             <img
               src="/icons/edit-icon.svg"
