@@ -2,7 +2,7 @@ import { BuildingDetails, SearchResult } from '@/map/types/Types';
 import api from '@/shared/api/intercepter';
 import { useEffect, useState } from 'react';
 
-import Cursor from '@/map/icons/Cursor.svg?react';
+import Cursor from '@/map/icons/cursor.svg?react';
 import Export from '@/map/icons/export.svg?react';
 import Drop from '@/map/icons/icnDrop.svg?react';
 import Report from '@/map/icons/reportIssue.svg?react';
