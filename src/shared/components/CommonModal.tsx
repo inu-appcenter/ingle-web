@@ -28,9 +28,11 @@ const CommonModal = ({ isOpen, onClose, onGoToRead, children }: CommonModalProps
         {children}
       </div>
       <div className="max-w-96 w-full px-8 mt-8 flex flex-col gap-8">
-        <StampButton onClick={onGoToRead || (() => {})}>Go to read</StampButton>
+        <StampButton className="text-[#ffffff]" onClick={onGoToRead || (() => {})}>
+          Go to read
+        </StampButton>
         <StampButton onClick={onClose} className="bg-[#ffffff] text-[#000000]">
-          close
+          Close
         </StampButton>
       </div>
     </div>

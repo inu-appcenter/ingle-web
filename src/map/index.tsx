@@ -2,7 +2,7 @@ import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei
 import { Canvas } from '@react-three/fiber';
 
 import Model from '@/map/components/MapTest';
-import BottomSheet from './components/BottomSheet';
+import BottomSheet from '@/map/components/BottomSheet';
 
 const MapPage = () => {
   return (

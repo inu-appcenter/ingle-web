@@ -2,7 +2,7 @@ import Header from '@/map/components/Header';
 import useBottomSheet from '@/map/hooks/useBottomSheet';
 import { SearchResult } from '@/map/types/Types';
 import { useEffect, useState } from 'react';
-import Contents from './Contents';
+import Contents from '@/map/components/Contents';
 
 import Close from '@/map/icons/close.svg?react';
 
