@@ -53,10 +53,6 @@ const TutorialDetailPage = () => {
     'k-culture': <KCulturePage />,
   };
 
-  // 디버깅을 위해 추가
-  console.log('Current pathname:', location.pathname);
-  console.log('Page type:', pageType);
-
   if (!pageType || !tutorialMap[pageType]) {
     return <NotFoundPage />;
   }
