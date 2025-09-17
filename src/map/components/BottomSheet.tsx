@@ -1,4 +1,3 @@
-// import {useState} from 'react'
 import Header from '@/map/components/Header';
 import useBottomSheet from '@/map/hooks/useBottomSheet';
 import { SearchResult } from '@/map/types/Types';

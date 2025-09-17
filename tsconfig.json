@@ -11,8 +11,8 @@
     "paths": {
       "@/*": ["src/*"]
     },
-    "outDir": "./dist", // 혹시 이게 "./src"인가요?    
-    "types": ["vite-plugin-svgr/client","react", "react-dom", "@react-three/fiber","@react-three/drei"]
+    "types": ["vite-plugin-svgr/client","react", "react-dom", "@react-three/fiber","@react-three/drei"],
+    "outDir": "./dist"
   },
   "include": ["src","svg.d.ts"],
   "exclude": ["node_modules"]
