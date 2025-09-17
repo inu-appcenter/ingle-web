@@ -17,7 +17,7 @@ const DormitoryPage = () => {
       <Header
         images={[
           '/images/place/dormitory-image1.jpg',
-          '/images/place/dormitory-image2.png',
+          '/images/place/dormitory-image2.jpg',
           '/images/place/dormitory-image3.jpg',
         ]}
       />
@@ -138,7 +138,7 @@ const DormitoryPage = () => {
         {/* 소제목 : OOOO */}
         <section className="mb-8 flex flex-col gap-5">
           <h2 className="text-xl font-bold">What to Bring</h2>
-          <img src="/images/place/dormitory-image5.png" />
+          <img src="/images/place/dormitory-image5.jpg" />
           <ul className="text-sm font-light px-4 list-disc">
             <li>Pillow and blanket (not provided)</li>
             <li>Personal toiletries</li>
