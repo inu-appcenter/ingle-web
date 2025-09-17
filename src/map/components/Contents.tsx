@@ -18,6 +18,7 @@ export default function Contents({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState<BuildingDetails | null>(null);
+  const [isDrop, setIsDrop] = useState(false);
   const Day = [
     'Sunday',
     'Monday',
@@ -72,8 +73,9 @@ export default function Contents({
     return (
       <div>
         {OpenDays.map(index => (
-          <div>
-            {index.slice(0, 3)} {details?.openTime} - {details?.closeTime}
+          <div className="flex flex-row">
+            <p className="w-10">{index.slice(0, 3)}</p> {details?.openTime} -{' '}
+            {details?.closeTime}
           </div>
         ))}
       </div>
@@ -136,20 +138,20 @@ export default function Contents({
             ))}
           </section>
 
-          <section className="flex flex-row justify-between items-center py-2 px-4 bg-[#FFFFFF] rounded-[10px]">
-            <div>
-              <h3 className="text-[#868782] text-[15px]">Hours</h3>
-              <p>
-                {details?.openTime}-{details?.closeTime}
-              </p>
-              <p className="font-semibold text-[#DF563F] text-[17px]">
-                {isOpen ? 'Open' : 'Closed'}
-              </p>
-              {/* 드롭다운 기능 추가 */}
-              {operation()}
+          <section className="items-center py-2 px-4 bg-[#FFFFFF] rounded-[10px]">
+            <div className="flex flex-row items-center justify-between">
+              <div>
+                <h3 className="text-[#868782] text-[15px]">Hours</h3>
+                <p className="text-[17px] font-semibold">
+                  {details?.openTime}-{details?.closeTime}
+                </p>
+                <p className="font-semibold text-[#DF563F] text-[17px]">
+                  {isOpen ? 'Open' : 'Closed'}
+                </p>
+              </div>
+              <Drop onClick={() => setIsDrop(!isDrop)} />
             </div>
-
-            <Drop />
+            {isDrop && operation()}
           </section>
 
           <section className="flex flex-col gap-[10px]">
