@@ -158,7 +158,7 @@ const TutorialPage = () => {
       </div>
 
       {/* 카테고리 */}
-      <div className="h-[55vh] flex flex-col gap-[14px] bg-[#F4F2F6] w-full px-4 pt-4 rounded-t-[30px]">
+      <div className="h-[65vh] flex flex-col gap-[14px] bg-[#F4F2F6] w-full px-4 pt-4 rounded-t-[30px]">
         {/*카테고리 상단 설명 */}
         {tabs === 1 && (
           <div>
