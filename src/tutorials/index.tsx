@@ -1,6 +1,6 @@
 import { ROUTES } from '@/router/routes';
 import InformationButton from '@/tutorials/components/InformationButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 
 const campusLifeList = [
@@ -92,7 +92,13 @@ const lifeStyleList = [
 
 const TutorialPage = () => {
   const navigate = useNavigate();
-  const [tabs, setTabs] = useState(1);
+  const [tabs, setTabs] = useState<null | string>('CamLife');
+
+  useEffect(() => {
+    if (localStorage.getItem('tutorialTab')) {
+      setTabs(localStorage.getItem('tutorialTab'));
+    }
+  }, []);
 
   return (
     <div
@@ -104,39 +110,48 @@ const TutorialPage = () => {
         <div className="flex-none flex flex-row justify-between mb-8">
           <div
             onClick={() => {
-              setTabs(1);
+              setTabs('CamLife');
+              localStorage.setItem('tutorialTab', 'CamLife');
             }}
           >
             <p
-              className={`${tabs === 1 ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
+              className={`${tabs === 'CamLife' ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
             >
               Campus Life
             </p>
-            {tabs === 1 && <hr className="border-t-2 border-[#7A00E6] w-full"></hr>}
+            {tabs === 'CamLife' && (
+              <hr className="border-t-2 border-[#7A00E6] w-full"></hr>
+            )}
           </div>
           <div
             onClick={() => {
-              setTabs(2);
+              setTabs('Academic');
+              localStorage.setItem('tutorialTab', 'Academic');
             }}
           >
             <p
-              className={`${tabs === 2 ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
+              className={`${tabs === 'Academic' ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
             >
               Academics
             </p>
-            {tabs === 2 && <hr className="border-t-2 border-[#7A00E6] w-full"></hr>}
+            {tabs === 'Academic' && (
+              <hr className="border-t-2 border-[#7A00E6] w-full"></hr>
+            )}
           </div>
           <div
             onClick={() => {
-              setTabs(3);
+              setTabs('LifeStyle');
+              localStorage.setItem('tutorialTab', 'LifeStyle');
             }}
           >
             <p
-              className={`${tabs === 3 ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
+              className={`${tabs === 'LifeStyle' ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
             >
               Lifestyle
             </p>
-            {tabs === 3 && <hr className="border-t-2 border-[#7A00E6] w-full"></hr>}
+            {tabs === 'LifeStyle' && (
+              <hr className="border-t-2 border-[#7A00E6] w-full"></hr>
+            )}
           </div>
         </div>
 
@@ -160,7 +175,7 @@ const TutorialPage = () => {
       {/* 카테고리 */}
       <div className="h-[65vh] flex flex-col gap-[14px] bg-[#F4F2F6] w-full px-4 pt-4 rounded-t-[30px]">
         {/*카테고리 상단 설명 */}
-        {tabs === 1 && (
+        {tabs === 'CamLife' && (
           <div>
             <h1 className="font-extrabold text-xl">All about Campus</h1>
             <p className="text-[#9681EB] font-medium text-sm">
@@ -168,7 +183,7 @@ const TutorialPage = () => {
             </p>
           </div>
         )}
-        {tabs === 2 && (
+        {tabs === 'Academic' && (
           <div>
             <h1 className="font-extrabold text-xl">Smarter Academics</h1>
             <p className="text-[#9681EB] font-medium text-sm">
@@ -176,7 +191,7 @@ const TutorialPage = () => {
             </p>
           </div>
         )}
-        {tabs === 3 && (
+        {tabs === 'LifeStyle' && (
           <div>
             <h1 className="font-extrabold text-xl">Life in Korea INU</h1>
             <p className="text-[#9681EB] font-medium text-sm">
@@ -186,7 +201,7 @@ const TutorialPage = () => {
         )}
         {/* 상세페이지 내용 */}
         <div className="w-full pb-4 grid grid-cols-2 gap-4 mx-auto overflow-y-auto scrollbar-hide">
-          {tabs === 1 &&
+          {tabs === 'CamLife' &&
             campusLifeList.map((data, index) => {
               return (
                 <InformationButton
@@ -199,7 +214,7 @@ const TutorialPage = () => {
                 </InformationButton>
               );
             })}
-          {tabs === 2 &&
+          {tabs === 'Academic' &&
             academicAffairsList.map((data, index) => {
               return (
                 <InformationButton
@@ -212,7 +227,7 @@ const TutorialPage = () => {
                 </InformationButton>
               );
             })}
-          {tabs === 3 &&
+          {tabs === 'LifeStyle' &&
             lifeStyleList.map((data, index) => {
               return (
                 <InformationButton
