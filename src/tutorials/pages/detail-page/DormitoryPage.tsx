@@ -20,17 +20,7 @@ const DormitoryPage = () => {
 
   return (
     <>
-<<<<<<< HEAD
-      <Header
-        images={[
-          '/images/place/dormitory-image1.jpg',
-          '/images/place/dormitory-image2.jpg',
-          '/images/place/dormitory-image3.jpg',
-        ]}
-      />
-=======
       <Header images={criticalImages} />
->>>>>>> 535d62dd4379cf5f447233dffe5da41cd764fabf
       <main className="px-4">
         <Tag>Campus Life</Tag>
         <h1 className="text-[32px] font-bold mb-4">Dormitory</h1>
@@ -156,15 +146,11 @@ const DormitoryPage = () => {
         {/* 소제목 : OOOO */}
         <section className="mb-8 flex flex-col gap-5">
           <h2 className="text-xl font-bold">What to Bring</h2>
-<<<<<<< HEAD
-          <img src="/images/place/dormitory-image5.jpg" />
-=======
           <LazyImage
             src="/images/place/dormitory-image5.png"
             alt="What to bring checklist"
             className="w-full rounded-lg"
           />
->>>>>>> 535d62dd4379cf5f447233dffe5da41cd764fabf
           <ul className="text-sm font-light px-4 list-disc">
             <li>Pillow and blanket (not provided)</li>
             <li>Personal toiletries</li>
