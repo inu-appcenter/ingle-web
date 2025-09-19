@@ -1,19 +1,26 @@
 import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
 import NervousIcon from '@/shared/assets/icons/nervous-icon.png';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
-// import dormitoryImage1 from '@/shared/assets/images/place/dormitory-image1.jpg';
-// import dormitoryImage2 from '@/shared/assets/images/place/dormitory-image2.png';
-// import dormitoryImage3 from '@/shared/assets/images/place/dormitory-image3.jpg';
-// import dormitoryImage4 from '@/shared/assets/images/place/dormitory-image4.png';
-// import dormitoryImage5 from '@/shared/assets/images/place/dormitory-image5.png';
+import { LazyImage } from '@/shared/components/LazyImage';
+import { useImagePreload } from '@/shared/hooks/useImagePreload';
 import Header from '@/tutorials/components/Header';
 
 import Button from '@/tutorials/components/Button';
 import Tag from '@/tutorials/components/Tag';
 
 const DormitoryPage = () => {
+  // 중요한 이미지들을 미리 로드
+  const criticalImages = [
+    '/images/place/dormitory-image1.jpg',
+    '/images/place/dormitory-image2.png',
+    '/images/place/dormitory-image3.jpg',
+  ];
+
+  useImagePreload(criticalImages, { priority: true });
+
   return (
     <>
+<<<<<<< HEAD
       <Header
         images={[
           '/images/place/dormitory-image1.jpg',
@@ -21,6 +28,9 @@ const DormitoryPage = () => {
           '/images/place/dormitory-image3.jpg',
         ]}
       />
+=======
+      <Header images={criticalImages} />
+>>>>>>> 535d62dd4379cf5f447233dffe5da41cd764fabf
       <main className="px-4">
         <Tag>Campus Life</Tag>
         <h1 className="text-[32px] font-bold mb-4">Dormitory</h1>
@@ -43,8 +53,16 @@ const DormitoryPage = () => {
         {/* 소제목 : Dormitory Location */}
         <section className="mb-8 flex flex-col gap-5">
           <h2 className="text-xl font-bold">Dormitory Location</h2>
-          <img src="/images/place/dormitory-image1.jpg" />
-          <img src="/images/place/dormitory-image4.png" />
+          <LazyImage
+            src="/images/place/dormitory-image1.jpg"
+            alt="Dormitory location map"
+            className="w-full rounded-lg"
+          />
+          <LazyImage
+            src="/images/place/dormitory-image4.png"
+            alt="Dormitory facilities"
+            className="w-full rounded-lg"
+          />
           <p className="text-base font-light"></p>
           <ul className="list-disc px-4">
             <li>Dormitory 1 & 2 & 3: Building no. 18</li>
@@ -138,7 +156,15 @@ const DormitoryPage = () => {
         {/* 소제목 : OOOO */}
         <section className="mb-8 flex flex-col gap-5">
           <h2 className="text-xl font-bold">What to Bring</h2>
+<<<<<<< HEAD
           <img src="/images/place/dormitory-image5.jpg" />
+=======
+          <LazyImage
+            src="/images/place/dormitory-image5.png"
+            alt="What to bring checklist"
+            className="w-full rounded-lg"
+          />
+>>>>>>> 535d62dd4379cf5f447233dffe5da41cd764fabf
           <ul className="text-sm font-light px-4 list-disc">
             <li>Pillow and blanket (not provided)</li>
             <li>Personal toiletries</li>

@@ -1,16 +1,41 @@
 import { logout } from '@/profile/api/profile';
 import { ROUTES } from '@/router/routes';
-// import DeleteIcon from '@/shared/assets/icons/delete-icon.svg?react';
-// import InformationIcon from '@/shared/assets/icons/information-icon.svg?react';
-// import LogoutIcon from '@/shared/assets/icons/logout-icon.svg?react';
-// import NextIcon from '@/shared/assets/icons/next-icon.svg?react';
-// import QuestionIcon from '@/shared/assets/icons/question-icon.svg?react';
 import { useAuthStore } from '@/shared/stores/authStore';
 import { useNavigate } from 'react-router';
+import { useEffect } from 'react';
+import { useProfileStore } from '@/profile/stores/profile-store';
+import { getProfile } from '@/profile/api/profile';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
   const { clearTokens } = useAuthStore();
+  const {
+    memberId,
+    studentId,
+    department,
+    studentType,
+    country,
+    nickname,
+    imageUrl,
+    setProfile,
+  } = useProfileStore();
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      const res = await getProfile(); // 실제 API 함수 import 필요
+      console.log(res);
+      setProfile(
+        res.memberId,
+        res.studentId,
+        res.department,
+        res.studentType,
+        res.country,
+        res.nickname,
+        res.imageUrl,
+      );
+    };
+    fetchProfile();
+  }, []);
 
   const handleLogoutButton = async () => {
     try {
@@ -27,12 +52,12 @@ const ProfilePage = () => {
     <main className="flex flex-col px-4 items-center">
       {/* 프로필 사진 */}
       <div className="mt-16 rounded-full bg-[#d9d9d9] w-32 h-32 mb-8">
-        <img />
+        {imageUrl && <img src={imageUrl} alt="Profile" />}
       </div>
       {/* 닉네임 & 이메일 */}
       <div className="flex flex-col items-center gap-1 mb-4">
-        <p className="text-2xl font-bold ">Jung Youdahm</p>
-        <p className="text-sm">youdarmjung@inu.ac.kr</p>
+        <p className="text-2xl font-bold ">{nickname}</p>
+        {/* <p className="text-sm">{email || ''}</p> */}
       </div>
 
       {/* 프로필 수정 버튼 */}

@@ -94,7 +94,11 @@ export function Dropdown({
   onToggle,
 }: DropdownProps) {
   const dropdownRef = useRef<HTMLDivElement>(null); //
-  const selectedLabel = options.find(opt => opt.value === selectedValue)?.label;
+  const safeOptions = (options ?? []).filter(
+    (opt): opt is DropdownOption =>
+      !!opt && typeof opt.value === 'string' && typeof opt.label === 'string',
+  );
+  const selectedLabel = safeOptions.find(opt => opt.value === selectedValue)?.label;
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -126,7 +130,7 @@ export function Dropdown({
             className="scroll absolute w-full mt-1 py-2 bg-white border border-[#DEE2E6] rounded-xl shadow-lg z-10
           max-h-56 overflow-y-auto"
           >
-            {options.map(option => (
+            {safeOptions.map(option => (
               <li
                 key={option.value}
                 onClick={() => {

@@ -11,8 +11,9 @@ const BottomNavigator = () => {
   return (
     <nav
       className="fixed bottom-4 left-1/2 -translate-x-1/2 
-                    w-[90%] max-w-xs h-16 p-1 bg-[#E8E5EF]/60 backdrop-blur-md
-                    rounded-full"
+                    w-[90%] max-w-xs h-16 p-1  backdrop-blur-md
+                    rounded-full bg-[#E8E5EF]/60
+                    "
     >
       <ul className="h-full flex flex-row justify-between text-center text-xs">
         {/* Home으로 이동 */}

@@ -3,7 +3,7 @@ import { Canvas } from '@react-three/fiber';
 import { useRef } from 'react';
 
 import Model from '@/map/components/MapTest';
-import BottomSheet from './components/BottomSheet';
+import BottomSheet from '@/map/components/BottomSheet';
 
 const MapPage = () => {
   const modelRef = useRef<any>(null);

@@ -3,8 +3,8 @@ import BackIcon from '@/shared/assets/icons/back-icon.svg?react';
 
 const StampHeader = ({ children }: { children: ReactNode }) => {
   return (
-    <header className="w-full h-20 flex items-center gap-2">
-      <BackIcon className="cursor-pointer" />
+    <header className="w-full h-20 flex items-center gap-2 mx-4">
+      {/* <BackIcon className="cursor-pointer" /> */}
       <p className="text-2xl">{children}</p>
     </header>
   );
