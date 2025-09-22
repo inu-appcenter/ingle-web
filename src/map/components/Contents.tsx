@@ -138,7 +138,7 @@ export default function Contents({
           {/* [ ] 이미지 잘 모르겠음...*/}
           <section className="flex flex-row gap-4 mx-1">
             <img
-              src={`${import.meta.env.BASE_URL}/api/v1/images/ece07de0-edf2-4df2-b65e-787e1e8ef7da.png`}
+              src="https://ingle-server.inuappcenter.kr/api/v1/images/ece07de0-edf2-4df2-b65e-787e1e8ef7da.png"
               alt="image"
             />
           </section>
