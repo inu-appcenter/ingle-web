@@ -12,7 +12,7 @@ const DormitoryPage = () => {
   // 중요한 이미지들을 미리 로드
   const criticalImages = [
     '/images/place/dormitory-image1.jpg',
-    '/images/place/dormitory-image2.png',
+    '/images/place/dormitory-image2.jpg',
     '/images/place/dormitory-image3.jpg',
   ];
 
