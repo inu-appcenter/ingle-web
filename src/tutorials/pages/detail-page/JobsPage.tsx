@@ -44,7 +44,7 @@ const JobsPage = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <Header images={['/images/place/jops-image.png']} />
+      <Header images={['/images/place/jops-image.jpg']} />
       <main className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />
         <h1 className="text-[#383737] text-[32px] font-bold leading-none">Job</h1>

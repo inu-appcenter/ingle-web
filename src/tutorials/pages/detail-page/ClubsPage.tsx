@@ -10,9 +10,8 @@ const ClubsPage = () => {
   // 중요한 이미지들을 미리 로드
   const criticalImages = [
     '/images/place/club-image1.jpg',
-    '/images/place/club-image2.png',
-    '/images/place/club-image3.png',
-    '/images/place/club-image4.png',
+    '/images/place/club-image2.jpg',
+    '/images/place/club-image3.jpg',
   ];
 
   useImagePreload(criticalImages, { priority: true });

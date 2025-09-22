@@ -49,7 +49,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <main className="flex flex-col px-4 items-center">
+    <main className="flex flex-col px-4 items-center text-black">
       {/* 프로필 사진 */}
       <div className="mt-16 rounded-full bg-[#d9d9d9] w-32 h-32 mb-8">
         {imageUrl && <img src={imageUrl} alt="Profile" />}

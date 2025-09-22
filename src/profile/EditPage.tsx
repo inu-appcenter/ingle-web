@@ -4,11 +4,13 @@ import { editMembers } from '@/profile/api/profile';
 import Header from '@/profile/components/Header';
 import ProfileButton from '@/profile/components/ProfileButton';
 import { LazyImage } from '@/shared/components/LazyImage';
-// import EditIcon from '@/shared/assets/icons/edit-icon.svg?react';
+import EditIcon from '@/shared/assets/icons/edit-icon.svg?react';
 // import testImage from '@/shared/assets/images/stamp/clubs-image.png';
 import { useAuthStore } from '@/shared/stores/authStore';
 import { useState } from 'react';
 import { useProfileStore } from '@/profile/stores/profile-store';
+import { useNavigate } from 'react-router';
+import { ROUTES } from '@/router/routes';
 
 const EditPage = () => {
   const { studentId, nickname, studentType, department } = useAuthStore();
@@ -20,8 +22,8 @@ const EditPage = () => {
   const [editedDepartment, setEditedDepartment] = useState(department);
   const [status, setStatus] = useState(studentType);
   const [country, setCountry] = useState('SOUTH_KOREA'); // 기본값 추가
-
   const [openDropdown, setOpenDropdown] = useState<null | 'department' | 'status'>(null);
+  const navigate = useNavigate();
 
   // [ ] 현재 undergraduate 대학만 나타내고 있다.
   const departmentList = [
@@ -85,10 +87,23 @@ const EditPage = () => {
             ) : (
               <div className="w-40 h-40 rounded-full bg-[#d9d9d9]" />
             )}
-            <img
-              src="/icons/edit-icon.svg"
-              alt="Edit"
-              className="absolute bottom-2 right-2 w-6 h-6"
+
+            <EditIcon
+              className="absolute bottom-2 right-2 w-6 h-6 cursor-pointer transition-all duration-200 hover:brightness-0 hover:saturate-100 hover:invert hover:sepia hover:hue-rotate-[270deg] hover:contrast-100"
+              style={{
+                filter: 'none',
+                transition: 'filter 0.2s ease-in-out',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.filter =
+                  'brightness(0) saturate(100%) invert(27%) sepia(100%) saturate(7500%) hue-rotate(270deg) contrast(100%)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.filter = 'none';
+              }}
+              onClick={e => {
+                navigate(ROUTES.PROFILE_EDIT_IMAGE);
+              }}
             />
           </div>
           <p className="text-xl font-bold">{editedNickname}</p>

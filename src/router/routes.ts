@@ -22,6 +22,7 @@ export const ROUTES = {
   STAMP: '/stamp',
   MAP: '/map',
   PROFILE: '/profile',
+  PROFILE_EDIT_IMAGE: '/profile/edit/image',
   ADMIN: '/admin',
   NOTFOUND: '*',
 } as const;

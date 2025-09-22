@@ -11,8 +11,9 @@ const FestivalPage = () => {
     <>
       <Header
         images={[
-          '/images/place/festival-image1.png',
-          '/images/place/festival-image2.png',
+          '/images/place/festival-image1.jpg',
+          '/images/place/festival-image2.jpg',
+          '/images/place/festival-image3.jpg',
         ]}
       />
       <main className="px-4 flex gap-5 flex-col">
