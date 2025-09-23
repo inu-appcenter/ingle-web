@@ -25,6 +25,7 @@ export default function Portal() {
   const [remember, setRemember] = useState(false);
   const navigate = useNavigate();
   const storedId = localStorage.getItem('portalId');
+  const [loginError, setLoginError] = useState<string | null>(null);
 
   const {
     register,
@@ -52,7 +53,6 @@ export default function Portal() {
 
         navigate(ROUTES.TUTORIAL);
       } else if (res.status === 202) {
-        alert(res.data.message); //회원가입이 필요합니다
         setStudentInfo({ portalId: res.data.studentId });
         setStep('studentInfo');
       }
@@ -63,18 +63,12 @@ export default function Portal() {
         localStorage.removeItem('portalId');
       }
     } catch (err: any) {
-      if (err.response.status === 401) {
-        alert(err.response.data.message); // 로그인이 실패하였습니다
+      if (err.response?.status === 401) {
+        setLoginError('-- Portal Login Fail --');
       } else {
-        console.log(err);
-        alert('알 수 없는 오류가 발생했습니다.');
+        setLoginError('Something is wrong.');
       }
     }
-  };
-
-  const onError = (err: any) => {
-    alert('학번과 비밀번호를 확인해주세요');
-    console.error('로그인 에러:', err);
   };
 
   const handleVisibility = () => {
@@ -95,7 +89,7 @@ export default function Portal() {
       <h1 className="text-4xl font-extrabold mb-2">Log in</h1>
       <h1 className="text-base">Please Enter your INU Portal ID/PW</h1>
       <form
-        onSubmit={handleSubmit(onSubmit, onError)}
+        onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col flex-1 w-full justify-center gap-[20px] mt-[26px]"
       >
         {/*학번*/}
@@ -103,7 +97,7 @@ export default function Portal() {
           <Id className="mr-4" />
           <input
             {...register('studentId', {
-              required: true,
+              required: { value: true, message: 'check your studendId' },
             })}
             defaultValue={storedId || ''}
             placeholder="20XXXXXXX"
@@ -134,8 +128,14 @@ export default function Portal() {
           Remember Me
         </label>
 
+        <p
+          className={`text-red-500 text-sm text-center min-h-[20px] ${loginError ? 'visible' : 'invisible'}`}
+        >
+          {loginError || 'placeholder'}
+        </p>
+
         <button
-          className="mt-auto flex-none mb-4 mx-4 h-12 bg-[#7A00E6] text-white rounded-2xl"
+          className="mt-auto mb-4 mx-4 h-12 bg-[#7A00E6] text-white rounded-2xl"
           type="submit"
         >
           Log in
