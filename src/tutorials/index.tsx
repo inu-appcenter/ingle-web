@@ -17,21 +17,23 @@ const campusLifeList = [
     icon: <img src="/icons/tutorial2-icon.svg" alt="Dormitory" className="w-30 h-30" />,
   },
   {
+    name: 'Clubs',
+    description: '동아리 가입, 활동 정보 및 모집 공고',
+    route: ROUTES.CLUBS,
+
+    icon: <img src="/icons/tutorial3-icon.svg" alt="Library" className="w-30 h-30" />,
+  },
+  {
     name: 'Library',
     description: '도서관 이용안내, 열람실 및 자료 검색',
     route: ROUTES.LIBRARY,
-    icon: <img src="/icons/tutorial3-icon.svg" alt="Library" className="w-30 h-30" />,
+
+    icon: <img src="/icons/tutorial4-icon.svg" alt="Festival" className="w-30 h-30" />,
   },
   {
     name: 'Festival',
     description: '학교 축제, 행사 일정 및 참여 방법',
     route: ROUTES.FESTIVAL,
-    icon: <img src="/icons/tutorial4-icon.svg" alt="Festival" className="w-30 h-30" />,
-  },
-  {
-    name: 'Clubs',
-    description: '동아리 가입, 활동 정보 및 모집 공고',
-    route: ROUTES.CLUBS,
     icon: <img src="/icons/tutorial5-icon.svg" alt="Clubs" className="w-30 h-30" />,
   },
 ];

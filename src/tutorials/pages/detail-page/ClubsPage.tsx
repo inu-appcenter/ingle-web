@@ -144,7 +144,7 @@ const ClubsPage = () => {
             <p className="text-base font-bold">List of Central Clubs</p>
             <div className="bg-[#354B45] px-2 rounded-[20px] h-6">
               <p className="text-[#ffffff]">
-                <a href="https://www.youtube.com/watch?v=TK7vpDZe1c8">view</a>
+                <a href="https://www.inu.ac.kr/inu/11707/subview.do">view</a>
               </p>
             </div>
           </div>

@@ -45,7 +45,11 @@ export const getProfile = async () => {
 
 export const deleteAccount = async (reason?: string) => {
   try {
-    const res = await instance.delete('/api/v1/auth');
+    const res = await instance.delete('/api/v1/auth', {
+      data: {
+        content: reason,
+      },
+    });
     return res.data;
   } catch (error) {
     console.error('탈퇴 에러 발생:', error);
