@@ -64,7 +64,7 @@ const InsurancePage = () => {
 
   return (
     <div className="flex flex-col w-full">
-      <Header images={['/images/place/insurance-image.png']} />
+      <Header images={['/images/place/insurance-image.jpg']} />
 
       <main className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />

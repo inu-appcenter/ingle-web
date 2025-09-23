@@ -1,24 +1,24 @@
 import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
-// import clubImage1 from '@/shared/assets/images/place/club-image1.jpg';
-// import clubImage2 from '@/shared/assets/images/place/club-image2.png';
-// import clubImage3 from '@/shared/assets/images/place/club-image3.png';
-// import clubImage4 from '@/shared/assets/images/place/club-image4.png';
+import { LazyImage } from '@/shared/components/LazyImage';
+import { useImagePreload } from '@/shared/hooks/useImagePreload';
 import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
 import Tag from '@/tutorials/components/Tag';
 
 const ClubsPage = () => {
+  // 중요한 이미지들을 미리 로드
+  const criticalImages = [
+    '/images/place/club-image1.jpg',
+    '/images/place/club-image2.jpg',
+    '/images/place/club-image3.jpg',
+  ];
+
+  useImagePreload(criticalImages, { priority: true });
+
   return (
     <>
-      <Header
-        images={[
-          '/images/place/club-image1.jpg',
-          '/images/place/club-image2.png',
-          '/images/place/club-image3.png',
-          '/images/place/club-image4.png',
-        ]}
-      />
+      <Header images={criticalImages} />
       <main className="px-4 flex flex-col gap-5">
         <Tag>Campus Life</Tag>
         <h1 className="text-[32px] font-bold">Student Club</h1>
@@ -130,7 +130,11 @@ const ClubsPage = () => {
               </tr>
             </tbody>
           </table>
-          <img src="/images/place/club-image4.png" />
+          <LazyImage
+            src="/images/place/club-image4.png"
+            alt="Student club activities"
+            className="w-full rounded-lg"
+          />
         </section>
         <hr className="border-t border-[#E8E5EF] my-5" />
 

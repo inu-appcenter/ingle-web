@@ -1,6 +1,7 @@
 import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
 import GiftIcon from '@/shared/assets/icons/gift-icon.png';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
+import DownloadIcon from '@/shared/assets/icons/download-icon.svg?react';
 // import curriculumImage1 from '@/shared/assets/images/place/curriculum-image1.jpg';
 import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
@@ -140,6 +141,16 @@ const CurriculumPage = () => {
             </p>
           </div>
         </div>
+
+        <a
+          href="https://admission.inu.ac.kr/submenu.do?menuurl=Cf5PbokbyGk5VfLO98MtrA%3d%3d&"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex mx-auto gap-4 items-center hover:underline cursor-pointer"
+        >
+          <p className="text-xl">Admission Guide Book_2025 Fall</p>
+          <DownloadIcon />
+        </a>
 
         <div className="flex flex-col gap-4 p-4 bg-[#F4F2F6] rounded-md mt-8">
           <div className="flex flex-row items-center gap-4">
