@@ -8,16 +8,18 @@ const DeletePage = () => {
   const navigate = useNavigate();
   const [reason, setReason] = useState('');
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     if (!reason) {
       alert('탈퇴 사유를 선택해주세요.');
       return;
     }
 
-    // API 연동은 추후 추가 예정
-    // console.log('선택한 탈퇴 사유:', reason);
-    deleteAccount();
-    navigate('/'); // 원하는 경로로 수정 가능
+    try {
+      await deleteAccount(reason);
+      navigate('/');
+    } catch (e) {
+      alert('탈퇴 처리 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+    }
   };
 
   return (
