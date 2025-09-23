@@ -5,6 +5,7 @@ import NotFoundPage from '@/not-fuound';
 import ProfilePage from '@/profile';
 import DeletePage from '@/profile/DeletePage';
 import EditPage from '@/profile/EditPage';
+import EditImagePage from '@/profile/EditImagePage';
 import SupportPage from '@/profile/SupportPage';
 import { ROUTES } from '@/router/routes';
 import BottomNavigator from '@/shared/components/BottomNavigator';
@@ -50,6 +51,7 @@ function AppWrapper() {
             <Route path={ROUTES.MAP} element={<MapPage />} />
             <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
             <Route path={`${ROUTES.PROFILE}/edit`} element={<EditPage />} />
+            <Route path={ROUTES.PROFILE_EDIT_IMAGE} element={<EditImagePage />} />
             <Route path={`${ROUTES.PROFILE}/delete`} element={<DeletePage />} />
             <Route path={`${ROUTES.PROFILE}/support`} element={<SupportPage />} />
             <Route path={ROUTES.NOTFOUND} element={<NotFoundPage />} />

@@ -30,7 +30,7 @@ export default function KCulturePage() {
 
   return (
     <div className="flex flex-col w-full">
-      <Header images={['/images/place/kculture-image.png']} />
+      <Header images={['/images/place/kculture-image.jpg']} />
       <div className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />
         <h1 className="text-[#383737] text-[32px] font-bold leading-none">K-Culture</h1>
