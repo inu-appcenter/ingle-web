@@ -21,10 +21,10 @@ const TutorialModal = ({ isOpen, onClose }: TutorialModalProps) => {
 
   return (
     <div
-      className="fixed inset-0 bg-black/80 flex flex-col items-end justify-center z-50 "
+      className="fixed inset-0 bg-black/80 flex flex-col items-center justify-end z-50 "
       onClick={onClose}
     >
-      <div className="px-5 pt-16 pb-8 fixed bottom-0 flex flex-col bg-white rounded-t-[30px] w-full">
+      <div className="relative max-w-[480px] px-5 pt-16 pb-8 fixed bottom-0 flex flex-col bg-white rounded-t-[30px] w-full">
         <div className="absolute -top-36 left-1/2 -translate-x-1/2">
           <RewardBox />
         </div>

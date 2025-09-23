@@ -6,7 +6,7 @@ import Contents from '@/map/components/Contents';
 
 import Close from '@/map/icons/close.svg?react';
 
-export default function BottomSheet() {
+export default function BottomSheet({ modelRef }: { modelRef: React.RefObject<any> }) {
   const { sheet, content, handleUp, handleDown } = useBottomSheet();
   const [buildingList, setBuildingList] = useState<SearchResult[]>([]);
   const [showDetail, setShowDetail] = useState<number | null>(null);
@@ -28,6 +28,7 @@ export default function BottomSheet() {
       {/* 핸들러 */}
       <div className="flex-none my-4 h-[5px] w-9 rounded-sm bg-[#BEBFC0]" />
 
+      {/* 건물 상세 정보 */}
       {showDetail && (
         <div className="overflow-y-auto scrollbar-hide w-full">
           <Contents buildingList={buildingList} Id={showDetail}>
@@ -36,9 +37,11 @@ export default function BottomSheet() {
         </div>
       )}
 
+      {/* 바텀시트 기본 구성 */}
       {!showDetail && (
         <>
-          <Header setBuildingList={setBuildingList} />
+          <Header setBuildingList={setBuildingList} modelRef={modelRef} />
+
           <div ref={content} className="overflow-y-auto w-full">
             {/* 빌딩 리스트 */}
             {buildingList.map(building => (
@@ -51,9 +54,6 @@ export default function BottomSheet() {
                 }}
               >
                 <div className="font-bold">{building.buildingName}</div>
-                <div className="text-sm text-gray-500">
-                  {building.latitude}, {building.longitude}
-                </div>
                 <div className="text-sm">{building.buildingCategory}</div>
               </div>
             ))}

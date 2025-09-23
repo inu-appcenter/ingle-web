@@ -68,8 +68,6 @@ export default function useBottomSheet() {
       const { touchStart, touchMove } = metrics.current;
       const currentTouch = e.touches[0];
 
-      console.log(touchStart.touchY, currentTouch.clientY);
-      ``;
       if (touchMove.prevTouchY === undefined) {
         touchMove.prevTouchY = touchStart.touchY;
       }
@@ -89,7 +87,7 @@ export default function useBottomSheet() {
       }
 
       if (canUserMoveBottomSheet()) {
-        e.preventDefault();
+        //e.preventDefault();
         const touchOffset = currentTouch.clientY - touchStart.touchY;
         let nextSheetY = touchStart.sheetY + touchOffset;
 

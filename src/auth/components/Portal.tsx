@@ -25,15 +25,12 @@ export default function Portal() {
   const [remember, setRemember] = useState(false);
   const navigate = useNavigate();
   const storedId = localStorage.getItem('portalId');
-  console.log('저장된 아이디', storedId);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-
-  console.log(errors);
 
   const onSubmit = async (data: Inputs, e: any) => {
     e.preventDefault(); //기본 제출 막기.
@@ -52,7 +49,6 @@ export default function Portal() {
           nickname: res.data.nickname,
         });
         setTokens(res.data.accessToken, res.data.accessTokenExpiresDate);
-        console.log('로그인 성공');
 
         navigate(ROUTES.TUTORIAL);
       } else if (res.status === 202) {
