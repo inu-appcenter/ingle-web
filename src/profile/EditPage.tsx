@@ -80,7 +80,7 @@ const EditPage = () => {
           <div className="relative">
             {imageUrl ? (
               <LazyImage
-                src={imageUrl}
+                src={`${import.meta.env.VITE_BASE_URL}${imageUrl}`}
                 alt="profile-image"
                 className="w-40 h-40 rounded-full object-cover"
               />

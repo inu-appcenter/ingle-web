@@ -52,7 +52,9 @@ const ProfilePage = () => {
     <main className="flex flex-col px-4 items-center text-black">
       {/* 프로필 사진 */}
       <div className="mt-16 rounded-full bg-[#d9d9d9] w-32 h-32 mb-8">
-        {imageUrl && <img src={imageUrl} alt="Profile" />}
+        {imageUrl && (
+          <img src={`${import.meta.env.VITE_BASE_URL}${imageUrl}`} alt="Profile" />
+        )}
       </div>
       {/* 닉네임 & 이메일 */}
       <div className="flex flex-col items-center gap-1 mb-4">
