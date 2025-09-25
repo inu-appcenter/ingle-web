@@ -113,7 +113,7 @@ export default function Portal() {
             {...register('password', {
               required: true,
               onChange: e => {
-                e.target.value = e.target.value.replace(/[^0-9a-zA-Z]/g, '');
+                e.target.value = e.target.value.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
               },
             })}
             className="bg-transparent outline-none flex-1 placeholder:text-[#C1C9D2]"
