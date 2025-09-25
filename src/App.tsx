@@ -4,8 +4,8 @@ import MapPage from '@/map';
 import NotFoundPage from '@/not-fuound';
 import ProfilePage from '@/profile';
 import DeletePage from '@/profile/DeletePage';
-import EditPage from '@/profile/EditPage';
 import EditImagePage from '@/profile/EditImagePage';
+import EditPage from '@/profile/EditPage';
 import SupportPage from '@/profile/SupportPage';
 import { ROUTES } from '@/router/routes';
 import BottomNavigator from '@/shared/components/BottomNavigator';
@@ -14,6 +14,7 @@ import StampPage from '@/stamp';
 import TutorialPage from '@/tutorials';
 import TutorialModal from '@/tutorials/components/Modal';
 import TutorialDetailPage from '@/tutorials/pages/TutorialDetailPage';
+import { useNavigate } from 'react-router';
 import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
 
 function AppWrapper() {
@@ -21,6 +22,7 @@ function AppWrapper() {
   const isAdmin = location.pathname === ROUTES.ADMIN;
   const isAuth = location.pathname === ROUTES.AUTH;
   const { isOpen, openModal, closeModal } = useTutorialModal();
+  const navigate = useNavigate();
 
   // 관리자 페이지는 기존 레이아웃 유지
   if (isAdmin) {

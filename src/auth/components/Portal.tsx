@@ -98,6 +98,9 @@ export default function Portal() {
           <input
             {...register('studentId', {
               required: 'check your Id',
+              onChange: e => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+              },
             })}
             defaultValue={storedId || ''}
             placeholder="20XXXXXXX"
