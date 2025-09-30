@@ -24,6 +24,7 @@ const EditPage = () => {
   const [country, setCountry] = useState('SOUTH_KOREA'); // 기본값 추가
   const [openDropdown, setOpenDropdown] = useState<null | 'department' | 'status'>(null);
   const navigate = useNavigate();
+  const a = 123;
 
   // [ ] 현재 undergraduate 대학만 나타내고 있다.
   const departmentList = [
