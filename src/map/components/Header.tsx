@@ -34,7 +34,7 @@ export default function Header({
 }) {
   const { register, handleSubmit } = useForm();
   const [category, setCategory] = useState<Category | null>(null);
-  const visibleBuildings = useRayStore();
+  const visibleBuildings = useRayStore(state => state.visibleBuildings);
 
   const handleCategoryClick = (categoryName: Category) => {
     // 현재 선택된 카테고리와 클릭한 카테고리가 같으면 null로, 아니면 해당 카테고리로 설정합니다.
@@ -62,11 +62,13 @@ export default function Header({
         });
         console.log('api 결과', category, res.data);
 
-        // [ ] 모든 검사가 진행되고 나서 그다음에 저장되어야 할듯.
-        setBuildingList(res.data); //카테고리의 모든 빌딩 데이터 리스트
+        const filtered = res.data.filter((b: any) =>
+          useRayStore.getState().visibleBuildings.includes(b.buildingId),
+        );
+        console.log('최종검색 결과 : ', filtered);
 
-        //테스트
-        console.log('저장된 건물:', visibleBuildings);
+        // [ ] 모든 검사가 진행되고 나서 그다음에 저장되어야 할듯.
+        setBuildingList(filtered); //카테고리의 모든 빌딩 데이터 리스트
 
         //setBuildingList();
       } catch (err) {

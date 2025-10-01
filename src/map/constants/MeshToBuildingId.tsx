@@ -104,3 +104,5 @@ const meshNameToBuildingId: Record<string, number[]> = {
   smoking_area004: [95],
   cylinder_observatory: [26], //[ ]어딘지 확인 필요
 };
+
+export default meshNameToBuildingId;

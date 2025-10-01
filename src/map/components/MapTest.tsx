@@ -1,3 +1,4 @@
+import MeshToBuildingId from '@/map/constants/MeshToBuildingId';
 import { useRayStore } from '@/map/stores/rayStore';
 import { useGLTF } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
@@ -9,7 +10,7 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
   const { camera, scene } = useThree();
   const raycaster = useRef(new THREE.Raycaster()).current;
   const originalColors = useRef(new Map<THREE.Mesh, THREE.Color>());
-  const { setVisibleBuildings, resetVisibleBuildings } = useRayStore();
+  const { setVisibleBuildings } = useRayStore();
 
   //ray 선 그룹
   const guideGroup = useRef<THREE.Group>(new THREE.Group());
@@ -88,13 +89,22 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       }
     });
 
-    const visibleNames = Array.from(visibleBuildings).map(b => b.name);
-    console.log('maptest 보이는 건물:', visibleNames);
+    //mesh -> buildingid 변환
+    const visibleId = Array.from(visibleBuildings)
+      .flatMap(b => MeshToBuildingId[b.name])
+      .sort((a, b) => a - b);
+    const setVisibleId = Array.from(new Set(visibleId));
+
+    //const visibleNames = Array.from(visibleBuildings).map(b => b.name);
+    console.log('maptest 보이는 건물id:', setVisibleId);
     // 건물의 번호만 추출
 
     //저장
-    resetVisibleBuildings();
-    setVisibleBuildings(visibleNames);
+    setVisibleBuildings(setVisibleId);
+
+    //테스트
+    const current = useRayStore.getState().visibleBuildings; // 최신 값 바로 가져오기
+    console.log('저장된 건물:', current);
   };
 
   // 외부 ref에서 castRays 호출 가능
