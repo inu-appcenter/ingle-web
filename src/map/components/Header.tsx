@@ -62,15 +62,14 @@ export default function Header({
         });
         console.log('api 결과', category, res.data);
 
+        //
         const filtered = res.data.filter((b: any) =>
           useRayStore.getState().visibleBuildings.includes(b.buildingId),
         );
         console.log('최종검색 결과 : ', filtered);
 
-        // [ ] 모든 검사가 진행되고 나서 그다음에 저장되어야 할듯.
+        // [x] 모든 검사가 진행되고 나서 그다음에 저장되어야 할듯.
         setBuildingList(filtered); //카테고리의 모든 빌딩 데이터 리스트
-
-        //setBuildingList();
       } catch (err) {
         console.log(err);
       }
