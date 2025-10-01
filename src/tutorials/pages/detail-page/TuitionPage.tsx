@@ -1,13 +1,19 @@
 import CheckIcon from '@/shared/assets/icons/check-icon.svg?react';
 import SmileIcon from '@/shared/assets/icons/smile-icon.svg?react';
+import { LazyImage } from '@/shared/components/LazyImage';
+import { useImagePreload } from '@/shared/hooks/useImagePreload';
 import Button from '@/tutorials/components/Button';
 import Header from '@/tutorials/components/Header';
 import Tag from '@/tutorials/components/Tag';
 
 const TuitionPage = () => {
+  // 중요한 이미지들을 미리 로드
+  const criticalImages = ['/images/place/tuition-image1.jpg'];
+  useImagePreload(criticalImages, { priority: true });
+
   return (
     <>
-      <Header images={['/images/place/tuition-image1.jpg']} />
+      <Header images={criticalImages} />
       <main className="px-4 flex flex-col gap-5">
         <Tag>Academics</Tag>
         <h1 className="text-[32px] font-bold">Tuition</h1>
@@ -146,7 +152,11 @@ const TuitionPage = () => {
               <li>Certificate of Language Skills</li>
             </ul>
           </div>
-          <img src="/images/place/tuition-image2.png" />
+          <LazyImage
+            src="/images/place/tuition-image2.png"
+            alt="Tuition payment information"
+            className="w-full rounded-lg"
+          />
           <div className="bg-[#C3FCF2] flex justify-between px-4 h-16 items-center text-base rounded-[20px]">
             <p className="text-base font-bold">2025 Syllabus</p>
             <div className="bg-[#007663] px-2 rounded-[20px] h-6">

@@ -13,11 +13,10 @@ const SupportPage = () => {
       const res = await instance.post('/api/v1/members/feedback', {
         content: feedback,
       });
-      console.log('피드백 전송 결과:', res.data);
-      alert('피드백이 성공적으로 전송되었습니다!');
+      console.log(res);
       navigate(-1); // 전송 후 뒤로가기
     } catch (error) {
-      console.error('피드백 전송 오류:', error);
+      console.error(error);
       alert('피드백 전송 중 오류가 발생했습니다.');
     }
   };

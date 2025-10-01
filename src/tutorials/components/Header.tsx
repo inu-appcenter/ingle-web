@@ -1,10 +1,12 @@
 // import BackIcon from '@/shared/assets/icons/back-icon.svg?react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { LazyImage } from '@/shared/components/LazyImage';
+import { useImagePreload } from '@/shared/hooks/useImagePreload';
 
 interface HeaderProps {
   images: string[];
@@ -13,6 +15,9 @@ interface HeaderProps {
 const Header = ({ images }: HeaderProps) => {
   const navigate = useNavigate();
   const [zoomImage, setZoomImage] = useState<string | null>(null);
+
+  // Header의 이미지들은 중요하므로 우선 로드
+  useImagePreload(images, { priority: true });
 
   const handleBackClick = (): void => {
     navigate(-1);
@@ -30,10 +35,11 @@ const Header = ({ images }: HeaderProps) => {
       >
         {images.map((src, idx) => (
           <SwiperSlide key={idx}>
-            <img
+            <LazyImage
               src={src}
+              alt={`Header image ${idx + 1}`}
               className="w-full h-full object-cover object-center select-none cursor-zoom-in"
-              alt={`dormitory-${idx}`}
+              onLoad={() => console.log(`Header image ${idx + 1} loaded`)}
               onClick={() => setZoomImage(src)}
             />
           </SwiperSlide>

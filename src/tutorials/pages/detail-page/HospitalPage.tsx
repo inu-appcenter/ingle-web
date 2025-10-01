@@ -79,7 +79,7 @@ export default function HospitalPage() {
 
   return (
     <div className="flex flex-col w-full">
-      <Header images={['/images/place/hospital-image.png']} />
+      <Header images={['/images/place/hospital-image.jpg']} />
 
       <main className="flex flex-col gap-5 mx-4 text-[#383737] leading-[140%]">
         <CategoryTag />
