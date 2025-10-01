@@ -18,6 +18,7 @@ export default function Contents({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [details, setDetails] = useState<BuildingDetails | null>(null);
+  const [isDrop, setIsDrop] = useState(false);
   const Day = [
     'Sunday',
     'Monday',
@@ -30,50 +31,15 @@ export default function Contents({
 
   if (!buildingList || buildingList.length === 0) return null;
 
-  const checkTime = () => {
-    // 현재 시간 가져와서 비교 => 오픈, 닫음
-    const getTime = new Date();
-    const Today: Times = {
-      hour: getTime.getHours(),
-      minute: getTime.getMinutes(),
-    };
-    const openTime: Times = {
-      hour: Number(details?.openTime.split(':')[0]),
-      minute: Number(details?.openTime.split(':')[1]),
-    };
-    const closedTime: Times = {
-      hour: Number(details?.closeTime.split(':')[0]),
-      minute: Number(details?.closeTime.split(':')[1]),
-    };
-
-    //closedDay = string (Monday, Tuesday ...)
-    //day = 0~6 (일~토)
-    {
-      details?.closedDays.map(closedDay => {
-        if (closedDay === Day[getTime.getDay()]) {
-          setIsOpen(false);
-        } else if (Today.hour >= openTime.hour && Today.hour <= closedTime.hour) {
-          if (
-            (Today.hour === openTime.hour && Today.minute < openTime.minute) ||
-            (Today.hour === closedTime.hour && Today.minute > closedTime.minute)
-          ) {
-            setIsOpen(false);
-          } else {
-            setIsOpen(true);
-          }
-        }
-      });
-    }
-  };
-
   const operation = () => {
     const OpenDays = Day.filter(x => !details?.closedDays.includes(x));
     console.log(OpenDays);
     return (
       <div>
         {OpenDays.map(index => (
-          <div>
-            {index.slice(0, 3)} {details?.openTime} - {details?.closeTime}
+          <div className="flex flex-row">
+            <p className="w-10">{index.slice(0, 3)}</p> {details?.openTime} -{' '}
+            {details?.closeTime}
           </div>
         ))}
       </div>
@@ -84,23 +50,68 @@ export default function Contents({
     window.location.href = details.buildingUrl;
   };
 
-  const showImages = () => {};
-
-  const getDetails = async (Id: number | null) => {
-    console.log('건물ID', Id);
-    if (!Id) return;
-    try {
-      const res = await api.get(`${import.meta.env.VITE_MAP_BUILDIINGS}/${Id}`);
-      setDetails(res.data);
-      console.log(res.data);
-    } catch {}
+  const showImages = async (imageUrls: string[] | undefined) => {
+    if (imageUrls === undefined) return;
+    for (let i = 0; i < imageUrls.length; i++) {
+      try {
+        const res = await api.get(`/api/v1/images/${imageUrls[i]}`);
+        console.log(res.data);
+      } catch {
+        console.log('이미지 실패');
+      }
+    }
   };
 
   useEffect(() => {
+    const getDetails = async (Id: number | null) => {
+      console.log('건물ID', Id);
+      if (!Id) return;
+      try {
+        const res = await api.get(`${import.meta.env.VITE_MAP_BUILDIINGS}/${Id}`);
+        setDetails(res.data);
+        console.log(res.data);
+      } catch {}
+    };
     getDetails(Id);
   }, [Id]);
 
   useEffect(() => {
+    const checkTime = () => {
+      // 현재 시간 가져와서 비교 => 오픈, 닫음
+      const getTime = new Date();
+      const Today: Times = {
+        hour: getTime.getHours(),
+        minute: getTime.getMinutes(),
+      };
+      const openTime: Times = {
+        hour: Number(details?.openTime.split(':')[0]),
+        minute: Number(details?.openTime.split(':')[1]),
+      };
+      const closedTime: Times = {
+        hour: Number(details?.closeTime.split(':')[0]),
+        minute: Number(details?.closeTime.split(':')[1]),
+      };
+
+      //closedDay = string (Monday, Tuesday ...)
+      //day = 0~6 (일~토)
+      {
+        details?.closedDays.map(closedDay => {
+          if (closedDay === Day[getTime.getDay()]) {
+            setIsOpen(false);
+          } else if (Today.hour >= openTime.hour && Today.hour <= closedTime.hour) {
+            if (
+              (Today.hour === openTime.hour && Today.minute < openTime.minute) ||
+              (Today.hour === closedTime.hour && Today.minute > closedTime.minute)
+            ) {
+              setIsOpen(false);
+            } else {
+              setIsOpen(true);
+            }
+          }
+        });
+      }
+    };
+
     checkTime();
     const timer = setInterval(() => {
       checkTime();
@@ -121,35 +132,31 @@ export default function Contents({
             <div className="w-[30px] h-[30px]">{children}</div>
             {/* children은 닫기 버튼 */}
           </div>
-          <h3 className="text-[15px] ">한줄 부가 설명</h3>
         </header>
 
         <main className="flex flex-col gap-5">
           {/* [ ] 이미지 잘 모르겠음...*/}
           <section className="flex flex-row gap-4 mx-1">
-            {details?.buildingImages.map(imgurl => (
-              <img
-                key={imgurl}
-                src={`${import.meta.env.VITE_IMAGE}/${imgurl}`}
-                alt="images"
-              />
-            ))}
+            <img
+              src="https://ingle-server.inuappcenter.kr/api/v1/images/ece07de0-edf2-4df2-b65e-787e1e8ef7da.png"
+              alt="image"
+            />
           </section>
 
-          <section className="flex flex-row justify-between items-center py-2 px-4 bg-[#FFFFFF] rounded-[10px]">
-            <div>
-              <h3 className="text-[#868782] text-[15px]">Hours</h3>
-              <p>
-                {details?.openTime}-{details?.closeTime}
-              </p>
-              <p className="font-semibold text-[#DF563F] text-[17px]">
-                {isOpen ? 'Open' : 'Closed'}
-              </p>
-              {/* 드롭다운 기능 추가 */}
-              {operation()}
+          <section className="items-center py-2 px-4 bg-[#FFFFFF] rounded-[10px]">
+            <div className="flex flex-row items-center justify-between">
+              <div>
+                <h3 className="text-[#868782] text-[15px]">Hours</h3>
+                <p className="text-[17px] font-semibold">
+                  {details?.openTime}-{details?.closeTime}
+                </p>
+                <p className="font-semibold text-[#DF563F] text-[17px]">
+                  {isOpen ? 'Open' : 'Closed'}
+                </p>
+              </div>
+              <Drop onClick={() => setIsDrop(!isDrop)} />
             </div>
-
-            <Drop />
+            {isDrop && operation()}
           </section>
 
           <section className="flex flex-col gap-[10px]">
