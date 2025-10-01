@@ -13,6 +13,7 @@ const AuthPage = () => {
   const navigate = useNavigate();
   const [checked, setChecked] = useState(false);
 
+  // access 토큰 검사
   useEffect(() => {
     const checkToken = async () => {
       const accessToken = localStorage.getItem('AccessToken'); //access 토큰

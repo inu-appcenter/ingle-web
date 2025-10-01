@@ -48,6 +48,9 @@ export default function Header({
 
     const fetchBuildings = async () => {
       try {
+        //화면에 보이는 건물 레이캐스트
+        modelRef.current?.castRays();
+
         const res = await api.get(import.meta.env.VITE_MAP_BUILDIINGS, {
           params: {
             maxLat: 38,
@@ -58,10 +61,10 @@ export default function Header({
           },
         });
         console.log('api 결과', category, res.data);
-        setBuildingList(res.data); //검색 결과 빌딩 데이터 리스트
 
-        //화면에 보이는 건물 레이캐스트
-        modelRef.current?.castRays();
+        // [ ] 모든 검사가 진행되고 나서 그다음에 저장되어야 할듯.
+        setBuildingList(res.data); //카테고리의 모든 빌딩 데이터 리스트
+
         //테스트
         console.log('저장된 건물:', visibleBuildings);
 

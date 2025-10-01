@@ -49,8 +49,8 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
     const yMin = -0.15;
     const yMax = 0.8;
 
-    const rows = 40;
-    const cols = 20;
+    const rows = 80;
+    const cols = 60;
 
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
@@ -64,7 +64,12 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
         const intersects = raycaster.intersectObjects(gltf.scene.children, true);
         if (intersects.length > 0) {
           const hit = intersects[0].object;
-          if (hit instanceof THREE.Mesh && hit.name.toLowerCase().includes('building')) {
+          if (
+            hit instanceof THREE.Mesh &&
+            (hit.name.toLowerCase().includes('building') ||
+              hit.name.toLowerCase().includes('smoking') ||
+              hit.name.toLowerCase().includes('observatory'))
+          ) {
             visibleBuildings.add(hit);
           }
         }
@@ -85,9 +90,11 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
 
     const visibleNames = Array.from(visibleBuildings).map(b => b.name);
     console.log('maptest 보이는 건물:', visibleNames);
+    // 건물의 번호만 추출
+
+    //저장
     resetVisibleBuildings();
     setVisibleBuildings(visibleNames);
-    //저장하면 뭔가 다른가?
   };
 
   // 외부 ref에서 castRays 호출 가능
