@@ -149,6 +149,10 @@ export default function Contents({
                 alt={`image-${idx}`}
               />
             ))}
+            {/* <img
+              src="https://ingle-server.inuappcenter.kr/api/v1/images/ece07de0-edf2-4df2-b65e-787e1e8ef7da.png"
+              alt="image"
+            /> */}
           </section>
 
           <section className="items-center py-2 px-4 bg-[#FFFFFF] rounded-[10px]">
