@@ -10,11 +10,11 @@ export const useImagePreload = (imageSrcs: string[], options: PreloadOptions = {
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [loadingImages, setLoadingImages] = useState<Set<string>>(new Set());
   const [errorImages, setErrorImages] = useState<Set<string>>(new Set());
-  const ranOnce = useRef(false); // ✅ 실행 여부 저장
+  const ranOnce = useRef(false);
 
   useEffect(() => {
-    //추가함
-    if (ranOnce.current) return; // 이미 실행했으면 중단
+    //무한 랜더링 방지
+    if (ranOnce.current) return;
     ranOnce.current = true;
 
     const preloadImages = async () => {

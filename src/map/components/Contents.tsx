@@ -141,7 +141,7 @@ export default function Contents({
 
         <main className="flex flex-col gap-5">
           {/* [ ] 이미지 잘 모르겠음...*/}
-          <section className="flex flex-row gap-4 mx-1 overflow-x-auto h-28">
+          <section className="flex flex-row gap-2 mx-1 overflow-x-auto h-32">
             {details?.buildingImages.map((url, idx) => (
               <img
                 key={idx}

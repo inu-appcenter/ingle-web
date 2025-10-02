@@ -33,13 +33,13 @@ const BottomNavigator = () => {
 
         {/* Map으로 이동 */}
         <li
-          className={`flex-1 flex flex-col gap-2 justify-center rounded-full ${location.pathname.includes('/map') && 'bg-[#ffffff]'}`}
+          className={`flex-1 flex flex-col gap-1 justify-center rounded-full ${location.pathname.includes('/map') && 'bg-[#ffffff]'}`}
           onClick={() => navigate(ROUTES.MAP)}
         >
           <img
             src="/icons/map-icon.svg"
             alt="Map"
-            className="w-[18px] h-[18px] mx-auto"
+            className="w-[16px] h-[16px] mx-auto"
           />
           <p>Map</p>
         </li>
