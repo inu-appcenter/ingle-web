@@ -5,16 +5,19 @@
 import { ROUTES } from '@/router/routes';
 import { Link, useLocation, useNavigate } from 'react-router';
 
-const BottomNavigator = () => {
+const BottomNavigator = ({ visible }: { visible: boolean }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
   return (
     <nav
-      className="fixed bottom-4 left-1/2 -translate-x-1/2 
-                    w-[90%] max-w-xs h-16 p-1  backdrop-blur-md
-                    rounded-full bg-[#E8E5EF]/60
-                    "
+      className={`fixed bottom-4 left-1/2 -translate-x-1/2 
+                w-[90%] max-w-xs h-16 p-1  backdrop-blur-md
+                rounded-full bg-[#E8E5EF]/60
+                transform transition-all duration-300 ease-in-out 
+                ${visible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0'}
+                
+                `}
     >
       <ul className="h-full flex flex-row justify-between text-center text-xs">
         {/* Home으로 이동 */}

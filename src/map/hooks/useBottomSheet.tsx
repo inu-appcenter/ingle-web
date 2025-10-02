@@ -4,8 +4,6 @@ import {
 } from '@/map/constants/BottomSheetOption';
 import { useEffect, useRef } from 'react';
 
-//[ ] 지금 시트의 상단이 기준이 되어야 하는데 bottom이 기준이 되고 있다.
-
 interface BottomCheetMetrics {
   touchStart: {
     sheetY: number;
