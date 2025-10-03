@@ -113,7 +113,7 @@ export default function Header({
 
       {/* 카테고리 버튼 */}
       <div className="mb-2 w-full flex flex-row justify-between text-xs text-center">
-        <div
+        <button
           className="flex flex-col gap-1"
           onClick={() => {
             handleCategoryClick(Category.Cafeteria);
@@ -121,22 +121,22 @@ export default function Header({
         >
           {category === Category.Cafeteria ? <CafeteriaP /> : <CafeteriaW />}
           <div>Cafeteria</div>
-        </div>
-        <div
+        </button>
+        <button
           className="flex flex-col gap-1"
           onClick={() => handleCategoryClick(Category.Cafe)}
         >
           {category === Category.Cafe ? <CafeP /> : <CafeW />}
           <div>Cafe</div>
-        </div>
-        <div
+        </button>
+        <button
           className="flex flex-col gap-1"
           onClick={() => handleCategoryClick(Category.Convenience)}
         >
           {category === Category.Convenience ? <StoreP /> : <StoreW />}
           <div>24/7</div>
-        </div>
-        <div
+        </button>
+        <button
           className="flex flex-col gap-1"
           onClick={() => handleCategoryClick(Category.SmokingBooth)}
         >
@@ -146,8 +146,8 @@ export default function Header({
             <br />
             Area
           </div>
-        </div>
-        <div
+        </button>
+        <button
           className="flex flex-col gap-1"
           onClick={() => handleCategoryClick(Category.BusStop)}
         >
@@ -157,7 +157,7 @@ export default function Header({
             <br />
             Station
           </div>
-        </div>
+        </button>
       </div>
     </>
   );

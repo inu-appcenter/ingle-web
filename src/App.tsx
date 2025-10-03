@@ -14,15 +14,22 @@ import StampPage from '@/stamp';
 import TutorialPage from '@/tutorials';
 import TutorialModal from '@/tutorials/components/Modal';
 import TutorialDetailPage from '@/tutorials/pages/TutorialDetailPage';
-import { useNavigate } from 'react-router';
 import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
+import { useNavBar } from './shared/hooks/useNavBar';
 
 function AppWrapper() {
   const location = useLocation();
   const isAdmin = location.pathname === ROUTES.ADMIN;
   const isAuth = location.pathname === ROUTES.AUTH;
   const { isOpen, openModal, closeModal } = useTutorialModal();
-  const navigate = useNavigate();
+  const { visible, showNavBar } = useNavBar();
+
+  const handleClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('button, Link')) {
+      showNavBar();
+    }
+  };
 
   // 관리자 페이지는 기존 레이아웃 유지
   if (isAdmin) {
@@ -30,7 +37,10 @@ function AppWrapper() {
   }
 
   return (
-    <div className="flex bg-neutral-100 h-screen justify-center font-manrope">
+    <div
+      className="flex bg-neutral-100 h-screen justify-center font-manrope"
+      onClick={handleClick}
+    >
       <div className="w-full max-w-[480px] h-full bg-white shadow-lg flex flex-col">
         <main className="flex-1 overflow-y-auto min-h-0 scrollbar-hide">
           <Routes>
@@ -60,7 +70,7 @@ function AppWrapper() {
           </Routes>
         </main>
         {/* AuthPage에서는 BottomNavigator 숨김 */}
-        {!isAuth && <BottomNavigator />}
+        {!isAuth && <BottomNavigator visible={visible} />}
 
         {isOpen && <TutorialModal isOpen={isOpen} onClose={closeModal} />}
       </div>
