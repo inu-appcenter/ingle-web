@@ -97,7 +97,10 @@ export default function Portal() {
           <Id className="mr-4" />
           <input
             {...register('studentId', {
-              required: { value: true, message: 'check your studendId' },
+              required: 'check your Id',
+              onChange: e => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+              },
             })}
             defaultValue={storedId || ''}
             placeholder="20XXXXXXX"
@@ -110,7 +113,12 @@ export default function Portal() {
         <div className="flex items-center bg-[#F0EDFF]/80 rounded-2xl px-5 py-4">
           <Pw className="mr-4" />
           <input
-            {...register('password', { required: true })}
+            {...register('password', {
+              required: true,
+              onChange: e => {
+                e.target.value = e.target.value.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣]/g, '');
+              },
+            })}
             className="bg-transparent outline-none flex-1 placeholder:text-[#C1C9D2]"
             placeholder="Password"
             type={showpw ? 'text' : 'password'}

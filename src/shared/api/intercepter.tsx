@@ -12,7 +12,6 @@ const api = axios.create({
 //요청 인터셉터
 api.interceptors.request.use(
   config => {
-
     const access = localStorage.getItem('AccessToken');
 
     if (access) {

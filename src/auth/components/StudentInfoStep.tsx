@@ -101,13 +101,10 @@ export default function StudentInfoStep() {
           country: res.data.country,
         });
         setTokens(res.data.accessToken, res.data.accessTokenExpiresDate);
-
-        alert('회원가입 성공');
         setStep('finish');
       }
     } catch (err: any) {
       console.log(err.response?.data);
-      alert('회원가입에 실패하였습니다. 다시 시도해주세요');
     }
   }
 

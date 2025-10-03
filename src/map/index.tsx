@@ -2,8 +2,8 @@ import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei
 import { Canvas } from '@react-three/fiber';
 import { useRef } from 'react';
 
-import Model from '@/map/components/MapTest';
 import BottomSheet from '@/map/components/BottomSheet';
+import Model from '@/map/components/MapTest';
 
 const MapPage = () => {
   const modelRef = useRef<any>(null);
@@ -24,7 +24,7 @@ const MapPage = () => {
           //   TWO: THREE.TOUCH.ROTATE, // 두 손 → 회전
           // }}
         />
-        <Model ref={modelRef} url="/INGLE_campus_map_number.glb" />
+        <Model ref={modelRef} url="/INGLE_campus_map_0914.glb" />
 
         {/* 빛 */}
         <directionalLight position={[20, 10, 5]} />

@@ -1,3 +1,4 @@
+import MeshToBuildingId from '@/map/constants/MeshToBuildingId';
 import { useRayStore } from '@/map/stores/rayStore';
 import { useGLTF } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
@@ -9,7 +10,7 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
   const { camera, scene } = useThree();
   const raycaster = useRef(new THREE.Raycaster()).current;
   const originalColors = useRef(new Map<THREE.Mesh, THREE.Color>());
-  const { setVisibleBuildings, resetVisibleBuildings } = useRayStore();
+  const { setVisibleBuildings } = useRayStore();
 
   //ray 선 그룹
   const guideGroup = useRef<THREE.Group>(new THREE.Group());
@@ -49,8 +50,8 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
     const yMin = -0.15;
     const yMax = 0.8;
 
-    const rows = 40;
-    const cols = 20;
+    const rows = 80;
+    const cols = 60;
 
     for (let i = 0; i < cols; i++) {
       for (let j = 0; j < rows; j++) {
@@ -64,7 +65,12 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
         const intersects = raycaster.intersectObjects(gltf.scene.children, true);
         if (intersects.length > 0) {
           const hit = intersects[0].object;
-          if (hit instanceof THREE.Mesh && hit.name.toLowerCase().includes('building')) {
+          if (
+            hit instanceof THREE.Mesh &&
+            (hit.name.toLowerCase().includes('building') ||
+              hit.name.toLowerCase().includes('smoking') ||
+              hit.name.toLowerCase().includes('observatory'))
+          ) {
             visibleBuildings.add(hit);
           }
         }
@@ -83,11 +89,22 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       }
     });
 
-    const visibleNames = Array.from(visibleBuildings).map(b => b.name);
-    console.log('maptest 보이는 건물:', visibleNames);
-    resetVisibleBuildings();
-    setVisibleBuildings(visibleNames);
-    //저장하면 뭔가 다른가?
+    //mesh -> buildingid 변환
+    const visibleId = Array.from(visibleBuildings)
+      .flatMap(b => MeshToBuildingId[b.name])
+      .sort((a, b) => a - b);
+    const setVisibleId = Array.from(new Set(visibleId));
+
+    //const visibleNames = Array.from(visibleBuildings).map(b => b.name);
+    console.log('maptest 보이는 건물id:', setVisibleId);
+    // 건물의 번호만 추출
+
+    //저장
+    setVisibleBuildings(setVisibleId);
+
+    //테스트
+    const current = useRayStore.getState().visibleBuildings; // 최신 값 바로 가져오기
+    console.log('저장된 건물:', current);
   };
 
   // 외부 ref에서 castRays 호출 가능
