@@ -11,7 +11,7 @@ const MapPage = () => {
   return (
     <div className="w-full h-full relative">
       <Canvas
-        className=" w-full h-full absolute z-1"
+        className="absolute fixed top-0 w-full h-full z-0"
         onContextMenu={e => e.preventDefault()}
       >
         <PerspectiveCamera makeDefault position={[100, 300, -250]} fov={100} />
