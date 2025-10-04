@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface PreloadOptions {
   priority?: boolean;
@@ -10,8 +10,13 @@ export const useImagePreload = (imageSrcs: string[], options: PreloadOptions = {
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [loadingImages, setLoadingImages] = useState<Set<string>>(new Set());
   const [errorImages, setErrorImages] = useState<Set<string>>(new Set());
+  const ranOnce = useRef(false);
 
   useEffect(() => {
+    //무한 랜더링 방지
+    if (ranOnce.current) return;
+    ranOnce.current = true;
+
     const preloadImages = async () => {
       const promises = imageSrcs.map(src => {
         return new Promise<string>((resolve, reject) => {

@@ -2,8 +2,8 @@ import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei
 import { Canvas } from '@react-three/fiber';
 import { useRef } from 'react';
 
-import Model from '@/map/components/MapTest';
 import BottomSheet from '@/map/components/BottomSheet';
+import Model from '@/map/components/MapTest';
 
 const MapPage = () => {
   const modelRef = useRef<any>(null);
@@ -11,20 +11,18 @@ const MapPage = () => {
   return (
     <div className="w-full h-full relative">
       <Canvas
-        className=" w-full h-full absolute z-1"
+        className="absolute fixed -top-20 w-full h-full z-0"
         onContextMenu={e => e.preventDefault()}
       >
-        <PerspectiveCamera makeDefault position={[100, 300, -250]} fov={100} />
+        <PerspectiveCamera makeDefault position={[-300, 1000, 1000]} fov={40} />
         <Environment preset="apartment" />
         <OrbitControls
-          minDistance={100} // 카메라와 대상(lookAt)의 최소 거리
-          maxDistance={700}
-          // touches={{
-          //   ONE: THREE.TOUCH.PAN, // 한 손 → 이동
-          //   TWO: THREE.TOUCH.ROTATE, // 두 손 → 회전
-          // }}
+          minDistance={80} // 카메라와 대상(lookAt)의 최소 거리
+          maxDistance={1000}
+          minPolarAngle={Math.PI / 5}
+          maxPolarAngle={(Math.PI * 2) / 5}
         />
-        <Model ref={modelRef} url="/INGLE_campus_map_number.glb" />
+        <Model ref={modelRef} url="/INGLE_campus_map_0914.glb" />
 
         {/* 빛 */}
         <directionalLight position={[20, 10, 5]} />
