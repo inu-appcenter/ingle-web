@@ -44,12 +44,12 @@ export default function Header({
   };
 
   useEffect(() => {
-    console.log('Selected Category:', category);
+    //console.log('Selected Category:', category);
 
     const fetchBuildings = async () => {
       try {
         //화면에 보이는 건물 레이캐스트
-        modelRef.current?.castRays();
+        modelRef.current?.castRays(category);
 
         const res = await api.get(import.meta.env.VITE_MAP_BUILDIINGS, {
           params: {

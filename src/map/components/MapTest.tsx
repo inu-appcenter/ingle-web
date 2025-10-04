@@ -2,8 +2,10 @@ import MeshToBuildingId from '@/map/constants/MeshToBuildingId';
 import { useRayStore } from '@/map/stores/rayStore';
 import { useGLTF } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
-import { forwardRef, useImperativeHandle, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import * as THREE from 'three';
+import { SVGLoader } from 'three-stdlib';
+import { AxesHelper } from 'three/src/helpers/AxesHelper';
 
 const Model = forwardRef(({ url }: { url: string }, ref) => {
   const gltf = useGLTF(url);
@@ -11,6 +13,73 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
   const raycaster = useRef(new THREE.Raycaster()).current;
   const originalColors = useRef(new Map<THREE.Mesh, THREE.Color>());
   const { setVisibleBuildings } = useRayStore();
+
+  useEffect(() => {
+    if (!gltf.scene) return;
+
+    const loader = new SVGLoader();
+    loader.load('/bus-purple.svg', data => {
+      const paths = data.paths;
+
+      //버스정류장 위치
+      const busPositions = [
+        new THREE.Vector3(160, 50, -400), //정문(더샵마스터뷰)
+        new THREE.Vector3(200, 50, -320), //정문(셀트리온방면)
+
+        new THREE.Vector3(370, 10, 20), //자연대(공과대학 방면)
+        new THREE.Vector3(350, 10, 100), //자연대(인천대정문 방면)
+
+        new THREE.Vector3(180, 10, 260), //공과대(송도공영차고지 방면)
+        new THREE.Vector3(160, 10, 350), //공과대(자연과학대학 방면)
+        new THREE.Vector3(40, 10, 450), //공과대(종점 방면)
+
+        new THREE.Vector3(-200, 10, 170), //송도캠퍼스(북문 방면)
+        new THREE.Vector3(-300, 5, 140), //송도캠퍼스(얀센백신 방면)
+
+        new THREE.Vector3(-220, 10, -390), //북문(정문 방면)
+        new THREE.Vector3(-130, 10, -530), //분문(송도캠퍼스 방면)
+      ];
+
+      const busGroup = new THREE.Group();
+      busGroup.name = 'bus_stations_group';
+
+      //버스 아이콘 추가
+      busPositions.forEach((pos, index) => {
+        const group = new THREE.Group();
+        group.name = `bus_${index}`;
+        group.scale.multiplyScalar(0.5);
+        group.position.copy(pos);
+        group.rotation.x = Math.PI / 2;
+        // group.rotation.z = Math.PI / 4; //180도 회전
+
+        paths.forEach(path => {
+          const material = new THREE.MeshBasicMaterial({
+            color: path.color,
+            side: THREE.DoubleSide,
+            depthWrite: false,
+          });
+
+          const shapes = SVGLoader.createShapes(path);
+          shapes.forEach((shape, shapeIndex) => {
+            const geometry = new THREE.ShapeGeometry(shape);
+            const mesh = new THREE.Mesh(geometry, material);
+
+            mesh.name = `bus_${index}_part_${shapeIndex}`;
+            group.add(mesh);
+          });
+        });
+
+        busGroup.add(group);
+      });
+      gltf.scene.add(busGroup);
+      console.log('씬에 추가된 그룹:', gltf.scene.getObjectByName('bus_stations_group'));
+      scene.add(new AxesHelper(100)); // 씬 축 보기
+
+      // const box = new THREE.Box3().setFromObject(busGroup);
+      // const helper = new THREE.Box3Helper(box, 0xff0000);
+      // scene.add(helper);
+    });
+  }, [gltf]);
 
   //ray 선 그룹
   const guideGroup = useRef<THREE.Group>(new THREE.Group());
@@ -36,7 +105,7 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
     });
   }
 
-  const castRays = () => {
+  const castRays = (category: string) => {
     console.log('castRays 호출');
 
     if (!gltf?.scene || printed) return;
@@ -77,14 +146,23 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       }
     }
 
-    // 색상 변경 (보이는 건물만 빨간색)
+    //버스정류장 visible 처리
+    gltf.scene.traverse(child => {
+      if (child instanceof THREE.Group && child.name === 'bus_stations_group') {
+        child.visible = category === 'BUS_STOP';
+      }
+    });
+
+    // 색상 변경 (보이는 건물만)
     gltf.scene.traverse(child => {
       if (child instanceof THREE.Mesh && child.name.toLowerCase().includes('building')) {
         const mat = child.material as THREE.MeshStandardMaterial;
         if (visibleBuildings.has(child)) {
-          mat.color.set('red');
+          mat.color.set('blue');
+          // child.visible = false;
         } else {
           mat.color.copy(originalColors.current.get(child)!);
+          // child.visible = true;
         }
       }
     });
