@@ -14,71 +14,164 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
   const originalColors = useRef(new Map<THREE.Mesh, THREE.Color>());
   const { setVisibleBuildings } = useRayStore();
 
+  function createIconGroup({
+    name,
+    svgPaths,
+    positions,
+    scale = 0.4,
+    rotationX = Math.PI / 2,
+  }: {
+    name: string;
+    svgPaths: SVGLoader.Path[];
+    positions: THREE.Vector3[];
+    scale?: number;
+    rotationX?: number;
+  }) {
+    const group = new THREE.Group();
+    group.name = name;
+    group.visible = false;
+
+    positions.forEach((pos, index) => {
+      const itemGroup = new THREE.Group();
+      itemGroup.name = `${name}_${index}`;
+      itemGroup.scale.multiplyScalar(0.5);
+      itemGroup.position.copy(pos);
+      itemGroup.rotation.x = rotationX;
+      // group.rotation.z = Math.PI / 4; //180도 회전
+
+      svgPaths.forEach(path => {
+        const material = new THREE.MeshBasicMaterial({
+          color: path.color,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+        });
+
+        const shapes = SVGLoader.createShapes(path);
+        shapes.forEach((shape, shapeIndex) => {
+          const geometry = new THREE.ShapeGeometry(shape);
+          const mesh = new THREE.Mesh(geometry, material);
+
+          mesh.name = `${name}_${index}_part_${shapeIndex}`;
+          itemGroup.add(mesh);
+        });
+      });
+
+      group.add(itemGroup);
+    });
+
+    return group;
+  }
+
   useEffect(() => {
     if (!gltf.scene) return;
 
     const loader = new SVGLoader();
+
+    //버스 아이콘
     loader.load('/bus-purple.svg', data => {
-      const paths = data.paths;
-
-      //버스정류장 위치
       const busPositions = [
-        new THREE.Vector3(160, 50, -400), //정문(더샵마스터뷰)
-        new THREE.Vector3(200, 50, -320), //정문(셀트리온방면)
+        new THREE.Vector3(160, 5, -400), //정문(더샵마스터뷰)
+        new THREE.Vector3(200, 5, -320), //정문(셀트리온방면)
 
-        new THREE.Vector3(370, 10, 20), //자연대(공과대학 방면)
-        new THREE.Vector3(350, 10, 100), //자연대(인천대정문 방면)
+        new THREE.Vector3(370, 5, 20), //자연대(공과대학 방면)
+        new THREE.Vector3(350, 5, 100), //자연대(인천대정문 방면)
 
-        new THREE.Vector3(180, 10, 260), //공과대(송도공영차고지 방면)
-        new THREE.Vector3(160, 10, 350), //공과대(자연과학대학 방면)
-        new THREE.Vector3(40, 10, 450), //공과대(종점 방면)
+        new THREE.Vector3(180, 5, 260), //공과대(송도공영차고지 방면)
+        new THREE.Vector3(160, 5, 350), //공과대(자연과학대학 방면)
+        new THREE.Vector3(40, 5, 450), //공과대(종점 방면)
 
-        new THREE.Vector3(-200, 10, 170), //송도캠퍼스(북문 방면)
+        new THREE.Vector3(-200, 5, 170), //송도캠퍼스(북문 방면)
         new THREE.Vector3(-300, 5, 140), //송도캠퍼스(얀센백신 방면)
 
-        new THREE.Vector3(-220, 10, -390), //북문(정문 방면)
-        new THREE.Vector3(-130, 10, -530), //분문(송도캠퍼스 방면)
+        new THREE.Vector3(-220, 5, -390), //북문(정문 방면)
+        new THREE.Vector3(-130, 5, -530), //분문(송도캠퍼스 방면)
       ];
-
-      const busGroup = new THREE.Group();
-      busGroup.name = 'bus_stations_group';
-
-      //버스 아이콘 추가
-      busPositions.forEach((pos, index) => {
-        const group = new THREE.Group();
-        group.name = `bus_${index}`;
-        group.scale.multiplyScalar(0.5);
-        group.position.copy(pos);
-        group.rotation.x = Math.PI / 2;
-        // group.rotation.z = Math.PI / 4; //180도 회전
-
-        paths.forEach(path => {
-          const material = new THREE.MeshBasicMaterial({
-            color: path.color,
-            side: THREE.DoubleSide,
-            depthWrite: false,
-          });
-
-          const shapes = SVGLoader.createShapes(path);
-          shapes.forEach((shape, shapeIndex) => {
-            const geometry = new THREE.ShapeGeometry(shape);
-            const mesh = new THREE.Mesh(geometry, material);
-
-            mesh.name = `bus_${index}_part_${shapeIndex}`;
-            group.add(mesh);
-          });
-        });
-
-        busGroup.add(group);
+      const busGroup = createIconGroup({
+        name: 'bus_stations_group',
+        svgPaths: data.paths,
+        positions: busPositions,
       });
       gltf.scene.add(busGroup);
-      console.log('씬에 추가된 그룹:', gltf.scene.getObjectByName('bus_stations_group'));
-      scene.add(new AxesHelper(100)); // 씬 축 보기
-
-      // const box = new THREE.Box3().setFromObject(busGroup);
-      // const helper = new THREE.Box3Helper(box, 0xff0000);
-      // scene.add(helper);
     });
+
+    //카페 15개
+    loader.load('/cafe-purple.svg', data => {
+      const cafePositions = [
+        new THREE.Vector3(-350, 63, 230), //카페혜윰
+        new THREE.Vector3(-180, 20, 370), //미스터디유커피
+        new THREE.Vector3(-260, 10, 120), //카페ing 학생회관
+        new THREE.Vector3(80, 42, 0), //카페ing 학산도서관
+        new THREE.Vector3(-60, 1, -100), //스낵바
+        new THREE.Vector3(-160, 15, 110), //메가커피 복지회관
+        // new THREE.Vector3(0, 5, 0), //카페 js
+        // new THREE.Vector3(0, 5, 0), //케이슨 24
+        new THREE.Vector3(-230, 10, 110), //그라찌에
+
+        new THREE.Vector3(350, 22, 145), //이디야
+        new THREE.Vector3(360, 21, 130), //컴포즈
+        new THREE.Vector3(360, 23, 155), //커피화 로스터즈 2호점
+        new THREE.Vector3(380, 22, 170), //수플림
+        new THREE.Vector3(400, 22, 185), //매머드커피익스프레스
+        new THREE.Vector3(410, 21, 195), //117 카페
+      ];
+      const cafeGroup = createIconGroup({
+        name: 'cafe_group',
+        svgPaths: data.paths,
+        positions: cafePositions,
+      });
+      gltf.scene.add(cafeGroup);
+    });
+
+    //편의점 15개
+    loader.load('/cvs-purple.svg', data => {
+      const cvsPositions = [
+        new THREE.Vector3(-200, 20, 360), //이마트24 생명대
+        new THREE.Vector3(-390, 63, 230), //이마트24 3기숙사
+        new THREE.Vector3(-350, 63, 180), //이마트24 1기숙사
+        new THREE.Vector3(-400, 5, 80), //cu 인천대점(2긱)
+        new THREE.Vector3(-130, 13, 65), //이마트24 복지회관
+        new THREE.Vector3(-145, 20, -20), //이마트24 인문대
+        new THREE.Vector3(90, 41, 10), //이마트24 도서관
+        new THREE.Vector3(20, 19, -130), //이마트24 사회대
+        new THREE.Vector3(250, 18, -110), //이마트24 자연대
+        new THREE.Vector3(190, 18, -100), //이마트24 공대
+        new THREE.Vector3(355, 23, 135), //cu 코스테이
+      ];
+      const cvsGroup = createIconGroup({
+        name: 'cvs_group',
+        svgPaths: data.paths,
+        positions: cvsPositions,
+      });
+      gltf.scene.add(cvsGroup);
+    });
+    //흡연부스 7개
+    loader.load('/smoking-purple.svg', data => {
+      const smokingPositions = [
+        new THREE.Vector3(110, 1, 125), //정보대
+        new THREE.Vector3(40, 1, 250), //공대
+        new THREE.Vector3(-5, 1, -18), //컨벤션센터
+        new THREE.Vector3(-250, 1, 0), //농구코트1
+        new THREE.Vector3(-242, 1, -10), //농구코ㄷ트2
+        // new THREE.Vector3(-145, 20, -20), //1긱
+        // new THREE.Vector3(90, 41, 10), //2긱
+
+        //지도에는 있고 DB에는 없는
+        new THREE.Vector3(-160, 1, -85), //인문대 뒤
+        new THREE.Vector3(-65, 1, -205), //동북아 뒤
+      ];
+      const smokingGroup = createIconGroup({
+        name: 'smoking_group',
+        svgPaths: data.paths,
+        positions: smokingPositions,
+      });
+      gltf.scene.add(smokingGroup);
+    });
+
+    scene.add(new AxesHelper(100)); // 씬 축 보기
+
+    // const box = new THREE.Box3().setFromObject(busGroup);
+    // const helper = new THREE.Box3Helper(box, 0xff0000);
+    // scene.add(helper);
   }, [gltf]);
 
   //ray 선 그룹
@@ -105,7 +198,7 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
     });
   }
 
-  const castRays = (category: string) => {
+  const castRays = (category: string | null) => {
     console.log('castRays 호출');
 
     if (!gltf?.scene || printed) return;
@@ -146,10 +239,19 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       }
     }
 
-    //버스정류장 visible 처리
+    //카테고리 visible 처리
     gltf.scene.traverse(child => {
       if (child instanceof THREE.Group && child.name === 'bus_stations_group') {
         child.visible = category === 'BUS_STOP';
+      }
+      if (child instanceof THREE.Group && child.name === 'cafe_group') {
+        child.visible = category === 'CAFE';
+      }
+      if (child instanceof THREE.Group && child.name === 'cvs_group') {
+        child.visible = category === 'CONVENIENCE_STORE';
+      }
+      if (child instanceof THREE.Group && child.name === 'smoking_group') {
+        child.visible = category === 'SMOKING_BOOTH';
       }
     });
 
@@ -158,11 +260,9 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       if (child instanceof THREE.Mesh && child.name.toLowerCase().includes('building')) {
         const mat = child.material as THREE.MeshStandardMaterial;
         if (visibleBuildings.has(child)) {
-          mat.color.set('blue');
-          // child.visible = false;
+          //mat.color.set('blue');
         } else {
           mat.color.copy(originalColors.current.get(child)!);
-          // child.visible = true;
         }
       }
     });

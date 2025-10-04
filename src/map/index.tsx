@@ -11,18 +11,16 @@ const MapPage = () => {
   return (
     <div className="w-full h-full relative">
       <Canvas
-        className="absolute fixed top-0 w-full h-full z-0"
+        className="absolute fixed -top-20 w-full h-full z-0"
         onContextMenu={e => e.preventDefault()}
       >
-        <PerspectiveCamera makeDefault position={[100, 300, -250]} fov={100} />
+        <PerspectiveCamera makeDefault position={[-300, 1000, 1000]} fov={40} />
         <Environment preset="apartment" />
         <OrbitControls
-          minDistance={100} // 카메라와 대상(lookAt)의 최소 거리
-          maxDistance={700}
-          // touches={{
-          //   ONE: THREE.TOUCH.PAN, // 한 손 → 이동
-          //   TWO: THREE.TOUCH.ROTATE, // 두 손 → 회전
-          // }}
+          minDistance={80} // 카메라와 대상(lookAt)의 최소 거리
+          maxDistance={1000}
+          minPolarAngle={Math.PI / 5}
+          maxPolarAngle={(Math.PI * 2) / 5}
         />
         <Model ref={modelRef} url="/INGLE_campus_map_0914.glb" />
 
