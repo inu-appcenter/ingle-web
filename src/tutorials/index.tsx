@@ -116,11 +116,11 @@ const TutorialPage = () => {
               localStorage.setItem('tutorialTab', 'CamLife');
             }}
           >
-            <p
+            <button
               className={`${tabs === 'CamLife' ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
             >
               Campus Life
-            </p>
+            </button>
             {tabs === 'CamLife' && (
               <hr className="border-t-2 border-[#7A00E6] w-full"></hr>
             )}
@@ -131,11 +131,11 @@ const TutorialPage = () => {
               localStorage.setItem('tutorialTab', 'Academic');
             }}
           >
-            <p
+            <button
               className={`${tabs === 'Academic' ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
             >
               Academics
-            </p>
+            </button>
             {tabs === 'Academic' && (
               <hr className="border-t-2 border-[#7A00E6] w-full"></hr>
             )}
@@ -146,11 +146,11 @@ const TutorialPage = () => {
               localStorage.setItem('tutorialTab', 'LifeStyle');
             }}
           >
-            <p
+            <button
               className={`${tabs === 'LifeStyle' ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
             >
               Lifestyle
-            </p>
+            </button>
             {tabs === 'LifeStyle' && (
               <hr className="border-t-2 border-[#7A00E6] w-full"></hr>
             )}

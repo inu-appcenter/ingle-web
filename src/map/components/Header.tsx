@@ -34,7 +34,7 @@ export default function Header({
 }) {
   const { register, handleSubmit } = useForm();
   const [category, setCategory] = useState<Category | null>(null);
-  const visibleBuildings = useRayStore();
+  const visibleBuildings = useRayStore(state => state.visibleBuildings);
 
   const handleCategoryClick = (categoryName: Category) => {
     // 현재 선택된 카테고리와 클릭한 카테고리가 같으면 null로, 아니면 해당 카테고리로 설정합니다.
@@ -48,6 +48,9 @@ export default function Header({
 
     const fetchBuildings = async () => {
       try {
+        //화면에 보이는 건물 레이캐스트
+        modelRef.current?.castRays();
+
         const res = await api.get(import.meta.env.VITE_MAP_BUILDIINGS, {
           params: {
             maxLat: 38,
@@ -58,14 +61,15 @@ export default function Header({
           },
         });
         console.log('api 결과', category, res.data);
-        setBuildingList(res.data); //검색 결과 빌딩 데이터 리스트
 
-        //화면에 보이는 건물 레이캐스트
-        modelRef.current?.castRays();
-        //테스트
-        console.log('저장된 건물:', visibleBuildings);
+        //
+        const filtered = res.data.filter((b: any) =>
+          useRayStore.getState().visibleBuildings.includes(b.buildingId),
+        );
+        console.log('최종검색 결과 : ', filtered);
 
-        //setBuildingList();
+        // [x] 모든 검사가 진행되고 나서 그다음에 저장되어야 할듯.
+        setBuildingList(filtered); //카테고리의 모든 빌딩 데이터 리스트
       } catch (err) {
         console.log(err);
       }
@@ -106,7 +110,7 @@ export default function Header({
 
       {/* 카테고리 버튼 */}
       <div className="mb-2 w-full flex flex-row justify-between text-xs text-center">
-        <div
+        <button
           className="flex flex-col gap-1"
           onClick={() => {
             handleCategoryClick(Category.Cafeteria);
@@ -114,22 +118,22 @@ export default function Header({
         >
           {category === Category.Cafeteria ? <CafeteriaP /> : <CafeteriaW />}
           <div>Cafeteria</div>
-        </div>
-        <div
+        </button>
+        <button
           className="flex flex-col gap-1"
           onClick={() => handleCategoryClick(Category.Cafe)}
         >
           {category === Category.Cafe ? <CafeP /> : <CafeW />}
           <div>Cafe</div>
-        </div>
-        <div
+        </button>
+        <button
           className="flex flex-col gap-1"
           onClick={() => handleCategoryClick(Category.Convenience)}
         >
           {category === Category.Convenience ? <StoreP /> : <StoreW />}
           <div>24/7</div>
-        </div>
-        <div
+        </button>
+        <button
           className="flex flex-col gap-1"
           onClick={() => handleCategoryClick(Category.SmokingBooth)}
         >
@@ -139,8 +143,8 @@ export default function Header({
             <br />
             Area
           </div>
-        </div>
-        <div
+        </button>
+        <button
           className="flex flex-col gap-1"
           onClick={() => handleCategoryClick(Category.BusStop)}
         >
@@ -150,7 +154,7 @@ export default function Header({
             <br />
             Station
           </div>
-        </div>
+        </button>
       </div>
     </>
   );

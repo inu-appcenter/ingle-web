@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Stamp } from '@/stamp/types/stamp';
-import StampItem from '@/stamp/components/StampItem';
 import Modal from '@/stamp/components/Modal';
+import StampItem from '@/stamp/components/StampItem';
+import { Stamp } from '@/stamp/types/stamp';
+import { useState } from 'react';
 // import TransitImage from '@/shared/assets/images/stamp/transit-image.png';
 // import DormitoryImage from '@/shared/assets/images/stamp/dormitory-image.png';
 // import LibraryImage from '@/shared/assets/images/stamp/library-image.png';

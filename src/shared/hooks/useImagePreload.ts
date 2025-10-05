@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface PreloadOptions {
   priority?: boolean;
@@ -10,8 +10,13 @@ export const useImagePreload = (imageSrcs: string[], options: PreloadOptions = {
   const [loadedImages, setLoadedImages] = useState<Set<string>>(new Set());
   const [loadingImages, setLoadingImages] = useState<Set<string>>(new Set());
   const [errorImages, setErrorImages] = useState<Set<string>>(new Set());
+  const ranOnce = useRef(false); // ✅ 실행 여부 저장
 
   useEffect(() => {
+    //추가함
+    if (ranOnce.current) return; // 이미 실행했으면 중단
+    ranOnce.current = true;
+
     const preloadImages = async () => {
       const promises = imageSrcs.map(src => {
         return new Promise<string>((resolve, reject) => {
