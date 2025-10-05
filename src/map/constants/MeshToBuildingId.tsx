@@ -59,7 +59,7 @@ const meshNameToBuildingId: Record<string, number[]> = {
   Areasbuilding058: [57], // 스낵바
   Areasbuilding059: [61], // 케이슨24??
   Areasbuilding060: [19, 99, 72], // 2기숙사
-  Areasbuilding061: [7, 69, 37], // 7호관 최고당 이마트 생명대
+  Areasbuilding061: [7, 37], // 7호관 최고당
   Areasbuilding062: [],
   Areasbuilding064: [79, 63, 64, 65, 66, 67, 68, 41, 42, 45, 47, 48, 49, 50, 51, 52, 40], // 코스테이(cu, 이디야,컴포즈 등등)
   Areasbuilding065: [],
@@ -69,7 +69,7 @@ const meshNameToBuildingId: Record<string, number[]> = {
   Areasbuilding069: [39],
   Areasbuilding070: [39, 10], // 10=게스트하우스
   Areasbuilding071: [39, 10],
-  Areasbuilding072: [54, 31], // 미유카페, 생명대
+  Areasbuilding072: [54, 31, 69], // 미유카페, 생명대
   Areasbuilding073: [30], // 30=도시과학건물
   Areasbuilding074: [101, 29], // 27호관 식당, joint lab2
   Areasbuilding075: [],

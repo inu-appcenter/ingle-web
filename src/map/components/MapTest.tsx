@@ -5,7 +5,6 @@ import { useThree } from '@react-three/fiber';
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { SVGLoader } from 'three-stdlib';
-import { AxesHelper } from 'three/src/helpers/AxesHelper';
 
 const Model = forwardRef(({ url }: { url: string }, ref) => {
   const gltf = useGLTF(url);
@@ -70,21 +69,21 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
     //버스 아이콘
     loader.load('/bus-purple.svg', data => {
       const busPositions = [
-        new THREE.Vector3(160, 5, -400), //정문(더샵마스터뷰)
-        new THREE.Vector3(200, 5, -320), //정문(셀트리온방면)
+        new THREE.Vector3(160, 1, -400), //정문(더샵마스터뷰)
+        new THREE.Vector3(200, 1, -320), //정문(셀트리온방면)
 
-        new THREE.Vector3(370, 5, 20), //자연대(공과대학 방면)
-        new THREE.Vector3(350, 5, 100), //자연대(인천대정문 방면)
+        new THREE.Vector3(370, 1, 20), //자연대(공과대학 방면)
+        new THREE.Vector3(350, 1, 100), //자연대(인천대정문 방면)
 
-        new THREE.Vector3(180, 5, 260), //공과대(송도공영차고지 방면)
-        new THREE.Vector3(160, 5, 350), //공과대(자연과학대학 방면)
-        new THREE.Vector3(40, 5, 450), //공과대(종점 방면)
+        new THREE.Vector3(180, 1, 260), //공과대(송도공영차고지 방면)
+        new THREE.Vector3(160, 1, 350), //공과대(자연과학대학 방면)
+        new THREE.Vector3(40, 1, 450), //공과대(종점 방면)
 
-        new THREE.Vector3(-200, 5, 170), //송도캠퍼스(북문 방면)
-        new THREE.Vector3(-300, 5, 140), //송도캠퍼스(얀센백신 방면)
+        new THREE.Vector3(-200, 1, 170), //송도캠퍼스(북문 방면)
+        new THREE.Vector3(-300, 1, 140), //송도캠퍼스(얀센백신 방면)
 
-        new THREE.Vector3(-220, 5, -390), //북문(정문 방면)
-        new THREE.Vector3(-130, 5, -530), //분문(송도캠퍼스 방면)
+        new THREE.Vector3(-220, 1, -390), //북문(정문 방면)
+        new THREE.Vector3(-130, 1, -530), //분문(송도캠퍼스 방면)
       ];
       const busGroup = createIconGroup({
         name: 'bus_stations_group',
@@ -166,12 +165,35 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       });
       gltf.scene.add(smokingGroup);
     });
+    //음식점 27개
+    loader.load('/restaurant-purple.svg', data => {
+      const restaurantPositions = [
+        new THREE.Vector3(370, 23, 165), //코스테이 (장미꽃 떡볶이,라면)
+        new THREE.Vector3(360, 23, 155), //코스테이 하노이키친
+        new THREE.Vector3(360, 23, 135), //라피자일피노
+        new THREE.Vector3(385, 23, 180), //다와국밥
+        new THREE.Vector3(390, 23, 183), //황비홍마라탕
+        // new THREE.Vector3(-242, 1, -10), //도스마스
+        // new THREE.Vector3(-242, 1, -10), //진심즉석떡볶이, 조가연마라탕, 오백국수, 냉삼회관,
+        // new THREE.Vector3(90, 41, 10), //양평해장국
+        //너무 많아서 생략..
 
-    scene.add(new AxesHelper(100)); // 씬 축 보기
-
-    // const box = new THREE.Box3().setFromObject(busGroup);
-    // const helper = new THREE.Box3Helper(box, 0xff0000);
-    // scene.add(helper);
+        new THREE.Vector3(-250, 10, 130), //토마토도시락
+        new THREE.Vector3(230, 18, -90), //바비와따
+        new THREE.Vector3(-365, 63, 250), //맘스터치
+        new THREE.Vector3(110, 20, -320), //샹차이
+        new THREE.Vector3(90, 16, 80), //최고당
+        new THREE.Vector3(150, 5, 170), //봉구스
+        new THREE.Vector3(160, 5, 160), //팔뚝김밥
+        new THREE.Vector3(-150, 20, 320), //샐러디
+      ];
+      const restaurantGroup = createIconGroup({
+        name: 'restaurant_group',
+        svgPaths: data.paths,
+        positions: restaurantPositions,
+      });
+      gltf.scene.add(restaurantGroup);
+    });
   }, [gltf]);
 
   //ray 선 그룹
@@ -253,6 +275,9 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       if (child instanceof THREE.Group && child.name === 'smoking_group') {
         child.visible = category === 'SMOKING_BOOTH';
       }
+      if (child instanceof THREE.Group && child.name === 'restaurant_group') {
+        child.visible = category === 'RESTAURANT';
+      }
     });
 
     // 색상 변경 (보이는 건물만)
@@ -260,7 +285,7 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       if (child instanceof THREE.Mesh && child.name.toLowerCase().includes('building')) {
         const mat = child.material as THREE.MeshStandardMaterial;
         if (visibleBuildings.has(child)) {
-          //mat.color.set('blue');
+          mat.color.set('blue');
         } else {
           mat.color.copy(originalColors.current.get(child)!);
         }

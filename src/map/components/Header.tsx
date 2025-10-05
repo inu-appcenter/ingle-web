@@ -108,7 +108,6 @@ export default function Header({
           placeholder="Search Maps"
           className="focus:outline-none text-[#6C6C6C] text-[17px] bg-[#EDEDED] flex-1"
         />
-        <input type="submit" />
       </form>
 
       {/* 카테고리 버튼 */}
