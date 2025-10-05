@@ -1,7 +1,7 @@
 import { ROUTES } from '@/router/routes';
 import { useAuthStore } from '@/shared/stores/authStore';
 import axios from 'axios';
-import { useState } from 'react';
+import { MouseEvent, ReactNode, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 
@@ -19,6 +19,46 @@ type Inputs = {
   password: string;
 };
 
+interface CommonModalProps {
+  isOpen: boolean;
+  onClose: (event?: MouseEvent<HTMLDivElement | HTMLButtonElement>) => void;
+  onGoToRead?: () => void;
+  children?: ReactNode;
+}
+
+const CommonModal = ({ isOpen, onClose, onGoToRead, children }: CommonModalProps) => {
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className="fixed inset-0 bg-black/70 flex flex-col items-center justify-center z-50 px-8"
+      onClick={onClose}
+    >
+      <div
+        className="px-6 pb-3 pt-4 w-full bg-[#ffffff] rounded-[30px] shadow-lg relative max-w-md flex flex-col gap-2 items-center justify-center  font-inter"
+        onClick={e => e.stopPropagation()}
+      >
+        <img
+          src="/icons/auth/close.svg"
+          alt="close"
+          className="absolute right-0 top-0 m-4"
+          onClick={onClose}
+        />
+        <div className="m-6 flex flex-col items-center">
+          <h2 className="font-bold text-2xl text-[#313131]">Login Failed</h2>
+          <p className="text-sm text-[#535353]">Please try again</p>
+        </div>
+        <button
+          className="bg-[#7949FF] w-full h-10 mx-10 rounded-md text-[#ffffff] text-sm"
+          onClick={onClose}
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export default function Portal() {
   const { setStudentInfo, setStep, setTokens, studentId } = useAuthStore();
   const [showpw, setShowPw] = useState(false);
@@ -26,6 +66,7 @@ export default function Portal() {
   const navigate = useNavigate();
   const storedId = localStorage.getItem('portalId');
   const [loginError, setLoginError] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
     register,
@@ -64,7 +105,7 @@ export default function Portal() {
       }
     } catch (err: any) {
       if (err.response?.status === 401) {
-        setLoginError('-- Portal Login Fail --');
+        setIsModalOpen(true);
       } else {
         setLoginError('Something is wrong.');
       }
@@ -75,9 +116,6 @@ export default function Portal() {
     setShowPw(!showpw);
   };
 
-  {
-    /* [ ] 기능연결 : 버튼 누르면 마지막으로 저장된 remember 상태도 저장해야 됨*/
-  }
   const handleRemember = () => {
     setRemember(!remember);
   };
@@ -149,6 +187,8 @@ export default function Portal() {
           Log in
         </button>
       </form>
+
+      <CommonModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }
