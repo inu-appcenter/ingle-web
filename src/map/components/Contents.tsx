@@ -16,7 +16,7 @@ export default function Contents({
   Id: number | null;
   children?: React.ReactNode;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<Boolean | null>(false);
   const [details, setDetails] = useState<BuildingDetails | null>(null);
   const [isDrop, setIsDrop] = useState(false);
   const Day = [
@@ -33,7 +33,7 @@ export default function Contents({
 
   const operation = () => {
     const OpenDays = Day.filter(x => !details?.closedDays.includes(x));
-    console.log(OpenDays);
+    //console.log('open', OpenDays);
     return (
       <div>
         {OpenDays.map(index => (
@@ -64,7 +64,7 @@ export default function Contents({
 
   useEffect(() => {
     const getDetails = async (Id: number | null) => {
-      console.log('건물ID', Id);
+      //console.log('건물ID', Id);
       if (!Id) return;
       try {
         const res = await api.get(`${import.meta.env.VITE_MAP_BUILDIINGS}/${Id}`);
@@ -83,13 +83,18 @@ export default function Contents({
         hour: getTime.getHours(),
         minute: getTime.getMinutes(),
       };
+      if (!details?.openTime || !details.closeTime) {
+        setIsOpen(null);
+        return;
+      }
+
       const openTime: Times = {
-        hour: Number(details?.openTime.split(':')[0]),
-        minute: Number(details?.openTime.split(':')[1]),
+        hour: Number(details.openTime.split(':')[0]),
+        minute: Number(details.openTime.split(':')[1]),
       };
       const closedTime: Times = {
-        hour: Number(details?.closeTime.split(':')[0]),
-        minute: Number(details?.closeTime.split(':')[1]),
+        hour: Number(details.closeTime.split(':')[0]),
+        minute: Number(details.closeTime.split(':')[1]),
       };
 
       //closedDay = string (Monday, Tuesday ...)
@@ -136,11 +141,18 @@ export default function Contents({
 
         <main className="flex flex-col gap-5">
           {/* [ ] 이미지 잘 모르겠음...*/}
-          <section className="flex flex-row gap-4 mx-1">
-            <img
+          <section className="flex flex-row gap-2 mx-1 overflow-x-auto h-32">
+            {details?.buildingImages.map((url, idx) => (
+              <img
+                key={idx}
+                src={`${import.meta.env.VITE_BASE_URL}${import.meta.env.VITE_IMAGE}/${url}`}
+                alt={`image-${idx}`}
+              />
+            ))}
+            {/* <img
               src="https://ingle-server.inuappcenter.kr/api/v1/images/ece07de0-edf2-4df2-b65e-787e1e8ef7da.png"
               alt="image"
-            />
+            /> */}
           </section>
 
           <section className="items-center py-2 px-4 bg-[#FFFFFF] rounded-[10px]">

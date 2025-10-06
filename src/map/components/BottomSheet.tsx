@@ -1,8 +1,8 @@
+import Contents from '@/map/components/Contents';
 import Header from '@/map/components/Header';
 import useBottomSheet from '@/map/hooks/useBottomSheet';
 import { SearchResult } from '@/map/types/Types';
 import { useEffect, useState } from 'react';
-import Contents from '@/map/components/Contents';
 
 import Close from '@/map/icons/close.svg?react';
 
@@ -22,7 +22,7 @@ export default function BottomSheet({ modelRef }: { modelRef: React.RefObject<an
   return (
     <div
       ref={sheet}
-      className={`flex flex-col items-center absolute z-1 top-[calc(100%-200px)] h-[540px]
+      className={`flex flex-col items-center absolute z-15 top-[calc(100%-200px)] h-[540px]
             px-4 pt-2 w-full  bg-[#F7F7F6] rounded-t-xl transition:transform duration-200 ease-out`}
     >
       {/* 핸들러 */}

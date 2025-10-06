@@ -116,11 +116,11 @@ const TutorialPage = () => {
               localStorage.setItem('tutorialTab', 'CamLife');
             }}
           >
-            <p
+            <button
               className={`${tabs === 'CamLife' ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
             >
               Campus Life
-            </p>
+            </button>
             {tabs === 'CamLife' && (
               <hr className="border-t-2 border-[#7A00E6] w-full"></hr>
             )}
@@ -131,11 +131,11 @@ const TutorialPage = () => {
               localStorage.setItem('tutorialTab', 'Academic');
             }}
           >
-            <p
+            <button
               className={`${tabs === 'Academic' ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
             >
               Academics
-            </p>
+            </button>
             {tabs === 'Academic' && (
               <hr className="border-t-2 border-[#7A00E6] w-full"></hr>
             )}
@@ -146,18 +146,18 @@ const TutorialPage = () => {
               localStorage.setItem('tutorialTab', 'LifeStyle');
             }}
           >
-            <p
+            <button
               className={`${tabs === 'LifeStyle' ? 'text-[#7A00E6]' : 'text-[#838A8F]'} hover:text-[#7A00E6] cursor-pointer`}
             >
               Lifestyle
-            </p>
+            </button>
             {tabs === 'LifeStyle' && (
               <hr className="border-t-2 border-[#7A00E6] w-full"></hr>
             )}
           </div>
         </div>
 
-        {/* 헤더 : 마진 정확하게 조정해야함 */}
+        {/* 그림 및 INGLE 글자 */}
         <header className="w-full mb-8 flex-1 flex flex-col justify-center ">
           <p
             className="text-4xl font-extrabold text-white "
@@ -176,7 +176,7 @@ const TutorialPage = () => {
 
       {/* 카테고리 */}
       <div className="h-[65vh] flex flex-col gap-[14px] bg-[#F4F2F6] w-full px-4 pt-4 rounded-t-[30px]">
-        {/*카테고리 상단 설명 */}
+        {/*카테고리 헤더 */}
         {tabs === 'CamLife' && (
           <div>
             <h1 className="font-extrabold text-xl">All about Campus</h1>
