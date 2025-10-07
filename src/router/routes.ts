@@ -24,5 +24,6 @@ export const ROUTES = {
   PROFILE: '/profile',
   PROFILE_EDIT_IMAGE: '/profile/edit/image',
   ADMIN: '/admin',
+  PRIVACY: '/privacy',
   NOTFOUND: '*',
 } as const;
