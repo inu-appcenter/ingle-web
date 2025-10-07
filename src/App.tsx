@@ -14,6 +14,7 @@ import StampPage from '@/stamp';
 import TutorialPage from '@/tutorials';
 import TutorialModal from '@/tutorials/components/Modal';
 import TutorialDetailPage from '@/tutorials/pages/TutorialDetailPage';
+import PrivacyPage from '@/privacy';
 import { Route, BrowserRouter as Router, Routes, useLocation } from 'react-router-dom';
 
 function AppWrapper() {
@@ -54,6 +55,7 @@ function AppWrapper() {
             <Route path={ROUTES.PROFILE_EDIT_IMAGE} element={<EditImagePage />} />
             <Route path={`${ROUTES.PROFILE}/delete`} element={<DeletePage />} />
             <Route path={`${ROUTES.PROFILE}/support`} element={<SupportPage />} />
+            <Route path={`${ROUTES.PRIVACY}`} element={<PrivacyPage />} />
             <Route path={ROUTES.NOTFOUND} element={<NotFoundPage />} />
           </Routes>
         </main>
