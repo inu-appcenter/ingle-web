@@ -140,55 +140,74 @@ export default function Contents({
         </header>
 
         <main className="flex flex-col gap-5">
-          {/* [ ] 이미지 잘 모르겠음...*/}
-          <section className="flex flex-row gap-2 mx-1 overflow-x-auto h-32">
+          {/* 이미지.*/}
+          <section className="flex flex-row gap-2 mx-1 overflow-x-auto">
             {details?.buildingImages.map((url, idx) => (
               <img
                 key={idx}
                 src={`${import.meta.env.VITE_BASE_URL}${import.meta.env.VITE_IMAGE}/${url}`}
                 alt={`image-${idx}`}
+                className="h-32 w-auto"
               />
             ))}
-            {/* <img
-              src="https://ingle-server.inuappcenter.kr/api/v1/images/ece07de0-edf2-4df2-b65e-787e1e8ef7da.png"
-              alt="image"
-            /> */}
           </section>
 
-          <section className="items-center py-2 px-4 bg-[#FFFFFF] rounded-[10px]">
-            <div className="flex flex-row items-center justify-between">
-              <div>
-                <h3 className="text-[#868782] text-[15px]">Hours</h3>
-                <p className="text-[17px] font-semibold">
-                  {details?.openTime}-{details?.closeTime}
-                </p>
-                <p className="font-semibold text-[#DF563F] text-[17px]">
-                  {isOpen ? 'Open' : 'Closed'}
-                </p>
-              </div>
-              <Drop onClick={() => setIsDrop(!isDrop)} />
-            </div>
-            {isDrop && operation()}
-          </section>
-
-          <section className="flex flex-col gap-[10px]">
-            <div className="font-semibold text-xl">Details</div>
-            <div className="bg-[#FFFFFF] rounded-[10px]">
-              <div className="flex flex-col gap-1 px-4 py-3">
-                <div className="text-[15px] text-[#868782] font-normal">INGLE's pick</div>
-                <div className="text-[#7A00E6] text-sm font-medium">
-                  {details?.inglePick}
+          {/* 운영시간 */}
+          {(details?.buildingCategory === 'RESTAURANT' ||
+            details?.buildingCategory === 'CAFE' ||
+            details?.buildingCategory === 'CONVENIENCE_STORE') && (
+            <section className="items-center py-2 px-4 bg-[#FFFFFF] rounded-[10px]">
+              <div className="flex flex-row items-center justify-between">
+                <div>
+                  <h3 className="text-[#868782] text-[15px]">Hours</h3>
+                  <p className="text-[17px] font-semibold">
+                    {details?.openTime}-{details?.closeTime}
+                  </p>
+                  <p className="font-semibold text-[#DF563F] text-[17px]">
+                    {isOpen ? 'Open' : 'Closed'}
+                  </p>
                 </div>
 
-                <hr className="my-2 border-[#E8E5EF]" />
+                <Drop onClick={() => setIsDrop(!isDrop)} />
+              </div>
+              {isDrop && operation()}
+            </section>
+          )}
 
-                <div className="text-[15px] text-[#868782] font-normal">Address</div>
-                <div className="text-[#000000] text-sm font-normal">
-                  {details?.address}
+          {/* 추천메뉴, 위치 */}
+          {(details?.buildingCategory === 'RESTAURANT' ||
+            details?.buildingCategory === 'CAFE' ||
+            details?.buildingCategory === 'CONVENIENCE_STORE') && (
+            <section className="flex flex-col gap-[10px]">
+              <div className="font-semibold text-xl">Details</div>
+              <div className="bg-[#FFFFFF] rounded-[10px]">
+                <div className="flex flex-col gap-1 px-4 py-3">
+                  <div className="text-[15px] text-[#868782] font-normal">
+                    INGLE's pick
+                  </div>
+                  <div className="text-[#7A00E6] text-sm font-medium">
+                    {details?.inglePick}
+                  </div>
+
+                  <hr className="my-2 border-[#E8E5EF]" />
+
+                  <div className="text-[15px] text-[#868782] font-normal">Address</div>
+                  <div className="text-[#000000] text-sm font-normal">
+                    {details?.location}
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
+
+          {/* 흡연부스 */}
+          {details?.buildingCategory === 'SMOKING_BOOTH' && (
+            <section className="flex flex-col gap-[10px]">
+              <div className="bg-[#FFFFFF] rounded-[10px] h-20 flex flex-col justify-center p-4">
+                <p className="font-semibold text-base">You must smoke in the Booth!</p>
+              </div>
+            </section>
+          )}
 
           <section className="p-4 flex flex-row gap-3 bg-[#FFFFFF] rounded-[10px]">
             <Report />
@@ -196,7 +215,7 @@ export default function Contents({
           </section>
         </main>
 
-        <footer className="flex flex-row gap-2 justify-stretch w-full">
+        <footer className="flex flex-row gap-2 justify-stretch w-full ">
           <button
             disabled={!details?.buildingUrl}
             onClick={() => moveToUrl()}

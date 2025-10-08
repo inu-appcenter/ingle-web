@@ -285,7 +285,7 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       if (child instanceof THREE.Mesh && child.name.toLowerCase().includes('building')) {
         const mat = child.material as THREE.MeshStandardMaterial;
         if (visibleBuildings.has(child)) {
-          mat.color.set('blue');
+          //mat.color.set('blue');
         } else {
           mat.color.copy(originalColors.current.get(child)!);
         }
