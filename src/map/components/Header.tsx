@@ -69,7 +69,7 @@ export default function Header({
           const filtered = res.data.filter((b: any) =>
             useRayStore.getState().visibleBuildings.includes(b.buildingId),
           );
-          console.log('최종검색 결과 : ', filtered);
+          // console.log('최종검색 결과 : ', filtered);
 
           setBuildingList(filtered); //카테고리의 모든 빌딩 데이터 리스트
         }
@@ -92,7 +92,6 @@ export default function Header({
       setBuildingList(res.data);
     } catch (err) {
       console.log(err);
-      alert('No related search terms found');
     }
   };
 

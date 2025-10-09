@@ -1,10 +1,9 @@
-import { logout } from '@/profile/api/profile';
+import { getProfile, logout } from '@/profile/api/profile';
+import { useProfileStore } from '@/profile/stores/profile-store';
 import { ROUTES } from '@/router/routes';
 import { useAuthStore } from '@/shared/stores/authStore';
-import { useNavigate } from 'react-router';
 import { useEffect } from 'react';
-import { useProfileStore } from '@/profile/stores/profile-store';
-import { getProfile } from '@/profile/api/profile';
+import { useNavigate } from 'react-router';
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -23,7 +22,6 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       const res = await getProfile(); // 실제 API 함수 import 필요
-      console.log(res);
       setProfile(
         res.memberId,
         res.studentId,

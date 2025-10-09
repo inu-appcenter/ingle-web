@@ -37,7 +37,7 @@ export default function Contents({
     return (
       <div>
         {OpenDays.map(index => (
-          <div className="flex flex-row">
+          <div key={index} className="flex flex-row">
             <p className="w-10">{index.slice(0, 3)}</p> {details?.openTime} -{' '}
             {details?.closeTime}
           </div>
@@ -55,7 +55,7 @@ export default function Contents({
     for (let i = 0; i < imageUrls.length; i++) {
       try {
         const res = await api.get(`/api/v1/images/${imageUrls[i]}`);
-        console.log(res.data);
+        //console.log(res.data);
       } catch {
         console.log('이미지 실패');
       }
@@ -64,7 +64,6 @@ export default function Contents({
 
   useEffect(() => {
     const getDetails = async (Id: number | null) => {
-      //console.log('건물ID', Id);
       if (!Id) return;
       try {
         const res = await api.get(`${import.meta.env.VITE_MAP_BUILDIINGS}/${Id}`);
@@ -142,6 +141,11 @@ export default function Contents({
         <main className="flex flex-col gap-5">
           {/* 이미지.*/}
           <section className="flex flex-row gap-2 mx-1 overflow-x-auto">
+            {details?.buildingImages?.length === 0 && (
+              <div className="h-28 w-36 bg-gray-200 flex items-center justify-center text-gray-500">
+                No Image
+              </div>
+            )}
             {details?.buildingImages.map((url, idx) => (
               <img
                 key={idx}

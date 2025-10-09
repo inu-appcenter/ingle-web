@@ -9,8 +9,6 @@ export async function isTakenNickname(data: { nickname: string }): Promise<boole
       params: { nickname: data.nickname },
     });
 
-    console.log(res);
-
     if (res.data === true) {
       console.log('중복임');
       return true;
