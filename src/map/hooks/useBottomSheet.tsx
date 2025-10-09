@@ -1,7 +1,4 @@
-import {
-  BOTTOM_SHEET_MAX_Y,
-  BOTTOM_SHEET_MIN_Y,
-} from '@/map/constants/BottomSheetOption';
+import { BOTTOM_SHEET_MAX_Y } from '@/map/constants/BottomSheetOption';
 import { useEffect, useRef } from 'react';
 
 interface BottomCheetMetrics {
@@ -17,7 +14,7 @@ interface BottomCheetMetrics {
 }
 
 export default function useBottomSheet() {
-  let MIN_Y = BOTTOM_SHEET_MIN_Y;
+  let MIN_Y = window.innerHeight - 540; //bottomsheet의 최상 div 높이
   let MAX_Y = BOTTOM_SHEET_MAX_Y;
   let MID_Y = 400;
 

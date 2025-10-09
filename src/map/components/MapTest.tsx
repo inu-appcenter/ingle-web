@@ -221,8 +221,6 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
   }
 
   const castRays = (category: string | null) => {
-    console.log('castRays 호출');
-
     if (!gltf?.scene || printed) return;
 
     //보이는 건물 저장
@@ -285,7 +283,7 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       if (child instanceof THREE.Mesh && child.name.toLowerCase().includes('building')) {
         const mat = child.material as THREE.MeshStandardMaterial;
         if (visibleBuildings.has(child)) {
-          mat.color.set('blue');
+          //mat.color.set('blue');
         } else {
           mat.color.copy(originalColors.current.get(child)!);
         }
@@ -298,16 +296,14 @@ const Model = forwardRef(({ url }: { url: string }, ref) => {
       .sort((a, b) => a - b);
     const setVisibleId = Array.from(new Set(visibleId));
 
-    //const visibleNames = Array.from(visibleBuildings).map(b => b.name);
-    console.log('maptest 보이는 건물id:', setVisibleId);
-    // 건물의 번호만 추출
+    // console.log('maptest 보이는 건물id:', setVisibleId);
 
     //저장
     setVisibleBuildings(setVisibleId);
 
     //테스트
     const current = useRayStore.getState().visibleBuildings; // 최신 값 바로 가져오기
-    console.log('저장된 건물:', current);
+    // console.log('저장된 건물:', current);
   };
 
   // 외부 ref에서 castRays 호출 가능

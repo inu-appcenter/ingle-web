@@ -25,9 +25,7 @@ export default function SetNickname() {
     const submitter = e?.nativeEvent?.submitter as HTMLButtonElement;
     //학번 제출
     if (submitter.name === 'id') {
-      console.log('학번제출:', data.studentId);
       if (data.studentId === portalId) {
-        console.log('학번 확인 완료');
         setCheckID(true);
         setStudentInfo({ studentId: data.studentId });
       } else {
@@ -36,14 +34,11 @@ export default function SetNickname() {
     }
     // 닉네임 제출
     else if (submitter.name === 'nick') {
-      console.log('입력한 닉네임:', data.nickname);
       if (data.nickname.length < 3 || data.nickname.length > 20) {
-        console.log('닉네임은 3~20자 사이입니다');
         return;
       }
       // 중복회원 확인 api
       const isTaken = await isTakenNickname({ nickname: data.nickname });
-      console.log(isTaken);
       if (isTaken) {
         setIsTaken(true);
       } else setIsTaken(false);

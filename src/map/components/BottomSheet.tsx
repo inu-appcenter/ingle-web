@@ -32,7 +32,9 @@ export default function BottomSheet({ modelRef }: { modelRef: React.RefObject<an
       {showDetail && (
         <div className="overflow-y-auto scrollbar-hide w-full">
           <Contents buildingList={buildingList} Id={showDetail}>
-            <Close onClick={() => setShowDetail(null)} />
+            <button>
+              <Close onClick={() => setShowDetail(null)} />
+            </button>
           </Contents>
         </div>
       )}
@@ -42,20 +44,19 @@ export default function BottomSheet({ modelRef }: { modelRef: React.RefObject<an
         <>
           <Header setBuildingList={setBuildingList} modelRef={modelRef} />
 
-          <div ref={content} className="overflow-y-auto w-full">
+          <div ref={content} className="overflow-y-auto w-full mb-4">
             {/* 빌딩 리스트 */}
             {buildingList.map(building => (
-              <div
+              <button
                 key={building.buildingId}
-                className="p-2 border-b "
+                className="p-2 border-b flex flex-col items-start text-left text-balance"
                 onClick={() => {
                   setShowDetail(building.buildingId);
-                  console.log('클릭', showDetail);
                 }}
               >
                 <div className="font-bold">{building.buildingName}</div>
                 <div className="text-sm">{building.buildingCategory}</div>
-              </div>
+              </button>
             ))}
           </div>
         </>
