@@ -12,6 +12,8 @@ import { useProfileStore } from '@/profile/stores/profile-store';
 import { useNavigate } from 'react-router';
 import { ROUTES } from '@/router/routes';
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const EditPage = () => {
   const { studentId, nickname, studentType, department } = useAuthStore();
   const { imageUrl } = useProfileStore();
@@ -81,7 +83,7 @@ const EditPage = () => {
           <div className="relative">
             {imageUrl ? (
               <LazyImage
-                src={imageUrl}
+                src={`${BASE_URL}${imageUrl}`}
                 alt="profile-image"
                 className="w-40 h-40 rounded-full object-cover"
               />

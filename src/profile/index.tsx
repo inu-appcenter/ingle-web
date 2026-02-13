@@ -4,6 +4,9 @@ import { ROUTES } from '@/router/routes';
 import { useAuthStore } from '@/shared/stores/authStore';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import { LazyImage } from '@/shared/components/LazyImage';
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const ProfilePage = () => {
   const navigate = useNavigate();
@@ -47,11 +50,13 @@ const ProfilePage = () => {
   };
 
   return (
-    <main className="flex flex-col px-4 items-center text-black">
+    <main className="flex flex-col px-4 items-center text-black pt-16">
       {/* 프로필 사진 */}
-      <div className="mt-16 rounded-full bg-[#d9d9d9] w-32 h-32 mb-8">
-        {imageUrl && <img src={imageUrl} alt="Profile" />}
-      </div>
+      <LazyImage
+        src={`${BASE_URL}${imageUrl}`}
+        alt="profile-image"
+        className="w-40 h-40 rounded-full object-cover"
+      />
       {/* 닉네임 & 이메일 */}
       <div className="flex flex-col items-center gap-1 mb-4">
         <p className="text-2xl font-bold ">{nickname}</p>
