@@ -3,11 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import CommonModal from '@/shared/components/CommonModal';
 import { ImageSkeleton } from '@/shared/components/SkeletonUI';
 import { ROUTES } from '@/router/routes';
+import type { Stamp } from '@/stamp/types/stamp';
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  stamp: { name: string; imageUrl: string; completed: boolean; keyword: string } | null;
+  stamp: Stamp | null;
 }
 
 const Modal = ({ isOpen, onClose, stamp }: ModalProps) => {

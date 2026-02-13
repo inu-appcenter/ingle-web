@@ -43,7 +43,7 @@ const StampList = ({ stampList }: { stampList: Stamp[] }) => {
 
   const handleStampClick = (stamp: any) => {
     // completed가 false인 경우 모달을 열지 않음
-    if (!stamp.completed) {
+    if (!stamp.isCompleted) {
       return;
     }
     setSelectedStamp(stamp);
@@ -57,7 +57,7 @@ const StampList = ({ stampList }: { stampList: Stamp[] }) => {
           key={index}
           name={item.name}
           image={item.imageUrl}
-          completed={item.completed}
+          completed={item.isCompleted}
           keyword={item.keyword}
           onClick={() => handleStampClick(item)} // 여기서 클릭 이벤트
         />
@@ -67,7 +67,7 @@ const StampList = ({ stampList }: { stampList: Stamp[] }) => {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         stamp={selectedStamp}
-        keyword={selectedStamp?.keyword}
+        // keyword={selectedStamp?.keyword}
       />
     </div>
   );

@@ -25,7 +25,7 @@ const StampPage = () => {
     getStampList();
   }, []);
 
-  const currentCount = stampList.filter(stamp => stamp.completed).length;
+  const currentCount = stampList.filter(stamp => stamp.isCompleted).length;
   const totalCount = stampList.length;
 
   return (
