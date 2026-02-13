@@ -14,7 +14,7 @@ const CommonModal = ({ isOpen, onClose, onGoToRead, children }: CommonModalProps
 
   return (
     <div
-      className="fixed inset-0 bg-black/80 flex flex-col items-center justify-center z-50 px-4"
+      className="fixed inset-0 bg-black/80 flex flex-col items-center justify-center z-50 px-4 box-border"
       onClick={onClose}
     >
       <div className="text-2xl font-bold text-[#ffffff] flex flex-col gap-4 items-center my-5">
@@ -22,7 +22,7 @@ const CommonModal = ({ isOpen, onClose, onGoToRead, children }: CommonModalProps
         <h2>You have just get a stamp</h2>
       </div>
       <div
-        className="bg-[#ffffff] rounded-lg shadow-lg p-6 relative max-w-md flex flex-col items-center justify-center h-[510px] text-[#ffffff]"
+        className="bg-[#ffffff] rounded-lg shadow-lg py-12 box-border relative flex flex-col items-center justify-center h-fit text-[#ffffff] w-full max-w-80"
         onClick={e => e.stopPropagation()}
       >
         {children}
